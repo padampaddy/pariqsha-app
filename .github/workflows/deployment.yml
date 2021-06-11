@@ -10,9 +10,12 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v2
       - name: Install and Build
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
         run: |
-          npm install
-          npm run build
+          yarn
+          yarn build
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
