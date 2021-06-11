@@ -4,7 +4,7 @@ on:
     branches:
       - main
 jobs:
-  Deployment-Action:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
@@ -13,7 +13,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: "12.x"
-        run: |
+      - run: |
           yarn
           yarn build
       - name: Deploy
