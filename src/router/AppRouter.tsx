@@ -1,7 +1,7 @@
 import Signin from "../pages/Signin";
 import Signup from "../pages/Signup";
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Switch,
   Route,
   Redirect,
