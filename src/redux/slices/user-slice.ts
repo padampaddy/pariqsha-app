@@ -25,11 +25,11 @@ export const signupAction = createAsyncThunk(
   }
 );
 
-function saveEntities(entities: SignupSigninResponse) {
+export function saveEntities(entities: SignupSigninResponse) {
   localStorage.setItem("entities", JSON.stringify(entities));
 }
 
-function getEntities(): SignupSigninResponse | undefined {
+export function getEntities(): SignupSigninResponse | undefined {
   const entities = localStorage.getItem("entities");
   if (entities) {
     return JSON.parse(entities) as SignupSigninResponse;
@@ -41,6 +41,7 @@ function getEntities(): SignupSigninResponse | undefined {
 const userSlice = createSlice<
   UserState,
   {
+    saveToken: (state: UserState, { payload }: PayloadAction<string>) => void;
     logout: (state: UserState) => void;
   },
   "user"
@@ -48,6 +49,10 @@ const userSlice = createSlice<
   name: "user",
   initialState: { entities: getEntities(), loading: "idle" },
   reducers: {
+    saveToken: (state: UserState, { payload }: PayloadAction<string>) => {
+      state.entities!.token = payload;
+      saveEntities(state.entities!);
+    },
     logout: (state: UserState) => {
       state.entities = undefined;
       state.loading = "idle";

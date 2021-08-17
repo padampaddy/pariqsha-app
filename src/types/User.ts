@@ -15,8 +15,9 @@ export interface SignupUser {
 }
 
 export interface SignupSigninResponse {
-  token: string;
-  user: User;
+  refreshToken?: string;
+  token?: string;
+  user?: User;
 }
 
 export interface User {

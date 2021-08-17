@@ -9,7 +9,7 @@ interface Props {
 const Menu = ({ onClose }: Props) => {
   const dispatch = useDispatch();
   return (
-    <div className="w-screen h-full flex flex-row bg-gray-100">
+    <div className="w-screen z-50 h-full flex flex-row">
       <div className="flex flex-col bg-white w-screen overflow-hidden">
         <div className="flex items-center justify-start text-3xl py-2 px-4">
           <button
