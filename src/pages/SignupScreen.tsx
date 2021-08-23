@@ -43,30 +43,30 @@ function SignupScreen() {
                     className="bg-white group-hover:rounded px-8 pt-6 pb-8 mb-4 flex flex-col">
 
                     <div className="mb-4">
-                        <label className="block text-sm font-bold mb-2 text-left bottom-0 text-gray-400" htmlFor="">
+                        <label className="signup-screen-label" htmlFor="">
                             Email
                         </label>
-                        <input className="appearance-none  w-full py-2 text-grey-darker border-b-2 outline-none"
+                        <input className="signup-screen-input"
                             onChange={(e) => setEmail(e.target.value)} autoFocus 
                             type="text" autoComplete="new-password" placeholder="Email"
                         />
                     </div>
 
-                    <div className="mb-0">
-                        <label className="block text-gray-400 text-sm font-bold mb-2 text-left" htmlFor="">
+                    <div className="mb-4">
+                        <label className="signup-screen-label" htmlFor="">
                             Password
                         </label>
-                        <input className="appearance-none  w-full py-2 text-gray-500 mb-3 border-b-2 outline-none"
+                        <input className="signup-screen-input"
                             onChange={(e) => setPassword(e.target.value)}
                             type="password" autoComplete="new-password" placeholder="Enter your password"
                         />
                     </div>
 
-                    <div className="mb-0">
-                        <label className="block text-gray-400 text-sm font-bold mb-2 text-left" htmlFor="">
+                    <div className="mb-4">
+                        <label className="signup-screen-label" htmlFor="">
                             Confirm Password
                         </label>
-                        <input className="appearance-none  w-full py-2 text-gray-500 mb-3 border-b-2 outline-none"
+                        <input className="signup-screen-input"
                             onChange={(e) => setCPassword(e.target.value)} 
                             type="password" autoComplete="new-password" placeholder="Re-Enter password"
                         />

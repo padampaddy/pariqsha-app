@@ -34,20 +34,20 @@ function Login() {
                     className="bg-white group-hover:rounded px-8 pt-6 pb-8 mb-4 flex flex-col">
 
                     <div className="mb-4">
-                        <label className="block text-sm font-bold mb-2 text-left bottom-0 text-gray-400" htmlFor="">
+                        <label className="signup-screen-label" htmlFor="">
                             Username
                         </label>
-                        <input className="appearance-none  w-full py-2 text-grey-darker border-b-2 outline-none"
+                        <input className="signup-screen-input"
                             onChange={(e) => setEmail(e.target.value)}
                             autoComplete="" type="text" placeholder="Enter Username"
                         />
                     </div>
                     
                     <div className="mb-0">
-                        <label className="block text-gray-400 text-sm font-bold mb-2 text-left" htmlFor="">
+                        <label className="signup-screen-label" htmlFor="">
                             Password
                         </label>
-                        <input className="appearance-none  w-full py-2 text-gray-500 mb-3 border-b-2 outline-none"
+                        <input className="signup-screen-input"
                             onChange={(e) => setPassword(e.target.value)}
                             autoComplete="" type="password" placeholder="Enter Password"
                         />

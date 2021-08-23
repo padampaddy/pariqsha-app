@@ -36,30 +36,30 @@ const Drawer = ({ onClose }: Props) => {
 
                 <ul className="flex flex-col  justify-center text-center">
 
-                    <li className="py-4 flex justify-center  hover:bg-gray-100">
+                    <li className="nav-item">
                         <Link to="/home" onClick={() => onClose()}
-                            className="font-medium text-black text-xl transform hover:translate-x-2 transition-transform ease-in duration-200 hover:text-gray-800">
+                            className="nav-link">
                             Quizzes
                         </Link>
                     </li>
 
-                    <li className="py-4 flex justify-center  hover:bg-gray-100 ">
+                    <li className="nav-item">
                         <Link to="/chats" onClick={() => onClose()}
-                            className="font-medium text-black text-xl transform hover:translate-x-2 transition-transform ease-in duration-200 hover:text-gray-800">
+                            className="nav-link">
                             My Chats
                         </Link>
                     </li>
 
-                    <li className="py-4 flex justify-center  hover:bg-gray-100">
+                    <li className="nav-item">
                         <Link to="/leader" onClick={() => onClose()}
-                            className="font-medium text-black text-xl transform hover:translate-x-2 transition-transform ease-in duration-200 hover:text-gray-800">
+                            className="nav-link">
                             Leaderboard
                         </Link>
                     </li>
 
-                    <li className="py-4  flex justify-center hover:bg-gray-100 ">
+                    <li className="nav-item">
                         <Link to="/notification" onClick={() => onClose()}
-                            className="font-medium text-black text-xl ml-10 transform hover:translate-x-2 transition-transform ease-in duration-200 hover:text-gray-800">
+                            className="nav-link pl-4">
                             Notifications
                         </Link>
                         <span className="rounded-full h-6 w-6 flex items-center justify-center ml-3 text-white font-bold common-btn">
@@ -67,9 +67,9 @@ const Drawer = ({ onClose }: Props) => {
                         </span>
                     </li>
 
-                    <li className="py-4 flex justify-center hover:bg-gray-100">
+                    <li className="nav-item">
                         <Link to="/coins" onClick={() => onClose()}
-                            className="font-medium text-black text-xl transform hover:translate-x-2 transition-transform ease-in duration-200 hover:text-gray-800">
+                            className="nav-link">
                             Earn Coins
                         </Link>
                     </li>

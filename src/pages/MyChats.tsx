@@ -48,7 +48,7 @@ function Mychats() {
             {data?.communication_threads.flatMap((chat, index) => (
               <li
                 key={index}
-                className="flex justify-between border-t items-center bg-white  py-4 rounded cursor-pointer transition"
+                className="my-chat-list"
               >
                 <div className="flex ml-2">
                   <div className="h-50 w-50">

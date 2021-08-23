@@ -19,6 +19,31 @@
   .button:hover {
     @apply transform translate-y-0.5 shadow-none;
   }
+  .nav-item{
+    @apply py-4 flex justify-center  hover:bg-gray-100;
+  }
+ .nav-link{
+  @apply font-medium text-black text-xl transform hover:translate-x-2 transition-transform ease-in duration-200 hover:text-gray-800;
+
+ }
+ .my-chat-list{
+   @apply flex justify-between border-t items-center bg-white  py-4 rounded cursor-pointer transition;
+ }
+ .leaderboard-img{
+   @apply rounded-full md:p-9 p-4;
+ }
+ .notification-list{
+   @apply flex items-center w-full border p-4 mb-4 rounded-tr-2xl rounded-br-2xl bg-white hover:bg-gray-100 hover:shadow-md  
+   transition transform hover:-translate-y-1 hover:scale-95;
+ }
+ .signup-screen-input{
+  @apply appearance-none  w-full py-2 text-gray-500 border-b-2 outline-none;
+}
+.signup-screen-label{
+  @apply block text-sm font-bold mb-2 text-left bottom-0 text-gray-400;
+}
+
+
   
 }
 
