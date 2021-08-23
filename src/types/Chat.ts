@@ -25,6 +25,12 @@ export interface IChatResponse {
     }[]
 }
 
-export interface Message {
-    communication_messages: IChat[];
+export interface IMessage {
+    communication_messages: {
+        "id": string,
+        "attachment_url": string,
+        "created_at": Date,
+        "message": string,
+        "sent_by": string,
+    }[]
 }

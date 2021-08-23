@@ -1,25 +1,23 @@
 import { Link } from "react-router-dom";
 import BaseLayout from "../layouts/Base";
-import { useQuery } from "@apollo/client";
 import { useDispatch, useSelector } from "react-redux";
 import { GET_MY_CHATS } from "../api/queries";
 import modalSlice from "../redux/slices/modal-slice";
 import { RootState } from "../redux/store";
 import { IChatResponse } from "../types/Chat";
 import moment from "moment";
+import useAuthSubscription from "../hooks/useAuthSubscription";
 
 function Mychats() {
   const user = useSelector((state: RootState) => state.user.entities?.user);
-  const { data } = useQuery<IChatResponse>(GET_MY_CHATS, {
-    variables: {
-      id: user?.id,
-    },
+  const { data } = useAuthSubscription<IChatResponse>(GET_MY_CHATS, {
+    id: user?.id,
   });
 
   const dispatch = useDispatch();
 
   return (
-    <BaseLayout title="My Chats"> 
+    <BaseLayout title="My Chats">
       <div className=" bg-white mt-4">
         <div className="px-4 pt-8">
           <div className=" flex justify-center mt-2 relative rounded-md">
@@ -46,15 +44,16 @@ function Mychats() {
 
           <ul>
             {data?.communication_threads.flatMap((chat, index) => (
-              <li
-                key={index}
-                className="flex justify-between border-t items-center bg-white  py-4 rounded cursor-pointer transition"
-              >
+              <li key={index} className="my-chat-list">
                 <div className="flex ml-2">
                   <div className="h-50 w-50">
                     <img
                       // src="https://i.imgur.com/aq39RMA.jpg"
-                      src={chat.profileByStartedWith.id===user?.id?chat.profileByStartedBy.image_url:chat.profileByStartedWith.image_url}
+                      src={
+                        chat.profileByStartedWith.id === user?.id
+                          ? chat.profileByStartedBy.image_url
+                          : chat.profileByStartedWith.image_url
+                      }
                       width="50"
                       height="50"
                       className="rounded-full"
@@ -62,12 +61,14 @@ function Mychats() {
                   </div>
                   <div className="flex flex-col ml-4">
                     <span className="text-black font-bold text-md">
-                      {chat.profileByStartedWith.id===user?.id?chat.profileByStartedBy.name:chat.profileByStartedWith.name}
+                      {chat.profileByStartedWith.id === user?.id
+                        ? chat.profileByStartedBy.name
+                        : chat.profileByStartedWith.name}
                     </span>
-                    <span className="text-sm text-gray-400 truncate w-32">
-                      
+                    <span className="text-sm text-gray-400 truncate w-32"></span>
+                    <span className="mt-1 text-sm text-gray-400">
+                      {moment(chat.updated_at).fromNow()}
                     </span>
-                    <span className="mt-1 text-sm text-gray-400">{moment(chat.updated_at).fromNow()}</span>
                   </div>
                 </div>
                 <div className="flex flex-col items-center">

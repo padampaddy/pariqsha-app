@@ -107,7 +107,7 @@ export const MAKE_REFUND_REQUEST = gql`
 `;
 
 export const GET_MY_CHATS = gql`
-  query get_my_chats($id: uuid!) {
+  subscription get_my_chats($id: uuid!) {
     communication_threads(
       where: {
         _or: [{ started_by: { _eq: $id } }, { started_with: { _eq: $id } }]
@@ -130,7 +130,7 @@ export const GET_MY_CHATS = gql`
 `;
 
 export const GET_MY_MESSAGES = gql`
-  query get_my_messages($id: uuid!) {
+subscription get_my_messages($id: uuid!) {
     communication_messages(where: { thread_id: { _eq: $id } }) {
       id
       attachment_url

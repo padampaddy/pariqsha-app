@@ -1,23 +1,19 @@
 import BaseLayout from "../layouts/Base";
-import { useQuery } from "@apollo/client";
-import { useDispatch, useSelector } from "react-redux";
+import useAuthSubscription from "../hooks/useAuthSubscription";
+import { useSelector } from "react-redux";
 import { GET_MY_MESSAGES } from "../api/queries";
-import modalSlice from "../redux/slices/modal-slice";
 import { RootState } from "../redux/store";
-import { Message } from "../types/Chat";
+import moment from "moment";
+import { IMessage } from "../types/Chat";
 
 const Messages = () => {
   const user = useSelector((state: RootState) => state.user.entities?.user);
-  const { data } = useQuery<Message>(GET_MY_MESSAGES, {
-    variables: {
-      id: user?.id,
-    },
+  const { data } = useAuthSubscription<IMessage>(GET_MY_MESSAGES, {
+    id: user?.id,
   });
 
-  const dispatch = useDispatch();
-
   return (
-    <BaseLayout>
+    <BaseLayout title="Messages">
       <div className=" mx-auto px-4 bg-gray-100 h-screen relative">
         <div className="header pt-8 text-center">
           <img
@@ -34,38 +30,38 @@ const Messages = () => {
           <p className="text-gray-400 font-medium text-xs text-center pt-2">
             Today 10:18AM
           </p>
-          <div className="flex flex-col flex-auto rounded-2xl bg-gray-100 h-full">
-            <div className="flex flex-col h-full overflow-x-auto mb-4">
-              <div className="flex flex-col h-full">
-                <div className="grid grid-cols-12 gap-y-2">
-                  <div className="col-start-1 col-end-13 py-3 rounded-xl">
-                    <div className="flex flex-row items-center">
-                      <div className="text-sm bg-white py-2 px-4  rounded-xl common-btn text-white">
-                        <div>Hey How are you today?</div>
-                      </div>
-                    </div>
-                  </div>
 
-                  <div className="col-start-4 col-end-13 py-3 pb-0 rounded-lg">
-                    <div className="flex items-center justify-start flex-row-reverse">
-                      <div className="text-sm bg-white py-2 px-4  rounded-xl">
-                        <div>Im ok what about you?</div>
+          <div className="flex flex-col flex-auto rounded-2xl bg-gray-100 h-full">
+            <div className="grid">
+              <ul>
+                {data?.communication_messages.flatMap((msg, index) => (
+                  <div key={index}>
+                    <li className="py-3 rounded-xl">
+                      <div className="flex flex-row items-center">
+                        <p className="text-sm bg-white py-2 px-4 rounded-xl common-btn text-white">
+                          {msg.message}
+                        </p>
+                        <small className="p-0 float-right">
+                          {moment(msg.created_at).fromNow()}
+                        </small>
                       </div>
-                    </div>
-                  </div>
-                  <div className="col-start-5 col-end-13 py-3 pt-0 rounded-lg">
-                    <div className="flex items-center justify-start flex-row-reverse">
-                      <div className="text-sm bg-white py-2 px-4  rounded-xl">
-                        <div>
-                          Lorem ipsum dolor sit, amet consectetur adipisicing. ?
-                        </div>
+                    </li>
+                    <li className="py-3 pb-0 rounded-lg">
+                      <div className="flex items-center justify-start flex-row-reverse">
+                        <p className="text-sm bg-white py-2 px-4 rounded-xl">
+                          {msg.message}
+                        </p>
+                        <small className="p-0 float-right text-gray-500">
+                          {moment(msg.created_at).fromNow()}
+                        </small>
                       </div>
-                    </div>
+                    </li>
                   </div>
-                </div>
-              </div>
+                ))}
+              </ul>
             </div>
           </div>
+
           <div className="flex flex-row items-center h-16 rounded-xl bg-white w-full px-2 md:absolute left-0 bottom-0 fixed">
             <div className="flex-grow ml-4">
               <div className="relative w-full">
@@ -73,7 +69,7 @@ const Messages = () => {
                   type="text"
                   className="flex w-full focus:outline-none focus:border-indigo-300  h-10 "
                   placeholder="Type Your Message"
-                ></input>
+                />
                 <button className="absolute flex items-center justify-center h-full w-12 right-0 top-0 text-gray-400 hover:text-gray-600">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

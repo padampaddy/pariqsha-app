@@ -4,7 +4,7 @@ import { refreshToken } from "../api/user-api";
 import userSlice from "../redux/slices/user-slice";
 import store from "../redux/store";
 
-const useAuthSubscription = function <T>(query: DocumentNode, params: object) {
+const useAuthSubscription = function <T>(query: DocumentNode, params: any) {
     const [data, setData] = useState<T>()
     const { data: gData, error } = useSubscription<T>(query, {
         variables: params
