@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +35,43 @@
   to {
     transform: rotate(360deg);
   }
+} */
+
+
+.App {
+  text-align: center;
+}
+
+.language:hover{
+  background-color: #27A7AD;
+  border-radius: 10rem;
+  color: white;
+}
+.science:hover{
+background-color: #F9541F;
+border-radius: 10rem;
+color: white;
+}
+.drama:hover{
+background-color: #CDA4FF;
+border-radius: 10rem;
+color: white;
+}
+.art:hover{
+background-color: #91C874;
+border-radius: 10rem;
+color: white;
+}
+.maths:hover{
+background-color: #FDCC40;
+border-radius: 10rem;
+color: white;
+}
+.gk:hover{
+background-color: #79D9EF;
+border-radius: 10rem;
+color: white;
+}
+.common-btn{
+  background-image: linear-gradient(to right, #00cbe4, #00d0e2, #00d5df, #00dadc, #02ded7);
 }

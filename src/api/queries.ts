@@ -105,3 +105,38 @@ export const MAKE_REFUND_REQUEST = gql`
     }
   }
 `;
+
+export const GET_MY_CHATS = gql`
+  query get_my_chats($id: uuid!) {
+    communication_threads(
+      where: {
+        _or: [{ started_by: { _eq: $id } }, { started_with: { _eq: $id } }]
+      }
+    ) {
+      id
+      updated_at
+      profileByStartedBy {
+        id
+        name
+        image_url
+      }
+      profileByStartedWith {
+        id
+        name
+        image_url
+      }
+    }
+  }
+`;
+
+export const GET_MY_MESSAGES = gql`
+  query get_my_messages($id: uuid!) {
+    communication_messages(where: { thread_id: { _eq: $id } }) {
+      id
+      attachment_url
+      created_at
+      message
+      sent_by
+    }
+  }
+`;

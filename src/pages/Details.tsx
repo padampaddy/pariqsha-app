@@ -21,7 +21,7 @@ import { RootState } from '../redux/store'
 import { QuizDetailsResponse, QuizRegistrationResponse } from '../types/Quiz'
 import UnregisterBody from './components/UnregisterBody'
 
-declare var Razorpay: any
+declare let Razorpay: any
 
 export default function Details(): ReactElement {
   const { id } = useParams<{ id: string }>()
@@ -101,7 +101,7 @@ export default function Details(): ReactElement {
                     const res = await createOrder({
                       quizId: data?.quiz_quiz_by_pk.id,
                     })
-                    var options = {
+                    const options = {
                       key: RP_KEY_ID_TEST, // Enter the Key ID generated from the Dashboard
                       amount: res.amount * 100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
                       currency: 'INR',
@@ -140,7 +140,7 @@ export default function Details(): ReactElement {
                           })
                       },
                     }
-                    var rzp1 = new Razorpay(options)
+                    const rzp1 = new Razorpay(options)
                     rzp1.open()
                   }}
                 >

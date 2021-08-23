@@ -19,5 +19,6 @@
   .button:hover {
     @apply transform translate-y-0.5 shadow-none;
   }
+  
 }
 

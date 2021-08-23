@@ -23,7 +23,7 @@ import UnregisterBody from './components/UnregisterBody'
 
 const today = new Date().toISOString()
 
-declare var Razorpay: any
+declare let Razorpay: any
 
 export default function Home() {
   const user = useSelector((state: RootState) => state.user.entities?.user)
@@ -115,7 +115,7 @@ export default function Home() {
                     const data = await createOrder({
                       quizId: quiz.id,
                     })
-                    var options = {
+                    const options = {
                       key: RP_KEY_ID_TEST, // Enter the Key ID generated from the Dashboard
                       amount: data.amount * 100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
                       currency: 'INR',
@@ -153,7 +153,7 @@ export default function Home() {
                           })
                       },
                     }
-                    var rzp1 = new Razorpay(options)
+                    const rzp1 = new Razorpay(options)
                     rzp1.open()
                   }}
                 >
@@ -233,21 +233,21 @@ export default function Home() {
           icon: (
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 fill-current text-gray-500"
+              className="h-5 w-5 fill-current text-gray-500" style={{ color: '#01D5DD' }}
               viewBox="0 0 24 24"
             >
-              <path d="M12 22c1.311 0 2.407-.834 2.818-2H9.182C9.593 21.166 10.689 22 12 22zM19 14.586V10c0-3.217-2.185-5.927-5.145-6.742C13.562 2.52 12.846 2 12 2s-1.562.52-1.855 1.258C7.185 4.074 5 6.783 5 10v4.586l-1.707 1.707C3.105 16.48 3 16.734 3 17v1c0 .553.447 1 1 1h16c.553 0 1-.447 1-1v-1c0-.266-.105-.52-.293-.707L19 14.586z"></path>
+              <path d="M12 22c1.311 0 2.407-.834 2.818-2H9.182C9.593 21.166 10.689 22 12 22zM19 14.586V10c0-3.217-2.185-5.927-5.145-6.742C13.562 2.52 12.846 2 12 2s-1.562.52-1.855 1.258C7.185 4.074 5 6.783 5 10v4.586l-1.707 1.707C3.105 16.48 3 16.734 3 17v1c0 .553.447 1 1 1h16c.553 0 1-.447 1-1v-1c0-.266-.105-.52-.293-.707L19 14.586z"  fill="currentColor"></path>
             </svg>
           ),
-          onClick: () => {},
+          onClick: () => {console.log()},
         },
         {
           icon: (
             <div className="capitalize ml-2 px-2 rounded-full bg-gray-400 text-white font-semibold">
-              {user?.username?.[0]}
+              {user?.username?.[0]|| 'P'}
             </div>
           ),
-          onClick: () => {},
+          onClick: () => {console.log()},
         },
       ]}
     >

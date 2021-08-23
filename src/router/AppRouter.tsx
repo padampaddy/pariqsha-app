@@ -1,5 +1,5 @@
-import Signin from '../pages/Signin'
-import Signup from '../pages/Signup'
+// import Signin from '../pages/Signin'
+// import Signup from '../pages/Signup'
 import {
   HashRouter as Router,
   Route,
@@ -22,23 +22,60 @@ import { RootState } from '../redux/store'
 import { IncomingOptions, Provider } from 'use-http'
 import { FUNCTIONS_URL_TEST } from '../Constants'
 import Details from '../pages/Details'
+import Login from '../pages/Login'
+import SignupScreen from '../pages/SignupScreen'
+import Mychats from '../pages/MyChats'
+import Coins from '../pages/Coins'
+import Notification from '../pages/Notifications'
+import Setting from '../pages/Setting'
+import LeaderBoard from '../pages/LeaderBoard'
+import Messages from '../pages/Messages'
 
 function MySwitch() {
   const location = useLocation()
   return (
     <Switch location={location}>
+
       <PrivateRoute path="/home">
         <Home />
       </PrivateRoute>
+
+      <PrivateRoute path="/coins">
+        <Coins />
+      </PrivateRoute>
+      
+      <PrivateRoute path="/notification">
+        <Notification />
+      </PrivateRoute>
+
+      <PrivateRoute path="/setting">
+        <Setting />
+      </PrivateRoute>
+
+      <PrivateRoute path="/leader">
+        <LeaderBoard />
+      </PrivateRoute>
+
+      <PrivateRoute path="/chats">
+        <Mychats />
+      </PrivateRoute>
+
+      <PrivateRoute path="/messages">
+        <Messages />
+      </PrivateRoute>
+
       <PrivateRoute path="/details/:id">
         <Details />
       </PrivateRoute>
+
       <PublicRoute path="/signin">
-        <Signin />
+        <Login />
       </PublicRoute>
+
       <PublicRoute path="/signup">
-        <Signup />
+        <SignupScreen />
       </PublicRoute>
+
       <Route path="*">
         <Redirect to="/signin" />
       </Route>
