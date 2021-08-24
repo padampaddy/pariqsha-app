@@ -27,7 +27,7 @@
 
  }
  .my-chat-list{
-   @apply flex justify-between border-t items-center bg-white  py-4 rounded cursor-pointer transition;
+   @apply flex justify-between border-b border-gray-300 items-center  py-2 rounded cursor-pointer transition;
  }
  .leaderboard-img{
    @apply rounded-full md:p-9 p-4;

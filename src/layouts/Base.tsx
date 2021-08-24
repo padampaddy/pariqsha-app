@@ -85,7 +85,7 @@ function BaseLayout({
             <path d="M4 6H20V8H4zM4 11H20V13H4zM4 16H20V18H4z"    fill="currentColor"></path>
           </svg>
         )}
-        <h4 className="text-xl flex-grow font-semibold flex-1 text-center text-black font-bold">
+        <h4 className="text-md flex-grow  flex-1 text-center text-black font-bold">
           {title}
         </h4>
         <div className="absolute right-0 top-0 bottom-0 my-auto items-center flex">
@@ -98,7 +98,7 @@ function BaseLayout({
       </div>
       <div
         className={`w-full ${
-          showBack ? '' : 'lg:pl-96'
+          showBack ? '' : 'lg:pl-80'
         } flex-grow bg-gradient-to-tl  pb-8 from-red-100 to-blue-100 overflow-y-auto`}
       >
         {children}

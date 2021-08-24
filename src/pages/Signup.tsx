@@ -89,7 +89,6 @@ export default function Signup() {
                 </span>
               </label>
               <button className="button mt-3 self-end">
-                {" "}
                 {loading === "pending"
                   ? "Signing up..."
                   : loading === "succeeded"
