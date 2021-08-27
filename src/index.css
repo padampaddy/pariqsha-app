@@ -8,41 +8,76 @@
   }
 
   .button {
-    @apply bg-blue-500 text-white py-2 px-12 rounded  shadow-md transition duration-100 ease-in-out;
+    @apply bg-blue-500 text-white py-2 px-8 rounded  shadow-md transition duration-100 ease-in-out;
   }
   .button-link {
-    @apply py-2 px-4 rounded  transition duration-100 ease-in-out;
+    @apply py-2 px-8 border-2 rounded  transition duration-100 ease-in-out;
   }
   .button-link:hover {
-    @apply  transform translate-y-0.5 shadow-none;
+    @apply transform translate-y-0.5 shadow-none;
   }
   .button:hover {
     @apply transform translate-y-0.5 shadow-none;
   }
-  .nav-item{
-    @apply py-4 flex justify-center  hover:bg-gray-100;
+  .nav-item {
+    @apply md:py-4  py-2 flex justify-center  hover:bg-gray-100;
   }
- .nav-link{
-  @apply font-medium text-black text-xl transform hover:translate-x-2 transition-transform ease-in duration-200 hover:text-gray-800;
-
- }
- .my-chat-list{
-   @apply flex justify-between border-b border-gray-300 items-center  py-2 rounded cursor-pointer transition;
- }
- .leaderboard-img{
-   @apply rounded-full md:p-9 p-4;
- }
- .notification-list{
-   @apply flex items-center w-full border p-4 mb-4 rounded-tr-2xl rounded-br-2xl bg-white hover:bg-gray-100 hover:shadow-md  
+  .nav-link {
+    @apply font-medium text-black md:text-xl text-base transform hover:translate-x-2 transition-transform ease-in duration-200 hover:text-gray-800;
+  }
+  .my-chat-list {
+    @apply flex justify-between border-b border-gray-300 items-center  py-2 rounded cursor-pointer transition hover:bg-gray-50;
+  }
+  .leaderboard-img {
+    @apply rounded-full md:p-9 p-4;
+  }
+  .notification-list {
+    @apply flex items-center w-full border p-4 mb-4 rounded-tr-2xl rounded-br-2xl bg-white hover:bg-gray-100 hover:shadow-md  
    transition transform hover:-translate-y-1 hover:scale-95;
- }
- .signup-screen-input{
-  @apply appearance-none  w-full py-2 text-gray-500 border-b-2 outline-none;
-}
-.signup-screen-label{
-  @apply block text-sm font-bold mb-2 text-left bottom-0 text-gray-400;
-}
+  }
+  .signup-screen-input {
+    @apply appearance-none  w-full py-1 text-gray-500 border-b-2 outline-none;
+  }
+  .signup-screen-label {
+    @apply block text-sm font-bold mt-3 text-left bottom-0 text-gray-400;
+  }
 
+  .quiz-button {
+    @apply float-left flex items-center border-2 border-gray-300 capitalize justify-center text-center md:mr-1 mr-2 px-2 text-xs md:text-sm;
+  }
 
-  
+  .quiz-button:hover {
+    @apply transform translate-y-0.5 shadow-none;
+  }
+
+  .drawer-button {
+    @apply text-gray-400 font-medium w-1/2 py-4 border-t border-b flex justify-center items-center
+  }
+
+  .drawer-button:hover {
+    @apply transform translate-y-0.5 shadow-none;
+  }
+
+  .loader {
+    -webkit-animation: spinner 1.5s linear infinite;
+    animation: spinner 1.5s linear infinite;
+  }
+
+  @-webkit-keyframes spinner {
+    0% {
+      -webkit-transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+    }
+  }
+
+  @keyframes spinner {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
 }

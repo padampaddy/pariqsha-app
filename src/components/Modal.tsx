@@ -10,7 +10,7 @@ const Modal = () => {
   if (!visible) return null;
   return (
     <div
-      className="fixed z-10 inset-0 overflow-y-auto"
+      className="fixed z-10 inset-0 md:mt-40 mt-20"
       aria-labelledby="modal-title"
       role="dialog"
       aria-modal="true"
@@ -25,9 +25,7 @@ const Modal = () => {
         <span
           className="hidden sm:inline-block sm:align-middle sm:h-screen"
           aria-hidden="true"
-        >
-          &#8203;
-        </span>
+        />
 
         <div className="inline-block align-center bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 w-full max-w-2xl">
           <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
@@ -56,13 +54,29 @@ const Modal = () => {
                 >
                   {title}
                 </h3>
-            </div>
               </div>
-              <div className="">
-              {body}
+              <div className="flex items-center justify-start text-4xl py-2 px-4">
+                <button
+                  onClick={() => dispatch(modalSlice.actions.hideModal())}
+                  className="focus:outline-none absolute md:top-6 md:right-5 right-3 top-4 "
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6 text-red-600"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </button>
               </div>
             </div>
-          
+            <div className="">{body}</div>
+          </div>
         </div>
       </div>
     </div>

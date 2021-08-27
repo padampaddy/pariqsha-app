@@ -77,7 +77,7 @@ export default function Details(): ReactElement {
             registration?.quiz_registration.length === 0 ? (
               <>
                 <button
-                  className="button"
+                  className="button common-btn"
                   onClick={async () => {
                     if (data?.quiz_quiz_by_pk.price === 0) {
                       Promise.all([
@@ -149,7 +149,7 @@ export default function Details(): ReactElement {
               </>
             ) : (
               <button
-                className="button-link text-red-500"
+                className="button-link text-red-500" style={{borderColor:"#00d5df"}}
                 onClick={() => {
                   dispatch(
                     modalSlice.actions.showModal({

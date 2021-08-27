@@ -17,14 +17,14 @@ export default function UnregisterBody({ onConfirm }: Props): ReactElement {
       </div>
       <div className="flex mt-4 items-center justify-center ">
         <button
-          className="text-red-500 button-link px-12"
+          className="text-red-500 button-link" style={{borderColor:"#00d5df"}}
           onClick={() => onConfirm()}
         >
           Yes
         </button>
         <button
           onClick={() => dispatch(modalSlice.actions.hideModal())}
-          className="button bg-gray-100 text-gray-600"
+          className="button common-btn"
         >
           No
         </button>

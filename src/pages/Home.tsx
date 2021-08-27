@@ -73,6 +73,7 @@ export default function Home() {
         key={index}
         title={quiz.title}
         imgSrc={quiz.image}
+        
         content={
           <div style={{ whiteSpace: 'pre-wrap' }}>{quiz.short_description}</div>
         }

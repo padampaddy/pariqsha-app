@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import logo from "../assets/images/pariqsha.png";
 import userSlice from "../redux/slices/user-slice";
 
 interface Props {
@@ -16,23 +17,42 @@ const Drawer = ({ onClose }: Props) => {
             onClick={() => {
               onClose();
             }}
-            className="focus:outline-none lg:hidden absolute  top-3 left-5"
+            className="focus:outline-none lg:hidden absolute  top-5 left-5"
             style={{ color: "#01D5DD" }}
           >
-            &times;
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fillRule="evenodd"
+                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                clipRule="evenodd"
+              />
+            </svg>
           </button>
         </div>
 
-        <div className="mb-8 mx-auto text-center pt-16 ">
+        <div className="mb-8 mx-auto text-center pt-0 ">
+          <div className="flex">
+            <img src={logo} className="h-10 w-10 mx-auto" alt="pariqsha logo" />
+            <h1 className="item-center pl-2 pt-1 text-2xl font-bold">
+              Pariqsha
+            </h1>
+          </div>
+        <Link to="/profile">
           <img
-            className="inline object-cover w-20 h-20 mr-2 rounded-full"
+            className="inline object-cover w-20 h-20 mt-12 rounded-full"
             src="https://images.pexels.com/photos/2589653/pexels-photo-2589653.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
             alt="Profile image"
           />
-          <h1 className="text-black font-medium text-2xl leading-8 mt-4">
+          <h1 className="text-black font-medium md:text-2xl text-lg leading-8 mt-4">
             Hanna Fields
           </h1>
-          <p className="text-gray-400 font-medium text-md pt-1">2,9848 coins</p>
+          <p className="text-gray-400 font-medium md:text-md text-sm pt-0">2,9848 coins</p>
+          </Link>
         </div>
 
         <ul className="flex flex-col  justify-center text-center">
@@ -62,7 +82,7 @@ const Drawer = ({ onClose }: Props) => {
             >
               Notifications
             </Link>
-            <span className="rounded-full h-6 w-6 flex items-center justify-center ml-3 text-white font-bold common-btn">
+            <span className="rounded-full h-5 w-5 md:h-6 md:w-6 flex items-center justify-center ml-2 mt-1 text-white font-medium common-btn text-xs">
               4
             </span>
           </li>
@@ -77,7 +97,7 @@ const Drawer = ({ onClose }: Props) => {
         <div className="flex flex-row w-full absolute  bottom-0 bg-white z-10">
           <Link
             to="/setting"
-            className="text-gray-400 font-medium text-md w-1/2 py-4 border-t border-b flex justify-center items-center"
+            className="drawer-button"
           >
             <span className="mr-2">
               <svg
@@ -101,7 +121,7 @@ const Drawer = ({ onClose }: Props) => {
               dispatch(userSlice.actions.logout());
               onClose();
             }}
-            className="text-gray-400 font-medium text-md w-1/2 py-4 border-b border-t border-l flex justify-center items-center"
+            className="drawer-button border-l"
           >
             <span className="mr-2">
               <svg

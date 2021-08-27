@@ -27,44 +27,44 @@ const LeaderBoard = () => {
       <div className="flex justify-between md:w-1/2 mx-auto">
         <div className="p-2">
           <div className="leaderboard-img bg-green-900">
-            <img src={shield} className="animate-pulse	"></img>
+            <img src={shield} className="animate-pulse"></img>
           </div>
         </div>
         <div className="p-2">
           <div className="leaderboard-img bg-pink-900">
-            <img src={medal}></img>
+            <img src={medal} className="animate-pulse"></img>
           </div>
         </div>
         <div className="p-2">
           <div className="leaderboard-img bg-purple-900">
-            <img src={crown}></img>
+            <img src={crown} className="animate-pulse"></img>
           </div>
         </div>
         <div className="p-2">
           <div className="bg-green-500 leaderboard-img">
-            <img src={trophy}></img>
+            <img src={trophy} className="animate-pulse"></img>
           </div>
         </div>
       </div>
       <div className="flex justify-between mx-auto md:w-1/2">
         <div className="p-2">
           <div className="leaderboard-img bg-pink-500 md:p-9">
-            <img src={medal3}></img>
+            <img src={medal3} className="animate-pulse"></img>
           </div>
         </div>
         <div className="p-2">
           <div className="bg-purple-500 leaderboard-img">
-            <img src={medal2}></img>
+            <img src={medal2} className="animate-pulse"></img>
           </div>
         </div>
         <div className="p-2">
           <div className="bg-yellow-900 leaderboard-img">
-            <img src={star}></img>
+            <img src={star} className="animate-pulse"></img>
           </div>
         </div>
         <div className="p-2">
           <div className="bg-blue-500 leaderboard-img">
-            <img src={tag}></img>
+            <img src={tag} className="animate-pulse"></img>
           </div>
         </div>
       </div>

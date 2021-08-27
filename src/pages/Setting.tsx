@@ -5,11 +5,11 @@ const Setting = () => {
 
   return (
     <BaseLayout title="Setting">
-      {/* <div className="text-center font-bold text-xl pt-8">Settings</div> */}
+      
       <div className=" mt-3 px-4 h-screen">
         <div className=" ">
           <div className=" text-gray-400 text-xs font-semibold pt-2">ACCOUNT</div>
-          <div className="flex justify-between rounded-lg border  mt-2  items-center bg-white p-4">
+          <div className="flex justify-between rounded-lg border  mt-2  items-center bg-white p-4 hover:bg-gray-100">
             <div className="flex">
               <div className="rounded-full h-10 w-10 bg-purple-400 flex justify-center items-center">
                 <svg
@@ -46,7 +46,7 @@ const Setting = () => {
               </svg>
             </div>
           </div>
-          <div className="flex justify-between rounded-lg border  mt-2 items-center bg-white p-4">
+          <div className="flex justify-between rounded-lg border  mt-2 items-center bg-white p-4 hover:bg-gray-100">
             <div className="flex ">
               <div className="rounded-full h-10 w-10 bg-yellow-400  flex justify-center items-center">
                 <svg
@@ -89,7 +89,7 @@ const Setting = () => {
         </div>
         <div className=" mt-6">
           <div className=" text-gray-400 text-xs font-semibold ">OTHER</div>
-          <div className="flex justify-between rounded-lg border mt-2 items-center bg-white p-4">
+          <div className="flex justify-between rounded-lg border mt-2 items-center bg-white p-4 hover:bg-gray-100">
             <div className="flex ">
               <div
                 className="rounded-full h-10 w-10  flex justify-center items-center"
@@ -128,7 +128,7 @@ const Setting = () => {
               </svg>
             </div>
           </div>
-          <div className="flex justify-between rounded-lg border  mt-2 items-center bg-white p-4">
+          <div className="flex justify-between rounded-lg border  mt-2 items-center bg-white p-4 hover:bg-gray-100">
             <div className="flex ">
               <div className="rounded-full h-10 w-10 bg-blue-800  flex justify-center items-center">
                 <i className="fab fa-facebook-f" style={{ color: "white" }}></i>
@@ -160,7 +160,7 @@ const Setting = () => {
       </div>
       <Link
         to="/login"
-        className="absolute w-full text-white common-btn p-4 left-0 bottom-0 text-center"
+        className="sticky w-full text-white common-btn p-4 left-0 bottom-0 text-center  block "
       >
         Log Out
       </Link>

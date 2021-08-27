@@ -130,15 +130,27 @@ export const GET_MY_CHATS = gql`
 `;
 
 export const GET_MY_MESSAGES = gql`
-subscription get_my_messages($id: uuid!) {
-    communication_messages(where: { thread_id: { _eq: $id } }) {
+subscription get_messages($id:uuid!) {
+  communication_threads_by_pk(id:$id){
+    messages{
       id
       attachment_url
       created_at
       message
       sent_by
     }
+    profileByStartedBy{
+      name
+      image_url
+      id
+    }
+    profileByStartedWith{
+      name
+      image_url
+      id
+    }
   }
+}
 `;
 
 export const SEND_MESSAGE = gql`

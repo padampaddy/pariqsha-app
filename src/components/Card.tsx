@@ -67,7 +67,7 @@ export default function Card({
               className="w-16 h-16 rounded-full border-2 object-cover border-gray-300"
               src={imgSrc}
             />
-          )}{' '}
+          )}
           <div id="header-text" className="leading-5 w-full relative ml-6 sm">
             <h4 id="name" className="text-xl font-semibold">
               {title}

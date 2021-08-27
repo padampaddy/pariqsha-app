@@ -25,13 +25,19 @@ export interface IChatResponse {
 }
 
 export interface IMessage {
-  communication_messages: {
-    id: string;
-    attachment_url: string;
-    created_at: Date;
-    message: string;
-    sent_by: string;
-  }[];
+  id: string;
+  attachment_url: string;
+  created_at: Date;
+  message: string;
+  sent_by: string;
+}
+
+export interface IThreadResponse {
+  communication_threads_by_pk: {
+    messages: IMessage[];
+    profileByStartedBy: IProfile;
+    profileByStartedWith: IProfile;
+  };
 }
 
 export interface ISendMessage {

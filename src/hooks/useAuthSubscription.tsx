@@ -6,7 +6,7 @@ import store from "../redux/store";
 
 const useAuthSubscription = function <T>(query: DocumentNode, params: any) {
     const [data, setData] = useState<T>()
-    const { data: gData, error } = useSubscription<T>(query, {
+    const { data: gData, error, loading } = useSubscription<T>(query, {
         variables: params
     })
     useEffect(() => {
@@ -21,7 +21,7 @@ const useAuthSubscription = function <T>(query: DocumentNode, params: any) {
             setData(gData)
         }
     }, [gData, error])
-    return { data };
+    return { data, loading };
 }
 
 export default useAuthSubscription;
