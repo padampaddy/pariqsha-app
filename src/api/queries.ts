@@ -154,8 +154,8 @@ subscription get_messages($id:uuid!) {
 `;
 
 export const SEND_MESSAGE = gql`
-mutation MyMutation($message: String!, $threadId: uuid!, $sentBy: uuid!) {
-  insert_communication_messages_one(object: {message: $message, thread_id: $threadId, sent_by: $sentBy}){
+mutation MyMutation($message: String!, $threadId: uuid!, $sentBy: uuid!, $attachment_url: String!) {
+  insert_communication_messages_one(object: {message: $message, thread_id: $threadId, sent_by: $sentBy}, attachment_url: $attachment_url){
     id
   }
 }

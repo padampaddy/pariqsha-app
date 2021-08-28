@@ -23,9 +23,20 @@ const Messages = () => {
   );
 
   const [input, setInput] = useState<string>("");
+  const [pictures, setPictures] = useState<string>("");
   const [sendMessage] = useMutation<ISendMessage>(SEND_MESSAGE);
 
-  const handleSend = () => {
+  const uploadPicture = (e) => {
+    setPictures(
+      e.target.files[0]
+      //   {
+      //   picturePreview: URL.createObjectURL(e.target.files[0]),
+      //   pictureAsFile: e.target.files[0],
+      // }
+    );
+  };
+
+  const handleSend = async () => {
     if (input.trim().length === 0) return;
     sendMessage({
       variables: { message: input, threadId: id, sentBy: user?.id },
@@ -35,6 +46,26 @@ const Messages = () => {
         setInput("");
       })
       .catch((e) => console.error(e));
+
+    const formData = new FormData();
+    formData.append("files", pictures);
+
+    const res = await fetch("https://functions.app.pariqsha.com/files/upload", {
+      method: "POST",
+      body: formData,
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    const responseObj = await res.json();
+    console.log(responseObj);
+
+    if (responseObj.isSuccess == true) {
+      sendMessage({
+        variables: { attachment_url: pictures },
+      });
+      setPictures("");
+    }
   };
 
   return (
@@ -45,7 +76,8 @@ const Messages = () => {
             className="inline object-cover w-12 h-12 rounded-full"
             src={
               data?.communication_threads_by_pk.profileByStartedWith.image_url
-                ? data?.communication_threads_by_pk.profileByStartedWith.image_url
+                ? data?.communication_threads_by_pk.profileByStartedWith
+                    .image_url
                 : DEFAULT_AVATAR
             }
             onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) =>
@@ -82,7 +114,7 @@ const Messages = () => {
                                   className="p-0 float-right text-white leading-normal"
                                   style={{ fontSize: "8px" }}
                                 >
-                                  {moment(msg.created_at).format("LT")}
+                                  {moment(msg.created_at).fromNow()}
                                 </small>
                               </div>
                             </div>
@@ -96,7 +128,7 @@ const Messages = () => {
                                   className="p-0 float-right leading-normal"
                                   style={{ fontSize: "8px" }}
                                 >
-                                  {moment(msg.created_at).format("LT")}
+                                  {moment(msg.created_at).fromNow()}
                                 </small>
                               </div>
                             </div>
@@ -112,7 +144,11 @@ const Messages = () => {
         </div>
       </div>
       <div className="flex flex-row items-center  rounded-full bg-white p-2   bottom-0 sticky w-full left-0">
-        <form onSubmit={handleSend} className="w-full">
+        <form
+          onSubmit={handleSend}
+          encType="multipart/form-data"
+          className="w-full"
+        >
           <div className="flex-grow ml-4">
             <div className="relative w-full">
               <input
@@ -122,36 +158,42 @@ const Messages = () => {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
               />
-             
+
+              {/* {data?.communication_threads_by_pk.messages.flatMap(
+                (pic, index) => (
+                  <img key={index} src={pic.attachment_url} />
+                )
+              )} */}
+
               <div className="absolute flex items-center justify-center h-full pr-2 right-0 top-0 text-gray-400">
-                <button type="button">
+                <label
+                  data-toggle="tooltip"
+                  data-placement="left"
+                  title="Upload"
+                >
+                  <input
+                    type="file"
+                    multiple
+                    value={pictures}
+                    onChange={uploadPicture}
+                    className="hidden"
+                  />
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
+                    className="h-5 w-5 mr-2"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
                   >
                     <path
-                      fillRule="evenodd"
-                      d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
-                      clipRule="evenodd"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"
                     />
                   </svg>
-                </button>
-                <button type="button">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5 ml-2"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 100-2 1 1 0 000 2zm7-1a1 1 0 11-2 0 1 1 0 012 0zm-.464 5.535a1 1 0 10-1.415-1.414 3 3 0 01-4.242 0 1 1 0 00-1.415 1.414 5 5 0 007.072 0z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </button>
+                </label>
+
                 <button type="submit">
                   <img src={send} className="	w-5 h-5 ml-2"></img>
                 </button>
