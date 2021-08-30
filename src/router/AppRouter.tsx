@@ -32,7 +32,8 @@ import Setting from '../pages/Setting'
 import Messages from '../pages/Messages'
 import NewChat from '../pages/NewChat'
 import Quizz from '../pages/Quizz'
-import Profile from '../pages/Profile'
+import Profile from '../components/Profile'
+import Modal from '../components/Modal'
 
 function MySwitch() {
   const location = useLocation()
@@ -111,6 +112,8 @@ export default function AppRouter() {
   return (
     <ApolloProvider client={client}>
       <Provider url={FUNCTIONS_URL_TEST} options={options}>
+      <Modal />
+
         <Router>
           <MySwitch />
         </Router>

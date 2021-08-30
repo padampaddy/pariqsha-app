@@ -1,7 +1,7 @@
 import BaseLayout from "../layouts/Base";
 import useAuthSubscription from "../hooks/useAuthSubscription";
 import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { GET_MY_MESSAGES, SEND_MESSAGE } from "../api/queries";
 import { RootState } from "../redux/store";
 import moment from "moment";
@@ -13,8 +13,9 @@ import DEFAULT_AVATAR from "../assets/images/profileuser.png";
 
 const Messages = () => {
   const { id } = useParams<{ id: string }>();
-
-  const user = useSelector((state: RootState) => state.user.entities?.user);
+  const { user, token } = useSelector(
+    (state: RootState) => state.user.entities!
+  );
   const { data, loading } = useAuthSubscription<IThreadResponse>(
     GET_MY_MESSAGES,
     {
@@ -24,48 +25,41 @@ const Messages = () => {
 
   const [input, setInput] = useState<string>("");
   const [pictures, setPictures] = useState<string>("");
+  const wrapperRef = useRef(null);
   const [sendMessage] = useMutation<ISendMessage>(SEND_MESSAGE);
 
-  const uploadPicture = (e) => {
-    setPictures(
-      e.target.files[0]
-      //   {
-      //   picturePreview: URL.createObjectURL(e.target.files[0]),
-      //   pictureAsFile: e.target.files[0],
-      // }
-    );
-  };
-
-  const handleSend = async () => {
-    if (input.trim().length === 0) return;
-    sendMessage({
-      variables: { message: input, threadId: id, sentBy: user?.id },
-    })
-      .then((info) => {
-        console.log(info);
-        setInput("");
-      })
-      .catch((e) => console.error(e));
-
+  const uploadPicture = async (e: React.ChangeEvent<any>) => {
+    console.log(e);
     const formData = new FormData();
-    formData.append("files", pictures);
-
+    formData.append("image", e.target.files[0]);
     const res = await fetch("https://functions.app.pariqsha.com/files/upload", {
       method: "POST",
       body: formData,
       headers: {
-        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${token}`,
       },
     });
-    const responseObj = await res.json();
-    console.log(responseObj);
+    const { url } = await res.json();
+    setPictures(url);
+    e.target.value="";
+  };
 
-    if (responseObj.isSuccess == true) {
-      sendMessage({
-        variables: { attachment_url: pictures },
-      });
-      setPictures("");
-    }
+  const handleSend = async () => {
+    if (input.trim().length === 0 && pictures.length===0) return;
+    sendMessage({
+      variables: {
+        message: input,
+        threadId: id,
+        sentBy: user?.id,
+        attachmentUrl: pictures,
+      },
+    })
+      .then((info) => {
+        console.log(info);
+        setInput("");
+        setPictures("");
+      })
+      .catch((e) => console.error(e));
   };
 
   return (
@@ -89,15 +83,14 @@ const Messages = () => {
           </h4>
           <hr className="mt-2 border-gray-300 border-b-1"></hr>
         </div>
-
         <div className="px-2 pt-2">
-          <div className="flex flex-col flex-auto rounded-2xl h-screen">
+          <div className="flex flex-col flex-auto rounded-2xl">
             <div className="grid">
               {loading ? (
                 <div className=" flex justify-center mt-4 items-center">
                   <div
                     className="loader ease-linear rounded-full border-4 border-t-4 border-gray-300 h-10 w-10"
-                    style={{ borderTopColor: "#00d2e0" }}
+                    style={{ borderTopColor: "#00D2E0" }}
                   ></div>
                 </div>
               ) : (
@@ -109,6 +102,9 @@ const Messages = () => {
                           <li className=" pb-1 rounded-xl">
                             <div className="flex items-center justify-end">
                               <div className="text-sm py-1 px-2 common-btn text-white rounded-xl max-w-xs md:max-w-md">
+                              {msg.attachment_url !== "" && (                            
+                              <img src={msg.attachment_url} className="w-20 h-20" />
+                              )}
                                 <p className="leading-normal">{msg.message}</p>
                                 <small
                                   className="p-0 float-right text-white leading-normal"
@@ -117,13 +113,17 @@ const Messages = () => {
                                   {moment(msg.created_at).fromNow()}
                                 </small>
                               </div>
+                              
                             </div>
                           </li>
                         ) : (
                           <li className="pb-1 rounded-xl">
                             <div className="flex flex-row items-center justify-start">
                               <div className="text-sm bg-white py-1 px-2 rounded-xl  max-w-xs md:max-w-md">
-                                <p className="leading-normal">{msg.message}</p>
+                              {msg.attachment_url !== "" && (                            
+                              <img src={msg.attachment_url} className="w-20 h-20" />
+                              )}
+                                <p className="leading-normal">{msg.message}</p>                            
                                 <small
                                   className="p-0 float-right leading-normal"
                                   style={{ fontSize: "8px" }}
@@ -143,67 +143,91 @@ const Messages = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-row items-center  rounded-full bg-white p-2   bottom-0 sticky w-full left-0">
+      <div className="p-1 pb-1">
+      <div className="flex flex-row items-center rounded-lg bg-white p-2 bottom-0 fixed  border border-black w-3/4">
         <form
           onSubmit={handleSend}
           encType="multipart/form-data"
           className="w-full"
         >
-          <div className="flex-grow ml-4">
+          {pictures !== "" && (
+            <div className="flex">
+              <div className="w-20 h-20 flex">
+                <img src={pictures} className="w-20 h-20" />
+                <button
+                  type="button"
+                  onClick={() => setPictures("")}
+                  className="-ml-2 -mt-2 rounded-full h-5 w-5 bg-gray-700"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5 text-white"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          )}
+          <div className="flex-grow">
             <div className="relative w-full">
-              <input
-                type="text"
-                className="flex w-full focus:outline-none focus:border-indigo-300  h-10 "
-                placeholder="Type Your Message"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-              />
-
               {/* {data?.communication_threads_by_pk.messages.flatMap(
                 (pic, index) => (
                   <img key={index} src={pic.attachment_url} />
                 )
               )} */}
-
-              <div className="absolute flex items-center justify-center h-full pr-2 right-0 top-0 text-gray-400">
-                <label
-                  data-toggle="tooltip"
-                  data-placement="left"
-                  title="Upload"
-                >
+              <div>
+                <textarea
+                  className="resize-none flex w-11/12 focus:outline-none break-words focus:border-indigo-300  h-10 pt-1  "
+                  placeholder="Type Your Message"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                />
+                <div className="absolute flex items-center justify-center h-full pr-2 right-0 top-0 text-gray-400">
                   <input
                     type="file"
-                    multiple
-                    value={pictures}
                     onChange={uploadPicture}
                     className="hidden"
+                    ref={wrapperRef}
                   />
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5 mr-2"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
+                  <button
+                    type="button"
+                    onClick={() => {
+                      (wrapperRef as any).current.click();
+                    }}
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"
-                    />
-                  </svg>
-                </label>
-
-                <button type="submit">
-                  <img src={send} className="	w-5 h-5 ml-2"></img>
-                </button>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5 mr-2"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"
+                      />
+                    </svg>
+                  </button>
+                  <button type="submit">
+                    <img src={send} className=" w-5 h-5 ml-2"></img>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </form>
       </div>
+      </div>
     </BaseLayout>
   );
 };
-
 export default Messages;

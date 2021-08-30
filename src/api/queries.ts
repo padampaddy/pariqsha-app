@@ -154,8 +154,16 @@ subscription get_messages($id:uuid!) {
 `;
 
 export const SEND_MESSAGE = gql`
-mutation MyMutation($message: String!, $threadId: uuid!, $sentBy: uuid!, $attachment_url: String!) {
-  insert_communication_messages_one(object: {message: $message, thread_id: $threadId, sent_by: $sentBy}, attachment_url: $attachment_url){
+mutation send_message($message: String!, $threadId: uuid!, $sentBy: uuid!, $attachmentUrl: String!) {
+  insert_communication_messages_one(object: {message: $message, thread_id: $threadId, sent_by: $sentBy,attachment_url: $attachmentUrl}){
+    id
+  }
+}
+`;
+
+export const USER_PROFILE = gql`
+mutation user_profile( $id: uuid!, $imageUrl: String!, $name: String!) {
+  update_users_profile_by_pk(pk_columns: {id: $id},_set: {image_url: $imageUrl, name: $name }){
     id
   }
 }

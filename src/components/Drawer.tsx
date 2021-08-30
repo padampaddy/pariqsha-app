@@ -2,6 +2,9 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import logo from "../assets/images/pariqsha.png";
 import userSlice from "../redux/slices/user-slice";
+import modalSlice from "../redux/slices/modal-slice";
+import Profile from "./Profile";
+
 
 interface Props {
   onClose: () => void;
@@ -9,6 +12,8 @@ interface Props {
 
 const Drawer = ({ onClose }: Props) => {
   const dispatch = useDispatch();
+  
+  
   return (
     <div className="z-50 h-full flex flex-row">
       <div className="flex flex-col bg-white w-screen overflow-hidden">
@@ -42,7 +47,13 @@ const Drawer = ({ onClose }: Props) => {
               Pariqsha
             </h1>
           </div>
-        <Link to="/profile">
+        <button type="button" onClick={() => {
+              dispatch(
+                modalSlice.actions.showModal({
+                  body: <Profile/>,
+                })
+              );
+            }}>
           <img
             className="inline object-cover w-20 h-20 mt-12 rounded-full"
             src="https://images.pexels.com/photos/2589653/pexels-photo-2589653.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
@@ -51,8 +62,7 @@ const Drawer = ({ onClose }: Props) => {
           <h1 className="text-black font-medium md:text-2xl text-lg leading-8 mt-4">
             Hanna Fields
           </h1>
-          <p className="text-gray-400 font-medium md:text-md text-sm pt-0">2,9848 coins</p>
-          </Link>
+          </button>
         </div>
 
         <ul className="flex flex-col  justify-center text-center">
@@ -119,6 +129,7 @@ const Drawer = ({ onClose }: Props) => {
             to="/login"
             onClick={() => {
               dispatch(userSlice.actions.logout());
+              dispatch(modalSlice.actions.hideModal());
               onClose();
             }}
             className="drawer-button border-l"
