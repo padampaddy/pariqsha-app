@@ -1,13 +1,14 @@
 import BaseLayout from "../layouts/Base";
-import {Link} from "react-router-dom"
+// import {Link} from "react-router-dom"
+import fb from "../assets/images/fb.png"
 
 const Setting = () => {
 
   return (
     <BaseLayout title="Setting">
       
-      <div className=" mt-3 px-4 h-screen">
-        <div className=" ">
+      <div className=" flex h-full flex-col">
+        <div className="h-full px-4 pt-3">
           <div className=" text-gray-400 text-xs font-semibold pt-2">ACCOUNT</div>
           <div className="flex justify-between rounded-lg border  mt-2  items-center bg-white p-4 hover:bg-gray-100">
             <div className="flex">
@@ -86,7 +87,7 @@ const Setting = () => {
               </svg>
             </div>
           </div>
-        </div>
+       
         <div className=" mt-6">
           <div className=" text-gray-400 text-xs font-semibold ">OTHER</div>
           <div className="flex justify-between rounded-lg border mt-2 items-center bg-white p-4 hover:bg-gray-100">
@@ -131,7 +132,7 @@ const Setting = () => {
           <div className="flex justify-between rounded-lg border  mt-2 items-center bg-white p-4 hover:bg-gray-100">
             <div className="flex ">
               <div className="rounded-full h-10 w-10 bg-blue-800  flex justify-center items-center">
-                <i className="fab fa-facebook-f" style={{ color: "white" }}></i>
+                <img src={fb}/>
               </div>
               <div className="flex flex-col  ml-3 text-sm font-semibold ">
                 Connect Facebook Account
@@ -157,13 +158,14 @@ const Setting = () => {
             </div>
           </div>
         </div>
-      </div>
-      <Link
+        </div>
+      {/* <Link
         to="/login"
-        className="sticky w-full text-white common-btn p-4 left-0 bottom-0 text-center  block "
+        className=" w-full text-white common-btn p-4 text-center  block "
       >
         Log Out
-      </Link>
+      </Link> */}
+      </div>
     </BaseLayout>
   );
 };

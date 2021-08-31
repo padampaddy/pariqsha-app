@@ -47,3 +47,11 @@ export interface ISendMessage {
     message: string;
   };
 }
+
+export interface IUsersProfile {
+  users_profile_by_pk: {
+    name: string;
+    id: string;
+    image_url: string;
+  };
+}

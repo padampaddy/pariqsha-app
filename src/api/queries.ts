@@ -155,7 +155,7 @@ subscription get_messages($id:uuid!) {
 
 export const SEND_MESSAGE = gql`
 mutation send_message($message: String!, $threadId: uuid!, $sentBy: uuid!, $attachmentUrl: String!) {
-  insert_communication_messages_one(object: {message: $message, thread_id: $threadId, sent_by: $sentBy,attachment_url: $attachmentUrl}){
+  insert_communication_messages_one(object: {message: $message, thread_id: $threadId, sent_by: $sentBy, attachment_url: $attachmentUrl}){
     id
   }
 }
@@ -169,3 +169,12 @@ mutation user_profile( $id: uuid!, $imageUrl: String!, $name: String!) {
 }
 `;
 
+export const USERS_PROFILE = gql`
+  subscription users_profile($id: uuid!) {
+    users_profile_by_pk(id: $id) {
+      id
+      image_url
+      name
+    }
+  }
+`;

@@ -45,5 +45,4 @@ export interface IUserProfile{
     name: string;
     id: string;
     image_url: string;
-  
 }

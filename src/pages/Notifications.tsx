@@ -4,8 +4,8 @@ const Notification = () => {
   return (
     <BaseLayout title="Notifications"> 
   
-      <div className=" mt-3  px-4 h-screen pt-1">
-      <div className="mt-6">
+      <div className=" px-4 h-full flex flex-col pt-1">
+      <div className="mt-6 h-full">
           <ul className="">
               <li className="notification-list border-l-4" style={{borderLeftColor: "#01CEE3", backgroundColor:"#FFFCF5"}}> 
                   <div className="justify-center items-center">

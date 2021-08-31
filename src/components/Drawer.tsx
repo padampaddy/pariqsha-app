@@ -1,10 +1,14 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import logo from "../assets/images/pariqsha.png";
 import userSlice from "../redux/slices/user-slice";
 import modalSlice from "../redux/slices/modal-slice";
 import Profile from "./Profile";
-
+import { RootState } from "../redux/store";
+import useAuthSubscription from "../hooks/useAuthSubscription";
+import { USERS_PROFILE } from "../api/queries";
+import { IUsersProfile } from "../types/Chat";
+import DEFAULT_AVATAR from "../assets/images/profileuser.png";
 
 interface Props {
   onClose: () => void;
@@ -12,8 +16,11 @@ interface Props {
 
 const Drawer = ({ onClose }: Props) => {
   const dispatch = useDispatch();
-  
-  
+  const user = useSelector((state: RootState) => state.user.entities?.user);
+  const { data } = useAuthSubscription<IUsersProfile>(USERS_PROFILE, {
+    id: user?.id,
+  });
+
   return (
     <div className="z-50 h-full flex flex-row">
       <div className="flex flex-col bg-white w-screen overflow-hidden">
@@ -47,39 +54,72 @@ const Drawer = ({ onClose }: Props) => {
               Pariqsha
             </h1>
           </div>
-        <button type="button" onClick={() => {
+          <button
+            type="button"
+            onClick={() => {
               dispatch(
                 modalSlice.actions.showModal({
-                  body: <Profile/>,
+                  body: (
+                    <Profile
+                      oName={data?.users_profile_by_pk.name}
+                      oUrl={data?.users_profile_by_pk.image_url}
+                    />
+                  ),
                 })
               );
-            }}>
-          <img
-            className="inline object-cover w-20 h-20 mt-12 rounded-full"
-            src="https://images.pexels.com/photos/2589653/pexels-photo-2589653.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
-            alt="Profile image"
-          />
-          <h1 className="text-black font-medium md:text-2xl text-lg leading-8 mt-4">
-            Hanna Fields
-          </h1>
+            }}
+          >
+            <img
+              className="inline object-cover w-20 h-20 mt-12 rounded-full"
+              src={
+                data?.users_profile_by_pk.image_url
+                  ? data?.users_profile_by_pk.image_url
+                  : DEFAULT_AVATAR
+              }
+              alt="Profile image"
+            />
+            <h1 className="text-black font-medium md:text-2xl text-lg leading-8 mt-4">
+              {data?.users_profile_by_pk.name}
+            </h1>
           </button>
         </div>
 
         <ul className="flex flex-col  justify-center text-center">
           <li className="nav-item">
-            <Link to="/home" onClick={() => onClose()} className="nav-link">
+            <Link
+              to="/home"
+              onClick={() => {
+                onClose();
+                dispatch(modalSlice.actions.hideModal());
+              }}
+              className="nav-link"
+            >
               Quizzes
             </Link>
           </li>
 
           <li className="nav-item">
-            <Link to="/chats" onClick={() => onClose()} className="nav-link">
+            <Link
+              to="/chats"
+              onClick={() => {
+                onClose();
+                dispatch(modalSlice.actions.hideModal());
+              }}
+              className="nav-link"
+            >
               My Chats
             </Link>
           </li>
 
           <li className="nav-item">
-            <Link to="/leader" onClick={() => onClose()} className="nav-link">
+            <Link
+              to="/leader"
+              onClick={() => {
+                onClose();
+                dispatch(modalSlice.actions.hideModal());
+              }}
+              className="nav-link"
+            >
               Leaderboard
             </Link>
           </li>
@@ -87,7 +127,10 @@ const Drawer = ({ onClose }: Props) => {
           <li className="nav-item">
             <Link
               to="/notification"
-              onClick={() => onClose()}
+              onClick={() => {
+                onClose();
+                dispatch(modalSlice.actions.hideModal());
+              }}
               className="nav-link pl-4"
             >
               Notifications
@@ -98,7 +141,14 @@ const Drawer = ({ onClose }: Props) => {
           </li>
 
           <li className="nav-item">
-            <Link to="/coins" onClick={() => onClose()} className="nav-link">
+            <Link
+              to="/coins"
+              onClick={() => {
+                onClose();
+                dispatch(modalSlice.actions.hideModal());
+              }}
+              className="nav-link"
+            >
               Earn Coins
             </Link>
           </li>
@@ -107,6 +157,10 @@ const Drawer = ({ onClose }: Props) => {
         <div className="flex flex-row w-full absolute  bottom-0 bg-white z-10">
           <Link
             to="/setting"
+            onClick={() => {
+              onClose();
+              dispatch(modalSlice.actions.hideModal());
+            }}
             className="drawer-button"
           >
             <span className="mr-2">

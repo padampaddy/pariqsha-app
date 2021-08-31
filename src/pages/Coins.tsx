@@ -9,13 +9,13 @@ import coin from "../assets/images/money.png";
 const Coins = () => {
   return (
     <BaseLayout title="Earn Coins">
-      <div className="px-4">
+      <div className="px-4 flex flex-col h-full">
         <div className="header pt-8 text-center">
           <p className="text-gray-500 font-medium text-xs">
             You have 2.589 Coins
           </p>
         </div>
-      </div>
+   
       <div className="pt-2  mt-3 h-screen ">
         <div className="flex  w-full">
           <div className="flex justify-center items-center m-2 w-1/2  hover:bg-gray-100  border border-gray-300 p-6 rounded-2xl bg-white">
@@ -77,6 +77,7 @@ const Coins = () => {
             </a>
           </div>
         </div>
+      </div>
       </div>
     </BaseLayout>
   );

@@ -10,7 +10,7 @@ const Modal = () => {
   if (!visible) return null;
   return (
     <div
-      className="fixed z-10 inset-0 md:mt-40 mt-20"
+      className="fixed z-10 inset-0  mt-20"
       aria-labelledby="modal-title"
       role="dialog"
       aria-modal="true"

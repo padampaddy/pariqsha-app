@@ -2,6 +2,10 @@ import { ReactElement } from "react";
 import PriceTag from "./PriceTag";
 import { RootState } from "../redux/store";
 import { useSelector } from "react-redux";
+import useAuthSubscription from "../hooks/useAuthSubscription";
+import { IUsersProfile } from "../types/Chat";
+import { USERS_PROFILE } from "../api/queries";
+import DEFAULT_AVATAR from "../assets/images/profileuser.png";
 
 interface Props {
   title?: string;
@@ -30,6 +34,9 @@ export default function Cards({
   duration,
 }: Props): ReactElement {
   const user = useSelector((state: RootState) => state.user.entities?.user);
+  const { data } = useAuthSubscription<IUsersProfile>(USERS_PROFILE, {
+    id: user?.id,
+  });
   return (
     <div>
       <ul>
@@ -121,7 +128,7 @@ export default function Cards({
             <div className="flex items-center">
               <img
                 className="inline object-cover w-6 h-6 rounded-full border mr-2"
-                src="https://images.pexels.com/photos/2589653/pexels-photo-2589653.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+                src={data?.users_profile_by_pk.image_url ? data.users_profile_by_pk.image_url : DEFAULT_AVATAR}
                 alt="Profile image"
               />
               <p className="md:text-sm text-xs">

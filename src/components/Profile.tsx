@@ -7,12 +7,12 @@ import { IUserProfile } from "../types/User";
 import { USER_PROFILE } from "../api/queries";
 import DEFAULT_AVATAR from "../assets/images/profileuser.png";
 
-function Profile() {
+function Profile({oUrl="", oName=""}:{oUrl?:string, oName?:string}) {
   const { entities } = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
   const wrapperRef = useRef(null);
-  const [pictures, setPictures] = useState<string>("");
-  const [name, setName] = useState<string>("");
+  const [pictures, setPictures] = useState<string>(oUrl);
+  const [name, setName] = useState<string>(oName);
   const [userProfile] = useMutation<IUserProfile>(USER_PROFILE);
 
   const uploadPicture = async (e: React.ChangeEvent<any>) => {
@@ -118,6 +118,7 @@ function Profile() {
                 className="w-full border p-2 md:text-md+ text-sm"
                 autoComplete=""
                 type="text"
+                value={name}
                 placeholder="Enter Name"
               />
             </div>

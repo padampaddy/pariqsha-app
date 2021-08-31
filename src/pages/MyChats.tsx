@@ -18,8 +18,8 @@ function Mychats() {
 
   return (
     <BaseLayout title="My Chats">
-      <div>
-        <div className="px-4 h-screen">
+      <div className="flex flex-col h-full">
+        <div className="px-4 h-full">
           {loading ? (
             <div className=" flex justify-center mt-4 items-center">
               <div
@@ -92,13 +92,14 @@ function Mychats() {
             </div>
           )}
         </div>
-      </div>
+     
       <Link
         to="/newchat"
         className="sticky text-white common-btn p-4 left-0 bottom-0 w-full block text-center"
       >
         New Chat
       </Link>
+      </div>
     </BaseLayout>
   );
 }

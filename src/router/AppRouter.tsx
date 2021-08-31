@@ -8,7 +8,7 @@ import {
   Switch,
 } from 'react-router-dom'
 import PrivateRoute from './PrivateRoute'
-import Home from '../pages/Home'
+// import Home from '../pages/Home'
 import PublicRoute from './PublicRoute'
 import { createApolloClient } from '../api/apollo-client'
 import {
@@ -28,12 +28,13 @@ import Mychats from '../pages/MyChats'
 import Coins from '../pages/Coins'
 import Notification from '../pages/Notifications'
 import Setting from '../pages/Setting'
-// import LeaderBoard from '../pages/LeaderBoard'
-import Messages from '../pages/Messages'
+import LeaderBoard from '../pages/LeaderBoard'
+// import Messages from '../pages/Messages'
 import NewChat from '../pages/NewChat'
 import Quizz from '../pages/Quizz'
 import Profile from '../components/Profile'
 import Modal from '../components/Modal'
+import Msg from '../pages/Msg'
 
 function MySwitch() {
   const location = useLocation()
@@ -61,7 +62,7 @@ function MySwitch() {
       </PrivateRoute>
 
       <PrivateRoute path="/leader">
-        <Home />
+        <LeaderBoard />
       </PrivateRoute>
 
       <PrivateRoute path="/chats">
@@ -73,7 +74,7 @@ function MySwitch() {
       </PrivateRoute>
 
       <PrivateRoute path="/messages/:id">
-        <Messages />
+        <Msg />
       </PrivateRoute>
 
       <PrivateRoute path="/details/:id">
@@ -113,7 +114,7 @@ export default function AppRouter() {
     <ApolloProvider client={client}>
       <Provider url={FUNCTIONS_URL_TEST} options={options}>
       <Modal />
-
+      
         <Router>
           <MySwitch />
         </Router>
