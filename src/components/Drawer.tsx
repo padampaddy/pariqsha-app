@@ -1,14 +1,16 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import logo from "../assets/images/pariqsha.png";
 import userSlice from "../redux/slices/user-slice";
 import modalSlice from "../redux/slices/modal-slice";
 import Profile from "./Profile";
 import { RootState } from "../redux/store";
-import useAuthSubscription from "../hooks/useAuthSubscription";
-import { USERS_PROFILE } from "../api/queries";
+// import useAuthSubscription from "../hooks/useAuthSubscription";
+import { USERS_PROFILE, USER_PROFILE_ADD } from "../api/queries";
 import { IUsersProfile } from "../types/Chat";
 import DEFAULT_AVATAR from "../assets/images/profileuser.png";
+import { useLazyQuery, useMutation } from "@apollo/client";
+import { useEffect } from "react";
 
 interface Props {
   onClose: () => void;
@@ -17,9 +19,27 @@ interface Props {
 const Drawer = ({ onClose }: Props) => {
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.user.entities?.user);
-  const { data } = useAuthSubscription<IUsersProfile>(USERS_PROFILE, {
-    id: user?.id,
+  const [getData, { data }] = useLazyQuery<IUsersProfile>(USERS_PROFILE, {
+    onCompleted: (res) => {
+      if (!res) {
+        addProfile({
+          variables: {
+            id: user?.id,
+            name: user?.email,
+            imageUrl: "",
+          },
+        }).then(() => {
+          getData({ variables: { id: user?.id } });
+        });
+      }
+    },
+    fetchPolicy: 'network-only'
   });
+  const [addProfile] = useMutation(USER_PROFILE_ADD);
+
+  useEffect(() => {
+    getData({ variables: { id: user?.id } });
+  }, []);
 
   return (
     <div className="z-50 h-full flex flex-row">
@@ -47,12 +67,10 @@ const Drawer = ({ onClose }: Props) => {
           </button>
         </div>
 
-        <div className="mb-8 mx-auto text-center pt-0 ">
-          <div className="flex">
-            <img src={logo} className="h-10 w-10 mx-auto" alt="pariqsha logo" />
-            <h1 className="item-center pl-2 pt-1 text-2xl font-bold">
-              Pariqsha
-            </h1>
+        <div className="mb-8 mx-auto text-center h-1/4">
+          <div className="flex items-center justify-center">
+            <img src={logo} className="h-10 w-10" alt="pariqsha logo" />
+            <h1 className="pl-2 text-2xl font-bold">Pariqsha</h1>
           </div>
           <button
             type="button"
@@ -61,8 +79,17 @@ const Drawer = ({ onClose }: Props) => {
                 modalSlice.actions.showModal({
                   body: (
                     <Profile
-                      oName={data?.users_profile_by_pk.name}
-                      oUrl={data?.users_profile_by_pk.image_url}
+                      onUpdate={() =>
+                        {
+                          console.log("Updated");
+                          getData({
+                          variables: {
+                            id: user?.id,
+                          },
+                        })}
+                      }
+                      oName={data?.users_profile_by_pk?.name}
+                      oUrl={data?.users_profile_by_pk?.image_url}
                     />
                   ),
                 })
@@ -72,85 +99,92 @@ const Drawer = ({ onClose }: Props) => {
             <img
               className="inline object-cover w-20 h-20 mt-12 rounded-full"
               src={
-                data?.users_profile_by_pk.image_url
+                data?.users_profile_by_pk?.image_url
                   ? data?.users_profile_by_pk.image_url
                   : DEFAULT_AVATAR
               }
               alt="Profile image"
             />
-            <h1 className="text-black font-medium md:text-2xl text-lg leading-8 mt-4">
-              {data?.users_profile_by_pk.name}
+            <h1 className="text-black font-medium md:text-xl text-lg leading-8 mt-4">
+              {data?.users_profile_by_pk?.name}
+           
             </h1>
           </button>
         </div>
 
         <ul className="flex flex-col  justify-center text-center">
           <li className="nav-item">
-            <Link
+            <NavLink
               to="/home"
               onClick={() => {
                 onClose();
                 dispatch(modalSlice.actions.hideModal());
               }}
               className="nav-link"
+              activeClassName="selected common-btn"
             >
               Quizzes
-            </Link>
+            </NavLink>
           </li>
 
           <li className="nav-item">
-            <Link
+            <NavLink
               to="/chats"
               onClick={() => {
                 onClose();
                 dispatch(modalSlice.actions.hideModal());
               }}
               className="nav-link"
+              activeClassName="selected common-btn"
             >
               My Chats
-            </Link>
+            </NavLink>
           </li>
 
           <li className="nav-item">
-            <Link
+            <NavLink
               to="/leader"
               onClick={() => {
                 onClose();
                 dispatch(modalSlice.actions.hideModal());
               }}
               className="nav-link"
+              activeClassName="selected common-btn"
             >
               Leaderboard
-            </Link>
+            </NavLink>
           </li>
 
           <li className="nav-item">
-            <Link
+            <NavLink
               to="/notification"
               onClick={() => {
                 onClose();
                 dispatch(modalSlice.actions.hideModal());
               }}
-              className="nav-link pl-4"
+              className="nav-link pl-4 flex justify-center items-center"
+              activeClassName="selected common-btn"
             >
               Notifications
-            </Link>
-            <span className="rounded-full h-5 w-5 md:h-6 md:w-6 flex items-center justify-center ml-2 mt-1 text-white font-medium common-btn text-xs">
+              <span className="rounded-full h-5 w-5 md:h-6 md:w-6 flex items-center justify-center ml-2 mt-1 text-white font-medium common-btn text-xs">
               4
             </span>
+            </NavLink>
+          
           </li>
 
           <li className="nav-item">
-            <Link
+            <NavLink
               to="/coins"
               onClick={() => {
                 onClose();
                 dispatch(modalSlice.actions.hideModal());
               }}
               className="nav-link"
+              activeClassName="selected common-btn"
             >
               Earn Coins
-            </Link>
+            </NavLink>
           </li>
         </ul>
 

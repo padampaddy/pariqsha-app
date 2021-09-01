@@ -72,8 +72,12 @@ background-color: #79D9EF;
 border-radius: 10rem;
 color: white;
 }
-.common-btn{
-  background-image: linear-gradient(to right, #00cbe4, #00d0e2, #00d5df, #00dadc, #02ded7);
+.common-btn, .nav-item:hover{
+  background-image: linear-gradient(to right, #00CBE4, #00D0E2, #00D5DF, #00DADC, #02DED7);
+  color: #fff;
+}
+.selected span, .nav-link:hover span {
+  background: #000;
 }
 /* width */
 ::-webkit-scrollbar {

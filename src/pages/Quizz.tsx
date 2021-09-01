@@ -290,9 +290,9 @@ function Quizz() {
       </div>
       ):(
         <div className="md:flex mt-4 p-4">
-        <div className="quizz-list  md:w-3/5 w-full mb-4">{getCards()}</div>
+        <div className="quizz-list  md:w-3/4 w-full mb-4">{getCards()}</div>
 
-        <div className="collections md:w-2/5 md:pl-4 w-full invisible md:visible">
+        <div className="collections md:w-1/4 md:pl-4 w-full invisible md:visible">
           <div className=" bg-white shadow-md">
             <div className="flex p-4 text-left font-medium border-b-2">
               <svg

@@ -130,51 +130,89 @@ export const GET_MY_CHATS = gql`
 `;
 
 export const GET_MY_MESSAGES = gql`
-subscription get_messages($id:uuid!) {
-  communication_threads_by_pk(id:$id){
-    messages{
-      id
-      attachment_url
-      created_at
-      message
-      sent_by
-    }
-    profileByStartedBy{
-      name
-      image_url
-      id
-    }
-    profileByStartedWith{
-      name
-      image_url
-      id
+  subscription get_messages($id: uuid!) {
+    communication_threads_by_pk(id: $id) {
+      messages {
+        id
+        attachment_url
+        created_at
+        message
+        sent_by
+      }
+      profileByStartedBy {
+        name
+        image_url
+        id
+      }
+      profileByStartedWith {
+        name
+        image_url
+        id
+      }
     }
   }
-}
 `;
 
 export const SEND_MESSAGE = gql`
-mutation send_message($message: String!, $threadId: uuid!, $sentBy: uuid!, $attachmentUrl: String!) {
-  insert_communication_messages_one(object: {message: $message, thread_id: $threadId, sent_by: $sentBy, attachment_url: $attachmentUrl}){
-    id
+  mutation send_message(
+    $message: String!
+    $threadId: uuid!
+    $sentBy: uuid!
+    $attachmentUrl: String!
+  ) {
+    insert_communication_messages_one(
+      object: {
+        message: $message
+        thread_id: $threadId
+        sent_by: $sentBy
+        attachment_url: $attachmentUrl
+      }
+    ) {
+      id
+    }
   }
-}
 `;
 
-export const USER_PROFILE = gql`
-mutation user_profile( $id: uuid!, $imageUrl: String!, $name: String!) {
-  update_users_profile_by_pk(pk_columns: {id: $id},_set: {image_url: $imageUrl, name: $name }){
-    id
+export const UPDATE_USER_PROFILE = gql`
+  mutation update_user_profile($id: uuid!, $imageUrl: String!, $name: String!) {
+    update_users_profile_by_pk(
+      pk_columns: { id: $id }
+      _set: { image_url: $imageUrl, name: $name }
+    ) {
+      id
+    }
   }
-}
+`;
+
+export const USER_PROFILE_ADD = gql`
+  mutation user_profile_add($id: uuid!, $imageUrl: String!, $name: String!) {
+    insert_users_profile_one(
+      object: { id: $id, image_url: $imageUrl, name: $name }
+    ) {
+      id
+    }
+  }
 `;
 
 export const USERS_PROFILE = gql`
-  subscription users_profile($id: uuid!) {
+  query users_profile($id: uuid!) {
     users_profile_by_pk(id: $id) {
       id
       image_url
       name
+    }
+  }
+`;
+
+export const USER_PROFILE_CONTACT = gql`
+  subscription user_profile_contact(
+    $id: uuid!
+    $imageUrl: String!
+    $name: String!
+  ) {
+    users_profile(where: { name: { _ilike: "%%" } }) {
+      name
+      image_url
     }
   }
 `;

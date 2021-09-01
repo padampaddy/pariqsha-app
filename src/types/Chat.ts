@@ -55,3 +55,11 @@ export interface IUsersProfile {
     image_url: string;
   };
 }
+
+export interface UserProfile {
+  users_profile: {
+    name: string;
+    id: string;
+    image_url: string;
+  };
+}

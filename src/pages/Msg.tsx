@@ -68,7 +68,7 @@ const Msg = () => {
 
   useEffect(() => {
     temp1.current?.scrollTo(0, temp1.current?.scrollHeight)
-  }, [temp1.current])
+  }, [data])
 
 
   return (

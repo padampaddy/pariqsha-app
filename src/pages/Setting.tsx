@@ -1,16 +1,33 @@
 import BaseLayout from "../layouts/Base";
 // import {Link} from "react-router-dom"
-import fb from "../assets/images/fb.png"
+import fb from "../assets/images/fb.png";
+import { useDispatch } from "react-redux";
+import UpdateEmail from "../components/UpdateEmail";
+import modalSlice from "../redux/slices/modal-slice";
+import UpdatePassword from "../components/UpdatePassword";
 
 const Setting = () => {
+  const dispatch = useDispatch();
 
   return (
     <BaseLayout title="Setting">
-      
       <div className=" flex h-full flex-col">
         <div className="h-full px-4 pt-3">
-          <div className=" text-gray-400 text-xs font-semibold pt-2">ACCOUNT</div>
-          <div className="flex justify-between rounded-lg border  mt-2  items-center bg-white p-4 hover:bg-gray-100">
+          <div className=" text-gray-400 text-xs font-semibold pt-2">
+            ACCOUNT
+          </div>
+
+          <div
+            role="button"
+            onClick={() => {
+              dispatch(
+                modalSlice.actions.showModal({
+                  body: <UpdateEmail />,
+                })
+              );
+            }}
+            className="flex justify-between rounded-lg border  mt-2  items-center bg-white p-4 hover:bg-gray-100"
+          >
             <div className="flex">
               <div className="rounded-full h-10 w-10 bg-purple-400 flex justify-center items-center">
                 <svg
@@ -47,7 +64,16 @@ const Setting = () => {
               </svg>
             </div>
           </div>
-          <div className="flex justify-between rounded-lg border  mt-2 items-center bg-white p-4 hover:bg-gray-100">
+
+          <div role="button"
+            onClick={() => {
+              dispatch(
+                modalSlice.actions.showModal({
+                  body: <UpdatePassword />,
+                })
+              );
+            }}
+             className="flex justify-between rounded-lg border  mt-2 items-center bg-white p-4 hover:bg-gray-100">
             <div className="flex ">
               <div className="rounded-full h-10 w-10 bg-yellow-400  flex justify-center items-center">
                 <svg
@@ -87,79 +113,81 @@ const Setting = () => {
               </svg>
             </div>
           </div>
-       
-        <div className=" mt-6">
-          <div className=" text-gray-400 text-xs font-semibold ">OTHER</div>
-          <div className="flex justify-between rounded-lg border mt-2 items-center bg-white p-4 hover:bg-gray-100">
-            <div className="flex ">
-              <div
-                className="rounded-full h-10 w-10  flex justify-center items-center"
-                style={{ background: "#A2E57D" }}
-              >
+
+          <div className=" mt-6">
+            <div className=" text-gray-400 text-xs font-semibold ">OTHER</div>
+
+            <div className="flex justify-between rounded-lg border mt-2 items-center bg-white p-4 hover:bg-gray-100">
+              <div className="flex ">
+                <div
+                  className="rounded-full h-10 w-10  flex justify-center items-center"
+                  style={{ background: "#A2E57D" }}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6"
+                    style={{ color: "white" }}
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" />
+                  </svg>
+                </div>
+                <div className="flex flex-col ml-3 text-sm font-semibold ">
+                  Push Notifications
+                  <span className="text-xs text-gray-400 ">
+                    For messages, badges etc
+                  </span>
+                </div>
+              </div>
+              <div className="flex flex-col items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  style={{ color: "white" }}
+                  className="h-5 w-5"
+                  style={{ color: "#9CA3AF" }}
                   viewBox="0 0 20 20"
                   fill="currentColor"
                 >
-                  <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" />
+                  <path
+                    fillRule="evenodd"
+                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                    clipRule="evenodd"
+                  />
                 </svg>
               </div>
-              <div className="flex flex-col ml-3 text-sm font-semibold ">
-                Push Notifications
-                <span className="text-xs text-gray-400 ">
-                  For messages, badges etc
-                </span>
-              </div>
             </div>
-            <div className="flex flex-col items-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                style={{ color: "#9CA3AF" }}
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </div>
-          </div>
-          <div className="flex justify-between rounded-lg border  mt-2 items-center bg-white p-4 hover:bg-gray-100">
-            <div className="flex ">
-              <div className="rounded-full h-10 w-10 bg-blue-800  flex justify-center items-center">
-                <img src={fb}/>
+
+            <div className="flex justify-between rounded-lg border  mt-2 items-center bg-white p-4 hover:bg-gray-100">
+              <div className="flex ">
+                <div className="rounded-full h-10 w-10 bg-blue-800  flex justify-center items-center">
+                  <img src={fb} />
+                </div>
+                <div className="flex flex-col  ml-3 text-sm font-semibold ">
+                  Connect Facebook Account
+                  <span className="text-xs text-gray-400 ">
+                    Allows quick login and sharing
+                  </span>
+                </div>
               </div>
-              <div className="flex flex-col  ml-3 text-sm font-semibold ">
-                Connect Facebook Account
-                <span className="text-xs text-gray-400 ">
-                  Allows quick login and sharing
-                </span>
+              <div className="flex flex-col items-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  style={{ color: "#9CA3AF" }}
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                    clipRule="evenodd"
+                  />
+                </svg>
               </div>
-            </div>
-            <div className="flex flex-col items-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                style={{ color: "#9CA3AF" }}
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                  clipRule="evenodd"
-                />
-              </svg>
             </div>
           </div>
         </div>
-        </div>
-      {/* <Link
+        {/* <Link
         to="/login"
         className=" w-full text-white common-btn p-4 text-center  block "
       >
