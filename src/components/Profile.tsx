@@ -74,7 +74,7 @@ function Profile({
             src={pictures ? pictures : DEFAULT_AVATAR}
             alt=""
           />
-          <div className="rounded-full h-7 w-7 p-1 text-white common-btn -mt-6 ml-9">
+          <div className="rounded-full h-7 w-7 p-1 text-white common-btn -mt-6 ml-9 absolute">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className=""

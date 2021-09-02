@@ -10,7 +10,8 @@ const Modal = () => {
   if (!visible) return null;
   return (
     <div
-      className="fixed z-10 inset-0  mt-20"
+      className="fixed z-50 inset-0"
+      style={{zIndex:9999}}
       aria-labelledby="modal-title"
       role="dialog"
       aria-modal="true"
@@ -27,7 +28,7 @@ const Modal = () => {
           aria-hidden="true"
         />
 
-        <div className="inline-block align-center bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 w-full max-w-2xl">
+        <div className="inline-block align-center bg-white absolute top-1/2 left-1/2  -translate-x-1/2  -translate-y-1/2 rounded-lg text-left overflow-hidden shadow-xl transform   w-full max-w-2xl">
           <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
             
             <div className="">{body}</div>

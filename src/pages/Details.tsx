@@ -15,7 +15,7 @@ import {
 import Card from '../components/Card'
 import MarkdownView from '../components/MarkdownView'
 import { RP_KEY_ID_TEST } from '../Constants'
-import Base from '../layouts/Base'
+import BaseLayout from '../layouts/Base'
 import modalSlice from '../redux/slices/modal-slice'
 import { RootState } from '../redux/store'
 import { QuizDetailsResponse, QuizRegistrationResponse } from '../types/Quiz'
@@ -55,7 +55,7 @@ export default function Details(): ReactElement {
   const [makeRefundRequest] = useMutation(MAKE_REFUND_REQUEST)
   const dispatch = useDispatch()
   return (
-    <Base title="Details" showBack>
+    <BaseLayout title="Details" showBack>
       <div className="flex justify-center">
         <Card
           title={data?.quiz_quiz_by_pk.title}
@@ -193,6 +193,6 @@ export default function Details(): ReactElement {
           }
         />
       </div>
-    </Base>
+    </BaseLayout>
   )
 }

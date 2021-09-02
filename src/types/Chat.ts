@@ -49,17 +49,13 @@ export interface ISendMessage {
 }
 
 export interface IUsersProfile {
-  users_profile_by_pk: {
-    name: string;
-    id: string;
-    image_url: string;
-  };
+  users_profile_by_pk: IProfile;
 }
 
 export interface UserProfile {
-  users_profile: {
-    name: string;
-    id: string;
-    image_url: string;
-  };
+  users_profile: IProfile;
+}
+
+export interface ISearchProfile {
+  users_profile: IProfile[]
 }

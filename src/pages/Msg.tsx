@@ -8,7 +8,7 @@ import moment from "moment";
 import { useMutation } from "@apollo/client";
 import { ISendMessage, IThreadResponse } from "../types/Chat";
 import send from "../assets/images/send.png";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import DEFAULT_AVATAR from "../assets/images/profileuser.png";
 import PicPreview from "../components/PicPreview";
 import modalSlice from "../redux/slices/modal-slice";
@@ -30,6 +30,7 @@ const Msg = () => {
   const wrapperRef = useRef(null);
   const [sendMessage] = useMutation<ISendMessage>(SEND_MESSAGE);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const uploadPicture = async (e: React.ChangeEvent<any>) => {
     console.log(e);
@@ -61,40 +62,60 @@ const Msg = () => {
         console.log(info);
         setInput("");
         setPictures("");
-        temp1.current?.scrollTo(0, temp1.current?.scrollHeight)
+        temp1.current?.scrollTo(0, temp1.current?.scrollHeight);
       })
       .catch((e) => console.error(e));
   };
 
   useEffect(() => {
-    temp1.current?.scrollTo(0, temp1.current?.scrollHeight)
-  }, [data])
-
+    temp1.current?.scrollTo(0, temp1.current?.scrollHeight);
+  }, [data]);
 
   return (
     <BaseLayout title="Messages">
       <div className="flex h-full flex-col">
-        <div className="">
-          <div className="bg-gradient-to-bl text-center px-2 py-4">
-            <img
-              className="inline object-cover w-12 h-12 rounded-full"
-              src={
-                data?.communication_threads_by_pk.profileByStartedWith.image_url
-                  ? data?.communication_threads_by_pk.profileByStartedWith
-                      .image_url
-                  : DEFAULT_AVATAR
-              }
-              onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) =>
-                ((e.target as HTMLImageElement).src = DEFAULT_AVATAR)
-              }
-            ></img>
-            <h4 className="text-black pt-1 text-sm font-bold">
-              {data?.communication_threads_by_pk.profileByStartedWith.name}
-            </h4>
-            <hr className="mt-2 border-gray-300 border-b-1"></hr>
-          </div>
+        <div>
+          <div className=" bg-gradient-to-bl items-center text-center px-2 py-4 relative">
+         
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-6 cursor-pointer absolute top-1/2 -translate-y-1/2 transform "
+                viewBox="0 0 512 512"
+                onClick={() => history.goBack()}
+              >
+                <title>Arrow Back</title>
+                <path
+                  fill="currentColor"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="48"
+                  d="M244 400L100 256l144-144M120 256h292"
+                />
+              </svg>
+          
+      
+              <img
+                className="inline object-cover w-12 h-12 rounded-full"
+                src={
+                  data?.communication_threads_by_pk.profileByStartedWith
+                    .image_url
+                    ? data?.communication_threads_by_pk.profileByStartedWith
+                        .image_url
+                    : DEFAULT_AVATAR
+                }
+                onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) =>
+                  ((e.target as HTMLImageElement).src = DEFAULT_AVATAR)
+                }
+              ></img>
+        
+              <h4 className="text-black pt-1 text-sm font-bold">
+                {data?.communication_threads_by_pk.profileByStartedWith.name}
+              </h4>
+            </div>
+      
         </div>
-
+        <hr className="mx-2 mb-2 border-gray-300 border-b-1"></hr>
         <div ref={temp1} className="flex-1 px-2 overflow-y-auto">
           <div className="flex flex-col flex-auto rounded-2xl">
             <div className="grid">
@@ -114,22 +135,28 @@ const Msg = () => {
                           <li className=" pb-1 rounded-xl">
                             <div className="flex items-center justify-end">
                               <div className="text-sm py-1 px-2 common-btn text-white rounded-xl max-w-xs md:max-w-md">
-                                {msg.attachment_url && msg.attachment_url !== "" && (
-                                  <div
-                                    onClick={() => {
-                                      dispatch(
-                                        modalSlice.actions.showModal({
-                                          body: <PicPreview url={msg.attachment_url}/>,
-                                        })
-                                      );
-                                    }}
-                                  >
-                                    <img
-                                      src={msg.attachment_url}
-                                      className="w-20 h-20"
-                                    />
-                                  </div>
-                                )}
+                                {msg.attachment_url &&
+                                  msg.attachment_url !== "" && (
+                                    <div
+                                      role="button"
+                                      onClick={() => {
+                                        dispatch(
+                                          modalSlice.actions.showModal({
+                                            body: (
+                                              <PicPreview
+                                                url={msg.attachment_url}
+                                              />
+                                            ),
+                                          })
+                                        );
+                                      }}
+                                    >
+                                      <img
+                                        src={msg.attachment_url}
+                                        className="w-20 h-20"
+                                      />
+                                    </div>
+                                  )}
                                 <p className="leading-normal">{msg.message}</p>
                                 <small
                                   className="p-0 float-right text-white leading-normal"
@@ -144,12 +171,28 @@ const Msg = () => {
                           <li className="pb-1 rounded-xl">
                             <div className="flex flex-row items-center justify-start">
                               <div className="text-sm bg-white py-1 px-2 rounded-xl  max-w-xs md:max-w-md">
-                                {msg.attachment_url && msg.attachment_url !== "" && (
-                                  <img
-                                    src={msg.attachment_url}
-                                    className="w-20 h-20"
-                                  />
-                                )}
+                                {msg.attachment_url &&
+                                  msg.attachment_url !== "" && (
+                                    <div
+                                      role="button"
+                                      onClick={() => {
+                                        dispatch(
+                                          modalSlice.actions.showModal({
+                                            body: (
+                                              <PicPreview
+                                                url={msg.attachment_url}
+                                              />
+                                            ),
+                                          })
+                                        );
+                                      }}
+                                    >
+                                      <img
+                                        src={msg.attachment_url}
+                                        className="w-20 h-20"
+                                      />
+                                    </div>
+                                  )}
                                 <p className="leading-normal">{msg.message}</p>
                                 <small
                                   className="p-0 float-right leading-normal"

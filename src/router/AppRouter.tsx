@@ -60,7 +60,7 @@ function MySwitch() {
         <Mychats />
       </PrivateRoute>
 
-      <PrivateRoute path="/newchat">
+      <PrivateRoute exact path="/chats/new">
         <NewChat />
       </PrivateRoute>
 

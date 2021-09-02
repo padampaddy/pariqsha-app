@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
 import BaseLayout from "../layouts/Base";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { GET_MY_CHATS } from "../api/queries";
-import modalSlice from "../redux/slices/modal-slice";
 import { RootState } from "../redux/store";
 import { IChatResponse } from "../types/Chat";
 import moment from "moment";
@@ -15,7 +14,6 @@ function Mychats() {
   const { data, loading } = useAuthSubscription<IChatResponse>(GET_MY_CHATS, {
     id: user?.id,
   });
-  const dispatch = useDispatch();
   const [searchTerm, setSearchTerm] = useState<string>(``);
 
   return (
@@ -66,13 +64,13 @@ function Mychats() {
                         .includes(searchTerm.toLowerCase());
                     }
                   })
-                  .flatMap((chat, index) => (
+                  .flatMap((chat) => (
                     <Link
+                    key={chat.id}
                       role="button"
                       to={`/chats/${chat.id}`}
-                      onClick={() => {dispatch(modalSlice.actions.hideModal())}}
                       >
-                      <li key={index} className="my-chat-list">
+                      <li className="my-chat-list">
                         <div className="flex ml-2 items-center">
                           <div className="h-50 w-50">
                             <img
@@ -121,7 +119,7 @@ function Mychats() {
           )}
         </div>
         <Link
-          to="/newchat"
+          to="/chats/new"
           className="sticky text-white common-btn p-4 left-0 bottom-0 w-full block text-center"
         >
           New Chat

@@ -106,12 +106,35 @@ export const MAKE_REFUND_REQUEST = gql`
   }
 `;
 
+export const CHECK_CHAT = gql`
+query check_chat($sid:uuid!, $rid: uuid!) {
+  communication_threads(where: {
+    _or: [{
+      _and:{
+        started_by: {_eq: $sid},
+	      started_with: {_eq: $rid} 
+      }},
+      {
+        _and:{
+        started_by: {_eq: $rid},
+        started_with: {_eq: $sid}
+      }
+    	}
+    ]
+  }) {
+ 		id
+  }
+}
+`;
+
+
 export const GET_MY_CHATS = gql`
   subscription get_my_chats($id: uuid!) {
     communication_threads(
       where: {
         _or: [{ started_by: { _eq: $id } }, { started_with: { _eq: $id } }]
-      }
+      },
+      order_by: {updated_at: desc}
     ) {
       id
       updated_at
@@ -204,15 +227,21 @@ export const USERS_PROFILE = gql`
   }
 `;
 
-export const USER_PROFILE_CONTACT = gql`
-  subscription user_profile_contact(
-    $id: uuid!
-    $imageUrl: String!
-    $name: String!
-  ) {
-    users_profile(where: { name: { _ilike: "%%" } }) {
+export const SEARCH_CONTACT = gql`
+  query search_contact($query: String!, $id: uuid!) {
+    users_profile(where: { name: { _ilike: $query },id: {_neq: $id}  }) {
       name
       image_url
+      id
     }
   }
 `;
+
+export const START_NEW_CHAT = gql`
+mutation ChatMutation ($sid: uuid!, $rid: uuid!) {
+  insert_communication_threads_one(object: {started_by: $sid, started_with: $rid}){
+    id
+  }
+}
+`;
+

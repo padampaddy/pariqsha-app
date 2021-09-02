@@ -33,7 +33,7 @@ const Drawer = ({ onClose }: Props) => {
         });
       }
     },
-    fetchPolicy: 'network-only'
+    fetchPolicy: "network-only",
   });
   const [addProfile] = useMutation(USER_PROFILE_ADD);
 
@@ -67,7 +67,7 @@ const Drawer = ({ onClose }: Props) => {
           </button>
         </div>
 
-        <div className="mb-8 mx-auto text-center h-1/4">
+        <div className="mb-8 mx-auto text-center md:h-1/4 h-2/6">
           <div className="flex items-center justify-center">
             <img src={logo} className="h-10 w-10" alt="pariqsha logo" />
             <h1 className="pl-2 text-2xl font-bold">Pariqsha</h1>
@@ -79,15 +79,14 @@ const Drawer = ({ onClose }: Props) => {
                 modalSlice.actions.showModal({
                   body: (
                     <Profile
-                      onUpdate={() =>
-                        {
-                          console.log("Updated");
-                          getData({
+                      onUpdate={() => {
+                        console.log("Updated");
+                        getData({
                           variables: {
                             id: user?.id,
                           },
-                        })}
-                      }
+                        });
+                      }}
                       oName={data?.users_profile_by_pk?.name}
                       oUrl={data?.users_profile_by_pk?.image_url}
                     />
@@ -107,7 +106,6 @@ const Drawer = ({ onClose }: Props) => {
             />
             <h1 className="text-black font-medium md:text-xl text-lg leading-8 mt-4">
               {data?.users_profile_by_pk?.name}
-           
             </h1>
           </button>
         </div>
@@ -132,7 +130,6 @@ const Drawer = ({ onClose }: Props) => {
               to="/chats"
               onClick={() => {
                 onClose();
-                dispatch(modalSlice.actions.hideModal());
               }}
               className="nav-link"
               activeClassName="selected common-btn"
@@ -146,7 +143,6 @@ const Drawer = ({ onClose }: Props) => {
               to="/leader"
               onClick={() => {
                 onClose();
-                dispatch(modalSlice.actions.hideModal());
               }}
               className="nav-link"
               activeClassName="selected common-btn"
@@ -160,17 +156,15 @@ const Drawer = ({ onClose }: Props) => {
               to="/notification"
               onClick={() => {
                 onClose();
-                dispatch(modalSlice.actions.hideModal());
               }}
               className="nav-link pl-4 flex justify-center items-center"
               activeClassName="selected common-btn"
             >
               Notifications
               <span className="rounded-full h-5 w-5 md:h-6 md:w-6 flex items-center justify-center ml-2 mt-1 text-white font-medium common-btn text-xs">
-              4
-            </span>
+                4
+              </span>
             </NavLink>
-          
           </li>
 
           <li className="nav-item">
@@ -178,7 +172,6 @@ const Drawer = ({ onClose }: Props) => {
               to="/coins"
               onClick={() => {
                 onClose();
-                dispatch(modalSlice.actions.hideModal());
               }}
               className="nav-link"
               activeClassName="selected common-btn"
@@ -193,7 +186,6 @@ const Drawer = ({ onClose }: Props) => {
             to="/setting"
             onClick={() => {
               onClose();
-              dispatch(modalSlice.actions.hideModal());
             }}
             className="drawer-button"
           >
@@ -217,7 +209,6 @@ const Drawer = ({ onClose }: Props) => {
             to="/login"
             onClick={() => {
               dispatch(userSlice.actions.logout());
-              dispatch(modalSlice.actions.hideModal());
               onClose();
             }}
             className="drawer-button border-l"
