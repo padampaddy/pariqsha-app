@@ -1,29 +1,22 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import modalSlice from "../redux/slices/modal-slice";
-import { RootState } from "../redux/store";
-import { useMutation } from "@apollo/client";
-import { User } from "../types/User";
-import { UPDATE_USER_PROFILE } from "../api/queries";
 
-function UpdateEmail() {
-  const { entities } = useSelector((state: RootState) => state.user);
+function UpdateEmail({
+  oEmail = "",
+  onUpdate,
+}: {
+  oEmail?: string;
+  onUpdate: () => void;
+}) {
+  
   const dispatch = useDispatch();
-  const [email, setEmail] = useState<string>("");
-  const [userProfile] = useMutation<User>(UPDATE_USER_PROFILE);
+  const [email, setEmail] = useState<string>(oEmail);
 
-  const handleSend = async () => {
-    userProfile({
-      variables: {
-        id: entities?.user?.id,
-        email,
-      },
-    })
-      .then((info) => {
-        console.log(info);
-      })
-      .catch((e) => console.error(e));
+  const handleSend = () => {
+    onUpdate();
   };
+
   return (
     <>
       <div className="profile-header flex justify-between items-center pb-4">
@@ -89,7 +82,7 @@ function UpdateEmail() {
           <div className="flex md:justify-end justify-center pt-4">
             <button
               onClick={() => dispatch(modalSlice.actions.hideModal())}
-              className="border py-2 px-10 mr-4 "
+              className="border rounded md:py-2 md:px-10 px-8 mr-4 text-sm md:text-base"
               style={{ borderColor: "#00CBE4" }}
             >
               Cancel
@@ -97,7 +90,7 @@ function UpdateEmail() {
             <button
               type="submit"
               onClick={handleSend}
-              className="common-btn py-2  px-4 text-white md:text-xl"
+              className="common-btn rounded py-2 md:px-5 px-3 text-white text-sm md:text-base"
             >
               Save Changes
             </button>

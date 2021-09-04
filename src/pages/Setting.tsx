@@ -1,13 +1,14 @@
 import BaseLayout from "../layouts/Base";
-// import {Link} from "react-router-dom"
 import fb from "../assets/images/fb.png";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import UpdateEmail from "../components/UpdateEmail";
 import modalSlice from "../redux/slices/modal-slice";
 import UpdatePassword from "../components/UpdatePassword";
+import { RootState } from "../redux/store";
 
 const Setting = () => {
   const dispatch = useDispatch();
+  const user = useSelector((state: RootState) => state.user.entities?.user);
 
   return (
     <BaseLayout title="Setting">
@@ -16,13 +17,16 @@ const Setting = () => {
           <div className=" text-gray-400 text-xs font-semibold pt-2">
             ACCOUNT
           </div>
-
           <div
             role="button"
             onClick={() => {
               dispatch(
                 modalSlice.actions.showModal({
-                  body: <UpdateEmail />,
+                  body: <UpdateEmail
+                  onUpdate={() => {
+                    console.log("Updated");
+                  }}
+                   oEmail={user?.email}/>,
                 })
               );
             }}
@@ -44,7 +48,7 @@ const Setting = () => {
               <div className="flex flex-col ml-3 text-sm font-semibold ">
                 Update Email Address
                 <span className="text-xs text-gray-400 ">
-                  hennafield@gmail.com
+                  {user?.email}
                 </span>
               </div>
             </div>

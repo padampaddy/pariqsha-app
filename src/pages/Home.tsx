@@ -12,14 +12,15 @@ import {
   REGISTER_QUIZ,
   UNREGISTER_QUIZ,
 } from '../api/queries'
-import Card from '../components/Card'
+
 import Switch from '../components/Switch'
 import { RP_KEY_ID_TEST } from '../Constants'
 import BaseLayout from '../layouts/Base'
 import modalSlice from '../redux/slices/modal-slice'
 import { RootState } from '../redux/store'
 import { MyQuizResponse, QuizResponse } from '../types/Quiz'
-import UnregisterBody from './components/UnregisterBody'
+import UnregisterBody from '../components/UnregisterBody'
+import Card from '../components/Card'
 
 const today = new Date().toISOString()
 
@@ -59,7 +60,7 @@ export default function Home() {
 
   const getCards = useCallback(() => {
     let quizData = data?.quiz_quiz
-    if (!quizData) return <div />
+    if (!quizData) return <div/>
     if (showMyQuizzes)
       quizData = quizData.filter(
         (quiz) =>
@@ -73,7 +74,6 @@ export default function Home() {
         key={index}
         title={quiz.title}
         imgSrc={quiz.image}
-        
         content={
           <div style={{ whiteSpace: 'pre-wrap' }}>{quiz.short_description}</div>
         }
@@ -244,7 +244,7 @@ export default function Home() {
         },
         {
           icon: (
-            <div className="capitalize ml-2 px-2 rounded-full bg-gray-400 text-white font-semibold">
+            <div className="capitalize mx-2 px-2 rounded-full bg-gray-400 text-white font-semibold">
               {user?.username?.[0]|| 'P'}
             </div>
           ),

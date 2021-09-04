@@ -19,7 +19,7 @@ import BaseLayout from '../layouts/Base'
 import modalSlice from '../redux/slices/modal-slice'
 import { RootState } from '../redux/store'
 import { QuizDetailsResponse, QuizRegistrationResponse } from '../types/Quiz'
-import UnregisterBody from './components/UnregisterBody'
+import UnregisterBody from '../components/UnregisterBody'
 
 declare let Razorpay: any
 

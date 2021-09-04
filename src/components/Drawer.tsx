@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../assets/images/pariqsha.png";
+import coin from "../assets/images/money.png";
 import userSlice from "../redux/slices/user-slice";
 import modalSlice from "../redux/slices/modal-slice";
 import Profile from "./Profile";
@@ -10,7 +11,7 @@ import { USERS_PROFILE, USER_PROFILE_ADD } from "../api/queries";
 import { IUsersProfile } from "../types/Chat";
 import DEFAULT_AVATAR from "../assets/images/profileuser.png";
 import { useLazyQuery, useMutation } from "@apollo/client";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 
 interface Props {
   onClose: () => void;
@@ -37,8 +38,12 @@ const Drawer = ({ onClose }: Props) => {
   });
   const [addProfile] = useMutation(USER_PROFILE_ADD);
 
-  useEffect(() => {
+  const getUserData = useCallback(()=>{
     getData({ variables: { id: user?.id } });
+  },[]);
+
+  useEffect(() => {
+    getUserData();
   }, []);
 
   return (
@@ -66,12 +71,12 @@ const Drawer = ({ onClose }: Props) => {
             </svg>
           </button>
         </div>
-
-        <div className="mb-8 mx-auto text-center md:h-1/4 h-2/6">
-          <div className="flex items-center justify-center">
-            <img src={logo} className="h-10 w-10" alt="pariqsha logo" />
-            <h1 className="pl-2 text-2xl font-bold">Pariqsha</h1>
+        <div className="pr-4 md:pl-4">
+            <img src={logo} className="h-8 w-8 float-right md:float-left" alt="pariqsha logo" />
           </div>
+
+        <div className="mb-16 mx-auto text-center h-1/5">
+   
           <button
             type="button"
             onClick={() => {
@@ -96,7 +101,7 @@ const Drawer = ({ onClose }: Props) => {
             }}
           >
             <img
-              className="inline object-cover w-20 h-20 mt-12 rounded-full"
+              className="inline object-cover w-20 h-20  rounded-full"
               src={
                 data?.users_profile_by_pk?.image_url
                   ? data?.users_profile_by_pk.image_url
@@ -104,13 +109,15 @@ const Drawer = ({ onClose }: Props) => {
               }
               alt="Profile image"
             />
-            <h1 className="text-black font-medium md:text-xl text-lg leading-8 mt-4">
+            <h1 className="text-black font-medium md:text-xl text-xl leading-8 mt-4 capitalize">
               {data?.users_profile_by_pk?.name}
             </h1>
           </button>
+          <h4 className="text-gray-500 text-sm md:mt-2 flex justify-center items-center">
+           <span><img src={coin} className="h-7 w-7 mr-2" alt="coin"/></span> 23456 </h4>  
         </div>
 
-        <ul className="flex flex-col  justify-center text-center">
+        <ul className="flex flex-col  justify-center text-center mx-4 md:mx-0">  
           <li className="nav-item">
             <NavLink
               to="/home"
@@ -140,14 +147,14 @@ const Drawer = ({ onClose }: Props) => {
 
           <li className="nav-item">
             <NavLink
-              to="/leader"
+              to="/market"
               onClick={() => {
                 onClose();
               }}
               className="nav-link"
               activeClassName="selected common-btn"
             >
-              Leaderboard
+              Market Place
             </NavLink>
           </li>
 
@@ -203,7 +210,7 @@ const Drawer = ({ onClose }: Props) => {
                 />
               </svg>
             </span>
-            Setting
+            Settings
           </Link>
           <Link
             to="/login"

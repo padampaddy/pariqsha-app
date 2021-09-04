@@ -23,7 +23,7 @@
     @apply flex justify-center hover:text-white;
   }
   .nav-link {
-    @apply font-medium md:text-xl w-full py-4  hover:text-white;
+    @apply font-medium md:text-lg w-full py-4  hover:text-white;
   }
   .my-chat-list {
     @apply flex justify-between border-b border-gray-300 items-center  py-2 rounded cursor-pointer transition hover:bg-gray-50;
@@ -43,20 +43,21 @@
   }
 
   .quiz-button {
-    @apply float-left flex items-center border-2 border-gray-300 capitalize justify-center text-center md:mr-1 mr-2 px-2 text-xs md:text-sm;
+    @apply float-left flex items-center border-2 border-gray-300 capitalize justify-center rounded text-center md:mr-1 mr-2 py-1 px-3 text-base;
   }
 
   .quiz-button:hover {
-    @apply transform translate-y-0.5 shadow-none;
+    @apply transform translate-y-0.5 shadow-none ;
   }
 
   .drawer-button {
-    @apply text-gray-400 font-medium w-1/2 py-4 border-t border-b flex justify-center items-center
+    @apply text-gray-400 font-medium w-1/2 py-4 border-t border-b flex justify-center items-center hover:text-black
   }
 
-  .drawer-button:hover {
-    @apply transform translate-y-0.5 shadow-none;
+  .collection-list {
+    @apply p-2 px-4 hover:bg-gray-100 flex float-left bg-white mr-1 mb-1 rounded-full border-gray-400 border items-center justify-center text-xs md:text-sm
   }
+  
 
   .loader {
     -webkit-animation: spinner 1.5s linear infinite;

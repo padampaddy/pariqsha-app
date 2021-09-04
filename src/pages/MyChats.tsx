@@ -9,7 +9,6 @@ import useAuthSubscription from "../hooks/useAuthSubscription";
 import { useState } from "react";
 
 function Mychats() {
-  
   const user = useSelector((state: RootState) => state.user.entities?.user);
   const { data, loading } = useAuthSubscription<IChatResponse>(GET_MY_CHATS, {
     id: user?.id,
@@ -29,8 +28,8 @@ function Mychats() {
             </div>
           ) : (
             <div>
-              <div className="bg-gray-100 flex items-center my-2 relative rounded-md">
-                <div className="text-gray-500 pl-2 hover:text-blue-400">
+              <div className="bg-gray-100 flex items-center my-2 relative rounded-full">
+                <div className="text-gray-500 pl-3 hover:text-black">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-5 w-5"
@@ -45,12 +44,30 @@ function Mychats() {
                   </svg>
                 </div>
                 <input
-                  className="w-full focus:outline-none rounded p-2  bg-gray-100"
+                  className="w-full focus:outline-none rounded-full p-2  bg-gray-100"
                   type="text"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   placeholder="Search Conversation"
                 />
+                <div
+                  role="button"
+                  onClick={() => setSearchTerm("")}
+                  className="text-gray-500 pr-3 hover:text-black"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </div>
               </div>
               <hr className=" border-gray-300"></hr>
               <ul>
@@ -59,17 +76,16 @@ function Mychats() {
                     if (searchTerm == "") {
                       return li;
                     } else {
-                      return (li.profileByStartedWith.name || li.profileByStartedBy.name)
+                      return (
+                        li.profileByStartedWith.name ||
+                        li.profileByStartedBy.name
+                      )
                         .toLowerCase()
                         .includes(searchTerm.toLowerCase());
                     }
                   })
                   .flatMap((chat) => (
-                    <Link
-                    key={chat.id}
-                      role="button"
-                      to={`/chats/${chat.id}`}
-                      >
+                    <Link key={chat.id} role="button" to={`/chats/${chat.id}`}>
                       <li className="my-chat-list">
                         <div className="flex ml-2 items-center">
                           <div className="h-50 w-50">

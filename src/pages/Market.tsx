@@ -7,21 +7,56 @@ import medal2 from "../assets/images/medal2.png";
 import medal3 from "../assets/images/medal3.png";
 import medal from "../assets/images/medal.png";
 import trophy from "../assets/images/trophy.png";
+import DEFAULT_AVATAR from "../assets/images/profileuser.png";
+import { useEffect } from "react";
+import { USERS_PROFILE, USER_PROFILE_ADD } from "../api/queries";
+import { useLazyQuery, useMutation } from "@apollo/client";
+import { IUsersProfile } from "../types/Chat";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
+import coin from "../assets/images/money.png";
 // import graph from "../assets/images/graph.jpg";
 
-const LeaderBoard = () => {
+const Market = () => {
+  const user = useSelector((state: RootState) => state.user.entities?.user);
+  const [getData, { data }] = useLazyQuery<IUsersProfile>(USERS_PROFILE, {
+    onCompleted: (res) => {
+      if (!res) {
+        addProfile({
+          variables: {
+            id: user?.id,
+            name: user?.email,
+            imageUrl: "",
+          },
+        }).then(() => {
+          getData({ variables: { id: user?.id } });
+        });
+      }
+    },
+    fetchPolicy: "network-only",
+  });
+  const [addProfile] = useMutation(USER_PROFILE_ADD);
+
+  useEffect(() => {
+    getData({ variables: { id: user?.id } });
+  }, []);
+  
   return (
-    <BaseLayout title="Leaderboard">
+    <BaseLayout title="Market Place">
       <div className="mb-8 text-center pt-10">
         <img
-          className="inline object-cover w-20 h-20 mr-2 rounded-full"
-          src="https://images.pexels.com/photos/2589653/pexels-photo-2589653.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+          className="inline object-cover w-20 h-20  rounded-full"
+          src={data?.users_profile_by_pk?.image_url
+            ? data?.users_profile_by_pk.image_url
+            : DEFAULT_AVATAR}
           alt="Profile image"
         />
         <h1 className="text-black font-medium text-2xl leading-8 mt-4">
-          Hanna Fields
+        {data?.users_profile_by_pk?.name}
         </h1>
-        <p className="text-gray-400 font-medium text-md pt-1">2,9848 coins</p>
+        <h4 className="text-gray-500 text-sm md:mt-2 flex justify-center items-center">
+           <span><img src={coin} className="h-7 w-7 mr-2" alt="coin"/></span> 23456 </h4>  
+     
       </div>
 
       <div className="flex justify-between md:w-1/2 mx-auto">
@@ -74,4 +109,4 @@ const LeaderBoard = () => {
     </BaseLayout>
   );
 };
-export default LeaderBoard;
+export default Market;

@@ -2,45 +2,54 @@ import BaseLayout from "../layouts/Base";
 import { CHECK_CHAT, SEARCH_CONTACT, START_NEW_CHAT } from "../api/queries";
 import { ISearchProfile } from "../types/Chat";
 import { useLazyQuery, useMutation } from "@apollo/client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { useHistory } from "react-router-dom";
 
 function NewChat() {
   const user = useSelector((state: RootState) => state.user.entities?.user);
-  const [startChat] = useMutation(START_NEW_CHAT,{
+  const [startChat] = useMutation(START_NEW_CHAT, {
     onCompleted: (res) => {
       history.push(`/chats/${res.insert_communication_threads_one.id}`);
-    }
-  })
+    },
+  });
+  const [query, setQuery] = useState('')
   const [search, { data, loading }] =
     useLazyQuery<ISearchProfile>(SEARCH_CONTACT);
     useEffect(() => {
-      search({
-        variables: {
-          query: "%%",
-          id: user?.id
-        },
-      });
-    }, []);
-    const history = useHistory();
-    const [checkChat,{ variables}] = useLazyQuery(CHECK_CHAT,{
-      onCompleted: (res) => {
-        if(res.communication_threads.length===0){
-          startChat({variables});
-        }else{
-          history.push(`/chats/${res.communication_threads[0].id}`);
-        }
-      }
+    search({
+      variables: {
+        query: "%%",
+        id: user?.id,
+      },
     });
+  }, []);
+  const history = useHistory();
+  const [checkChat, { variables }] = useLazyQuery(CHECK_CHAT, {
+    onCompleted: (res) => {
+      if (res.communication_threads.length === 0) {
+        startChat({ variables });
+      } else {
+        history.push(`/chats/${res.communication_threads[0].id}`);
+      }
+    },
+  });
+  useEffect(()=>{
+    search({
+      variables: {
+        query: `%${query}%`,
+        id: user?.id,
+      },
+    });
+  },[query])
   return (
     <BaseLayout title="My Contacts">
       <div className="flex flex-col h-full">
         <div className="px-4 h-full">
           <div>
-            <div className="bg-gray-100 flex items-center my-2 relative rounded-md">
-              <div className="text-gray-500 pl-2 hover:text-blue-400">
+            <div className="bg-gray-100 flex items-center my-2 relative rounded-full">
+              <div className="text-gray-500 pl-3 hover:text-black">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-5 w-5"
@@ -55,18 +64,33 @@ function NewChat() {
                 </svg>
               </div>
               <input
-                className="w-full focus:outline-none rounded p-2  bg-gray-100"
+                className="w-full focus:outline-none rounded-full p-2  bg-gray-100"
                 type="text"
+                value={query}
                 onChange={(e) => {
-                  search({
-                    variables: {
-                      query: `%${e.target.value}%`,
-                      id: user?.id
-                    },
-                  });
+                  setQuery(e.target.value)
+
                 }}
                 placeholder="Search Contacts"
               />
+              <div
+                role="button"
+                className="text-gray-500 pr-3 hover:text-black"
+                onClick={()=> setQuery('')}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </div>
             </div>
             <hr className=" border-gray-300"></hr>
 
@@ -78,7 +102,7 @@ function NewChat() {
                 ></div>
               </div>
             ) : data?.users_profile.length === 0 ? (
-              <p>No Contact</p>
+              <p className="text-center pt-4">No Contact</p>
             ) : (
               data?.users_profile.flatMap((profile, index) => (
                 <ul key={profile.id}>
@@ -88,12 +112,12 @@ function NewChat() {
                       checkChat({
                         variables: {
                           sid: user?.id,
-                          rid: profile.id
+                          rid: profile.id,
                         },
                         context: {
-                          pId: profile.id
-                        }
-                      })
+                          pId: profile.id,
+                        },
+                      });
                     }}
                   >
                     <li key={index} className="my-chat-list">

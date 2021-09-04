@@ -72,12 +72,20 @@ background-color: #79D9EF;
 border-radius: 10rem;
 color: white;
 }
-.common-btn, .nav-item:hover{
+.common-btn, .nav-item:hover, .quiz-button:hover{
   background-image: linear-gradient(to right, #00CBE4, #00D0E2, #00D5DF, #00DADC, #02DED7);
   color: #fff;
 }
+
+
+
+
+
 .selected span, .nav-link:hover span {
   background: #000;
+}
+a.collection-list.common-btn, .quiz-button:hover {
+  border-color: #00DADC;
 }
 /* width */
 ::-webkit-scrollbar {
@@ -98,3 +106,4 @@ color: white;
 ::-webkit-scrollbar-thumb:hover {
   background: #555; 
 }
+

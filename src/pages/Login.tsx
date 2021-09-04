@@ -8,7 +8,7 @@ import { loginAction } from "../redux/slices/user-slice";
 import { RootState } from "../redux/store";
 import ForgotPass from "./ForgetPass";
 
-function Login() {
+const Login=() =>{
   const { loading } = useSelector((state: RootState) => state.user);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

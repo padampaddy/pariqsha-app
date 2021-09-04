@@ -1,10 +1,15 @@
 import BaseLayout from "../layouts/Base";
-import tv from "../assets/images/tv-monitor.png";
-import chat from "../assets/images/chat.png";
-import fb from "../assets/images/facebook.png";
-import star from "../assets/images/favourite.png";
-import like from "../assets/images/like.png";
-import coin from "../assets/images/money.png";
+import money from "../assets/images/money.png";
+import { motion } from "framer-motion";
+
+const earns = [
+  { coin: "10", rs: "50" },
+  { coin: "50", rs: "100" },
+  { coin: "100", rs: "150" },
+  { coin: "200", rs: "200" },
+  { coin: "300", rs: "500" },
+  { coin: "500", rs: "1,000" },
+];
 
 const Coins = () => {
   return (
@@ -15,69 +20,38 @@ const Coins = () => {
             You have 2.589 Coins
           </p>
         </div>
-   
-      <div className="pt-2  mt-3 h-screen ">
-        <div className="flex  w-full">
-          <div className="flex justify-center items-center m-2 w-1/2  hover:bg-gray-100  border border-gray-300 p-6 rounded-2xl bg-white">
-            <a href="" className="text-center">
-              <img src={tv} className="w-16 h-16 object-cover m-auto"></img>
-              <h4 className="text-black text-sm font-bold mt-4 capitalize">
-                Watch add
-              </h4>
-              <p className="text-gray-400 text-xs">+50 coins</p>
-            </a>
-          </div>
-          <div className="flex justify-center items-center m-2  hover:bg-gray-50  w-1/2 border border-gray-300 p-6 rounded-2xl bg-white">
-            <a href="" className="text-center">
-              <img src={chat} className="w-16 h-16 object-cover m-auto"></img>
-              <h4 className="text-black text-sm font-bold mt-4 capitalize">
-                Invite Friends
-              </h4>
-              <p className="text-gray-400 text-xs">+1000 coins</p>
-            </a>
-          </div>
-        </div>
-        <div className="flex  w-full">
-          <div className="flex justify-center items-center m-2  hover:bg-gray-100  w-1/2 border border-gray-300 p-6 rounded-2xl bg-white">
-            <a href="" className="text-center">
-              <img src={fb} className="w-16 h-16 object-cover m-auto"></img>
-              <h4 className="text-black text-sm font-bold mt-4 capitalize">
-                Connect Fb
-              </h4>
-              <p className="text-gray-400 text-xs">+50 coins</p>
-            </a>
-          </div>
-          <div className="flex justify-center items-center m-2  hover:bg-gray-100  w-1/2 border border-gray-300 p-6 rounded-2xl bg-white">
-            <a href="" className="text-center">
-              <img src={star} className="w-16 h-16 object-cover m-auto"></img>
-              <h4 className="text-black text-sm font-bold mt-4 capitalize">
-                Rate us
-              </h4>
-              <p className="text-gray-400 text-xs">+1000 coins</p>
-            </a>
+
+        <div className="mt-6 h-full">
+          <div className="flex flex-wrap">
+            {earns.flatMap((earn, index) => (
+              <div className="md:p-4 p-2 w-1/3 text-center">
+                <motion.div
+                  key={index}
+                  className="  bg-white md:p-4 p-2 shadow-lg rounded"
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 200,
+                    damping: 30,
+                  }}
+                >
+                  <div className="justify-center items-center">
+                    <img
+                      className="inline object-cover md:w-20 md:h-20 w-14 h-14 mb-2"
+                      src={money}
+                      alt="Profile image"
+                    />
+                  </div>
+                  <div className=" text-center font-bold">{earn.coin}</div>
+                  <button className="common-btn md:p-2 p-1 md:px-8 px-6 mt-1 rounded">
+                    ₹ {earn.rs}
+                  </button>
+                </motion.div>
+              </div>
+            ))}
           </div>
         </div>
-        <div className="flex  w-full">
-          <div className="flex justify-center items-center m-2  hover:bg-gray-100  w-1/2 border border-gray-300 p-6 rounded-2xl bg-white">
-            <a href="" className="text-center">
-              <img src={like} className="w-16 h-16 object-cover m-auto "></img>
-              <h4 className="text-black text-sm font-bold mt-4 capitalize">
-                Like us on Fb
-              </h4>
-              <p className="text-gray-400 text-xs">+50 coins</p>
-            </a>
-          </div>
-          <div className="flex justify-center items-center m-2  hover:bg-gray-100  w-1/2 border border-gray-300 p-6 rounded-2xl bg-white">
-            <a href="" className="text-center">
-              <img src={coin} className="w-16 h-16 object-cover m-auto"></img>
-              <h4 className="text-black text-sm font-bold mt-4 capitalize">
-                Buy coins
-              </h4>
-              <p className="text-gray-400 text-xs">+1000 coins</p>
-            </a>
-          </div>
-        </div>
-      </div>
       </div>
     </BaseLayout>
   );

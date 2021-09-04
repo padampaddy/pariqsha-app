@@ -25,11 +25,12 @@ import Mychats from '../pages/MyChats'
 import Coins from '../pages/Coins'
 import Notification from '../pages/Notifications'
 import Setting from '../pages/Setting'
-import LeaderBoard from '../pages/LeaderBoard'
+import Market from '../pages/Market'
 import NewChat from '../pages/NewChat'
 import Quizz from '../pages/Quizz'
 import Modal from '../components/Modal'
 import Msg from '../pages/Msg'
+// import Home from '../pages/Home'
 
 function MySwitch() {
   const location = useLocation()
@@ -52,8 +53,8 @@ function MySwitch() {
         <Setting />
       </PrivateRoute>
 
-      <PrivateRoute path="/leader">
-        <LeaderBoard />
+      <PrivateRoute path="/market">
+        <Market />
       </PrivateRoute>
 
       <PrivateRoute exact path="/chats">

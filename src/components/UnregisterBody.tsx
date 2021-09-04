@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 import { useDispatch } from "react-redux";
-import modalSlice from "../../redux/slices/modal-slice";
+import modalSlice from "../redux/slices/modal-slice";
 
 interface Props {
   onConfirm: () => void;

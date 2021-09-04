@@ -1,5 +1,5 @@
 import BaseLayout from "../layouts/Base";
-import { motion } from "framer-motion";
+
 
 
 const notif = [{src:"https://images.pexels.com/photos/2589653/pexels-photo-2589653.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",title:"Celeb John", subtitle: "send you a msg" , time:"2 Mins Ago"} ,
@@ -16,23 +16,9 @@ const Notification = () => {
       <div className="mt-6 h-full">
           <ul className="">
               {notif.flatMap((notifs,index)=>(
-                  <motion.li key={index} className="notification-list border-l-4" style={{borderLeftColor: "#01CEE3", backgroundColor:"#ffffff"}}
+                  <li key={index} className="notification-list border-l-4" style={{borderLeftColor: "#01CEE3", backgroundColor:"#ffffff"}}
  
-                  initial={{
-                      opacity:0,
-             
-
-                  }}
-                  animate={{
-                      opacity:1,    
-
-                  }}
-                  transition={{
-                      delay:1,
-                      ease:"linear",
-                    
-                      
-                }}
+     
                   
                   > 
                   <div className="justify-center items-center">
@@ -42,7 +28,7 @@ const Notification = () => {
                       <p><b>{notifs.title}</b> <span className="text-gray-400 pl-2">{notifs.subtitle}</span></p>
                       <span className="text-gray-400">{notifs.time}</span>
                   </div>
-              </motion.li>
+              </li>
               ))}
              
           </ul>
