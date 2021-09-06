@@ -7,6 +7,8 @@ import { IChatResponse } from "../types/Chat";
 import moment from "moment";
 import useAuthSubscription from "../hooks/useAuthSubscription";
 import { useState } from "react";
+import { motion } from "framer-motion";
+
 
 function Mychats() {
   const user = useSelector((state: RootState) => state.user.entities?.user);
@@ -86,7 +88,9 @@ function Mychats() {
                   })
                   .flatMap((chat) => (
                     <Link key={chat.id} role="button" to={`/chats/${chat.id}`}>
-                      <li className="my-chat-list">
+                      <motion.li className="my-chat-list "style={{animationName:"hello1", animationDuration:"1s", animationIterationCount:"1", animationFillMode:"alternate", animationTimingFunction:"ease-in-out" }}
+   
+                      >
                         <div className="flex ml-2 items-center">
                           <div className="h-50 w-50">
                             <img
@@ -127,7 +131,7 @@ function Mychats() {
                             />
                           </svg>
                         </div>
-                      </li>
+                      </motion.li>
                     </Link>
                   ))}
               </ul>

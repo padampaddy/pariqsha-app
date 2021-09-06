@@ -23,9 +23,12 @@ const Login=() =>{
         <h1 className="md:text-md text-sm font-bold mt-4 text-center">
           Hi, Welcome to Pariqsha
         </h1>
-          <h1 className="text-black font-extrabold md:text-3xl text-lg leading-8 md:mt-4 mt-2">
+          <h1 className="text-black font-extrabold md:text-3xl text-2xl leading-8 md:mt-4 mt-2">
             Quiz App
           </h1>
+          <p className="text-gray-400 text-sm md:text-lg md:font-semibold  md:pt-2 ">
+            Login to continue
+          </p>
           
         </div>
 
@@ -36,9 +39,7 @@ const Login=() =>{
           }}
           className="bg-white group-hover:rounded px-8 md:pt-4 md:pb-8 rounded-lg flex flex-col"
         >
-          <p className="text-gray-600 text-sm md:text-lg md:font-semibold font-medium md:pt-2 ">
-            Login to continue
-          </p>
+         
           <div className="md:my-4 my-1">
             <label className="signup-screen-label" htmlFor="">
               Email
@@ -74,13 +75,13 @@ const Login=() =>{
                 })
               );
             }}
-            className="text-right text-gray-400 md:text-md text-sm underline hover:text-blue-darker md:my-4 mt-1 mb-3 focus:outline-none "
+            className="text-right text-gray-400 md:text-md text-sm underline hover:text-blue-darker md:my-4 mt-3 mb-4 focus:outline-none "
           >
             Forgot Password?
           </button>
 
           <div className="flex items-center justify-between">
-            <button type="submit" className="button md:mt-3 self-end hover:bg-white-100 text-white w-full font-medium md:py-3 py-2 focus:outline-none  rounded-full common-btn">
+            <button type="submit" className="button md:mt-3 self-end hover:bg-white-100 text-white w-full font-medium md:py-3 py-3 focus:outline-none  rounded-full common-btn">
               {loading === "pending"
                 ? "Logging In..."
                 : loading === "succeeded"

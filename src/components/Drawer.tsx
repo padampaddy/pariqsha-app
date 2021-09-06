@@ -154,7 +154,7 @@ const Drawer = ({ onClose }: Props) => {
               className="nav-link"
               activeClassName="selected common-btn"
             >
-              Market Place
+              Market
             </NavLink>
           </li>
 

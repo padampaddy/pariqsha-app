@@ -23,7 +23,7 @@ function SignupScreen() {
         <h1 className="md:text-md text-sm font-bold mt-4 text-center">
           Hi, Welcome to Pariqsha
         </h1>
-          <h1 className="text-black font-extrabold md:text-3xl text-lg leading-8 md:mt-4 mt-2">
+          <h1 className="text-black font-extrabold md:text-3xl text-2xl leading-8 md:mt-4 mt-2">
             Quiz App
           </h1>
         </div>
@@ -92,7 +92,7 @@ function SignupScreen() {
           </div> 
 
           <div className="flex items-center justify-between">
-            <button className="button mt-4 self-end hover:bg-white-100 text-white w-full font-medium md:py-3 py-2 focus:outline-none  rounded-full common-btn">
+            <button className="button mt-4 self-end hover:bg-white-100 text-white w-full font-medium md:py-3 py-3 focus:outline-none  rounded-full common-btn">
               {loading === "pending"
                 ? "Signing up..."
                 : loading === "succeeded"

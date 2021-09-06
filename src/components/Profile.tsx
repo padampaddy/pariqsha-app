@@ -151,7 +151,7 @@ function Profile({
           <div className="flex md:justify-end justify-center pt-4">
             <button
               onClick={() => dispatch(modalSlice.actions.hideModal())}
-              className="border md:py-2 rounded md:px-10 px-8 mr-4 text-sm md:text-base"
+              className="cancel-button"
               style={{ borderColor: "#00CBE4" }}
             >
               Cancel
@@ -159,7 +159,7 @@ function Profile({
             <button
               type="submit"
               onClick={handleSend}
-              className="common-btn rounded py-2 md:px-5 px-3 text-white text-sm md:text-base"
+              className="common-btn save-button"
             >
               Save Changes
             </button>

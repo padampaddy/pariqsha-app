@@ -8,7 +8,7 @@ import moment from "moment";
 import { useMutation } from "@apollo/client";
 import { ISendMessage, IThreadResponse } from "../types/Chat";
 import send from "../assets/images/send.png";
-import { useHistory, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import DEFAULT_AVATAR from "../assets/images/profileuser.png";
 import PicPreview from "../components/PicPreview";
 import modalSlice from "../redux/slices/modal-slice";
@@ -30,7 +30,6 @@ const Msg = () => {
   const wrapperRef = useRef(null);
   const [sendMessage] = useMutation<ISendMessage>(SEND_MESSAGE);
   const dispatch = useDispatch();
-  const history = useHistory();
 
   const uploadPicture = async (e: React.ChangeEvent<any>) => {
     console.log(e);
@@ -72,12 +71,12 @@ const Msg = () => {
   }, [data]);
 
   return (
-    <BaseLayout title="Messages">
+    <BaseLayout title="Messages" showBack>
       <div className="flex h-full flex-col">
         <div>
           <div className=" bg-gradient-to-bl items-center text-center px-2 py-4 relative">
          
-              <svg
+              {/* <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="w-6 cursor-pointer absolute top-1/2 -translate-y-1/2 transform "
                 viewBox="0 0 512 512"
@@ -92,7 +91,7 @@ const Msg = () => {
                   strokeWidth="48"
                   d="M244 400L100 256l144-144M120 256h292"
                 />
-              </svg>
+              </svg> */}
           
       
               <img

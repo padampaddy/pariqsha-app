@@ -49,24 +49,39 @@ function BaseLayout({
           />
         )}
       </div>
-      <div className="shadow-sm items-center flex flex-row gap-4 p-4 w-screen relative lg:pl-80">
+      <div className= {`shadow-sm items-center flex flex-row p-4 w-screen relative ${showBack ? "" : "lg:pl-80"
+        }`}>
         {showBack ? (
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="w-6 cursor-pointer absolute left-4 top-0 bottom-0 my-auto"
-            viewBox="0 0 512 512"
+            className="w-8 h-8 cursor-pointer absolute left-2 top-0 bottom-0 my-auto"
+            viewBox="0 0 20 20"
+            fill="currentColor"
             onClick={() => history.goBack()}
           >
             <title>Arrow Back</title>
             <path
-              fill="currentColor"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="48"
-              d="M244 400L100 256l144-144M120 256h292"
+              fillRule="evenodd"
+              d="M9.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L7.414 9H15a1 1 0 110 2H7.414l2.293 2.293a1 1 0 010 1.414z"
+              clipRule="evenodd"
             />
           </svg>
+          // <svg
+          //   xmlns="http://www.w3.org/2000/svg"
+          //   className="w-6 cursor-pointer absolute left-4 top-0 bottom-0 my-auto"
+          //   viewBox="0 0 512 512"
+          //   onClick={() => history.goBack()}
+          // >
+          //   <title>Arrow Back</title>
+          //   <path
+          //     fill="currentColor"
+          //     stroke="currentColor"
+          //     strokeLinecap="round"
+          //     strokeLinejoin="round"
+          //     strokeWidth="48"
+          //     d="M244 400L100 256l144-144M120 256h292"
+          //   />
+          // </svg>
         ) : (
           <svg
             onClick={() => {
@@ -83,7 +98,7 @@ function BaseLayout({
             ></path>
           </svg>
         )}
-        <h4 className="text-md flex-grow  flex-1 text-center text-black font-bold">
+        <h4 className= "text-md flex-grow flex-1 text-center text-black font-bold" >
           {title}
         </h4>
         <div className="  my-auto items-center flex relative">
@@ -104,7 +119,9 @@ function BaseLayout({
               fill="currentColor"
             ></path>
           </svg>
-          <div className="absolute bg-black text-white rounded-full w-3.5 h-3.5 flex justify-center items-center -right-0 p-1  -top-1 text-xs">1</div>
+          <div className="absolute bg-black text-white rounded-full w-3.5 h-3.5 flex justify-center items-center -right-0 p-1  -top-1 text-xs">
+            1
+          </div>
         </div>
       </div>
       <div

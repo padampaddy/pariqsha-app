@@ -1,5 +1,4 @@
 import BaseLayout from "../layouts/Base";
-import fb from "../assets/images/fb.png";
 import { useDispatch, useSelector } from "react-redux";
 import UpdateEmail from "../components/UpdateEmail";
 import modalSlice from "../redux/slices/modal-slice";
@@ -14,7 +13,95 @@ const Setting = () => {
     <BaseLayout title="Setting">
       <div className=" flex h-full flex-col">
         <div className="h-full px-4 pt-3">
-          <div className=" text-gray-400 text-xs font-semibold pt-2">
+          <div className=" mt-6">
+            <div className=" text-gray-400 text-xs font-semibold uppercase ">
+              Transactions History
+            </div>
+
+            <div className="flex justify-between rounded-lg border mt-2 items-center bg-white p-4 hover:bg-gray-100">
+              <div className="flex ">
+                <div className="rounded-full h-10 w-10  flex justify-center items-center bg-blue-900">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6 text-white"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </div>
+                <div className="flex flex-col ml-3 text-sm font-semibold ">
+                  Quiz
+                  <span className="text-xs text-gray-400 ">
+                    Quizzes Transactions History
+                  </span>
+                </div>
+              </div>
+              <div className="flex flex-col items-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  style={{ color: "#9CA3AF" }}
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </div>
+            </div>
+
+            <div className="flex justify-between rounded-lg border  mt-2 items-center bg-white p-4 hover:bg-gray-100">
+              <div className="flex ">
+                <div
+                  className="rounded-full h-10 w-10  flex justify-center items-center"
+                  style={{ background: "#A2E57D" }}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6 text-white"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </div>
+                <div className="flex flex-col  ml-3 text-sm font-semibold ">
+                  Market
+                  <span className="text-xs text-gray-400 ">
+                    Market Transactions History
+                  </span>
+                </div>
+              </div>
+              <div className="flex flex-col items-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  style={{ color: "#9CA3AF" }}
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div className="mt-6 text-gray-400 text-xs font-semibold pt-2">
             ACCOUNT
           </div>
           <div
@@ -22,11 +109,14 @@ const Setting = () => {
             onClick={() => {
               dispatch(
                 modalSlice.actions.showModal({
-                  body: <UpdateEmail
-                  onUpdate={() => {
-                    console.log("Updated");
-                  }}
-                   oEmail={user?.email}/>,
+                  body: (
+                    <UpdateEmail
+                      onUpdate={() => {
+                        console.log("Updated");
+                      }}
+                      oEmail={user?.email}
+                    />
+                  ),
                 })
               );
             }}
@@ -47,9 +137,7 @@ const Setting = () => {
               </div>
               <div className="flex flex-col ml-3 text-sm font-semibold ">
                 Update Email Address
-                <span className="text-xs text-gray-400 ">
-                  {user?.email}
-                </span>
+                <span className="text-xs text-gray-400 ">{user?.email}</span>
               </div>
             </div>
             <div className="flex  flex-col items-center">
@@ -69,7 +157,8 @@ const Setting = () => {
             </div>
           </div>
 
-          <div role="button"
+          <div
+            role="button"
             onClick={() => {
               dispatch(
                 modalSlice.actions.showModal({
@@ -77,7 +166,8 @@ const Setting = () => {
                 })
               );
             }}
-             className="flex justify-between rounded-lg border  mt-2 items-center bg-white p-4 hover:bg-gray-100">
+            className="flex justify-between rounded-lg border  mt-2 items-center bg-white p-4 hover:bg-gray-100"
+          >
             <div className="flex ">
               <div className="rounded-full h-10 w-10 bg-yellow-400  flex justify-center items-center">
                 <svg
@@ -115,79 +205,6 @@ const Setting = () => {
                   clipRule="evenodd"
                 />
               </svg>
-            </div>
-          </div>
-
-          <div className=" mt-6">
-            <div className=" text-gray-400 text-xs font-semibold ">OTHER</div>
-
-            <div className="flex justify-between rounded-lg border mt-2 items-center bg-white p-4 hover:bg-gray-100">
-              <div className="flex ">
-                <div
-                  className="rounded-full h-10 w-10  flex justify-center items-center"
-                  style={{ background: "#A2E57D" }}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6"
-                    style={{ color: "white" }}
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" />
-                  </svg>
-                </div>
-                <div className="flex flex-col ml-3 text-sm font-semibold ">
-                  Push Notifications
-                  <span className="text-xs text-gray-400 ">
-                    For messages, badges etc
-                  </span>
-                </div>
-              </div>
-              <div className="flex flex-col items-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  style={{ color: "#9CA3AF" }}
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </div>
-            </div>
-
-            <div className="flex justify-between rounded-lg border  mt-2 items-center bg-white p-4 hover:bg-gray-100">
-              <div className="flex ">
-                <div className="rounded-full h-10 w-10 bg-blue-800  flex justify-center items-center">
-                  <img src={fb} />
-                </div>
-                <div className="flex flex-col  ml-3 text-sm font-semibold ">
-                  Connect Facebook Account
-                  <span className="text-xs text-gray-400 ">
-                    Allows quick login and sharing
-                  </span>
-                </div>
-              </div>
-              <div className="flex flex-col items-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  style={{ color: "#9CA3AF" }}
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </div>
             </div>
           </div>
         </div>

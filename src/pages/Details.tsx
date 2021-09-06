@@ -56,7 +56,7 @@ export default function Details(): ReactElement {
   const dispatch = useDispatch()
   return (
     <BaseLayout title="Details" showBack>
-      <div className="flex justify-center">
+      <div className="flex justify-center mx-4 mt-4">
         <Card
           title={data?.quiz_quiz_by_pk.title}
           imgSrc={data?.quiz_quiz_by_pk.image}

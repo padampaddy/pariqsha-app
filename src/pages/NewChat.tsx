@@ -120,7 +120,7 @@ function NewChat() {
                       });
                     }}
                   >
-                    <li key={index} className="my-chat-list">
+                    <li key={index} className="my-chat-list" style={{animationName:"hello1", animationDuration:"1s", animationIterationCount:"1", animationFillMode:"alternate", animationTimingFunction:"ease-in-out" }}>
                       <div className="flex ml-2 items-center">
                         <div className="h-50 w-50">
                           <img

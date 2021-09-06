@@ -46,12 +46,20 @@
     @apply float-left flex items-center border-2 border-gray-300 capitalize justify-center rounded text-center md:mr-1 mr-2 py-1 px-3 text-base;
   }
 
-  .quiz-button:hover {
+  .quiz-button:hover, .market-btn {
     @apply transform translate-y-0.5 shadow-none ;
   }
 
   .drawer-button {
     @apply text-gray-400 font-medium w-1/2 py-4 border-t border-b flex justify-center items-center hover:text-black
+  }
+
+  .save-button {
+    @apply rounded py-2 md:px-5 px-3 text-white text-sm md:text-base
+  }
+
+  .cancel-button {
+    @apply border md:py-2 rounded md:px-10 px-8 mr-4 text-sm md:text-base
   }
 
   .collection-list {

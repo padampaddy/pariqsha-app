@@ -362,7 +362,6 @@ export default function Quizz() {
             <Route exact path="/home/myquiz">
               <div>My quiz</div>
             </Route>
-            
           </Switch>
         </div>
       )}
