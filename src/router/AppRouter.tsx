@@ -30,6 +30,7 @@ import NewChat from '../pages/NewChat'
 import Quizz from '../pages/Quizz'
 import Modal from '../components/Modal'
 import Msg from '../pages/Msg'
+import Cart from '../components/Cart'
 // import Home from '../pages/Home'
 
 function MySwitch() {
@@ -71,6 +72,10 @@ function MySwitch() {
 
       <PrivateRoute path="/details/:id">
         <Details />
+      </PrivateRoute>
+
+      <PrivateRoute path="/cart">
+        <Cart />
       </PrivateRoute>
 
       <PublicRoute path="/signin">

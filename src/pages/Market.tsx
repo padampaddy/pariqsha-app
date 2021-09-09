@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { useDispatch } from "react-redux";
 import modalSlice from "../redux/slices/modal-slice";
 import CoupenDetails from "../components/CoupenDetails";
+// import { Link } from "react-router-dom";
 
 const Market = () => {
   const { data } = useQuery<IMarketProduct>(GET_MARKET_PRODUCT, {
@@ -27,7 +28,7 @@ const Market = () => {
             </span>
             23456
           </h4>
-          <div className="pr-1 relative">
+          {/* <Link to="/cart" className="pr-1 relative">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-7 w-7"
@@ -35,6 +36,7 @@ const Market = () => {
               viewBox="0 0 24 24"
               stroke="currentColor"
             >
+              <title>cart</title>
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -45,7 +47,7 @@ const Market = () => {
             <div className="absolute common-btn text-black rounded-full w-3.5 h-3.5 flex justify-center items-center -right-0 p-1  -top-1 text-xs">
               1
             </div>
-          </div>
+          </Link> */}
         </div>
 
         <div className="flex w-full flex-wrap">
@@ -60,7 +62,13 @@ const Market = () => {
                 damping: 100,
               }}
             >
-              <div key={index} className="bg-white shadow-lg rounded-md">
+              <div
+                key={index}
+                className="bg-white shadow-lg rounded-md relative overflow-hidden"
+              >
+                <div className="inline-flex items-center justify-center w-32 py-2 absolute top-3 text-base -right-9 bg-pink-600 font-bold transform rotate-45 text-gray-200 bg-opacity-80">
+                  ₹ {market.price_coins}
+                </div>
                 <div className="p-8 ">
                   <div className="flex items-center h-9">
                     <img
@@ -94,8 +102,7 @@ const Market = () => {
                     onClick={() => {
                       dispatch(
                         modalSlice.actions.showModal({
-                          body: <CoupenDetails
-                          desc={market.description}/>,
+                          body: <CoupenDetails desc={market.description} />,
                         })
                       );
                     }}

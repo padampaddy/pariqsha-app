@@ -43,12 +43,7 @@ const CoupenDetails = ({
         {desc}
       </div>
       <div className="flex mt-4 items-center justify-center ">
-        {/* <button
-          className=" button-link mr-3"
-          style={{ borderColor: "#00d5df" }}
-        >
-          Buy
-        </button> */}
+        
         <button
           onClick={() => dispatch(modalSlice.actions.hideModal())}
           className="button common-btn py-2.5 px-9"
