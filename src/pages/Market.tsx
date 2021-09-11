@@ -1,5 +1,6 @@
 import BaseLayout from "../layouts/Base";
 import coin from "../assets/images/money.png";
+import price from "../assets/images/dollar.png";
 import { useQuery } from "@apollo/client";
 import { IMarketProduct } from "../types/Market";
 import { GET_MARKET_PRODUCT } from "../api/queries";
@@ -7,7 +8,10 @@ import { motion } from "framer-motion";
 import { useDispatch } from "react-redux";
 import modalSlice from "../redux/slices/modal-slice";
 import CoupenDetails from "../components/CoupenDetails";
-// import { Link } from "react-router-dom";
+import cartSlice from "../redux/slices/cart-slice";
+import CartButton from "../components/CartButton";
+import { useCallback } from "react";
+import { CartItem } from "../types/Cart";
 
 const Market = () => {
   const { data } = useQuery<IMarketProduct>(GET_MARKET_PRODUCT, {
@@ -18,8 +22,12 @@ const Market = () => {
 
   const dispatch = useDispatch();
 
+  const onAdd = useCallback((item: CartItem) => {
+    dispatch(cartSlice.actions.addItem(item));
+  }, []);
+
   return (
-    <BaseLayout title="Market">
+    <BaseLayout title="Market" actionButtons={[<CartButton key="cart" />]}>
       <div className="px-2">
         <div className="mb-8 text-center flex  pt-3 flex-row">
           <h4 className="text-gray-500 text-lg flex justify-center items-center flex-grow flex-1">
@@ -28,31 +36,12 @@ const Market = () => {
             </span>
             23456
           </h4>
-          {/* <Link to="/cart" className="pr-1 relative">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-7 w-7"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <title>cart</title>
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-              />
-            </svg>
-            <div className="absolute common-btn text-black rounded-full w-3.5 h-3.5 flex justify-center items-center -right-0 p-1  -top-1 text-xs">
-              1
-            </div>
-          </Link> */}
         </div>
 
         <div className="flex w-full flex-wrap">
           {data?.market_product.flatMap((market, index) => (
             <motion.div
+              key={index}
               className="md:w-1/3 w-1/2 p-2"
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
@@ -62,12 +51,10 @@ const Market = () => {
                 damping: 100,
               }}
             >
-              <div
-                key={index}
-                className="bg-white shadow-lg rounded-md relative overflow-hidden"
-              >
+              <div className="bg-white shadow-lg rounded-md relative overflow-hidden">
                 <div className="inline-flex items-center justify-center w-32 py-2 absolute top-3 text-base -right-9 bg-pink-600 font-bold transform rotate-45 text-gray-200 bg-opacity-80">
-                  ₹ {market.price_coins}
+                  <img src={price} alt="price" className="h-4 w-4 mr-1" />
+                  {market.price_coins}
                 </div>
                 <div className="p-8 ">
                   <div className="flex items-center h-9">
@@ -123,26 +110,53 @@ const Market = () => {
                     </svg>
                     Detail
                   </button>
-                  <button
-                    className="border border-gray-400 md:px-4 md:py-2 p-1 rounded flex market-btn"
-                    style={{ fontSize: "10px" }}
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-4 w-4 md:mr-1"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
+                  
+                    <button
+                      className="border border-gray-400 md:px-4 md:py-2 p-1 rounded flex market-btn"
+                      style={{ fontSize: "10px" }}
+                      onClick={() => onAdd(new CartItem(market))}
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                      />
-                    </svg>
-                    Add to Cart
-                  </button>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-4 w-4 md:mr-1"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+                        />
+                      </svg>
+                      Add to Cart
+                    </button>
+                 
+                    {/* <button
+                      className="border border-gray-400 md:px-4 md:py-2 p-1 rounded flex market-btn"
+                      style={{ fontSize: "10px" }}
+                      onClick={() =>
+                        dispatch(cartSlice.actions.removeItem(index))
+                      }
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-4 w-4 mr-1"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                        />
+                      </svg>
+                      Remove
+                    </button> */}
+               
                 </div>
               </div>
             </motion.div>

@@ -11,6 +11,8 @@ export const espTransform = (value:number, { precision = 2, showSymbol = true } 
     });
   }
 
+  
+
   export const reducer = (accumulator:any, currentValue:number) => {
     return accumulator + (isNaN(currentValue) ? 0 : currentValue);
   };

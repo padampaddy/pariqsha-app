@@ -30,7 +30,7 @@ import NewChat from '../pages/NewChat'
 import Quizz from '../pages/Quizz'
 import Modal from '../components/Modal'
 import Msg from '../pages/Msg'
-import Cart from '../components/Cart'
+import Cart from '../pages/Cart'
 // import Home from '../pages/Home'
 
 function MySwitch() {

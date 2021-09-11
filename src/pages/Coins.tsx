@@ -1,6 +1,7 @@
 import BaseLayout from "../layouts/Base";
 import money from "../assets/images/money.png";
 import { motion } from "framer-motion";
+import { espTransform } from "../utils";
 
 const earns = [
   { coin: "10", rs: "50", tag: "Popular" },
@@ -51,7 +52,7 @@ const Coins = () => {
                   </div>
                   <div className=" text-center font-bold">+ {earn.coin}</div>
                   <button className="common-btn md:p-2 p-1 md:px-8 px-2 mt-1 rounded text-sm md:text-base">
-                    ₹ {earn.rs}
+                  {espTransform(50).format()}
                   </button>
                 </motion.div>
               </div>

@@ -1,23 +1,19 @@
 import { PropsWithChildren, useEffect, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { ReactElement } from "react-markdown";
+import { useHistory } from "react-router-dom";
 import Drawer from "../components/Drawer";
 // import Menu from '../components/Menu'
 
-interface ActionButton {
-  icon: JSX.Element;
-  onClick: () => void;
-}
-
 interface Props {
   title?: string;
-  actionButtons?: ActionButton[];
+  actionButtons?: ReactElement[];
   showBack?: boolean;
 }
 
 function BaseLayout({
   children,
   title = "Pariqsha",
-  // actionButtons = [],
+  actionButtons = [],
   showBack = false,
 }: PropsWithChildren<Props>) {
   const [height, setHeight] = useState(window.innerHeight);
@@ -58,7 +54,7 @@ function BaseLayout({
         {showBack ? (
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="w-8 h-8 cursor-pointer absolute left-2 top-0 bottom-0 my-auto"
+            className="w-8 h-8 cursor-pointer sticky left-2 top-0 bottom-0 my-auto"
             viewBox="0 0 20 20"
             fill="currentColor"
             onClick={() => history.goBack()}
@@ -71,22 +67,6 @@ function BaseLayout({
             />
           </svg>
         ) : (
-          // <svg
-          //   xmlns="http://www.w3.org/2000/svg"
-          //   className="w-6 cursor-pointer absolute left-4 top-0 bottom-0 my-auto"
-          //   viewBox="0 0 512 512"
-          //   onClick={() => history.goBack()}
-          // >
-          //   <title>Arrow Back</title>
-          //   <path
-          //     fill="currentColor"
-          //     stroke="currentColor"
-          //     strokeLinecap="round"
-          //     strokeLinejoin="round"
-          //     strokeWidth="48"
-          //     d="M244 400L100 256l144-144M120 256h292"
-          //   />
-          // </svg>
           <svg
             onClick={() => {
               setIsOpen(true);
@@ -96,62 +76,44 @@ function BaseLayout({
             viewBox="0 0 24 24"
             style={{ color: "#01D5DD" }}
           >
+            <title>menu icon</title>
             <path
               d="M4 6H20V8H4zM4 11H20V13H4zM4 16H20V18H4z"
               fill="currentColor"
             ></path>
           </svg>
         )}
-        <h4 className="text-lg flex-grow flex-1 text-center text-black font-bold">
+        <h4 className="text-lg flex-grow text-center text-black font-bold">
           {title}
         </h4>
 
-        {/* {actionButtons.flatMap((button, index) => (
-            <div key={index} onClick={button.onClick}>
-              {button.icon}
-            </div>
-          ))} */}
-        <div className="  my-auto items-center flex relative">
+        {actionButtons.flatMap((button, index) => (
+          <div key={index}>{button}</div>
+        ))}
+        <div
+          role="button"
+          onClick={() => history.push("/notification")}
+          className=" my-auto items-center flex relative"
+        >
           <svg
-            role="button"
-            onClick={() => history.push("/notification")}
             xmlns="http://www.w3.org/2000/svg"
             className="h-7 w-7 fill-current"
             style={{ color: "#01D5DD" }}
             viewBox="0 0 24 24"
           >
-             <title>notification</title>
+            <title>notification</title>
             <path
               d="M12 22c1.311 0 2.407-.834 2.818-2H9.182C9.593 21.166 10.689 22 12 22zM19 14.586V10c0-3.217-2.185-5.927-5.145-6.742C13.562 2.52 12.846 2 12 2s-1.562.52-1.855 1.258C7.185 4.074 5 6.783 5 10v4.586l-1.707 1.707C3.105 16.48 3 16.734 3 17v1c0 .553.447 1 1 1h16c.553 0 1-.447 1-1v-1c0-.266-.105-.52-.293-.707L19 14.586z"
               fill="currentColor"
             ></path>
           </svg>
-          <div className="absolute bg-black text-white rounded-full w-3.5 h-3.5 flex justify-center items-center -right-0 p-1  -top-1 text-xs">
+          <div
+            className="absolute bg-black text-white font-bold rounded-full w-4 h-4 flex justify-center items-center right-0 -top-1 "
+            style={{ fontSize: "10px" }}
+          >
             2
           </div>
         </div>
-
-        <Link to="/cart" className="pr-1 relative ml-4">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-7 w-7"
-            style={{ color: "#01D5DD" }}
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <title>cart</title>
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-            />
-          </svg>
-          <div className="absolute bg-black text-white rounded-full w-3.5 h-3.5 flex justify-center items-center -right-0 p-1  -top-1 text-xs">
-            1
-          </div>
-        </Link>
       </div>
       <div
         className={`w-full ${
