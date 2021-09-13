@@ -12,6 +12,7 @@ import { useParams } from "react-router-dom";
 import DEFAULT_AVATAR from "../assets/images/profileuser.png";
 import PicPreview from "../components/PicPreview";
 import modalSlice from "../redux/slices/modal-slice";
+import Loader from "../components/Loader";
 
 const Msg = () => {
   const { id } = useParams<{ id: string }>();
@@ -119,12 +120,7 @@ const Msg = () => {
           <div className="flex flex-col flex-auto rounded-2xl">
             <div className="grid">
               {loading ? (
-                <div className=" flex justify-center mt-4 items-center">
-                  <div
-                    className="loader ease-linear rounded-full border-4 border-t-4 border-gray-300 h-10 w-10"
-                    style={{ borderTopColor: "#00D2E0" }}
-                  ></div>
-                </div>
+                <Loader/>
               ) : (
                 <ul>
                   {data?.communication_threads_by_pk.messages.flatMap(

@@ -48,7 +48,7 @@ const Market = () => {
               transition={{
                 type: "spring",
                 stiffness: 200,
-                damping: 100,
+                damping: 50,
               }}
             >
               <div className="bg-white shadow-lg rounded-md relative overflow-hidden">
@@ -110,30 +110,32 @@ const Market = () => {
                     </svg>
                     Detail
                   </button>
-                  
-                    <button
-                      className="border border-gray-400 md:px-4 md:py-2 p-1 rounded flex market-btn"
-                      style={{ fontSize: "10px" }}
-                      onClick={() => onAdd(new CartItem(market))}
+
+                  <button
+                    className="border border-gray-400 md:px-4 md:py-2 p-1 rounded flex market-btn"
+                    style={{ fontSize: "10px" }}
+                    onClick={() => {
+                      onAdd(new CartItem(market));
+                    }}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-4 w-4 md:mr-1"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
                     >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-4 w-4 md:mr-1"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                        />
-                      </svg>
-                      Add to Cart
-                    </button>
-                 
-                    {/* <button
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+                      />
+                    </svg>
+                    Add to Cart
+                  </button>
+
+                  {/* <button
                       className="border border-gray-400 md:px-4 md:py-2 p-1 rounded flex market-btn"
                       style={{ fontSize: "10px" }}
                       onClick={() =>
@@ -156,7 +158,6 @@ const Market = () => {
                       </svg>
                       Remove
                     </button> */}
-               
                 </div>
               </div>
             </motion.div>

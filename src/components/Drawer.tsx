@@ -55,7 +55,7 @@ const Drawer = ({ onClose }: Props) => {
               onClose();
             }}
             className="focus:outline-none lg:hidden absolute  top-5 left-5"
-            style={{ color: "#01D5DD" }}
+            style={{ color: "#3985db" }}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

@@ -4,6 +4,10 @@ import { useHistory } from "react-router-dom";
 import Drawer from "../components/Drawer";
 // import Menu from '../components/Menu'
 
+
+
+    
+
 interface Props {
   title?: string;
   actionButtons?: ReactElement[];
@@ -26,8 +30,15 @@ function BaseLayout({
     });
   }, []);
 
+
+
+
   const history = useHistory();
+
+
   return (
+    <>
+  
     <div
       style={{ width: width, height: height }}
       className="flex overflow-hidden flex-col flex-1"
@@ -46,15 +57,16 @@ function BaseLayout({
           />
         )}
       </div>
+  
       <div
-        className={`shadow-sm items-center flex flex-row p-4 w-screen relative ${
+        className={`shadow-sm items-center  p-4 w-screen relative   ${
           showBack ? "" : "lg:pl-80"
         }`}
       >
         {showBack ? (
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="w-8 h-8 cursor-pointer sticky left-2 top-0 bottom-0 my-auto"
+            className="w-6 h-6 cursor-pointer  left-2 top-0 bottom-0 my-auto absolute"
             viewBox="0 0 20 20"
             fill="currentColor"
             onClick={() => history.goBack()}
@@ -72,9 +84,9 @@ function BaseLayout({
               setIsOpen(true);
             }}
             xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6 cursor-pointer lg:hidden"
+            className="h-6 w-6 cursor-pointer lg:hidden absolute"
             viewBox="0 0 24 24"
-            style={{ color: "#01D5DD" }}
+            style={{ color: "#3985db" }}
           >
             <title>menu icon</title>
             <path
@@ -83,10 +95,11 @@ function BaseLayout({
             ></path>
           </svg>
         )}
+     
         <h4 className="text-lg flex-grow text-center text-black font-bold">
           {title}
         </h4>
-
+        <div className="absolute   flex top-1/2 transform -translate-y-1/2 right-4">
         {actionButtons.flatMap((button, index) => (
           <div key={index}>{button}</div>
         ))}
@@ -97,8 +110,8 @@ function BaseLayout({
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-7 w-7 fill-current"
-            style={{ color: "#01D5DD" }}
+            className="h-6 w-6 fill-current"
+            style={{ color: "#3985db" }}
             viewBox="0 0 24 24"
           >
             <title>notification</title>
@@ -113,6 +126,7 @@ function BaseLayout({
           >
             2
           </div>
+          </div>
         </div>
       </div>
       <div
@@ -124,6 +138,7 @@ function BaseLayout({
         {children}
       </div>
     </div>
+    </>
   );
 }
 

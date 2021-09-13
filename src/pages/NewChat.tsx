@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { useHistory } from "react-router-dom";
+import Loader from "../components/Loader";
 
 function NewChat() {
   const user = useSelector((state: RootState) => state.user.entities?.user);
@@ -95,12 +96,7 @@ function NewChat() {
             <hr className=" border-gray-300"></hr>
 
             {loading ? (
-              <div className=" flex justify-center mt-4 items-center">
-                <div
-                  className="loader ease-linear rounded-full border-4 border-t-4 border-gray-300 h-10 w-10"
-                  style={{ borderTopColor: "#00D2E0" }}
-                ></div>
-              </div>
+              <Loader/>
             ) : data?.users_profile.length === 0 ? (
               <p className="text-center pt-4">No Contact</p>
             ) : (
@@ -120,7 +116,7 @@ function NewChat() {
                       });
                     }}
                   >
-                    <li key={index} className="my-chat-list" style={{animationName:"hello1", animationDuration:"1s", animationIterationCount:"1", animationFillMode:"alternate", animationTimingFunction:"ease-in-out" }}>
+                    <li key={index} className="my-chat-list" style={{animationName:"hello1", animationDuration:"0.3s", animationIterationCount:"1", animationFillMode:"alternate", animationTimingFunction:"ease-in-out" }}>
                       <div className="flex ml-2 items-center">
                         <div className="h-50 w-50">
                           <img
@@ -142,7 +138,7 @@ function NewChat() {
                           xmlns="http://www.w3.org/2000/svg"
                           className="h-5 w-5"
                           viewBox="0 0 20 20"
-                          style={{ color: "#39CDDD" }}
+                          style={{ color: "#3985db" }}
                           fill="currentColor"
                         >
                           <path

@@ -31,7 +31,7 @@ const Modal = () => {
         <div className="inline-block align-center bg-white absolute top-1/2 left-1/2  -translate-x-1/2  -translate-y-1/2 rounded-lg text-left overflow-hidden shadow-xl transform   md:w-full w-3/4 max-w-2xl">
           <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
             
-            <div className="">{body}</div>
+            {body && <div className="">{body}</div>}
           </div>
         </div>
       </div>

@@ -26,7 +26,7 @@ const Cart = () => {
               <hr className="mt-1" />
               {items.flatMap((item, index) => (
                 <>
-                  <div key={index} className="flex mt-4">
+                  <div key={index} className="flex mt-4 items-center">
                     <div className="flex-grow-0 flex justify-center items-center md:w-28 w-16 ">
                       <img
                         src={item.getCoverImage()}
@@ -35,7 +35,7 @@ const Cart = () => {
                       />
                     </div>
                     <div className="flex-grow md:ml-5 ml-3 mr-1">
-                      <p className=" text-xl capitalize font-medium">
+                      <p className=" md:text-lg text-md capitalize font-medium">
                         {item.getName()}
                       </p>
                       <span className="text-gray-500 text-xs capitalize">
@@ -77,8 +77,8 @@ const Cart = () => {
               <div className="mt-3 flex  justify-between">
                 <div className="">
                   <button
-                    className=" md:text-lg text-base md:py-1.5 md:px-3 py-1 px-2 rounded flex items-center text-white"
-                    style={{ backgroundColor: "#00d5df" }}
+                    className=" md:text-lg text-base md:py-1.5 md:px-3 py-1 px-2 rounded flex items-center text-white common-btn"
+                  
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -97,10 +97,10 @@ const Cart = () => {
                     Buy
                   </button>
                 </div>
-                <div className="flex items-center md:text-lg text-base md:font-semibold font-medium">
-                  Subtotal:
+                <div className="flex items-center md:text-xl text-lg md:font-semibold font-medium">
+                <span className="mr-4">Subtotal:</span>
                   <img src={coin} alt="price" className="h-5 w-5 mr-1" />
-                  {items.reduce((pV, item) => pV + item.getPrice(), 0)}
+              {items.reduce((pV, item) => pV + item.getPrice(), 0)}
                 </div>
               </div>
             </>

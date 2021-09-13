@@ -92,7 +92,7 @@ function SignupScreen() {
           </div> 
 
           <div className="flex items-center justify-between">
-            <button className="button mt-4 self-end hover:bg-white-100 text-white w-full font-medium md:py-3 py-3 focus:outline-none  rounded-full common-btn">
+            <button className="button mt-4 md:mt-6 self-end hover:bg-white-100 text-white w-full font-medium md:py-4 md:text-lg py-3 focus:outline-none  rounded-full common-btn">
               {loading === "pending"
                 ? "Signing up..."
                 : loading === "succeeded"

@@ -7,12 +7,59 @@ import modalSlice from "../redux/slices/modal-slice";
 import { loginAction } from "../redux/slices/user-slice";
 import { RootState } from "../redux/store";
 import ForgotPass from "./ForgetPass";
+import * as Validation from "../Utils/validation";
 
 const Login=() =>{
+
+  const initialData = {
+    email: "",
+    password: "",
+    emptyErr: "",
+  };
+
   const { loading } = useSelector((state: RootState) => state.user);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
+  const [data, setData] = useState(initialData);
+  const [errData, seterrData] = useState(initialData);
   const dispatch = useDispatch();
+
+  const handleSubmit = (e: { preventDefault: () => void; }) =>{
+    e.preventDefault();
+
+    if (data.email === "" || data.password === "") {
+      seterrData({ ...errData, emptyErr: "All fields are required" });
+      return;
+    }
+    dispatch(loginAction({ email: data.email, password:data.password }));
+
+  }
+
+  const handleInputChange = (e:React.SyntheticEvent<HTMLInputElement, Event>) => {
+    const { name, value } = e.target as HTMLInputElement;
+    setData({ ...data, [name]: value });
+
+    switch (name) {
+      case "email": {
+        if (Validation.validateEmail(value)) {
+          seterrData({ ...errData, email: "" });
+        } else {
+          seterrData({ ...errData, email: "Please Enter A Valid Email" });
+        }
+        break;
+      }
+      case "password": {
+        if (Validation.validatePassword(value)) {
+          seterrData({ ...errData, password: "" });
+        } else {
+          seterrData({ ...errData, password: "Please Enter A Valid Password" });
+        }
+        break;
+      }
+      
+    }
+  };
+
 
   return (
     <GeneralLayout>
@@ -33,37 +80,48 @@ const Login=() =>{
         </div>
 
         <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            dispatch(loginAction({ email, password }));
-          }}
+          // onSubmit={(e) => {
+          //   e.preventDefault();
+          //   dispatch(loginAction({ email, password }));
+          // }}
+          onSubmit={(e)=>handleSubmit(e)}
           className="bg-white group-hover:rounded px-8 md:pt-4 md:pb-8 rounded-lg flex flex-col"
         >
          
-          <div className="md:my-4 my-1">
+          <div className="md:my-4 my-1 text-left">
             <label className="signup-screen-label" htmlFor="">
               Email
             </label>
             <input
               className="signup-screen-input"
-              onChange={(e) => setEmail(e.target.value)}
+              // onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => handleInputChange(e)}
+              value={data.email}
+              id="email"
+              name="email"
               autoComplete=""
               type="text"
               placeholder="john@doe.com"
             />
+             <small style={{ color: "red" }}>{errData.email || ""}</small>
           </div>
 
-          <div className="mb-0">
+          <div className="mb-0 text-left">
             <label className="signup-screen-label" htmlFor="">
               Password
             </label>
             <input
               className="signup-screen-input"
-              onChange={(e) => setPassword(e.target.value)}
+              // onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => handleInputChange(e)}
+              value={data.password || ""}
               autoComplete=""
               type="password"
               placeholder="*******"
+              id="password"
+              name="password"
             />
+             <small style={{ color: "red" }}>{errData.password}</small>
           </div>
 
           <button type="button"
@@ -81,13 +139,14 @@ const Login=() =>{
           </button>
 
           <div className="flex items-center justify-between">
-            <button type="submit" className="button md:mt-3 self-end hover:bg-white-100 text-white w-full font-medium md:py-3 py-3 focus:outline-none  rounded-full common-btn">
+            <button type="submit" className="button md:mt-6 mt-3 self-end hover:bg-white-100 text-white w-full font-medium md:py-4 py-3 focus:outline-none  rounded-full common-btn md:text-lg">
               {loading === "pending"
                 ? "Logging In..."
                 : loading === "succeeded"
                 ? "Login Successful"
                 : "Login"}
             </button>
+            <small style={{ color: "red" }}>{errData.emptyErr}</small>
           </div>
 
           <Link

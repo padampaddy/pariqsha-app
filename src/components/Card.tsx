@@ -47,7 +47,7 @@ export default function Card({
         opacity: 1,
       }}
       transition={{
-        delay: 1,
+        delay: 0.3,
         ease: "linear",
       }}
     >

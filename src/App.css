@@ -73,7 +73,7 @@ border-radius: 10rem;
 color: white;
 }
 .common-btn, .nav-item:hover, .quiz-button:hover, .market-btn:hover{
-  background-image: linear-gradient(to right, #00CBE4, #00D0E2, #00D5DF, #00DADC, #02DED7);
+  background: linear-gradient(185deg, rgba(31,160,238,1) 0%, rgba(31,160,238,1) 35%, rgba(57,133,219,1) 100%);
   color: #fff;
 }
 

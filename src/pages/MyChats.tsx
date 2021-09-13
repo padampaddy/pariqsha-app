@@ -8,6 +8,7 @@ import moment from "moment";
 import useAuthSubscription from "../hooks/useAuthSubscription";
 import { useState } from "react";
 import { motion } from "framer-motion";
+import Loader from "../components/Loader";
 
 
 function Mychats() {
@@ -22,12 +23,7 @@ function Mychats() {
       <div className="flex flex-col h-full">
         <div className="px-4 h-full">
           {loading ? (
-            <div className=" flex justify-center mt-4 items-center">
-              <div
-                className="loader ease-linear rounded-full border-4 border-t-4 border-gray-300 h-10 w-10"
-                style={{ borderTopColor: "#00D2E0" }}
-              ></div>
-            </div>
+            <Loader/>
           ) : (
             <div>
               <div className="bg-gray-100 flex items-center my-2 relative rounded-full">
@@ -88,7 +84,7 @@ function Mychats() {
                   })
                   .flatMap((chat) => (
                     <Link key={chat.id} role="button" to={`/chats/${chat.id}`}>
-                      <motion.li className="my-chat-list "style={{animationName:"hello1", animationDuration:"1s", animationIterationCount:"1", animationFillMode:"alternate", animationTimingFunction:"ease-in-out" }}
+                      <motion.li className="my-chat-list "style={{animationName:"hello1", animationDuration:"0.3s", animationIterationCount:"1", animationFillMode:"alternate", animationTimingFunction:"ease-in-out" }}
    
                       >
                         <div className="flex ml-2 items-center">
@@ -121,7 +117,7 @@ function Mychats() {
                             xmlns="http://www.w3.org/2000/svg"
                             className="h-5 w-5"
                             viewBox="0 0 20 20"
-                            style={{ color: "#39CDDD" }}
+                            style={{ color: "#3985db" }}
                             fill="currentColor"
                           >
                             <path

@@ -5,6 +5,17 @@ import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, useHistory, Switch } from "react-router-dom";
 import useFetch from "use-http";
+import Joyride from 'react-joyride';
+
+
+const steps = [
+  {
+    target: '.register',
+    content: 'This is register quiz!',
+  }
+  
+]
+
 import {
   ADD_RP_PAYLOAD,
   GET_MY_QUIZZES,
@@ -20,6 +31,7 @@ import { RootState } from "../redux/store";
 import { MyQuizResponse, QuizResponse } from "../types/Quiz";
 import UnregisterBody from "../components/UnregisterBody";
 import Collections from "../components/Collections";
+import Loader from "../components/Loader";
 
 const today = new Date().toISOString();
 
@@ -51,6 +63,8 @@ export default function Quizz() {
   const [makeRefundRequest] = useMutation(MAKE_REFUND_REQUEST);
   const dispatch = useDispatch();
   const history = useHistory();
+
+  const [searchTerm, setSearchTerm] = useState<string>("");
 
   useEffect(() => {
     refetch({
@@ -88,12 +102,14 @@ export default function Quizz() {
         subTitle={quiz.topics.split(",").join(", ")}
         footer={
           <>
+      <Joyride steps={steps} styles={{}} /> 
+
             {myQuizzes?.quiz_registration.findIndex(
               (q) => q.quizByQuiz.id === quiz.id
             ) === -1 ? (
               <>
                 <button
-                  className="quiz-button md:mb-0 mb-0.5"
+                  className="quiz-button md:mb-0 mb-0.5 "
                   onClick={async () => {
                     if (quiz.price === 0) {
                       Promise.all([
@@ -178,7 +194,7 @@ export default function Quizz() {
               </>
             ) : (
               <button
-                className="text-red-500 quiz-button "
+                className="text-red-500 quiz-button  "
                 onClick={() => {
                   dispatch(
                     modalSlice.actions.showModal({
@@ -312,8 +328,14 @@ export default function Quizz() {
             className="w-full focus:outline-none p-2 rounded-full bg-gray-100"
             type="text"
             placeholder="Search"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
           />
-          <div role="button" className="text-gray-500 pr-3 hover:text-black">
+          <div
+            role="button"
+            onChange={() => setSearchTerm("")}
+            className="text-gray-500 pr-3 hover:text-black"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -333,14 +355,9 @@ export default function Quizz() {
       </div>
 
       {loading ? (
-        <div className=" flex justify-center mt-4 items-center">
-          <div
-            className="loader ease-linear rounded-full border-4 border-t-4 border-gray-300 h-10 w-10"
-            style={{ borderTopColor: "#00d2e0" }}
-          ></div>
-        </div>
+        <Loader />
       ) : (
-        <div className=" px-4 mt-4">
+        <div className=" px-4 my-4">
           <div className="collections w-full">
             <Collections />
           </div>

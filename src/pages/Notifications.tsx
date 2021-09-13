@@ -38,7 +38,7 @@ const Notification = () => {
                 key={index}
                 className="notification-list border-l-4"
                 style={{
-                  borderLeftColor: "#01CEE3",
+                  borderLeftColor: "#3985db",
                   backgroundColor: "#ffffff",
                 }}
               >

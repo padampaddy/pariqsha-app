@@ -1,15 +1,43 @@
 import { NavLink } from "react-router-dom";
+import Joyride from 'react-joyride';
 
+
+
+
+const steps = [
+  {
+    target: '.discover',
+    content: 'This is Discover quiz!',
+  },
+  {
+    target: '.my-quiz',
+    content: 'This is  My-quiz!',
+  },
+  {
+    target: '.upcoming',
+    content: 'This is Upcoming quiz!',
+  },
+  {
+    target: '.live',
+    content: 'This is Live quiz!',
+  },
+  {
+    target: '.liked',
+    content: 'This is Liked quiz!',
+  }
+  
+]
 const Collections = () => {
   return (
     <>
+       <Joyride steps={steps} styles={{}} /> 
       <div className=" p-0">
         <ul className="w-full mb-2 float-left ">
-          <li role="button">
+          <li role="button" className="">
             <NavLink
               to="/home"
               exact
-              className="collection-list"
+              className="collection-list discover"
               activeClassName="common-btn"
             >
               <svg
@@ -33,7 +61,7 @@ const Collections = () => {
           <li role="button">
             <NavLink
               to="/home/myquiz"
-              className="collection-list"
+              className="collection-list my-quiz"
               activeClassName="common-btn"
             >
               <svg
@@ -57,7 +85,7 @@ const Collections = () => {
           <li role="button">
             <NavLink
               to="/home/upcoming"
-              className="collection-list"
+              className="collection-list upcoming"
               activeClassName="common-btn"
             >
               <svg
@@ -81,7 +109,7 @@ const Collections = () => {
           <li role="button">
             <NavLink
               to="/home/live"
-              className="collection-list"
+              className="collection-list live"
               activeClassName="common-btn selected"
               aria-current="page"
             >
@@ -93,7 +121,7 @@ const Collections = () => {
           <li role="button">
             <NavLink
               to="/home/like"
-              className="collection-list"
+              className="collection-list liked"
               activeClassName="common-btn"
             >
               <svg

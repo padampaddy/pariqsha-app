@@ -62,7 +62,7 @@ function ForgotPass() {
           </p>
         </div>
 
-        <form className="bg-white group-hover:rounded px-8 md:pt-6 pt-4 md:pb-8 mb-4 flex flex-col">
+        <form className="bg-white group-hover:rounded  md:pt-6 pt-4 md:pb-8 mb-4 flex flex-col">
           <div className="mb-4">
             <label className="signup-screen-label" htmlFor="email">
               Email

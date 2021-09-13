@@ -1,7 +1,7 @@
 import BaseLayout from "../layouts/Base";
 import money from "../assets/images/money.png";
 import { motion } from "framer-motion";
-import { espTransform } from "../utils";
+import { espTransform } from "../Utils/utils";
 
 const earns = [
   { coin: "10", rs: "50", tag: "Popular" },
