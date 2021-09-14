@@ -1,36 +1,42 @@
 import { NavLink } from "react-router-dom";
-import Joyride from 'react-joyride';
-
-
-
+import Joyride from "react-joyride";
 
 const steps = [
   {
-    target: '.discover',
-    content: 'This is Discover quiz!',
+    target: ".discover",
+    content: "This is Discover quiz!",
   },
   {
-    target: '.my-quiz',
-    content: 'This is  My-quiz!',
+    target: ".my-quiz",
+    content: "This is  My-quiz!",
   },
   {
-    target: '.upcoming',
-    content: 'This is Upcoming quiz!',
+    target: ".upcoming",
+    content: "This is Upcoming quiz!",
   },
   {
-    target: '.live',
-    content: 'This is Live quiz!',
+    target: ".live",
+    content: "This is Live quiz!",
   },
   {
-    target: '.liked',
-    content: 'This is Liked quiz!',
-  }
-  
-]
+    target: ".liked",
+    content: "This is Liked quiz!",
+  },
+];
 const Collections = () => {
   return (
     <>
-       <Joyride steps={steps} styles={{}} /> 
+      <Joyride steps={steps} styles={{
+          options: {
+            arrowColor: '#fff',
+            backgroundColor: '#fff',
+            primaryColor: '#3985db',
+            textColor: '#000',
+            width: 900,
+            zIndex: 1000,
+          }
+
+      }} />
       <div className=" p-0">
         <ul className="w-full mb-2 float-left ">
           <li role="button" className="">
@@ -126,7 +132,7 @@ const Collections = () => {
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-4 w-4 md:h-5 md:w-5 mr-1 md:mr-2"
+                className="h-4 w-4 md:h-5 md:w-5 mr-1 md:mr-2 text-red-600"
                 viewBox="0 0 20 20"
                 fill="currentColor"
               >

@@ -19,7 +19,7 @@ const Cart = () => {
             </div>
           ) : (
             <>
-              <p className=" md:text-base text-sm text-gray-600 capitalize text-right ">
+              <p className=" md:text-base text-sm font-medium capitalize text-right ">
                 Price
               </p>
 
@@ -76,10 +76,7 @@ const Cart = () => {
               ))}
               <div className="mt-3 flex  justify-between">
                 <div className="">
-                  <button
-                    className=" md:text-lg text-base md:py-1.5 md:px-3 py-1 px-2 rounded flex items-center text-white common-btn"
-                  
-                  >
+                  <button className=" md:text-lg text-base md:py-1.5 md:px-3 py-1 px-2 rounded flex items-center text-white common-btn">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="md:h-5 md:w-5 h-4 w-4 mr-2"
@@ -98,9 +95,9 @@ const Cart = () => {
                   </button>
                 </div>
                 <div className="flex items-center md:text-xl text-lg md:font-semibold font-medium">
-                <span className="mr-4">Subtotal:</span>
+                  <span className="mr-4">Subtotal:</span>
                   <img src={coin} alt="price" className="h-5 w-5 mr-1" />
-              {items.reduce((pV, item) => pV + item.getPrice(), 0)}
+                  {items.reduce((pV, item) => pV + item.getPrice(), 0)}
                 </div>
               </div>
             </>

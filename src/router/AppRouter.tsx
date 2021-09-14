@@ -23,7 +23,9 @@ import Login from '../pages/Login'
 import SignupScreen from '../pages/SignupScreen'
 import Mychats from '../pages/MyChats'
 import Coins from '../pages/Coins'
-import Notification from '../pages/Notifications'
+// import Pariqsha from '../pages/Pariqsha'
+// import Notification from '../pages/notification'
+import PariqshaQuiz from '../pages/PariqshaQuiz'
 import Setting from '../pages/Setting'
 import Market from '../pages/Market'
 import NewChat from '../pages/NewChat'
@@ -46,9 +48,16 @@ function MySwitch() {
         <Coins />
       </PrivateRoute>
       
-      <PrivateRoute path="/notification">
+      {/* <PrivateRoute path="/notification">
         <Notification />
-      </PrivateRoute>
+      </PrivateRoute> */}
+
+       {/* <PrivateRoute path="/notification">
+        <Pariqsha/>
+      </PrivateRoute>  */}
+      <PrivateRoute path="/notification">
+        <PariqshaQuiz/>
+      </PrivateRoute>  
 
       <PrivateRoute path="/setting">
         <Setting />

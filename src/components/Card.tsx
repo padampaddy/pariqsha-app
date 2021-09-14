@@ -2,8 +2,10 @@ import { ReactElement } from "react";
 import PriceTag from "./PriceTag";
 import logo from "../assets/images/pariqsha.png";
 import { motion } from "framer-motion";
+import { useHistory } from "react-router-dom";
 
 interface Props {
+  id?: string;
   title?: string;
   subTitle?: string;
   content?: ReactElement;
@@ -15,9 +17,11 @@ interface Props {
   duration?: string;
   price?: number;
   decorate?: boolean;
+  likeBtn?: ReactElement;
 }
 
 export default function Card({
+  id,
   title,
   decorate = false,
   subTitle,
@@ -29,7 +33,10 @@ export default function Card({
   price,
   time,
   duration,
+  likeBtn,
 }: Props): ReactElement {
+  const history = useHistory();
+  
   return (
     <motion.div
       className={`w-full text-sm ${
@@ -105,19 +112,30 @@ export default function Card({
             src={imgSrc ? imgSrc : logo}
           />
           <div id="header-text" className="leading-5 w-full relative ml-6 sm">
-            <h4 id="name" className="text-xl font-semibold">
-              {title}
-              <span className="text-sm ml-3 text-gray-600">({duration})</span>
-            </h4>
-
+            <div className="flex items-center justify-between">
+              <div className="flex items-center">
+              <div
+                role="button"
+                onClick={() => history.push(`details/${id}`)}
+                id="name"
+                className="text-xl font-semibold"
+              >
+                {title}
+              </div>
+              <div className="text-sm ml-3 text-gray-600 mt-1">({duration})</div>
+              </div>
+              <div>
+                {likeBtn}
+              </div>
+            </div>
             <h5 id="job" className="font-semibold text-gray-600">
               {subTitle}
             </h5>
-            {footer && !decorate && (
+            {/* {footer && !decorate && (
               <div className="hidden absolute top-0 right-0 py-3 max-w-lg md:flex">
                 {footer}
               </div>
-            )}
+            )} */}
           </div>
         </div>
         <div>{content}</div>

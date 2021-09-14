@@ -28,6 +28,9 @@
   .my-chat-list {
     @apply flex justify-between border-b border-gray-300 items-center  py-2 rounded cursor-pointer transition hover:bg-gray-50;
   }
+  .list-style{
+    @apply text-lg p-3  shadow-md	 border-l-4 mb-4 cursor-pointer border-blue-500;
+  }
   .leaderboard-img {
     @apply rounded-full md:p-9 p-4;
   }

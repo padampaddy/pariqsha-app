@@ -77,16 +77,11 @@ color: white;
   color: #fff;
 }
 
-
-
-
-
-
 .selected span, .nav-link:hover span {
   background: #000;
 }
 a.collection-list.common-btn, .quiz-button:hover, .market-btn:hover {
-  border-color: #00DADC;
+  border-color: rgba(31,160,238,1);
 }
 /* width */
 ::-webkit-scrollbar {

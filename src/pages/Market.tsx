@@ -1,6 +1,5 @@
 import BaseLayout from "../layouts/Base";
 import coin from "../assets/images/money.png";
-import price from "../assets/images/dollar.png";
 import { useQuery } from "@apollo/client";
 import { IMarketProduct } from "../types/Market";
 import { GET_MARKET_PRODUCT } from "../api/queries";
@@ -12,6 +11,7 @@ import cartSlice from "../redux/slices/cart-slice";
 import CartButton from "../components/CartButton";
 import { useCallback } from "react";
 import { CartItem } from "../types/Cart";
+import alertSlice from "../redux/slices/alert-slice";
 
 const Market = () => {
   const { data } = useQuery<IMarketProduct>(GET_MARKET_PRODUCT, {
@@ -53,7 +53,7 @@ const Market = () => {
             >
               <div className="bg-white shadow-lg rounded-md relative overflow-hidden">
                 <div className="inline-flex items-center justify-center w-32 py-2 absolute top-3 text-base -right-9 bg-pink-600 font-bold transform rotate-45 text-gray-200 bg-opacity-80">
-                  <img src={price} alt="price" className="h-4 w-4 mr-1" />
+                  <img src={coin} alt="price" className="h-4 w-4 mr-1" />
                   {market.price_coins}
                 </div>
                 <div className="p-8 ">
@@ -69,7 +69,7 @@ const Market = () => {
                 <div className=" pb-1 text-center ">
                   <div
                     id="header-text"
-                    className="leading-5 w-full relative  sm"
+                    className="leading-5 w-full relative"
                   >
                     <h4
                       id="name"
@@ -116,6 +116,9 @@ const Market = () => {
                     style={{ fontSize: "10px" }}
                     onClick={() => {
                       onAdd(new CartItem(market));
+                       dispatch(alertSlice.actions.showAlert({
+                         body:"add to cart"
+                       }))
                     }}
                   >
                     <svg

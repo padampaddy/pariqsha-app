@@ -146,8 +146,8 @@ const Login=() =>{
                 ? "Login Successful"
                 : "Login"}
             </button>
-            <small style={{ color: "red" }}>{errData.emptyErr}</small>
           </div>
+          <small style={{ color: "red", marginTop: "10px" }}>{errData.emptyErr}</small>
 
           <Link
             to="/signup"
