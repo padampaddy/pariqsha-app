@@ -67,10 +67,7 @@ const Market = () => {
                 </div>
 
                 <div className=" pb-1 text-center ">
-                  <div
-                    id="header-text"
-                    className="leading-5 w-full relative"
-                  >
+                  <div id="header-text" className="leading-5 w-full relative">
                     <h4
                       id="name"
                       className="text-lg pb-3  font-semibold capitalize"
@@ -116,9 +113,11 @@ const Market = () => {
                     style={{ fontSize: "10px" }}
                     onClick={() => {
                       onAdd(new CartItem(market));
-                       dispatch(alertSlice.actions.showAlert({
-                         body:"add to cart"
-                       }))
+                      dispatch(
+                        alertSlice.actions.showAlert({
+                          body: "Add to cart",
+                        })
+                      );
                     }}
                   >
                     <svg

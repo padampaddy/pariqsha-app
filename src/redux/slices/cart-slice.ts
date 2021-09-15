@@ -16,6 +16,9 @@ const cartSlice = createSlice({
         ...state.items.slice(payload + 1),
       ],
     }),
+    clearItem: () => ({
+      items: [],
+    }),
   },
 });
 

@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { CartItem } from "../types/Cart";
+import alertSlice from "./slices/alert-slice";
 import cartSlice from "./slices/cart-slice";
 import modalSlice from "./slices/modal-slice";
 import userSlice from "./slices/user-slice";
@@ -37,6 +38,7 @@ const store = configureStore({
     user: userSlice.reducer,
     modal: modalSlice.reducer,
     cart: cartSlice.reducer,
+    alert: alertSlice.reducer,
   },
 });
 

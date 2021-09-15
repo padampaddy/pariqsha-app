@@ -8,3 +8,12 @@ export interface IMarketProduct {
     description: string;
   }[];
 }
+
+export interface IMarketOrder {
+  market_orders: {
+    id: string;
+    user_id: string;
+    cost_coins: number;
+    details: JSON;
+  };
+}

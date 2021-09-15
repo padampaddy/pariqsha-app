@@ -11,7 +11,7 @@
     @apply bg-blue-500 text-white py-2 px-8 rounded shadow-md transition duration-100 ease-in-out;
   }
   .button-link {
-    @apply py-2 px-8 border-2 rounded transition duration-100 ease-in-out;
+    @apply py-2 px-8 border-2 border-blue-400 rounded transition duration-100 ease-in-out;
   }
   .button-link:hover {
     @apply transform translate-y-0.5 shadow-none;
@@ -29,8 +29,12 @@
     @apply flex justify-between border-b border-gray-300 items-center  py-2 rounded cursor-pointer transition hover:bg-gray-50;
   }
   .list-style{
-    @apply text-lg p-3  shadow-md	 border-l-4 mb-4 cursor-pointer border-blue-500;
+    @apply text-lg p-2 px-3  hover:bg-gray-100	 border-l-4 mb-4 cursor-pointer border-blue-500 flex items-center justify-between;
   }
+  .practice-list-test{
+    @apply p-2  text-sm hover:bg-gray-100	 border-l-4  cursor-pointer border-black  bg-white text-black  w-full flex  items-center ; 
+  }
+  
   .leaderboard-img {
     @apply rounded-full md:p-9 p-4;
   }
@@ -62,7 +66,7 @@
   }
 
   .cancel-button {
-    @apply border md:py-2 rounded md:px-10 px-8 mr-4 text-sm md:text-base
+    @apply border-2 border-blue-400 md:py-2 rounded md:px-10 px-8 mr-4 text-sm md:text-base
   }
 
   .collection-list {

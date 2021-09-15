@@ -64,7 +64,7 @@ export default function UnregisterBody({ onConfirm }: Props): ReactElement {
       <div className="flex mt-4 items-center justify-center ">
         <button
           className=" button-link mr-3"
-          style={{ borderColor: "#00d5df" }}
+          
           onClick={() => onConfirm()}
         >
           Yes

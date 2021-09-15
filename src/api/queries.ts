@@ -252,3 +252,22 @@ export const GET_MARKET_PRODUCT = gql`
     }
   }
 `;
+
+export const SEND_MARKET_ORDER = gql`
+  mutation send_market_order(
+    $costCoin: Int!
+    $userId: uuid!
+    $details: jsonb!
+  ) {
+    insert_market_orders_one(
+      object: {
+        cost_coins: $costCoin
+        user_id: $userId
+        details: $details
+      }
+    ) {
+      id
+    }
+  }
+`;
+

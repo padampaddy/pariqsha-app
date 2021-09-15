@@ -3,15 +3,13 @@ import modalSlice from "../redux/slices/modal-slice";
 import { RootState } from "../redux/store";
 
 const Modal = () => {
-  const { visible, body } = useSelector(
-    (state: RootState) => state.modal
-  );
+  const { visible, body } = useSelector((state: RootState) => state.modal);
   const dispatch = useDispatch();
   if (!visible) return null;
   return (
     <div
       className="fixed z-50 inset-0"
-      style={{zIndex:9999}}
+      style={{ zIndex: 9999 }}
       aria-labelledby="modal-title"
       role="dialog"
       aria-modal="true"
@@ -30,7 +28,6 @@ const Modal = () => {
 
         <div className="inline-block align-center bg-white absolute top-1/2 left-1/2  -translate-x-1/2  -translate-y-1/2 rounded-lg text-left overflow-hidden shadow-xl transform   md:w-full w-3/4 max-w-2xl">
           <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-            
             {body && <div className="">{body}</div>}
           </div>
         </div>

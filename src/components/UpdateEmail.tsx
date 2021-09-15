@@ -83,7 +83,7 @@ function UpdateEmail({
             <button
               onClick={() => dispatch(modalSlice.actions.hideModal())}
               className="cancel-button"
-              style={{ borderColor: "#00CBE4" }}
+              
             >
               Cancel
             </button>

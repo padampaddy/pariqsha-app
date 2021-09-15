@@ -25,7 +25,8 @@ import Mychats from '../pages/MyChats'
 import Coins from '../pages/Coins'
 // import Pariqsha from '../pages/Pariqsha'
 // import Notification from '../pages/notification'
-import PariqshaQuiz from '../pages/PariqshaQuiz'
+// import PariqshaQuiz from '../pages/PariqshaQuiz'
+import ListingQuiz from '../pages/ListingQuiz'
 import Setting from '../pages/Setting'
 import Market from '../pages/Market'
 import NewChat from '../pages/NewChat'
@@ -33,6 +34,7 @@ import Quizz from '../pages/Quizz'
 import Modal from '../components/Modal'
 import Msg from '../pages/Msg'
 import Cart from '../pages/Cart'
+import Alert from '../components/Alert'
 // import Home from '../pages/Home'
 
 function MySwitch() {
@@ -55,9 +57,12 @@ function MySwitch() {
        {/* <PrivateRoute path="/notification">
         <Pariqsha/>
       </PrivateRoute>  */}
-      <PrivateRoute path="/notification">
+      {/* <PrivateRoute path="/notification">
         <PariqshaQuiz/>
-      </PrivateRoute>  
+      </PrivateRoute>   */}
+       <PrivateRoute path="/notification">
+        <ListingQuiz/>
+      </PrivateRoute> 
 
       <PrivateRoute path="/setting">
         <Setting />
@@ -120,6 +125,7 @@ export default function AppRouter() {
     <ApolloProvider client={client}>
       <Provider url={FUNCTIONS_URL_TEST} options={options}>
       <Modal />
+      <Alert />
         <Router>
           <MySwitch />
         </Router>

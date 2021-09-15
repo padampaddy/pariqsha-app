@@ -170,7 +170,7 @@ export default function Details(): ReactElement {
             ) : (
               <button
                 className="button-link text-red-500"
-                style={{ borderColor: "#00d5df" }}
+                
                 onClick={() => {
                   dispatch(
                     modalSlice.actions.showModal({

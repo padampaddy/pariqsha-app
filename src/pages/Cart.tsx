@@ -4,10 +4,38 @@ import coin from "../assets/images/money.png";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import cartSlice from "../redux/slices/cart-slice";
+import { useMutation } from "@apollo/client";
+import { IMarketOrder } from "../types/Market";
+import { SEND_MARKET_ORDER } from "../api/queries";
+import alertSlice from "../redux/slices/alert-slice";
 
 const Cart = () => {
+  const user = useSelector((state: RootState) => state.user.entities?.user);
   const items = useSelector((state: RootState) => state.cart.items);
   const dispatch = useDispatch();
+
+  const [sendOrder] = useMutation<IMarketOrder>(SEND_MARKET_ORDER);
+
+  const handleSend = () => {
+    sendOrder({
+      variables: {
+        userId: user?.id,
+        details: items,
+        costCoin: items.reduce((pV, item) => pV + item.getPrice(), 0),
+      },
+    })
+      .then((info) => {
+        console.log(info);
+        dispatch(cartSlice.actions.clearItem());
+      })
+      .catch((e) => console.error(e));
+
+    dispatch(
+      alertSlice.actions.showAlert({
+        body: "Order Placed",
+      })
+    );
+  };
 
   return (
     <BaseLayout title="Cart" showBack>
@@ -76,7 +104,10 @@ const Cart = () => {
               ))}
               <div className="mt-3 flex  justify-between">
                 <div className="">
-                  <button className=" md:text-lg text-base md:py-1.5 md:px-3 py-1 px-2 rounded flex items-center text-white common-btn">
+                  <button
+                    onClick={handleSend}
+                    className=" md:text-lg text-base md:py-1.5 md:px-3 py-1 px-2 rounded flex items-center text-white common-btn"
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="md:h-5 md:w-5 h-4 w-4 mr-2"

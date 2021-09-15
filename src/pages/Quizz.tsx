@@ -57,6 +57,15 @@ export default function Quizz() {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [like, setLike] = useState<boolean>(false);
 
+  const handleLike = () => {
+    if (!like) {
+      setLike(true);
+      
+    } else {
+      setLike(false);
+    }
+  };
+
   useEffect(() => {
     refetch({
       user: user?.id,
@@ -65,7 +74,7 @@ export default function Quizz() {
 
   const getCards = useCallback(() => {
     let quizData = data?.quiz_quiz;
-    if (!quizData) return <div />;
+    if (!quizData) return <div/>;
     if (showMyQuizzes)
       quizData = quizData.filter(
         (quiz) =>
@@ -106,30 +115,30 @@ export default function Quizz() {
           subTitle={quiz.topics.split(",").join(", ")}
           likeBtn={
             <>
-            <svg
-              role="button"
-              onClick={() => setLike((a) => !a)}
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-8 w-8 mr-1 text-red-600"
-              fill={like ? "currentColor" : "none"}
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <title>heart</title>
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="1.5"
-                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-              />
-            </svg>
+              <svg
+                role="button"
+                onClick={() => handleLike()}
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-8 w-8 mr-1 text-red-600"
+                fill={like ? "currentColor" : "none"}
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <title>heart</title>
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="1.5"
+                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                />
+              </svg>
             </>
           }
           footer={
             <>
               {myQuizzes?.quiz_registration.findIndex(
                 (q) => q.quizByQuiz.id === quiz.id
-               ) === -1 ? (
+              ) === -1 ? (
                 <>
                   <button
                     className="quiz-button md:mb-0 mb-0.5 "
@@ -215,7 +224,7 @@ export default function Quizz() {
                     Register
                   </button>
                 </>
-               ) : (
+              ) : (
                 <button
                   className="text-red-500 quiz-button  "
                   onClick={() => {
