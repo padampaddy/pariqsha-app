@@ -4,10 +4,12 @@ import UpdateEmail from "../components/UpdateEmail";
 import modalSlice from "../redux/slices/modal-slice";
 import UpdatePassword from "../components/UpdatePassword";
 import { RootState } from "../redux/store";
+import { useHistory } from "react-router-dom";
 
 const Setting = () => {
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.user.entities?.user);
+  const history = useHistory();
 
   return (
     <BaseLayout title="Setting">
@@ -18,7 +20,7 @@ const Setting = () => {
               Transactions History
             </div>
 
-            <div className="flex justify-between rounded-lg border mt-2 items-center bg-white p-4 hover:bg-gray-100">
+            <div role="button" onClick={() => history.push(`quizhistory`)} className="flex justify-between rounded-lg border mt-2 items-center bg-white p-4 hover:bg-gray-100">
               <div className="flex ">
                 <div className="rounded-full h-10 w-10  flex justify-center items-center bg-blue-900">
                   <svg
@@ -58,7 +60,7 @@ const Setting = () => {
               </div>
             </div>
 
-            <div className="flex justify-between rounded-lg border  mt-2 items-center bg-white p-4 hover:bg-gray-100">
+            <div role="button" onClick={() => history.push(`markethistory`)} className="flex justify-between rounded-lg border  mt-2 items-center bg-white p-4 hover:bg-gray-100">
               <div className="flex ">
                 <div
                   className="rounded-full h-10 w-10  flex justify-center items-center"

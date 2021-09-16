@@ -23,9 +23,26 @@ import UnregisterBody from "../components/UnregisterBody";
 
 declare let Razorpay: any;
 
+const getLocalItems =()=>{
+  const likes = localStorage.getItem('like')
+  console.log(likes);
+
+  if(likes){
+    return JSON.parse(likes);
+  } else{
+    return[];
+  }
+}
+
 export default function Details(): ReactElement {
   const { id } = useParams<{ id: string }>();
   const user = useSelector((state: RootState) => state.user.entities?.user);
+  const [registerQuiz] = useMutation(REGISTER_QUIZ);
+  const [unRegisterQuiz] = useMutation(UNREGISTER_QUIZ);
+  const [addRPPayload] = useMutation(ADD_RP_PAYLOAD);
+  const [makeRefundRequest] = useMutation(MAKE_REFUND_REQUEST);
+  const dispatch = useDispatch();
+  const [like, setLike] = useState<boolean>(getLocalItems());
 
   const { data } = useQuery<QuizDetailsResponse>(GET_QUIZ_DETAILS, {
     variables: {
@@ -43,17 +60,23 @@ export default function Details(): ReactElement {
     cache: "no-cache",
   });
   useEffect(() => {
+    localStorage.setItem('like', JSON.stringify(like))
     refetchRegistration({
       quizId: id,
       userId: user?.id,
     });
-  }, [id, refetchRegistration, user?.id]);
-  const [registerQuiz] = useMutation(REGISTER_QUIZ);
-  const [unRegisterQuiz] = useMutation(UNREGISTER_QUIZ);
-  const [addRPPayload] = useMutation(ADD_RP_PAYLOAD);
-  const [makeRefundRequest] = useMutation(MAKE_REFUND_REQUEST);
-  const dispatch = useDispatch();
-  const [like, setLike] = useState<boolean>(false);
+  }, [id, refetchRegistration, user?.id,like]);
+  
+
+  const handleLike = () => {
+    if (!like) {
+      setLike(true);
+      
+    } else {
+      setLike(false);
+    }
+  };
+
   
   return (
     <BaseLayout title="Details" showBack>
@@ -77,7 +100,7 @@ export default function Details(): ReactElement {
           likeBtn={
             <svg
               role="button"
-              onClick={() => setLike((a) => !a)}
+              onClick={() => handleLike()}
               xmlns="http://www.w3.org/2000/svg"
               className="h-8 w-8 mr-1 text-red-600"
               fill={like ? "currentColor" : "none"}

@@ -1,9 +1,13 @@
+import exam2 from "../assets/images/exam2.png";
+
+
 const ListingQuiz = () => {
+
   return (
-    <>
-    <div className="common-btn mx-auto py-16 px-8">
+    <div className="h-full overflow-hidden">
+    <div className="common-btn mx-auto pt-8 pb-16 px-6">
       <div className="md:w-1/4 md:mx-auto">
-        <p className="text-2xl font-light pb-6">
+        <p className="text-2xl font-light ">
           Prepare for your <br /> first three{" "}
           <span className="font-medium text-white">Pariqsha Quiz</span> tests
           for <span className="font-medium">free</span>
@@ -73,8 +77,11 @@ const ListingQuiz = () => {
         </div>
       </div>
     </div>
+    <div className="bg-white -mt-10 rounded-3xl ">
+        <img src={exam2} className="rounded-3xl h-60 w-60 md:h-80 md:w-80 mx-auto"  alt="pariqsha exam2" />
+    </div>
 
-  </>
+  </div>
   );
 };
 

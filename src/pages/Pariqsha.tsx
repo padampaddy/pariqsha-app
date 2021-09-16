@@ -15,6 +15,8 @@ const Pariqsha = () => {
         <img src={logo} className="h-28 w-28 mx-auto" alt="pariqsha logo" />
     </div>
 
+
+
      </GeneralLayout>
     </div>
     )

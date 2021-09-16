@@ -13,11 +13,12 @@ const Alert = () => {
   // useEffect(() => {
   //   setTimeout(() => {
   //     setShow(false);
-  //   }, 5000);
-  // }, [5000]);
+  //   }, 3000);
+  // }, [3000]);
 
 
   return (
+    // show?
     <div
     className=" border text-white pl-2 pr-1 py-3  rounded absolute md:w-1/6 bottom-2 right-2 flex items-center" id="hideMe"
     style={{ backgroundColor: "rgb(82 177 85)" }}
@@ -56,7 +57,7 @@ const Alert = () => {
       </svg>
     </span>
   </div> 
-    
+    // :<div/>
   );
 };
 

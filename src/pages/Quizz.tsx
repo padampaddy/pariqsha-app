@@ -27,6 +27,17 @@ const today = new Date().toISOString();
 
 declare let Razorpay: any;
 
+const getLocalItems =()=>{
+  const likes = localStorage.getItem('like')
+  console.log(likes);
+
+  if(likes){
+    return JSON.parse(likes);
+  } else{
+    return[];
+  }
+}
+
 export default function Quizz() {
   const user = useSelector((state: RootState) => state.user.entities?.user);
   const { data, loading } = useQuery<QuizResponse>(GET_TODAY_QUIZZES, {
@@ -55,7 +66,7 @@ export default function Quizz() {
   const history = useHistory();
 
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const [like, setLike] = useState<boolean>(false);
+  const [like, setLike] = useState<boolean>(getLocalItems());
 
   const handleLike = () => {
     if (!like) {
@@ -67,10 +78,11 @@ export default function Quizz() {
   };
 
   useEffect(() => {
+    localStorage.setItem('like', JSON.stringify(like))
     refetch({
       user: user?.id,
     });
-  }, [refetch, user?.id]);
+  }, [refetch, user?.id,like]);
 
   const getCards = useCallback(() => {
     let quizData = data?.quiz_quiz;

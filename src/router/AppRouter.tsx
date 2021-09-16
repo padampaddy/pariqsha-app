@@ -26,7 +26,9 @@ import Coins from '../pages/Coins'
 // import Pariqsha from '../pages/Pariqsha'
 // import Notification from '../pages/notification'
 // import PariqshaQuiz from '../pages/PariqshaQuiz'
-import ListingQuiz from '../pages/ListingQuiz'
+// import ListingQuiz from '../pages/ListingQuiz'
+//  import ListeningAudio from '../pages/ListeningAudio'
+ import ListeningMcq from '../pages/ListeningMcq'
 import Setting from '../pages/Setting'
 import Market from '../pages/Market'
 import NewChat from '../pages/NewChat'
@@ -35,6 +37,10 @@ import Modal from '../components/Modal'
 import Msg from '../pages/Msg'
 import Cart from '../pages/Cart'
 import Alert from '../components/Alert'
+import MarketHistory from '../pages/MarketHistory'
+import QuizHistory from '../pages/QuizHistory'
+import QuizHeader from '../components/QuizHeader'
+import Note from '../components/QuizHeader'
 // import Home from '../pages/Home'
 
 function MySwitch() {
@@ -59,10 +65,23 @@ function MySwitch() {
       </PrivateRoute>  */}
       {/* <PrivateRoute path="/notification">
         <PariqshaQuiz/>
-      </PrivateRoute>   */}
+      </PrivateRoute>  
        <PrivateRoute path="/notification">
         <ListingQuiz/>
-      </PrivateRoute> 
+      </PrivateRoute>  */}
+        {/* <PrivateRoute path="/notification">
+        <ListeningAudio/>
+      </PrivateRoute> */}
+      <PrivateRoute path="/notification">
+        <ListeningMcq/>
+      </PrivateRoute>
+
+      <PrivateRoute path="/quizHeader">
+      <QuizHeader/>
+      </PrivateRoute>
+      <PrivateRoute path="/note">
+      <Note/>
+      </PrivateRoute>
 
       <PrivateRoute path="/setting">
         <Setting />
@@ -86,6 +105,14 @@ function MySwitch() {
 
       <PrivateRoute path="/details/:id">
         <Details />
+      </PrivateRoute>
+
+      <PrivateRoute path="/markethistory">
+        <MarketHistory />
+      </PrivateRoute>
+
+      <PrivateRoute path="/quizhistory">
+        <QuizHistory />
       </PrivateRoute>
 
       <PrivateRoute path="/cart">
