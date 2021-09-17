@@ -10,4 +10,4 @@ const MarketHistory = () => {
     )
 }
 
-export default MarketHistory
+export default MarketHistory 

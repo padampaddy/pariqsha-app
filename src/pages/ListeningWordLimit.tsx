@@ -1,20 +1,20 @@
-import QuizHeader from "../components/QuizHeader";
-import Note from "../components/Note";
 import BaseLayout from "../layouts/Base";
-import Question from "../components/Question";
+import Note from "../components/Note";
 import QuestionType from "../components/QuestionType";
+import Question from "../components/Question";
+import QuizHeader from "../components/QuizHeader";
 
-
-const ListeningAudio = () => {
+const ListeningWordLimit = () => {
   return (
-    <div>
+    <div className="">
       <BaseLayout showBack title="Listening">
         <div className="flex flex-col h-full md:w-1/2 md:mx-auto">
-          <QuizHeader title="Fill The Blank Section" />
+          <QuizHeader title="Word Limit" />
+
           <div className="flex-1 bg-white shadow-md mx-4 mb-4">
-            <div className=" p-6">
-              <QuestionType title="Part1 (Fill in the blanks)" />
-              <h3 className="">Question 1-10</h3>
+            <div className=" p-6 ">
+              <QuestionType title="Part 4 (Not more than two words)" />
+              <h3 className="">Question 31-40</h3>
               <Note />
               <audio controls autoPlay><source src="https://minio.app.pariqsha.com/pariqsha/audio/Audio1.mp3" /></audio>
               <Question />
@@ -24,6 +24,7 @@ const ListeningAudio = () => {
                 className="mt-4 py-2 w-full bg-transparent border border-b border-black border-l-0 border-r-0 border-t-0 focus:outline-none"
               />
             </div>
+         
           </div>
         </div>
       </BaseLayout>
@@ -31,4 +32,4 @@ const ListeningAudio = () => {
   );
 };
 
-export default ListeningAudio;
+export default ListeningWordLimit;

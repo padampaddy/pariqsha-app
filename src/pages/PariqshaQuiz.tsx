@@ -17,7 +17,7 @@ const PariqshaQuiz = () => {
       </div>
       <div className=" p-6  rounded-3xl -mt-10 md:w-1/2 md:mx-auto bg-white ">
         <ul>
-          <li className="list-style">
+          <li className="list-style animation"> 
             Listening
             <span>
               <img
@@ -27,25 +27,25 @@ const PariqshaQuiz = () => {
               />
             </span>
           </li>
-          <li className="list-style ">
+          <li className="list-style animation">
             Reading
             <span>
               <img src={reading} className="h-8 w-8 " alt="pariqsha reading" />
             </span>
           </li>
-          <li className="list-style ">
+          <li className="list-style animation">
             Writing
             <span>
               <img src={write} className="h-8 w-8 " alt="pariqsha write" />
             </span>
           </li>
-          <li className="list-style ">
+          <li className="list-style animation">
             Speaking
             <span>
               <img src={speak} className="h-8 w-8 " alt="pariqsha speak" />
             </span>
           </li>
-          <li className="list-style ">
+          <li className="list-style animation">
             4 Module Quiz
             <span>
               <img src={speak} className="h-8 w-8 " alt="pariqsha speak" />

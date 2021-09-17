@@ -14,7 +14,7 @@ const ListingQuiz = () => {
         </p>
         <div className="block">
           <div className="mt-2">
-            <div className="form-group mb-2">
+            <div className="form-group mb-2 animation">
               <input
                 type="checkbox"
                 className="form-checkbox h-6 w-6"
@@ -25,7 +25,7 @@ const ListingQuiz = () => {
                 Practice Test 1
               </label>
             </div>
-            <div className="form-group mb-2">
+            <div className="form-group mb-2 animation">
               <input
                 type="checkbox"
                 className="form-checkbox h-6 w-6"
@@ -36,7 +36,7 @@ const ListingQuiz = () => {
                 Practice Test 2
               </label>
             </div>
-            <div className="form-group mb-2">
+            <div className="form-group mb-2 animation">
               <input
                 type="checkbox"
                 className="form-checkbox h-6 w-6"
@@ -47,7 +47,7 @@ const ListingQuiz = () => {
                 Practice Test 3
               </label>
             </div>
-            <div className="form-group mb-2">
+            <div className="form-group mb-2 animation">
               <input
                 type="checkbox"
                 className="form-checkbox h-6 w-6"
@@ -60,7 +60,7 @@ const ListingQuiz = () => {
                 </span>
               </label>
             </div>
-            <div className="form-group mb-2">
+            <div className="form-group mb-2 animation">
               <input
                 type="checkbox"
                 className="form-checkbox h-6 w-6"

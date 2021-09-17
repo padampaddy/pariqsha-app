@@ -5,37 +5,37 @@ import QuestionType from "../components/QuestionType";
 import Question from "../components/Question";
 import QuizHeader from "../components/QuizHeader";
 
-const ListeningMcq = () => {
+const ListeningTrueFalse = () => {
   return (
     <div className="">
       <BaseLayout showBack title="Listening">
         <div className="flex flex-col h-full md:w-1/2 md:mx-auto">
-          <QuizHeader title="Multiple Choice Question" />
+          <QuizHeader title="True/False" />
+
           <div className="flex-1 bg-white shadow-md mx-4 mb-4 overflow-y-auto">
             <div className=" p-6 ">
-              <QuestionType title="Part 2 (Choose the correct option)" />
-              <h3 className="">Question 11-20</h3>
+              <QuestionType title="Part 3 (True False or Not given)" />
+              <h3 className="">Question 21-30</h3>
               <Note />
               <audio controls autoPlay><source src="https://minio.app.pariqsha.com/pariqsha/audio/Audio1.mp3" /></audio>
               <Question />
               <form className="mt-10 wrapper-mcq-form">
                 <p>
                   <input type="radio" id="test1" name="radio-group" />
-                  <label htmlFor="test1">Apple</label>
+                  <label htmlFor="test1">True</label>
                 </p>
                 <p>
                   <input type="radio" id="test2" name="radio-group" />
-                  <label htmlFor="test2">Peach</label>
+                  <label htmlFor="test2">False</label>
                 </p>
                 <p>
                   <input type="radio" id="test3" name="radio-group" />
-                  <label htmlFor="test3">Orange</label>
+                  <label htmlFor="test3">Not given</label>
                 </p>
               </form>
               <Tip />
-      
             </div>
-  
+          
           </div>
         </div>
       </BaseLayout>
@@ -43,4 +43,4 @@ const ListeningMcq = () => {
   );
 };
 
-export default ListeningMcq;
+export default ListeningTrueFalse;
