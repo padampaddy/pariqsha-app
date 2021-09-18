@@ -23,17 +23,17 @@ import Login from "../pages/Login";
 import SignupScreen from "../pages/SignupScreen";
 import Mychats from "../pages/MyChats";
 import Coins from "../pages/Coins";
-// import Pariqsha from '../pages/Pariqsha'
+// import Pariqsha from "../pages/Pariqsha";
 // import Notification from '../pages/notification'
-// import PariqshaQuiz from '../pages/PariqshaQuiz'
+import PariqshaQuiz from "../pages/PariqshaQuiz";
 // import ListingQuiz from "../pages/ListingQuiz";
 //  import ListeningAudio from '../pages/ListeningAudio'
 //  import ListeningMcq from '../pages/ListeningMcq'
 // import ListeningTrueFalse from "../pages/ListeningTrueFalse";
 // import Writing from "../pages/Writing";
-//  import QuizStart from "../pages/QuizStart"; 
+//  import QuizStart from "../pages/QuizStart";
 // import Reading from "../pages/Reading";
-// import ListeningWordLimit from "../pages/ListeningWordLimit";
+import ListeningWordLimit from "../pages/ListeningWordLimit";
 import Setting from "../pages/Setting";
 import Market from "../pages/Market";
 import NewChat from "../pages/NewChat";
@@ -60,13 +60,13 @@ function MySwitch() {
       <PrivateRoute path="/coins">
         <Coins />
       </PrivateRoute>
-
-      {/* <PrivateRoute path="/notification">
+      {/* 
+      <PrivateRoute path="/notification">
         <Notification />
       </PrivateRoute> */}
       {/* <PrivateRoute path="/notification">
-        <Pariqsha/>
-      </PrivateRoute>  */}
+        <Pariqsha />
+      </PrivateRoute> */}
       {/* <PrivateRoute path="/notification">
         <ListeningAudio/>
       </PrivateRoute> */}
@@ -79,46 +79,43 @@ function MySwitch() {
       {/* <PrivateRoute path="/notification">
         <Writing />
       </PrivateRoute> */}
-       {/* <PrivateRoute path="/notification">
+      {/* <PrivateRoute path="/notification">
         <QuizStart />
       </PrivateRoute> */}
       {/* <PrivateRoute path="/notification">
         <ListingQuiz />
-      </PrivateRoute> */} 
+      </PrivateRoute> */}
       {/* <PrivateRoute path="/notification">
         <Reading /> 
-      </PrivateRoute> */} 
-      {/* <PrivateRoute path="/notification">
-        <ListeningWordLimit />
-      </PrivateRoute> */}   
-      <PrivateRoute path="/quizHeader"> 
-        <QuizHeader />
-      </PrivateRoute> 
-      {/* <PrivateRoute path="/notification">
-        <PariqshaQuiz/>
       </PrivateRoute> */}
+
+      <PrivateRoute path="/quizHeader">
+        <QuizHeader />
+      </PrivateRoute>
+      <PrivateRoute path="/notification">
+        <PariqshaQuiz />
+      </PrivateRoute>
       <PrivateRoute path="/QuestionType">
         <QuestionType />
       </PrivateRoute>
       <PrivateRoute path="/note">
         <Note />
-      </PrivateRoute> 
-
+        <PrivateRoute path="/notification">
+          <ListeningWordLimit />
+        </PrivateRoute>
+      </PrivateRoute>
       <PrivateRoute path="/setting">
         <Setting />
       </PrivateRoute>
-
       <PrivateRoute path="/market">
         <Market />
       </PrivateRoute>
-
       <PrivateRoute exact path="/chats">
         <Mychats />
       </PrivateRoute>
-
       <PrivateRoute exact path="/chats/new">
         <NewChat />
-      </PrivateRoute> 
+      </PrivateRoute>
 
       <PrivateRoute path="/chats/:id">
         <Msg />
