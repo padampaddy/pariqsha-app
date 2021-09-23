@@ -242,7 +242,7 @@ export const START_NEW_CHAT = gql`
 
 export const GET_MARKET_PRODUCT = gql`
   query get_market_product($status: String!) {
-    market_product(where: {status: {_eq: $status}}) {
+    market_product(where: { status: { _eq: $status } }) {
       images
       name
       price_coins
@@ -260,14 +260,153 @@ export const SEND_MARKET_ORDER = gql`
     $details: jsonb!
   ) {
     insert_market_orders_one(
-      object: {
-        cost_coins: $costCoin
-        user_id: $userId
-        details: $details
-      }
+      object: { cost_coins: $costCoin, user_id: $userId, details: $details }
     ) {
       id
     }
   }
 `;
 
+export const EXAM_TYPE = gql`
+  query exam_type($id: uuid!) {
+    exams_exam_type(where: { id: { _eq: $id } }) {
+      id
+      name
+      description
+    }
+  }
+`;
+
+export const GET_TODAY_EXAM = gql`
+  query get_today_exam($date: timestamptz!) {
+    exams_exam(where: { end_at: { _gte: $date } }) {
+      cover_image_url
+      created_at
+      description
+      duration_in_minutes
+      end_at
+      id
+      image_url
+      price
+      price_in_coins
+      short_description
+      start_at
+      title
+    }
+  }
+`;
+
+export const GET_EXAM_DETAILS = gql`
+  query get_exam_by_pk($id: uuid!) {
+    exams_exam_by_pk(id: $id) {
+      cover_image_url
+      created_at
+      description
+      duration_in_minutes
+      end_at
+      id
+      image_url
+      price
+      price_in_coins
+      short_description
+      start_at
+      title
+      exam_type_id
+    }
+  }
+`;
+
+export const GET_MY_EXAMS = gql`
+  query get_my_exams($user: uuid!) {
+    exams_registration(where: { user_id: { _eq: $user } }) {
+      exam {
+        cover_image_url
+        created_at
+        description
+        duration_in_minutes
+        end_at
+        id
+        image_url
+        price
+        price_in_coins
+        short_description
+        start_at
+        title
+        exam_type_id
+      }
+    }
+  }
+`;
+
+export const GET_REGISTRATION_EXAM = gql`
+  query get_registration_exam($examId: uuid!, $userId: uuid!) {
+    exams_registration(
+      where: { exam_id: { _eq: $examId }, user_id: { _eq: $userId } }
+    ) {
+      id
+    }
+  }
+`;
+
+export const REGISTER_EXAM = gql`
+  mutation registerExam($examId: uuid!, $userId: uuid!) {
+    insert_exams_registration_one(
+      object: { exam_id: $examId, user_id: $userId }
+    ) {
+      exam_id
+      user_id
+    }
+  }
+`;
+
+export const UNREGISTER_EXAM = gql`
+  mutation unregisterExam($userId: uuid!, $examId: uuid!) {
+    delete_exams_registration(
+      where: { user_id: { _eq: $userId }, exam_id: { _eq: $examId } }
+    ) {
+      affected_rows
+      returning {
+        id
+      }
+    }
+  }
+`;
+
+export const GET_EXAM_QUES = gql`
+  query get_exam_ques($examId: String!) {
+    exams_exam_question(
+      where: { exam_id: { _eq: $examId } }
+      order_by: { order: asc }
+    ) {
+      id
+      exam_id
+      order
+      question {
+        id
+        correct_answer
+        context_id
+        question
+        created_at
+        options
+        image_link
+        solution
+        part {
+          name
+          id
+        }
+        type_of_question {
+          id
+          name
+        }
+        context {
+          details
+          image_link
+          link
+          context_type {
+            name
+          }
+        }
+      }
+    }
+  }
+`;

@@ -18,36 +18,39 @@ import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { IncomingOptions, Provider } from "use-http";
 import { FUNCTIONS_URL_TEST } from "../Constants";
-import Details from "../pages/Details";
-import Login from "../pages/Login";
-import SignupScreen from "../pages/SignupScreen";
-import Mychats from "../pages/MyChats";
+import Details from "../components/quiz/Details";
+
+import SignupScreen from "../pages/Login/SignupScreen";
+import Mychats from "../pages/Chat/MyChats";
 import Coins from "../pages/Coins";
-// import Pariqsha from "../pages/Pariqsha";
-// import Notification from '../pages/notification'
-import PariqshaQuiz from "../pages/PariqshaQuiz";
-// import ListingQuiz from "../pages/ListingQuiz";
-//  import ListeningAudio from '../pages/ListeningAudio'
-//  import ListeningMcq from '../pages/ListeningMcq'
-// import ListeningTrueFalse from "../pages/ListeningTrueFalse";
-// import Writing from "../pages/Writing";
-//  import QuizStart from "../pages/QuizStart";
-// import Reading from "../pages/Reading";
-import ListeningWordLimit from "../pages/ListeningWordLimit";
-import Setting from "../pages/Setting";
-import Market from "../pages/Market";
-import NewChat from "../pages/NewChat";
+import ExamStart from "../pages/ExamStart";
+import ListeningWordLimit from "../pages/QuizType/listening/ListeningWordLimit";
+import Setting from "../pages/setting/Setting";
+import Market from "../pages/market/Market";
+import NewChat from "../pages/Chat/NewChat";
 import Quizz from "../pages/Quizz";
-import Modal from "../components/Modal";
-import Msg from "../pages/Msg";
-import Cart from "../pages/Cart";
-import Alert from "../components/Alert";
-import MarketHistory from "../pages/MarketHistory";
-import QuizHistory from "../pages/QuizHistory";
+import Modal from "../components/Modal/Modal";
+import Msg from "../pages/Chat/Msg";
+import Cart from "../pages/market/Cart";
+import Alert from "../components/Modal/Alert";
+import MarketHistory from "../pages/setting/MarketHistory";
+import QuizHistory from "../pages/setting/QuizHistory";
 import QuizHeader from "../components/QuizHeader";
 import QuestionType from "../components/QuestionType";
 import Note from "../components/QuizHeader";
+import ExamCardDetails from "../components/exam/ExamCardDetails";
+import Login from "../pages/Login/Login";
+import Notification from "../pages/Notifications";
+import Reading from "../pages/QuizType/reading/Reading";
+import Writing from "../pages/QuizType/writing/Writing";
 // import Home from '../pages/Home'
+// import ListingQuiz from "../pages/QuizType/listening/ListingQuiz";
+//  import ListeningAudio from '../pages/QuizType/listening/ListeningAudio'
+//  import ListeningMcq from '../pages/QuizType/listening/ListeningMcq'
+// import ListeningTrueFalse from "../pages/QuizType/listening/ListeningTrueFalse";
+// import Writing from "../pages/writing/Writing";
+//  import QuizStart from "../pages/QuizStart";
+// import LandingPage from "../pages/LandingPage";
 
 function MySwitch() {
   const location = useLocation();
@@ -60,59 +63,19 @@ function MySwitch() {
       <PrivateRoute path="/coins">
         <Coins />
       </PrivateRoute>
-      {/* 
-      <PrivateRoute path="/notification">
-        <Notification />
-      </PrivateRoute> */}
-      {/* <PrivateRoute path="/notification">
-        <Pariqsha />
-      </PrivateRoute> */}
-      {/* <PrivateRoute path="/notification">
-        <ListeningAudio/>
-      </PrivateRoute> */}
-      {/* <PrivateRoute path="/notification">
-        <ListeningMcq/>
-      </PrivateRoute> */}
-      {/* <PrivateRoute path="/notification">
-        <ListeningTrueFalse />
-      </PrivateRoute> */}
-      {/* <PrivateRoute path="/notification">
-        <Writing />
-      </PrivateRoute> */}
-      {/* <PrivateRoute path="/notification">
-        <QuizStart />
-      </PrivateRoute> */}
-      {/* <PrivateRoute path="/notification">
-        <ListingQuiz />
-      </PrivateRoute> */}
-      {/* <PrivateRoute path="/notification">
-        <Reading /> 
-      </PrivateRoute> */}
 
-      <PrivateRoute path="/quizHeader">
-        <QuizHeader />
-      </PrivateRoute>
-      <PrivateRoute path="/notification">
-        <PariqshaQuiz />
-      </PrivateRoute>
-      <PrivateRoute path="/QuestionType">
-        <QuestionType />
-      </PrivateRoute>
-      <PrivateRoute path="/note">
-        <Note />
-        <PrivateRoute path="/notification">
-          <ListeningWordLimit />
-        </PrivateRoute>
-      </PrivateRoute>
       <PrivateRoute path="/setting">
         <Setting />
       </PrivateRoute>
-      <PrivateRoute path="/market">
-        <Market />
+
+      <PrivateRoute path="/notification">
+        <Notification />
       </PrivateRoute>
+
       <PrivateRoute exact path="/chats">
         <Mychats />
       </PrivateRoute>
+
       <PrivateRoute exact path="/chats/new">
         <NewChat />
       </PrivateRoute>
@@ -121,8 +84,12 @@ function MySwitch() {
         <Msg />
       </PrivateRoute>
 
-      <PrivateRoute path="/details/:id">
-        <Details />
+      <PrivateRoute path="/cart">
+        <Cart />
+      </PrivateRoute>
+
+      <PrivateRoute path="/market">
+        <Market />
       </PrivateRoute>
 
       <PrivateRoute path="/markethistory">
@@ -133,10 +100,62 @@ function MySwitch() {
         <QuizHistory />
       </PrivateRoute>
 
-      <PrivateRoute path="/cart">
-        <Cart />
+      <PrivateRoute path="/details/:id">
+        <Details />
       </PrivateRoute>
 
+      <PrivateRoute path="/examdetails/:id">
+        <ExamCardDetails />
+      </PrivateRoute>
+
+      <PrivateRoute path="/examstart/:id">
+        <ExamStart />
+      </PrivateRoute>
+
+      <PrivateRoute path="/reading/:id">
+        <Reading /> 
+      </PrivateRoute>
+
+      <PrivateRoute path="/writing/:id">
+        <Writing />
+      </PrivateRoute>
+
+      {/* <PrivateRoute path="/notification">
+        <LandingPage />
+      </PrivateRoute> */}
+      {/* <PrivateRoute path="/notification">
+        <ListeningAudio/>
+      </PrivateRoute> */}
+      {/* <PrivateRoute path="/notification">
+        <ListeningMcq/>
+      </PrivateRoute> */}
+      {/* <PrivateRoute path="/notification">
+        <ListeningTrueFalse />
+      </PrivateRoute> */}
+      
+      {/* <PrivateRoute path="/notification">
+        <QuizStart />
+      </PrivateRoute> */}
+      {/* <PrivateRoute path="/notification">
+        <ListingQuiz />
+      </PrivateRoute> */}
+     
+
+      <PrivateRoute path="/quizHeader">
+        <QuizHeader />
+      </PrivateRoute>
+
+      <PrivateRoute path="/QuestionType">
+        <QuestionType />
+      </PrivateRoute>
+
+      <PrivateRoute path="/note">
+        <Note />
+        <PrivateRoute path="/notification">
+          <ListeningWordLimit />
+        </PrivateRoute>
+      </PrivateRoute>
+      
       <PublicRoute path="/signin">
         <Login />
       </PublicRoute>

@@ -38,9 +38,9 @@ const Drawer = ({ onClose }: Props) => {
   });
   const [addProfile] = useMutation(USER_PROFILE_ADD);
 
-  const getUserData = useCallback(()=>{
+  const getUserData = useCallback(() => {
     getData({ variables: { id: user?.id } });
-  },[]);
+  }, []);
 
   useEffect(() => {
     getUserData();
@@ -72,11 +72,14 @@ const Drawer = ({ onClose }: Props) => {
           </button>
         </div>
         <div className="pr-4 md:pl-4">
-            <img src={logo} className="h-8 w-8 float-right md:float-left" alt="pariqsha logo" />
-          </div>
+          <img
+            src={logo}
+            className="h-8 w-8 float-right md:float-left"
+            alt="pariqsha logo"
+          />
+        </div>
 
         <div className="mb-16 mx-auto text-center h-1/5">
-   
           <button
             type="button"
             onClick={() => {
@@ -114,10 +117,14 @@ const Drawer = ({ onClose }: Props) => {
             </h1>
           </button>
           <h4 className="text-gray-500 text-sm md:mt-2 flex justify-center items-center">
-           <span><img src={coin} className="h-7 w-7 mr-2" alt="coin"/></span> 23456 </h4>  
+            <span>
+              <img src={coin} className="h-7 w-7 mr-2" alt="coin" />
+            </span>{" "}
+            23456{" "}
+          </h4>
         </div>
 
-        <ul className="flex flex-col  justify-center text-center mx-4 md:mx-0">  
+        <ul className="flex flex-col  justify-center text-center mx-4 md:mx-0">
           <li className="nav-item">
             <NavLink
               to="/home"

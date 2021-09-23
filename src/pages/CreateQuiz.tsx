@@ -1,5 +1,5 @@
 import BaseLayout from "../layouts/Base";
-import Note from "../components/Note";
+import Note from "./QuizType/components/Note";
 import QuestionType from "../components/QuestionType";
 import Question from "../components/Question";
 import QuizHeader from "../components/QuizHeader";

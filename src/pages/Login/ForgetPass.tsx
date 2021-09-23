@@ -1,13 +1,13 @@
-import { ReactElement } from "react";
+import { useState } from "react";
+import { forgotPassword } from "../../api/user-api";
 import { useDispatch } from "react-redux";
-import modalSlice from "../redux/slices/modal-slice";
+import modalSlice from "../../redux/slices/modal-slice";
 
-interface Props {
-  onConfirm: () => void;
-}
 
-export default function UnregisterBody({ onConfirm }: Props): ReactElement {
+function ForgotPass() {
+  const [email, setEmail] = useState("");
   const dispatch = useDispatch();
+
   return (
     <>
       <div className="sm:flex sm:items-start md:flex md:items-center">
@@ -33,7 +33,7 @@ export default function UnregisterBody({ onConfirm }: Props): ReactElement {
             className="text-lg leading-6 font-medium text-gray-900"
             id="modal-title"
           >
-            Are you sure?
+            Forgot Password
           </h3>
         </div>
         <div className="flex items-center justify-start text-4xl py-2 px-4">
@@ -56,22 +56,42 @@ export default function UnregisterBody({ onConfirm }: Props): ReactElement {
           </button>
         </div>
       </div>
-      <div className="my-2">Are you sure you want to unregister?</div>
-      <div className="text-gray-400 font-semibold text-sm">
-        If you have paid for the quiz, your refund request will be raised
-        automatically. Please contact us using the contact us form for details.
-      </div>
-      <div className="flex mt-4 items-center justify-center ">
-        <button className=" button-link mr-3" onClick={() => onConfirm()}>
-          Yes
-        </button>
-        <button
-          onClick={() => dispatch(modalSlice.actions.hideModal())}
-          className="button common-btn py-2.5 px-9"
-        >
-          No
-        </button>
+      <div className="md:py-10 m-auto text-center">
+        <div className="md:mb-8">
+          <p className="text-black md:font-bold font-medium md:text-2xl text-md leading-8 mt-4">
+            Enter Your Email
+          </p>
+        </div>
+
+        <form className="bg-white group-hover:rounded  md:pt-6 pt-4 md:pb-8 mb-4 flex flex-col">
+          <div className="mb-4">
+            <label className="signup-screen-label" htmlFor="email">
+              Email
+            </label>
+            <input
+              className="signup-screen-input"
+              onChange={(e) => setEmail(e.target.value)}
+              id="email"
+              type="email"
+              inputMode="email"
+              placeholder="john@doe.com"
+            />
+          </div>
+
+          <div className="flex items-center justify-between">
+            <button
+              className="hover:bg-white-100 text-white w-full focus:outline-none font-medium md:py-4 md:px-4 py-2 md:mt-8 mt-4 rounded-full common-btn"
+              onClick={() => {
+                forgotPassword(email);
+              }}
+              type="button"
+            >
+              Continue
+            </button>
+          </div>
+        </form>
       </div>
     </>
   );
 }
+export default ForgotPass;

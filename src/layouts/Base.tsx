@@ -121,9 +121,9 @@ function BaseLayout({
           </div>
         </div>
         <div
-          className={`w-full ${
+          className={`w-full quiz-list ${
             showBack ? "" : "lg:pl-80"
-          } flex-grow bg-gradient-to-tl  pb-0 from-red-100 to-blue-100 overflow-y-auto
+          } flex-grow bg-gradient-to-tl  pb-0 from-red-100 to-blue-100 overflow-y-auto 
         `}
         >
           {children}

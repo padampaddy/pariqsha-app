@@ -208,4 +208,7 @@ a.collection-list.common-btn, .quiz-button:hover, .market-btn:hover {
   animation-iteration-count: 1;
   animation-timing-function: ease-in-out;
 }
+.quiz-list {
+  overflow-y: auto!important;
+}
 

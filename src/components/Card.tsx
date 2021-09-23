@@ -2,7 +2,7 @@ import { ReactElement } from "react";
 import PriceTag from "./PriceTag";
 import logo from "../assets/images/pariqsha.png";
 import { motion } from "framer-motion";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 
 interface Props {
   id?: string;
@@ -21,7 +21,7 @@ interface Props {
 }
 
 export default function Card({
-  id,
+  // id,
   title,
   decorate = false,
   subTitle,
@@ -35,7 +35,7 @@ export default function Card({
   duration,
   likeBtn,
 }: Props): ReactElement {
-  const history = useHistory();
+  // const history = useHistory();
   
   return (
     <motion.div
@@ -115,14 +115,14 @@ export default function Card({
             <div className="flex items-center justify-between">
               <div className="flex items-center">
               <div
-                role="button"
-                onClick={() => history.push(`details/${id}`)}
+                // role="button"
+                // onClick={() => history.push(`details/${id}`)}
                 id="name"
                 className="text-xl font-semibold"
               >
                 {title}
               </div>
-              <div className="text-sm ml-3 text-gray-600 mt-1">({duration})</div>
+              <div className="text-sm ml-3 text-gray-600 mt-1">({duration} mins)</div>
               </div>
               <div>
                 {likeBtn}

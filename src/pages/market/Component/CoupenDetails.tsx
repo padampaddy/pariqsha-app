@@ -1,39 +1,21 @@
-import { ReactElement } from "react";
 import { useDispatch } from "react-redux";
-import modalSlice from "../redux/slices/modal-slice";
+import modalSlice from "../../../redux/slices/modal-slice";
 
-interface Props {
-  onConfirm: () => void;
-}
-
-export default function UnregisterBody({ onConfirm }: Props): ReactElement {
+const CoupenDetails = ({
+    desc,
+  }: {
+    desc?: string;
+  }) => {
   const dispatch = useDispatch();
   return (
     <>
       <div className="sm:flex sm:items-start md:flex md:items-center">
-        <div className="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
-          <svg
-            className="h-6 w-6 text-red-600"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            aria-hidden="true"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-            />
-          </svg>
-        </div>
-        <div className="mt-3 text-center flex-grow sm:mt-0 sm:ml-4 sm:text-left">
+        <div className=" text-center flex-grow sm:mt-0 ml-4 md:ml-0 sm:text-left">
           <h3
             className="text-lg leading-6 font-medium text-gray-900"
             id="modal-title"
           >
-            Are you sure?
+            Details
           </h3>
         </div>
         <div className="flex items-center justify-start text-4xl py-2 px-4">
@@ -56,22 +38,21 @@ export default function UnregisterBody({ onConfirm }: Props): ReactElement {
           </button>
         </div>
       </div>
-      <div className="my-2">Are you sure you want to unregister?</div>
-      <div className="text-gray-400 font-semibold text-sm">
-        If you have paid for the quiz, your refund request will be raised
-        automatically. Please contact us using the contact us form for details.
+      
+      <div className="text-gray-400 my-1 md:my-4 font-semibold text-sm">
+        {desc}
       </div>
       <div className="flex mt-4 items-center justify-center ">
-        <button className=" button-link mr-3" onClick={() => onConfirm()}>
-          Yes
-        </button>
+        
         <button
           onClick={() => dispatch(modalSlice.actions.hideModal())}
           className="button common-btn py-2.5 px-9"
         >
-          No
+          OK
         </button>
       </div>
     </>
   );
-}
+};
+
+export default CoupenDetails;
