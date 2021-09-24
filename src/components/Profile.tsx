@@ -48,8 +48,8 @@ function Profile({
       },
     })
       .then(() => {
-        dispatch(modalSlice.actions.hideModal());
         onUpdate();
+        dispatch(modalSlice.actions.hideModal());
       })
       .catch((e) => console.error(e));
   };

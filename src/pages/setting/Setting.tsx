@@ -20,14 +20,14 @@ const Setting = () => {
               Transactions History
             </div>
 
-            <div role="button" onClick={() => history.push(`quizhistory`)} className="flex justify-between rounded-lg border mt-2 items-center bg-white p-4 hover:bg-gray-100">
-              <div className="flex ">
+            <div role="button" onClick={() => history.push(`quizhistory`)} className="flex justify-between rounded-lg border mt-2 items-center bg-white p-4 hover:bg-gray-100 animation">
+              <div className="flex animation ">
                 <div className="rounded-full h-10 w-10  flex justify-center items-center bg-blue-900">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-6 w-6 text-white"
                     viewBox="0 0 20 20"
-                    fill="currentColor"
+                    fill="currentColor" 
                   >
                     <path
                       fillRule="evenodd"
@@ -36,7 +36,7 @@ const Setting = () => {
                     />
                   </svg>
                 </div>
-                <div className="flex flex-col ml-3 text-sm font-semibold ">
+                <div className="flex flex-col ml-3 text-sm font-semibold animation ">
                   Quiz
                   <span className="text-xs text-gray-400 ">
                     Quizzes Transactions History
@@ -60,7 +60,7 @@ const Setting = () => {
               </div>
             </div>
 
-            <div role="button" onClick={() => history.push(`markethistory`)} className="flex justify-between rounded-lg border  mt-2 items-center bg-white p-4 hover:bg-gray-100">
+            <div role="button" onClick={() => history.push(`markethistory`)} className="flex justify-between rounded-lg border  mt-2 items-center bg-white p-4 hover:bg-gray-100 animation">
               <div className="flex ">
                 <div
                   className="rounded-full h-10 w-10  flex justify-center items-center"
@@ -122,9 +122,9 @@ const Setting = () => {
                 })
               );
             }}
-            className="flex justify-between rounded-lg border  mt-2  items-center bg-white p-4 hover:bg-gray-100"
+            className="animation flex justify-between rounded-lg border  mt-2  items-center bg-white p-4 hover:bg-gray-100"
           >
-            <div className="flex">
+            <div className="flex animation">
               <div className="rounded-full h-10 w-10 bg-purple-400 flex justify-center items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -142,7 +142,7 @@ const Setting = () => {
                 <span className="text-xs text-gray-400 ">{user?.email}</span>
               </div>
             </div>
-            <div className="flex  flex-col items-center">
+            <div className="flex  flex-col items-center animation">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -168,7 +168,7 @@ const Setting = () => {
                 })
               );
             }}
-            className="flex justify-between rounded-lg border  mt-2 items-center bg-white p-4 hover:bg-gray-100"
+            className="flex animation justify-between rounded-lg border  mt-2 items-center bg-white p-4 hover:bg-gray-100"
           >
             <div className="flex ">
               <div className="rounded-full h-10 w-10 bg-yellow-400  flex justify-center items-center">
@@ -186,7 +186,7 @@ const Setting = () => {
                   />
                 </svg>
               </div>
-              <div className="flex flex-col  ml-3 text-sm font-semibold ">
+              <div className="flex flex-col  ml-3 text-sm font-semibold animation ">
                 Change Password
                 <span className="text-xs text-gray-400 ">
                   Last changed 2 weeks ago

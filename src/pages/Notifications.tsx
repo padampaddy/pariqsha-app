@@ -30,7 +30,7 @@ const notif = [
 const Notification = () => {
   return (
     <BaseLayout title="Notifications">
-      <div className=" px-4 h-full flex-col flex pt-1">
+      <div className=" px-4 h-full flex-col flex pt-1 animation"> 
         <div className="mt-6 h-full">
           <ul className="">
             {notif.flatMap((notifs, index) => (

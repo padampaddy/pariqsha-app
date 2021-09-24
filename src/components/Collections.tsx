@@ -33,7 +33,7 @@ const Collections = () => {
             primaryColor: '#3985db',
             textColor: '#000',
             width: 900,
-            zIndex: 1000,
+            zIndex: 0,
           }
 
       }} />

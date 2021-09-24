@@ -75,10 +75,13 @@ color: white;
 .list-style{
   box-shadow: 1px 1px 10px 1px #efdcdc;
 }
-.common-btn, .nav-item:hover, .quiz-button:hover, .market-btn:hover{
+.common-btn,  .quiz-button:hover, .market-btn:hover{
   background: linear-gradient(185deg, rgba(31,160,238,1) 0%, rgba(31,160,238,1) 35%, rgba(57,133,219,1) 100%);
   color: #fff;
 }
+.nav-item:hover, .nav-link:hover{
+  color: #229ceb;
+}   
 
 .selected span, .nav-link:hover span {
   background: #000;
