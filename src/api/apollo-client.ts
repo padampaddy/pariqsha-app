@@ -25,7 +25,7 @@ export const createApolloClient = () => {
 
   const errorLink = onError(({ graphQLErrors, operation, forward }) => {
     if (graphQLErrors) {
-      for (let err of graphQLErrors) {
+      for (const err of graphQLErrors) {
         console.log(err);
         switch (err.extensions?.code) {
           case "invalid-jwt":

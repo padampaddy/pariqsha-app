@@ -40,3 +40,9 @@ export interface User {
   username: string;
   verified: boolean;
 }
+
+export interface IUserProfile{
+    name: string;
+    id: string;
+    image_url: string;
+}
