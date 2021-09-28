@@ -78,10 +78,11 @@ export interface IContextType {
 }
 
 export interface IContext {
+  id:String;
   details: string;
   image_link: string;
   link: string;
-  context_type: IContextType[];
+  context_type: IContextType;
 }
 
 export interface ITypeOfQues {
@@ -98,15 +99,13 @@ export interface IQues {
   image_link: string;
   solution: string;
   context_id: string;
-  part: ITypeOfQues[];
-  type_of_question: ITypeOfQues[];
-  context: IContext[];
+  part: ITypeOfQues;
+  type_of_question: ITypeOfQues;
+  context: IContext;
 }
 
 export interface IExamQues {
-  exams_exam_question: {
     id: string;
     exam_id: string;
-    question: IQues[];
-  };
+    question: IQues;
 }

@@ -41,8 +41,6 @@ import Note from "../components/QuizHeader";
 import ExamCardDetails from "../components/exam/ExamCardDetails";
 import Login from "../pages/Login/Login";
 import Notification from "../pages/Notifications";
-import Reading from "../pages/QuizType/reading/Reading";
-import Writing from "../pages/QuizType/writing/Writing";
 // import Home from '../pages/Home'
 // import ListingQuiz from "../pages/QuizType/listening/ListingQuiz";
 //  import ListeningAudio from '../pages/QuizType/listening/ListeningAudio'
@@ -110,14 +108,6 @@ function MySwitch() {
 
       <PrivateRoute path="/examstart/:id">
         <ExamStart />
-      </PrivateRoute>
-
-      <PrivateRoute path="/reading/:id">
-        <Reading /> 
-      </PrivateRoute>
-
-      <PrivateRoute path="/writing/:id">
-        <Writing />
       </PrivateRoute>
 
       {/* <PrivateRoute path="/notification">

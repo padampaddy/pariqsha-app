@@ -373,7 +373,7 @@ export const UNREGISTER_EXAM = gql`
 `;
 
 export const GET_EXAM_QUES = gql`
-  query get_exam_ques($examId: String!) {
+  query get_exam_ques($examId: uuid!) {
     exams_exam_question(
       where: { exam_id: { _eq: $examId } }
       order_by: { order: asc }
@@ -399,6 +399,7 @@ export const GET_EXAM_QUES = gql`
           name
         }
         context {
+          id
           details
           image_link
           link

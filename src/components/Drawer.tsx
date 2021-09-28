@@ -133,7 +133,7 @@ const Drawer = ({ onClose }: Props) => {
                 dispatch(modalSlice.actions.hideModal());
               }}
               className="nav-link"
-              activeClassName="selected common-btn"
+              activeClassName="selected common-btn-nav"
             >
               Quizzes
             </NavLink>
@@ -146,7 +146,7 @@ const Drawer = ({ onClose }: Props) => {
                 onClose();
               }}
               className="nav-link"
-              activeClassName="selected common-btn"
+              activeClassName="selected common-btn-nav" 
             >
               My Chats
             </NavLink>
@@ -159,7 +159,7 @@ const Drawer = ({ onClose }: Props) => {
                 onClose();
               }}
               className="nav-link"
-              activeClassName="selected common-btn"
+              activeClassName="selected common-btn-nav"
             >
               Market
             </NavLink>
@@ -172,7 +172,7 @@ const Drawer = ({ onClose }: Props) => {
                 onClose();
               }}
               className="nav-link pl-4 flex justify-center items-center"
-              activeClassName="selected common-btn"
+              activeClassName="selected common-btn-nav"
             >
               Notifications
               <span className="rounded-full h-5 w-5 md:h-6 md:w-6 flex items-center justify-center ml-2 mt-1 text-white font-medium common-btn text-xs">
@@ -188,7 +188,7 @@ const Drawer = ({ onClose }: Props) => {
                 onClose();
               }}
               className="nav-link"
-              activeClassName="selected common-btn"
+              activeClassName="selected common-btn-nav"
             >
               Earn Coins
             </NavLink>
