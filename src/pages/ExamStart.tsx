@@ -1,5 +1,6 @@
 import listening from "../assets/images/headphone.png";
 import read from "../assets/images/books.png";
+import exam2 from "../assets/images/exam2.png";
 import write from "../assets/images/write.png";
 // import speak from "../assets/images/chats.png";
 import { useParams } from "react-router-dom";
@@ -13,6 +14,7 @@ import ListeningAudio from "./QuizType/listening/ListeningAudio";
 import Reading from "./QuizType/reading/Reading";
 import Writing from "./QuizType/writing/Writing";
 import GeneralLayout from "../layouts/General";
+
 
 const ExamStart = () => {
   // const history = useHistory();
@@ -61,12 +63,13 @@ const ExamStart = () => {
       };
     }
   }, [data]);
+  
 
   return (
-    <GeneralLayout hideFooter>
+    <GeneralLayout  hideFooter>
       {active === "menu" ? (
-        <>
-          <div className="common-btn p-10 py-16 flex-1">
+        <div className="flex flex-col h-full">
+          <div className="common-btn md:p-16 p-6 pb-16  flex-grow-0">
             <p className="text-xl leading-normal md:w-1/2 md:mx-auto ">
               Get lots of practical
               <br />
@@ -75,8 +78,9 @@ const ExamStart = () => {
               Reading and Writing sections to help you achieve your desired
               score
             </p>
+            
           </div>
-          <div className="p-6 rounded-3xl -mt-10 md:w-1/2 md:mx-auto bg-white ">
+          <div className="p-6 rounded-3xl -mt-10 md:w-1/2 md:mx-auto bg-white flex-grow-0 ">
             <ul>
               <li
                 role="button"
@@ -115,13 +119,17 @@ const ExamStart = () => {
               </li>
             </ul>
           </div>
-        </>
+          <div className="flex-grow">
+            <img src={exam2} className="md:hidden w-3/4 m-auto" alt="pariqsha exam2" />
+            </div>
+     
+        </div>
       ) : active === "listening" ? (
-        <ListeningAudio questions={groupedQue.listening} />
+        <ListeningAudio questions={groupedQue.listening} onActive={() => setActive("menu")}/>
       ) : active === "reading" ? (
-        <Reading questions={groupedQue.reading} />
+        <Reading questions={groupedQue.reading} onActive={() => setActive("menu")}/>
       ) : (
-        <Writing questions={groupedQue.writing}/>
+        <Writing questions={groupedQue.writing} onActive={() => setActive("menu")}/>
       )}
     </GeneralLayout>
   );

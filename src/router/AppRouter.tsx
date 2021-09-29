@@ -19,7 +19,6 @@ import { RootState } from "../redux/store";
 import { IncomingOptions, Provider } from "use-http";
 import { FUNCTIONS_URL_TEST } from "../Constants";
 import Details from "../components/quiz/Details";
-
 import SignupScreen from "../pages/Login/SignupScreen";
 import Mychats from "../pages/Chat/MyChats";
 import Coins from "../pages/Coins";

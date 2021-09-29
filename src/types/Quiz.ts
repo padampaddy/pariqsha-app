@@ -48,9 +48,9 @@ export interface IExam {
 }
 
 export interface IExamType {
-  exams_exam_type:{
-    id: string,
-    name: string,
+  exams_exam_type: {
+    id: string;
+    name: string;
     description: string;
   }[];
 }
@@ -78,7 +78,7 @@ export interface IContextType {
 }
 
 export interface IContext {
-  id:String;
+  id: String;
   details: string;
   image_link: string;
   link: string;
@@ -105,7 +105,31 @@ export interface IQues {
 }
 
 export interface IExamQues {
+  id: string;
+  exam_id: string;
+  question: IQues;
+}
+
+export interface IExamAns {
+  exams_exam_answer_by_pk: {
     id: string;
-    exam_id: string;
-    question: IQues;
+    updated_at: Date;
+    exam_question: {
+      exam_id: string;
+      question_id: string;
+      exam_answers: {
+        answer: string;
+      };
+    };
+  };
+}
+
+
+export interface ISendAnswer {
+  createAns: {
+    id: string;
+    answer: string;
+    user_id: string;
+    exam_question_id:string;
+  };
 }

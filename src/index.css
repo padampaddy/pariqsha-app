@@ -53,7 +53,7 @@
   }
 
   .quiz-button {
-    @apply float-left flex items-center border-2 border-gray-300 capitalize justify-center rounded text-center md:mr-1 mr-2 py-1 px-3 text-base;
+    @apply float-left flex items-center border border-gray-400 capitalize justify-center rounded text-center md:mr-1  py-1 px-3 text-base;
   }
 
   .quiz-button:hover, .market-btn {

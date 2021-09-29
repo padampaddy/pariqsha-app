@@ -411,3 +411,33 @@ export const GET_EXAM_QUES = gql`
     }
   }
 `;
+
+export const GET_EXAM_ANS = gql`
+  subscription get_exam_ans($id: uuid!) {
+    exams_exam_answer_by_pk(id: $id) {
+      id
+      updated_at
+      exam_question {
+        exam_id
+        question_id
+        exam_answers {
+          answer
+        }
+      }
+    }
+  }
+`;
+
+export const SEND_ANSWER = gql`
+  mutation send_answer(
+    $answer: String!
+    $quesId: uuid!
+    $userId: uuid!
+  ) {
+    insert_exams_exam_answer_one(
+      object: { user_id: $userId, answer: $answer, exam_question_id: $quesId }
+    ) {
+      id
+    }
+  }
+`;
