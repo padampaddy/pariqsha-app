@@ -2,7 +2,7 @@ import BaseLayout from "../layouts/Base";
 import Note from "./QuizType/components/Note";
 import QuestionType from "../components/QuestionType";
 import Question from "../components/Question";
-import QuizHeader from "../components/QuizHeader";
+import QuizHeader from "./QuizType/components/QuizHeader";
 
 const CreateQuiz = () => {
   return (

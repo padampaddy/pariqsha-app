@@ -1,4 +1,4 @@
-import TimeStamp from "./Time/TimeStamp";
+import TimeStamp from "../../../components/Time/TimeStamp";
 
 const QuizHeader = ({ title = "" }: { title?: string }) => {
   return (

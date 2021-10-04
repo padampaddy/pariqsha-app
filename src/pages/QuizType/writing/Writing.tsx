@@ -1,8 +1,9 @@
 import Note from "../components/Note";
 import QuestionType from "../../../components/QuestionType";
-import QuizFooter from "../../../components/QuizFooter";
-import QuizHeader from "../../../components/QuizHeader";
+import QuizFooter from "../components/QuizFooter";
+import QuizHeader from "../components/QuizHeader";
 import { IQues } from "../../../types/Quiz";
+import { useState } from "react";
 
 interface Props {
   questions: IQues[];
@@ -11,6 +12,16 @@ interface Props {
 
 const Writing = ({ questions = [], onActive }: Props) => {
   console.log(questions);
+  const [currQues, setCurrQues] = useState(0)
+  const [currContext, ] = useState(0)
+  const handleNext = () =>{
+    setCurrQues(currQues + 1)
+    // setCurrContext(currContext + 1)
+  }
+  const handlePrev = () =>{
+    setCurrQues(currQues - 1)
+    // setCurrContext(currContext + 1)
+  }
   return (
     <>
       <div className="flex md:w-1/2 md:mx-auto flex-col bg-white md:shadow-md h-full">
@@ -31,8 +42,8 @@ const Writing = ({ questions = [], onActive }: Props) => {
             </div>
           </div>
         </div>
-        <div className="flex-grow-0 px-6 py-4">
-          <QuizFooter onActive={onActive} />
+        <div className="flex-grow-0 px-6 py-4 border-t-2 border-gray-300">
+          <QuizFooter onActive={onActive} onNext={handleNext} onPrev={handlePrev} currQues={currQues} currContext={currContext}/>
         </div>
       </div>
     </>

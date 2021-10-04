@@ -34,12 +34,12 @@ import Cart from "../pages/market/Cart";
 import Alert from "../components/Modal/Alert";
 import MarketHistory from "../pages/setting/MarketHistory";
 import QuizHistory from "../pages/setting/QuizHistory";
-import QuizHeader from "../components/QuizHeader";
 import QuestionType from "../components/QuestionType";
-import Note from "../components/QuizHeader";
 import ExamCardDetails from "../components/exam/ExamCardDetails";
 import Login from "../pages/Login/Login";
 import Notification from "../pages/Notifications";
+import Note from "../pages/QuizType/components/Note";
+import QuizHeader from "../pages/QuizType/components/QuizHeader";
 // import Home from '../pages/Home'
 // import ListingQuiz from "../pages/QuizType/listening/ListingQuiz";
 //  import ListeningAudio from '../pages/QuizType/listening/ListeningAudio'

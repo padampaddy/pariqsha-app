@@ -19,11 +19,9 @@ import GeneralLayout from "../layouts/General";
 const ExamStart = () => {
   // const history = useHistory();
   const { id } = useParams<{ id: string }>();
-  const [active, setActive] = useState<
-    "menu" | "reading" | "writing" | "listening"
-  >("menu");
+  const [active, setActive] = useState<"menu" | "reading" | "writing" | "listening">("menu");
   // const user = useSelector((state: RootState) => state.user.entities?.user);
-  const { data } = useQuery<{ exams_exam_question: IExamQues[] }>(
+  const { data, loading } = useQuery<{ exams_exam_question: IExamQues[] }>(
     GET_EXAM_QUES,
     {
       variables: {
@@ -127,7 +125,7 @@ const ExamStart = () => {
       ) : active === "listening" ? (
         <ListeningAudio questions={groupedQue.listening} onActive={() => setActive("menu")}/>
       ) : active === "reading" ? (
-        <Reading questions={groupedQue.reading} onActive={() => setActive("menu")}/>
+        <Reading questions={groupedQue.reading} onActive={() => setActive("menu")} loading={loading}/>
       ) : (
         <Writing questions={groupedQue.writing} onActive={() => setActive("menu")}/>
       )}

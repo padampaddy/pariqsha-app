@@ -1,7 +1,7 @@
 import BaseLayout from "../../../layouts/Base";
 import Note from "../components/Note";
 import QuestionType from "../../../components/QuestionType";
-import QuizHeader from "../../../components/QuizHeader";
+import QuizHeader from "../components/QuizHeader";
 
 const ListeningWordLimit = () => {
   return (

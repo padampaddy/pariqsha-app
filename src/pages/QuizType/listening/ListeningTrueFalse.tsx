@@ -2,7 +2,7 @@ import BaseLayout from "../../../layouts/Base";
 import Note from "../components/Note";
 import Tip from "../components/Tip";
 import QuestionType from "../../../components/QuestionType";
-import QuizHeader from "../../../components/QuizHeader";
+import QuizHeader from "../components/QuizHeader";
 
 const ListeningTrueFalse = () => {
   return (
