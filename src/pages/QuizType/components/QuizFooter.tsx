@@ -1,21 +1,61 @@
+import { Dispatch, SetStateAction } from "react";
+import { useMutation } from "@apollo/client";
+import { IQues, ISendAnswer } from "../../../types/Quiz";
+import { SEND_ANSWER } from "../../../api/queries";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../redux/store";
+
 interface Props {
-  onActive: () => void;
-  onNext: () => void;
-  onPrev: () => void;
+  questions: (IQues & { exam_question_id: string })[];
+  setActive: React.Dispatch<SetStateAction<"menu" | "reading" | "writing" | "listening">>
   currQues: number;
-  currContext: number;
+  ans: string;
+  setCurrQues: Dispatch<SetStateAction<number>>;
 }
 const QuizFooter = ({
-  onActive,
-  onNext,
-  onPrev,
+  setActive,
   currQues,
-  currContext,
+  setCurrQues,
+  ans,
+  questions = [],
 }: Props) => {
-  console.log(currContext);
+  const user = useSelector((state: RootState) => state.user.entities?.user);
+  const [sendAnswer] = useMutation<ISendAnswer>(SEND_ANSWER);
+  // const [updateAnswer] = useMutation<ISendAnswer>(UPDATE_ANSWER);
+
+  const status =
+    ans === ""
+      ? "Unanswered"
+      : ans === questions[currQues].correct_answer
+      ? "Correct"
+      : "Wrong";
+
+  const handleNext = () => {
+    // if not submitted previously
+    sendAnswer({
+      variables: {
+        answer: ans,
+        quesId: questions[currQues].exam_question_id,
+        userId: user?.id,
+        status: status,
+      },
+    })
+      .then((info) => {
+        console.log(info);
+      })
+      .catch((e) => console.error(e));
+    if (questions.length-1 === currQues) {
+      setActive(a=>a==="reading"?"listening":a==="listening"?"writing":"menu")
+    } else setCurrQues(currQues + 1);
+  };
+
+  const handlePrev = () => {
+    setCurrQues(currQues - 1);
+  };
+
   return (
     <div className="btn-grup  flex justify-between ">
-      <button className="quiz-button" onClick={onActive}>
+      <button className="footer-button" onClick={()=>setActive("menu")}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-5 w-5 mr-2"
@@ -32,7 +72,7 @@ const QuizFooter = ({
       </button>
       <div>
         {currQues !== 0 && (
-          <button className="quiz-button mr-2" onClick={onPrev}>
+          <button className="footer-button mr-2" onClick={handlePrev}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5 mr-2"
@@ -48,12 +88,12 @@ const QuizFooter = ({
             Previous
           </button>
         )}
-        <button className="quiz-button" onClick={onNext}>
+        <button className="footer-button" onClick={handleNext}>
           {/* { currQues.length - 1 ? 'Submit' : 'Next'} */}
-          <div className="">Next</div>
+          Next
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5 "
+            className="h-5 w-5 ml-2"
             viewBox="0 0 20 20"
             fill="currentColor"
           >

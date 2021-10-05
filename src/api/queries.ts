@@ -429,13 +429,20 @@ export const GET_EXAM_ANS = gql`
 `;
 
 export const SEND_ANSWER = gql`
-  mutation send_answer(
-    $answer: String!
-    $quesId: uuid!
-    $userId: uuid!
-  ) {
+  mutation send_answer($answer: String!, $quesId: uuid!, $userId: uuid!, $status: String!) {
     insert_exams_exam_answer_one(
-      object: { user_id: $userId, answer: $answer, exam_question_id: $quesId }
+      object: { user_id: $userId, answer: $answer, exam_question_id: $quesId , status: $status}
+    ) {
+      id
+    }
+  }
+`;
+
+export const UPDATE_ANSWER = gql`
+  mutation update_answer($id: uuid!, $answer: String!,  $status: String!, $quesId: uuid!) {
+    update_exams_exam_answer_by_pk(
+      pk_columns: { id: $id }
+      _set: { answer: $answer, status: $status, exam_question_id: $quesId,}
     ) {
       id
     }

@@ -3,25 +3,18 @@ import QuestionType from "../../../components/QuestionType";
 import QuizFooter from "../components/QuizFooter";
 import QuizHeader from "../components/QuizHeader";
 import { IQues } from "../../../types/Quiz";
-import { useState } from "react";
+import { SetStateAction, useState } from "react";
 
 interface Props {
-  questions: IQues[];
-  onActive: () => void;
+  questions: (IQues & { exam_question_id: string })[];
+  setActive: React.Dispatch<SetStateAction<"menu" | "reading" | "writing" | "listening">>
+ 
 }
 
-const Writing = ({ questions = [], onActive }: Props) => {
-  console.log(questions);
-  const [currQues, setCurrQues] = useState(0)
-  const [currContext, ] = useState(0)
-  const handleNext = () =>{
-    setCurrQues(currQues + 1)
-    // setCurrContext(currContext + 1)
-  }
-  const handlePrev = () =>{
-    setCurrQues(currQues - 1)
-    // setCurrContext(currContext + 1)
-  }
+const Writing = ({ questions = [], setActive }: Props) => {
+  const [currQues, setCurrQues] = useState(0);
+  const [ans] = useState<string>("");
+
   return (
     <>
       <div className="flex md:w-1/2 md:mx-auto flex-col bg-white md:shadow-md h-full">
@@ -29,7 +22,7 @@ const Writing = ({ questions = [], onActive }: Props) => {
           <QuizHeader title="Writing " />
         </div>
         <div className="flex-grow bg-white mx-0  overflow-y-auto">
-          <div className=" p-6 ">
+          <div className=" px-6 py-4">
             <QuestionType title="Write on an A4 sheet then scan and upload ." />
             <Note />
             <div className="flex  items-center justify-center mt-5">
@@ -42,8 +35,14 @@ const Writing = ({ questions = [], onActive }: Props) => {
             </div>
           </div>
         </div>
-        <div className="flex-grow-0 px-6 py-4 border-t-2 border-gray-300">
-          <QuizFooter onActive={onActive} onNext={handleNext} onPrev={handlePrev} currQues={currQues} currContext={currContext}/>
+        <div className="flex-grow-0 quiz-footer common-btn">
+          <QuizFooter
+            ans={ans}
+            setActive={setActive}
+            currQues={currQues}
+            setCurrQues={setCurrQues}
+            questions={questions}
+          />
         </div>
       </div>
     </>

@@ -10,7 +10,7 @@ import { useQuery } from "@apollo/client";
 import { GET_EXAM_QUES } from "../api/queries";
 import { IExamQues, IQues } from "../types/Quiz";
 import { useMemo, useState } from "react";
-import ListeningAudio from "./QuizType/listening/ListeningAudio";
+import Listening from "./QuizType/listening/Listening";
 import Reading from "./QuizType/reading/Reading";
 import Writing from "./QuizType/writing/Writing";
 import GeneralLayout from "../layouts/General";
@@ -34,9 +34,9 @@ const ExamStart = () => {
     console.log("Data", data);
     if (data?.exams_exam_question) {
       const obj: {
-        reading: IQues[];
-        listening: IQues[];
-        writing: IQues[];
+        reading: (IQues & {exam_question_id: string})[];
+        listening: (IQues & {exam_question_id: string})[];
+        writing: (IQues & {exam_question_id: string})[];
       } = {
         reading: [],
         listening: [],
@@ -48,7 +48,7 @@ const ExamStart = () => {
             | "reading"
             | "writing"
             | "listening"
-        ].push(cV.question);
+        ].push({...cV.question,exam_question_id: cV.id});
         return pV;
       }, obj);
       console.log("Obj", obj);
@@ -78,7 +78,7 @@ const ExamStart = () => {
             </p>
             
           </div>
-          <div className="p-6 rounded-3xl -mt-10 md:w-1/2 md:mx-auto bg-white flex-grow-0 ">
+          <div className="md:p-6 pb-0 p-4 rounded-3xl -mt-10 md:w-1/2 md:mx-auto bg-white flex-grow-0 ">
             <ul>
               <li
                 role="button"
@@ -123,11 +123,11 @@ const ExamStart = () => {
      
         </div>
       ) : active === "listening" ? (
-        <ListeningAudio questions={groupedQue.listening} onActive={() => setActive("menu")}/>
+        <Listening questions={groupedQue.listening} setActive={setActive} />
       ) : active === "reading" ? (
-        <Reading questions={groupedQue.reading} onActive={() => setActive("menu")} loading={loading}/>
+        <Reading questions={groupedQue.reading} setActive={setActive}  loading={loading}/>
       ) : (
-        <Writing questions={groupedQue.writing} onActive={() => setActive("menu")}/>
+        <Writing questions={groupedQue.writing}  setActive={setActive}/>
       )}
     </GeneralLayout>
   );

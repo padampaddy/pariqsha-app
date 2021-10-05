@@ -43,6 +43,11 @@ const TimeStamp = ({ hours = 0, minutes = 0, seconds = 0 }: Props) => {
     return () => clearInterval(timerID);
   }, [tick]);
 
+
+  const time = `${h.toString().padStart(2, "0")}:${m
+    .toString()
+    .padStart(2, "0")}:${s.toString().padStart(2, "0")}`
+
   return (
     <div>
       <p className="flex justify-end items-center">
@@ -60,13 +65,15 @@ const TimeStamp = ({ hours = 0, minutes = 0, seconds = 0 }: Props) => {
             />
           </svg>
         </div>
-        <div className="w-16">
-          {`${h.toString().padStart(2, "0")}:${m
+        <div className="">
+          {/* {over ? "Time's up!" : {time}} */}
+          {time}
+          {/* {`${h.toString().padStart(2, "0")}:${m
             .toString()
-            .padStart(2, "0")}:${s.toString().padStart(2, "0")}`}
+            .padStart(2, "0")}:${s.toString().padStart(2, "0")}`} */}
         </div>
       </p>
-      <div>{over ? "Time's up!" : ""}</div>
+      
     </div>
   );
 };

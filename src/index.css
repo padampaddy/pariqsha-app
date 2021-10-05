@@ -56,12 +56,20 @@
     @apply float-left flex items-center border border-gray-400 capitalize justify-center rounded text-center md:mr-1  py-1 px-3 text-base;
   }
 
-  .quiz-button:hover, .market-btn {
+  .quiz-button:hover, .market-btn:hover, .footer-button:hover {
     @apply transform translate-y-0.5 shadow-none ;
   }
 
   .drawer-button {
     @apply text-gray-400 font-medium w-1/2 py-4 border-t border-b flex justify-center items-center hover:text-black
+  }
+
+  .quiz-footer {
+    @apply px-5 py-3 
+  }
+
+  .footer-button {
+    @apply float-left flex items-center border border-white capitalize justify-center rounded text-center md:mr-1  py-1 px-3 text-base;
   }
 
   .save-button {

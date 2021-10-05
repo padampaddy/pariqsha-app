@@ -124,12 +124,10 @@ export interface IExamAns {
   };
 }
 
-
 export interface ISendAnswer {
-  createAns: {
-    id: string;
-    answer: string;
-    user_id: string;
-    exam_question_id:string;
-  };
+  id: string;
+  answer: string;
+  user_id: string;
+  exam_question_id: string;
+  status: string;
 }

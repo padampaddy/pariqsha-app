@@ -23,7 +23,7 @@ import SignupScreen from "../pages/Login/SignupScreen";
 import Mychats from "../pages/Chat/MyChats";
 import Coins from "../pages/Coins";
 import ExamStart from "../pages/ExamStart";
-import ListeningWordLimit from "../pages/QuizType/listening/ListeningWordLimit";
+// import ListeningWordLimit from "../components/Type of Ques/WordLimit";
 import Setting from "../pages/setting/Setting";
 import Market from "../pages/market/Market";
 import NewChat from "../pages/Chat/NewChat";
@@ -38,7 +38,7 @@ import QuestionType from "../components/QuestionType";
 import ExamCardDetails from "../components/exam/ExamCardDetails";
 import Login from "../pages/Login/Login";
 import Notification from "../pages/Notifications";
-import Note from "../pages/QuizType/components/Note";
+// import Note from "../pages/QuizType/components/Note";
 import QuizHeader from "../pages/QuizType/components/QuizHeader";
 // import Home from '../pages/Home'
 // import ListingQuiz from "../pages/QuizType/listening/ListingQuiz";
@@ -137,13 +137,13 @@ function MySwitch() {
       <PrivateRoute path="/QuestionType">
         <QuestionType />
       </PrivateRoute>
-
+{/* 
       <PrivateRoute path="/note">
         <Note />
         <PrivateRoute path="/notification">
           <ListeningWordLimit />
         </PrivateRoute>
-      </PrivateRoute>
+      </PrivateRoute> */}
       
       <PublicRoute path="/signin">
         <Login />
