@@ -389,6 +389,7 @@ export const GET_EXAM_QUES = gql`
         created_at
         options
         image_link
+        type_of_question_description_override
         solution
         part {
           name

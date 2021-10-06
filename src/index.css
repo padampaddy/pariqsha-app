@@ -56,7 +56,7 @@
     @apply float-left flex items-center border border-gray-400 capitalize justify-center rounded text-center md:mr-1  py-1 px-3 text-base;
   }
 
-  .quiz-button:hover, .market-btn:hover, .footer-button:hover {
+  .quiz-button:hover, .market-btn:hover, {
     @apply transform translate-y-0.5 shadow-none ;
   }
 

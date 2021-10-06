@@ -97,6 +97,7 @@ export interface IQues {
   created_at: Date;
   options: string[];
   image_link: string;
+  type_of_question_description_override: string;
   solution: string;
   context_id: string;
   part: ITypeOfQues;

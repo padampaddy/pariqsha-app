@@ -2,14 +2,14 @@ import BaseLayout from "../layouts/Base";
 import Note from "./QuizType/components/Note";
 import QuestionType from "../components/QuestionType";
 import Question from "../components/Question";
-import QuizHeader from "./QuizType/components/QuizHeader";
+// import QuizHeader from "./QuizType/components/QuizHeader";
 
 const CreateQuiz = () => {
   return (
     <div className="">
       <BaseLayout showBack title="Writing">
         <div className="flex flex-col h-full md:w-1/2 md:mx-auto">
-          <QuizHeader title="Time limit 40 minutes " />
+          {/* <QuizHeader title="Time limit 40 minutes " /> */}
 
           <div className="flex-1 bg-white shadow-md mx-4 mb-4">
             <div className=" p-6 ">
