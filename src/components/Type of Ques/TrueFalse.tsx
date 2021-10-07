@@ -12,7 +12,7 @@ const TrueFalse = ({ onUpdate, ans }: Props) => {
     <>
       <form className="wrapper-mcq-form">
         {items.flatMap((item, index) => (
-          <p key={index}>
+          <p className="text-sm" key={index}>
             <input
               type="radio"
               value={item.name}

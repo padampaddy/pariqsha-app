@@ -44,12 +44,12 @@ const Reading = ({ questions = [], setActive, loading }: Props) => {
                 </div>
                 {/* questions */}
                 <div className="flex-grow-0">
-                  <p className="mt-5 font-bold">Questions {currQues + 1}</p>
+                  <p className="mt-3 font-bold">Questions {currQues + 1}</p>
                   <h5 className="text-sm mt-2">
                     {questions[currQues].question}
                   </h5>
                   {/* type of question */}
-                  <div className=" mt-2">
+                  <div className="mt-1.5">
                     {type === "true_false_not_given" ? (
                       <TrueFalse
                         ans={ans}
@@ -84,7 +84,7 @@ const Reading = ({ questions = [], setActive, loading }: Props) => {
           <div className="flex-grow-0 quiz-footer common-btn">
             <QuizFooter
               ans={ans}
-              // setAns={setAns}
+              setAns={setAns}
               setActive={setActive}
               currQues={currQues}
               setCurrQues={setCurrQues}

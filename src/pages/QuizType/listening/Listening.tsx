@@ -30,7 +30,7 @@ const Listening = ({ questions = [], setActive }: Props) => {
         <div className="flex-grow-0 ">
           <QuizHeader title="Listening"  setActive={setActive}/>
         </div>
-        <div className="flex-grow px-6 py-4">
+        <div className="flex-grow px-6 py-4 overflow-y-auto h-full">
           <Note detail="Recording will be played once only"/>
           {tip && <Tip detail={tip} />}
           <audio controls autoPlay className="mt-6">
@@ -70,7 +70,7 @@ const Listening = ({ questions = [], setActive }: Props) => {
         <div className="flex-grow-0 quiz-footer common-btn">
           <QuizFooter
             ans={ans}
-            // setAns={setAns}
+            setAns={setAns}
             setActive={setActive}
             currQues={currQues}
             setCurrQues={setCurrQues}

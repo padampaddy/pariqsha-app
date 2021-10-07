@@ -78,7 +78,7 @@ export interface IContextType {
 }
 
 export interface IContext {
-  id: String;
+  id: string;
   details: string;
   image_link: string;
   link: string;

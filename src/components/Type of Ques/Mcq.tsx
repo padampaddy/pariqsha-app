@@ -10,7 +10,7 @@ const Mcq = ({ options, onUpdate, ans }: Props) => {
     <>
       <form className="wrapper-mcq-form">
         {options.flatMap((item, index) => (
-          <p key={index}>
+          <p className="text-sm" key={index}>
             <input
               type="radio"
               value={ans}

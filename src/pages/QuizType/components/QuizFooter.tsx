@@ -1,9 +1,10 @@
 import { Dispatch, SetStateAction } from "react";
 import { useMutation } from "@apollo/client";
-import { IQues, ISendAnswer } from "../../../types/Quiz";
-import { SEND_ANSWER } from "../../../api/queries";
+import { IExamAns, IQues, ISendAnswer } from "../../../types/Quiz";
+import { GET_EXAM_ANS, SEND_ANSWER } from "../../../api/queries";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
+import useAuthSubscription from "../../../hooks/useAuthSubscription";
 
 interface Props {
   questions: (IQues & { exam_question_id: string })[];
@@ -12,7 +13,7 @@ interface Props {
   >;
   currQues: number;
   ans: string;
-  // setAns: React.Dispatch<SetStateAction<string>>
+  setAns: React.Dispatch<SetStateAction<string>>;
   setCurrQues: Dispatch<SetStateAction<number>>;
 }
 const QuizFooter = ({
@@ -20,13 +21,16 @@ const QuizFooter = ({
   currQues,
   setCurrQues,
   ans,
-  // setAns,
+  setAns,
   questions = [],
 }: Props) => {
   const user = useSelector((state: RootState) => state.user.entities?.user);
+  const { data } = useAuthSubscription<IExamAns>(GET_EXAM_ANS, {
+    id: questions[currQues].exam_question_id,
+  });
   const [sendAnswer] = useMutation<ISendAnswer>(SEND_ANSWER);
   // const [updateAnswer] = useMutation<ISendAnswer>(UPDATE_ANSWER);
-
+  console.log(data);
   const status =
     ans === ""
       ? "Unanswered"
@@ -46,7 +50,7 @@ const QuizFooter = ({
     })
       .then((info) => {
         console.log(info);
-        // setAns("")
+        setAns("");
       })
       .catch((e) => console.error(e));
     if (questions.length - 1 === currQues) {
@@ -63,7 +67,6 @@ const QuizFooter = ({
   return (
     <div className="btn-grup">
       {currQues !== 0 && (
-  
         <button className="footer-button float-left" onClick={handlePrev}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -79,11 +82,9 @@ const QuizFooter = ({
           </svg>
           Previous
         </button>
-    
       )}
-   
+
       <button className="footer-button float-right" onClick={handleNext}>
-        {/* { currQues.length - 1 ? 'Submit' : 'Next'} */}
         Next
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -103,8 +104,7 @@ const QuizFooter = ({
           />
         </svg>
       </button>
-      </div>
-  
+    </div>
   );
 };
 export default QuizFooter;

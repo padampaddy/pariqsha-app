@@ -25,17 +25,16 @@ const Writing = ({ questions = [], setActive }: Props) => {
         <div className="flex-grow-0 ">
           <QuizHeader title="Writing" setActive={setActive} />
         </div>
-        <div className="flex-grow bg-white mx-0  overflow-y-auto">
-          <div className=" px-6 py-4">
-            <Note detail="Write on an A4 sheet then scan and upload." />
-            <div>
-              <p className="mt-5 font-bold">Questions {currQues + 1}</p>
-              <h5 className="text-sm mt-4">{questions[currQues].question}</h5>
-            </div>
-            {img && <img className="mt-1 h-2/5" src={img} />}
-            <div className="flex items-center justify-center mt-5">
-              <label className=" flex items-center px-6 py-4 common-btn text-blue rounded-lg shadow-lg tracking-wide uppercase  cursor-pointer ">
-                <span>
+        <div className="flex-grow bg-white px-6 py-4 overflow-y-auto h-full">
+          <Note detail="Write on an A4 sheet then scan and upload." />
+          <div>
+            <p className="mt-5 font-bold">Questions {currQues + 1}</p>
+            <h5 className="text-sm mt-4">{questions[currQues].question}</h5>
+          </div>
+          {img && <img className="mt-1 h-2/5" src={img} />}
+          <div className="flex items-center justify-center mt-5">
+            <label className=" flex items-center px-6 py-4 common-btn text-blue rounded-lg shadow-lg tracking-wide uppercase  cursor-pointer ">
+              <span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-6 w-6 mr-2"
@@ -50,19 +49,16 @@ const Writing = ({ questions = [], setActive }: Props) => {
                     d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
                   />
                 </svg>
-                </span>
-                
-                  Upload File Here
-             
-                <input type="file" className="hidden" />
-              </label>
-            </div>
+              </span>
+              Upload File Here
+              <input type="file" className="hidden" />
+            </label>
           </div>
         </div>
         <div className="flex-grow-0 quiz-footer common-btn">
           <QuizFooter
             ans={ans}
-            // setAns={setAns}
+            setAns={setAns}
             setActive={setActive}
             currQues={currQues}
             setCurrQues={setCurrQues}

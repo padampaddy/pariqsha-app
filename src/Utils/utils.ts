@@ -5,7 +5,6 @@ export const espTransform = (
   { precision = 2, showSymbol = true } = {}
 ) => {
   const val = !isNaN(Number(value)) ? Number(value) : value;
-
   return currency(val, {
     precision: precision,
     symbol: showSymbol ? "₹" : "",
@@ -14,21 +13,21 @@ export const espTransform = (
   });
 };
 
-export const spanishConverter = (text = "") => {
-  let value = "";
-  if (text !== undefined && text !== null) {
-    value = text.toString();
-    value = value.replace(",", ".");
-    // value = value.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-  }
-  return value;
-};
+// export const spanishConverter = (text = "") => {
+//   let value = "";
+//   if (text !== undefined && text !== null) {
+//     value = text.toString();
+//     value = value.replace(",", ".");
+//     // value = value.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+//   }
+//   return value;
+// };
 
-export const reducer = (accumulator: any, currentValue: number) => {
-  return accumulator + (isNaN(currentValue) ? 0 : currentValue);
-};
+// export const reducer = (accumulator: any, currentValue: number) => {
+//   return accumulator + (isNaN(currentValue) ? 0 : currentValue);
+// };
 
-export const commaToDecimal = (value: any) => Number(value.replace(",", "."));
+// export const commaToDecimal = (value: any) => Number(value.replace(",", "."));
 
-export const convertToNum = (val: any) =>
-  val.toString().includes(",") ? commaToDecimal(val) : Number(val);
+// export const convertToNum = (val: any) =>
+//   val.toString().includes(",") ? commaToDecimal(val) : Number(val);

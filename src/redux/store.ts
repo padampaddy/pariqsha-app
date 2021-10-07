@@ -11,11 +11,11 @@ function getPersistedState() {
     const state = JSON.parse(pStateString);
     state.cart.items = state.cart.items.map(
       (item: {
-        mId: any;
-        mDescription: any;
-        mImages: any[];
-        mName: any;
-        mPriceCoins: any;
+        mId: string;
+        mDescription: string;
+        mImages: string[];
+        mName: string;
+        mPriceCoins: number;
       }) =>
         new CartItem({
           id: item.mId,
