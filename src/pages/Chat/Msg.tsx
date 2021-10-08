@@ -28,7 +28,7 @@ const Msg = () => {
   const temp1 = useRef() as MutableRefObject<HTMLDivElement>;
   const [input, setInput] = useState<string>("");
   const [pictures, setPictures] = useState<string>("");
-  const wrapperRef = useRef(null);
+  const wrapperRef = useRef() as MutableRefObject<HTMLInputElement>;
   const [sendMessage] = useMutation<ISendMessage>(SEND_MESSAGE);
   const dispatch = useDispatch();
 
@@ -76,25 +76,7 @@ const Msg = () => {
       <div className="flex h-full flex-col">
         <div>
           <div className=" bg-gradient-to-bl items-center text-center px-2 py-4 relative">
-         
-              {/* <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-6 cursor-pointer absolute top-1/2 -translate-y-1/2 transform "
-                viewBox="0 0 512 512"
-                onClick={() => history.goBack()}
-              >
-                <title>Arrow Back</title>
-                <path
-                  fill="currentColor"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="48"
-                  d="M244 400L100 256l144-144M120 256h292"
-                />
-              </svg> */}
-          
-      
+    
               <img
                 className="inline object-cover w-12 h-12 rounded-full"
                 src={
@@ -260,7 +242,7 @@ const Msg = () => {
                         <button
                           type="button"
                           onClick={() => {
-                            (wrapperRef as any).current.click();
+                            wrapperRef.current.click();
                           }}
                         >
                           <svg

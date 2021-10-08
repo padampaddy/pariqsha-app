@@ -17,7 +17,7 @@ const Writing = ({ questions = [], setActive }: Props) => {
 
   console.log(setAns);
 
-  const img = questions[currQues].image_link;
+  const img = questions[currQues]?.image_link;
 
   return (
     <>

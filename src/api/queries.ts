@@ -401,6 +401,7 @@ export const GET_EXAM_QUES = gql`
         }
         context {
           id
+          title
           details
           image_link
           link
@@ -414,16 +415,14 @@ export const GET_EXAM_QUES = gql`
 `;
 
 export const GET_EXAM_ANS = gql`
-  subscription get_exam_ans($id: uuid!) {
-    exams_exam_answer_by_pk(id: $id) {
+  subscription get_exam_ans($userId: uuid!, $ExamId: uuid!,) {
+    exams_exam_answer(where: {_and: {user_id: {_eq: $userId}, exam_question: {exam_id: {_eq: $ExamId}}}}) {
+      answer
       id
+      status
       updated_at
       exam_question {
-        exam_id
-        question_id
-        exam_answers {
-          answer
-        }
+        id
       }
     }
   }
@@ -440,10 +439,10 @@ export const SEND_ANSWER = gql`
 `;
 
 export const UPDATE_ANSWER = gql`
-  mutation update_answer($id: uuid!, $answer: String!,  $status: String!, $quesId: uuid!) {
+  mutation update_answer( $answer: String!,  $status: String!, $quesId: uuid!) {
     update_exams_exam_answer_by_pk(
-      pk_columns: { id: $id }
-      _set: { answer: $answer, status: $status, exam_question_id: $quesId,}
+      pk_columns: { id: $quesId }
+      _set: { answer: $answer, status: $status}
     ) {
       id
     }

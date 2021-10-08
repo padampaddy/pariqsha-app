@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { MutableRefObject, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import modalSlice from "../redux/slices/modal-slice";
 import { RootState } from "../redux/store";
@@ -18,7 +18,7 @@ function Profile({
 }) {
   const { entities } = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
-  const wrapperRef = useRef(null);
+  const wrapperRef = useRef() as MutableRefObject<HTMLInputElement>;
   const [pictures, setPictures] = useState<string>(oUrl);
   const [name, setName] = useState<string>(oName);
   const [userProfile] = useMutation<IUserProfile>(UPDATE_USER_PROFILE);
@@ -53,6 +53,7 @@ function Profile({
       })
       .catch((e) => console.error(e));
   };
+  
   return (
     <>
       <div className="profile-header flex justify-between items-center pb-4">
@@ -65,7 +66,7 @@ function Profile({
         <button
           type="button"
           onClick={() => {
-            (wrapperRef as any).current.click();
+            wrapperRef.current.click();
           }}
           className=""
         >

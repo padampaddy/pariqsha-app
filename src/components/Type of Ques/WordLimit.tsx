@@ -9,7 +9,7 @@ const WordLimit = ({ onUpdate, ans }: Props) => {
     <>
       <input
         type="text"
-        className="resize-none text-sm flex w-full md:h-10 h-8 bg-transparent focus:outline-none border border-gray-400 break-words px-2 py-1 "
+        className="resize-none text-sm flex w-full md:h-8 h-6 bg-transparent focus:outline-none border border-gray-400 break-words px-2 py-1 "
         placeholder="Type Your Answer"
         value={ans}
         onChange={onUpdate}

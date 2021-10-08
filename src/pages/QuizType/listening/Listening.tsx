@@ -2,7 +2,13 @@ import Note from "../components/Note";
 import QuizHeader from "../components/QuizHeader";
 import { IQues } from "../../../types/Quiz";
 import QuizFooter from "../components/QuizFooter";
-import { SetStateAction, useState } from "react";
+import {
+  MutableRefObject,
+  SetStateAction,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import TrueFalse from "../../../components/Type of Ques/TrueFalse";
 import Mcq from "../../../components/Type of Ques/Mcq";
 import WordLimit from "../../../components/Type of Ques/WordLimit";
@@ -19,21 +25,35 @@ interface Props {
 const Listening = ({ questions = [], setActive }: Props) => {
   const [currQues, setCurrQues] = useState(0);
   const [ans, setAns] = useState<string>("");
+  const audioRef = useRef() as MutableRefObject<HTMLAudioElement>;
 
-  const type = questions[currQues].type_of_question.name;
-  const tip = questions[currQues].type_of_question_description_override;
-  const img = questions[currQues].image_link;
+  useEffect(() => {
+    localStorage.setItem(
+      questions[currQues].context.id,
+      audioRef.current.currentTime.toString()
+    );
+    audioRef.current.pause();
+    audioRef.current.load();
+    const timeLocal = localStorage.getItem(questions[currQues]?.context.id);
+    audioRef.current.currentTime = timeLocal ? parseInt(timeLocal) : 0;
+    audioRef.current.play();
+
+  }, [questions[currQues]?.context.details]);
+
+  const type = questions[currQues]?.type_of_question.name;
+  const tip = questions[currQues]?.type_of_question_description_override;
+  const img = questions[currQues]?.image_link;
 
   return (
     <>
       <div className="flex md:w-1/2 md:mx-auto flex-col bg-white md:shadow-md h-full">
         <div className="flex-grow-0 ">
-          <QuizHeader title="Listening"  setActive={setActive}/>
+          <QuizHeader title="Listening" setActive={setActive} />
         </div>
         <div className="flex-grow px-6 py-4 overflow-y-auto h-full">
-          <Note detail="Recording will be played once only"/>
+          <Note detail="Recording will be played once only" />
           {tip && <Tip detail={tip} />}
-          <audio controls autoPlay className="mt-6">
+          <audio ref={audioRef} autoPlay className="mt-6">
             <source src={questions[currQues].context.details} />
           </audio>
           {img && <img className="mt-4 h-2/5" src={img} />}

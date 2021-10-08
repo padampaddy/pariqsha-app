@@ -16,7 +16,7 @@ const TrueFalse = ({ onUpdate, ans }: Props) => {
             <input
               type="radio"
               value={item.name}
-              checked={item.name===ans}
+              checked={item.name === ans}
               onChange={onUpdate}
               id={`rb_${index}`}
               name="radio-group"

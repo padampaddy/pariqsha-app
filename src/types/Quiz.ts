@@ -80,6 +80,7 @@ export interface IContextType {
 export interface IContext {
   id: string;
   details: string;
+  title: string;
   image_link: string;
   link: string;
   context_type: IContextType;
@@ -112,16 +113,12 @@ export interface IExamQues {
 }
 
 export interface IExamAns {
-  exams_exam_answer_by_pk: {
+  exams_exam_answer: {
     id: string;
     updated_at: Date;
-    exam_question: {
-      exam_id: string;
-      question_id: string;
-      exam_answers: {
-        answer: string;
-      };
-    };
+    exam_question_id: string;
+    answer: string;
+    status: string;
   };
 }
 

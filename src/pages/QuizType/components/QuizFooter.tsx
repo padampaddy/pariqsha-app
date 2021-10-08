@@ -1,10 +1,9 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useEffect } from "react";
 import { useMutation } from "@apollo/client";
-import { IExamAns, IQues, ISendAnswer } from "../../../types/Quiz";
-import { GET_EXAM_ANS, SEND_ANSWER } from "../../../api/queries";
+import { IQues, ISendAnswer } from "../../../types/Quiz";
+import { SEND_ANSWER, UPDATE_ANSWER } from "../../../api/queries";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
-import useAuthSubscription from "../../../hooks/useAuthSubscription";
 
 interface Props {
   questions: (IQues & { exam_question_id: string })[];
@@ -16,6 +15,7 @@ interface Props {
   setAns: React.Dispatch<SetStateAction<string>>;
   setCurrQues: Dispatch<SetStateAction<number>>;
 }
+
 const QuizFooter = ({
   setActive,
   currQues,
@@ -25,12 +25,12 @@ const QuizFooter = ({
   questions = [],
 }: Props) => {
   const user = useSelector((state: RootState) => state.user.entities?.user);
-  const { data } = useAuthSubscription<IExamAns>(GET_EXAM_ANS, {
-    id: questions[currQues].exam_question_id,
-  });
   const [sendAnswer] = useMutation<ISendAnswer>(SEND_ANSWER);
-  // const [updateAnswer] = useMutation<ISendAnswer>(UPDATE_ANSWER);
-  console.log(data);
+  const [updateAnswer] = useMutation<ISendAnswer>(UPDATE_ANSWER);
+  console.log(updateAnswer);
+  console.log(sendAnswer);
+  console.log(user);
+
   const status =
     ans === ""
       ? "Unanswered"
@@ -38,21 +38,44 @@ const QuizFooter = ({
       ? "Correct"
       : "Wrong";
 
+  console.log(status);
+
+  useEffect(() => {
+    localStorage.setItem("answers", JSON.stringify(ans));
+  }, [ans])
+
   const handleNext = () => {
-    // if not submitted previously
-    sendAnswer({
-      variables: {
-        answer: ans,
-        quesId: questions[currQues].exam_question_id,
-        userId: user?.id,
-        status: status,
-      },
-    })
-      .then((info) => {
-        console.log(info);
-        setAns("");
-      })
-      .catch((e) => console.error(e));
+    // if ans not given
+    // if (ans === "") {
+    //   sendAnswer({
+    //     variables: {
+    //       answer: ans,
+    //       quesId: questions[currQues].exam_question_id,
+    //       userId: user?.id,
+    //       status: status,
+    //     },
+    //   })
+    //     .then((info) => {
+    //       console.log(info);
+    //       setAns("");
+    //     })
+    //     .catch((e) => console.error(e));
+    // } else {
+    //   // if ans given
+    //   updateAnswer({
+    //     variables: {
+    //       quesId: questions[currQues].exam_question_id,
+    //       answer: ans,
+    //       status: status,
+    //     },
+    //   })
+    //     .then((info) => {
+    //       console.log(info);
+    //       setAns("");
+    //     })
+    //     .catch((e) => console.error(e));
+    // }
+   setAns("")
     if (questions.length - 1 === currQues) {
       setActive((a) =>
         a === "reading" ? "listening" : a === "listening" ? "writing" : "menu"
@@ -63,6 +86,8 @@ const QuizFooter = ({
   const handlePrev = () => {
     setCurrQues(currQues - 1);
   };
+
+
 
   return (
     <div className="btn-grup">
