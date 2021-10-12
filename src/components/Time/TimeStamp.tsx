@@ -7,7 +7,6 @@ interface Props {
 }
 
 const TimeStamp = ({ hours = 0, minutes = 0, seconds = 0 }: Props) => {
-  
   const getLocalItems = useCallback(() => {
     const time = localStorage.getItem("time");
     console.log(time);
@@ -16,13 +15,13 @@ const TimeStamp = ({ hours = 0, minutes = 0, seconds = 0 }: Props) => {
     } else {
       return [hours, minutes, seconds];
     }
-  },[]);
+  }, []);
 
   console.log(getLocalItems);
 
   const [over, setOver] = useState(false);
   const [[h, m, s], setTime] = useState(getLocalItems());
- 
+
   const tick = () => {
     if (over) return;
     if (h === 0 && m === 0 && s === 0) setOver(true);
@@ -35,18 +34,15 @@ const TimeStamp = ({ hours = 0, minutes = 0, seconds = 0 }: Props) => {
     }
   };
 
-
-
   useEffect(() => {
     const timerID = setInterval(() => tick(), 1000);
-    localStorage.setItem("time", JSON.stringify([h,m,s]));
+    localStorage.setItem("time", JSON.stringify([h, m, s]));
     return () => clearInterval(timerID);
   }, [tick]);
 
-
   const time = `${h.toString().padStart(2, "0")}:${m
     .toString()
-    .padStart(2, "0")}:${s.toString().padStart(2, "0")}`
+    .padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
 
   return (
     <div>
@@ -68,12 +64,8 @@ const TimeStamp = ({ hours = 0, minutes = 0, seconds = 0 }: Props) => {
         <div className="">
           {/* {over ? "Time's up!" : {time}} */}
           {time}
-          {/* {`${h.toString().padStart(2, "0")}:${m
-            .toString()
-            .padStart(2, "0")}:${s.toString().padStart(2, "0")}`} */}
         </div>
       </p>
-      
     </div>
   );
 };

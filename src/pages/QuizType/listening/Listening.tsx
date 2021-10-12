@@ -56,7 +56,7 @@ const Listening = ({ questions = [], setActive }: Props) => {
           <audio ref={audioRef} autoPlay className="mt-6">
             <source src={questions[currQues].context.details} />
           </audio>
-          {img && <img className="mt-4 h-2/5" src={img} />}
+          {img && <img className="mt-4 " src={img} />}
           <div>
             <p className="mt-5 font-bold">Questions {currQues + 1}</p>
             <h5 className="text-sm mt-4">{questions[currQues].question}</h5>

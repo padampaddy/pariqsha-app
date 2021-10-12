@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect } from "react";
+import { Dispatch, SetStateAction, useCallback,  } from "react";
 import { useMutation } from "@apollo/client";
 import { IQues, ISendAnswer } from "../../../types/Quiz";
 import { SEND_ANSWER, UPDATE_ANSWER } from "../../../api/queries";
@@ -40,9 +40,13 @@ const QuizFooter = ({
 
   console.log(status);
 
-  useEffect(() => {
+  // useEffect(() => {
+  //   localStorage.setItem("answers", JSON.stringify(ans));
+  // }, [ans])
+
+  const getAns = useCallback(() => {
     localStorage.setItem("answers", JSON.stringify(ans));
-  }, [ans])
+    },[ans])
 
   const handleNext = () => {
     // if ans not given
@@ -75,6 +79,9 @@ const QuizFooter = ({
     //     })
     //     .catch((e) => console.error(e));
     // }
+   
+  //  localStorage.setItem("answers", JSON.stringify(ans));
+  getAns()
    setAns("")
     if (questions.length - 1 === currQues) {
       setActive((a) =>
@@ -86,8 +93,6 @@ const QuizFooter = ({
   const handlePrev = () => {
     setCurrQues(currQues - 1);
   };
-
-
 
   return (
     <div className="btn-grup">

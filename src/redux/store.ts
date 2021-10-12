@@ -6,7 +6,7 @@ import modalSlice from "./slices/modal-slice";
 import userSlice from "./slices/user-slice";
 
 function getPersistedState() {
-  const pStateString = localStorage.getItem("reduxState");
+  const pStateString = localStorage.getItem("cartItems");
   if (pStateString) {
     const state = JSON.parse(pStateString);
     state.cart.items = state.cart.items.map(
@@ -43,7 +43,7 @@ const store = configureStore({
 });
 
 store.subscribe(() => {
-  localStorage.setItem("reduxState", JSON.stringify(store.getState()));
+  localStorage.setItem("cartItems", JSON.stringify(store.getState()));
 });
 
 export type RootState = ReturnType<typeof store.getState>;

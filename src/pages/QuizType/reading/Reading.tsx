@@ -30,7 +30,6 @@ const getLocalAns = () => {
   }
 };
 
-
 const Reading = ({ questions = [], setActive, loading }: Props) => {
   const [currQues, setCurrQues] = useState(0);
   const [ans, setAns] = useState<string>(getLocalAns());
@@ -45,18 +44,22 @@ const Reading = ({ questions = [], setActive, loading }: Props) => {
       ) : (
         <div className="flex md:w-1/2 md:mx-auto flex-col bg-white md:shadow-md h-full">
           <div className="flex-grow-0">
-            <QuizHeader title="Reading" setActive={setActive}/>
+            <QuizHeader title="Reading" setActive={setActive} />
           </div>
           <div className="flex-grow bg-white mx-0">
             <div className="px-6 py-4 flex flex-col h-full">
-              <TotalQues/>
-            <QuestionType title="Read Passage" />
+              <TotalQues questions={questions} />
+              <QuestionType title="Read Passage" />
               {tip && <Tip detail={tip} />}
               <div className="mt-1.5 flex flex-col h-full">
                 {/* passage */}
-                <p className="text-sm font-bold">{questions[currQues].context.title}</p>
+                <p className="text-sm font-bold">
+                  {questions[currQues].context.title}
+                </p>
                 <div className="flex-grow overflow-y-auto md:h-50 h-36">
-                  <p className="text-sm mt-2 whitespace-pre-wrap">{questions[currQues].context.details}</p>
+                  <p className="text-sm mt-2 whitespace-pre-wrap">
+                    {questions[currQues].context.details}
+                  </p>
                 </div>
                 {/* questions */}
                 <div className="flex-grow-0">

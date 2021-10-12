@@ -31,7 +31,7 @@ const Writing = ({ questions = [], setActive }: Props) => {
             <p className="mt-5 font-bold">Questions {currQues + 1}</p>
             <h5 className="text-sm mt-4">{questions[currQues].question}</h5>
           </div>
-          {img && <img className="mt-1 h-2/5" src={img} />}
+          {img && <img className="mt-1 " src={img} />}
           <div className="flex items-center justify-center mt-5">
             <label className=" flex items-center px-6 py-4 common-btn text-blue rounded-lg shadow-lg tracking-wide uppercase  cursor-pointer ">
               <span>

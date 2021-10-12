@@ -223,3 +223,21 @@ a.collection-list.common-btn, .quiz-button:hover, .market-btn:hover {
   overflow-y: auto!important;
 }
 
+
+/* .qstn-list {
+  margin-bottom: 18px;
+} */
+ 
+.qstn-list li {
+  float: left;
+  margin: 0 5px 0 0;
+  background: #1071b1;
+  color: #fff;
+  border-radius: 50%;
+  width: 20px;
+  text-align: center;
+  height: 20px;
+  font-size: 11px;
+  line-height: 20px;
+  font-weight: bold;
+}
