@@ -1,7 +1,7 @@
 const Note = ({detail}:{detail?:string}) => {
   return (
     <div
-      className="flex items-center bg-green-500 text-white text-sm font-bold px-4 py-3 my-3"
+      className="flex items-center bg-green-500 text-white text-sm font-bold px-4 py-3"
       role="alert"
     >
       <svg className="fill-current w-4 h-4 mr-2" viewBox="0 0 20 20">

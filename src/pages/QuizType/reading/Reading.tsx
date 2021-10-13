@@ -37,6 +37,8 @@ const Reading = ({ questions = [], setActive, loading }: Props) => {
   const type = questions[currQues]?.type_of_question.name;
   const tip = questions[currQues]?.type_of_question_description_override;
 
+  console.log(getLocalAns())
+
   return (
     <>
       {loading ? (

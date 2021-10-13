@@ -31,14 +31,14 @@ const QuizFooter = ({
   console.log(sendAnswer);
   console.log(user);
 
-  const status =
-    ans === ""
-      ? "Unanswered"
-      : ans === questions[currQues].correct_answer
-      ? "Correct"
-      : "Wrong";
+  // const status =
+  //   ans === ""
+  //     ? "Unanswered"
+  //     : ans === questions[currQues].correct_answer
+  //     ? "Correct"
+  //     : "Wrong";
 
-  console.log(status);
+  // console.log(status);
 
   // useEffect(() => {
   //   localStorage.setItem("answers", JSON.stringify(ans));

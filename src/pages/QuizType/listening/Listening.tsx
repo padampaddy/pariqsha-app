@@ -14,6 +14,7 @@ import Mcq from "../../../components/Type of Ques/Mcq";
 import WordLimit from "../../../components/Type of Ques/WordLimit";
 import Tip from "../components/Tip";
 import CheckBox from "../../../components/Type of Ques/CheckBox";
+import TotalQues from "../components/TotalQues";
 
 interface Props {
   questions: (IQues & { exam_question_id: string })[];
@@ -50,7 +51,8 @@ const Listening = ({ questions = [], setActive }: Props) => {
         <div className="flex-grow-0 ">
           <QuizHeader title="Listening" setActive={setActive} />
         </div>
-        <div className="flex-grow px-6 py-4 overflow-y-auto h-full">
+        <div className="flex-grow px-6 py-4 flex flex-col overflow-y-auto h-full">
+          <TotalQues questions={questions} />
           <Note detail="Recording will be played once only" />
           {tip && <Tip detail={tip} />}
           <audio ref={audioRef} autoPlay className="mt-6">

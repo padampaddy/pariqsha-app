@@ -7,22 +7,12 @@ interface Props {
 const TotalQues = ({ questions = [] }: Props) => {
   console.log(questions);
 
-//   for (let i = 1; i <= questions.length; i++) {
-//     console.log(i);
-//   }
-
-// const rows = [];
-// for (let i = 0; i < questions.length; i++) {
-//     rows.push(<ObjectRow key={i} />);
-// }
-
   return (
-    <div className="qstn-list mb-4">
+    <div className="qstn-list mb-3">
       <ul>
-        <li role="button">1</li>
-        <li role="button">2</li>
-        <li role="button">3</li>
-        <li role="button">4</li>
+        {questions.map((_,idx)=>(
+          <li key={idx} role="button">{1+ idx}</li>
+        ))}
       </ul>
     </div>
   );

@@ -3,6 +3,7 @@ import QuizFooter from "../components/QuizFooter";
 import QuizHeader from "../components/QuizHeader";
 import { IQues } from "../../../types/Quiz";
 import { SetStateAction, useState } from "react";
+import TotalQues from "../components/TotalQues";
 
 interface Props {
   questions: (IQues & { exam_question_id: string })[];
@@ -25,7 +26,8 @@ const Writing = ({ questions = [], setActive }: Props) => {
         <div className="flex-grow-0 ">
           <QuizHeader title="Writing" setActive={setActive} />
         </div>
-        <div className="flex-grow bg-white px-6 py-4 overflow-y-auto h-full">
+        <div className="flex-grow bg-white px-6 py-4 flex flex-col overflow-y-auto h-full">
+        <TotalQues questions={questions} />
           <Note detail="Write on an A4 sheet then scan and upload." />
           <div>
             <p className="mt-5 font-bold">Questions {currQues + 1}</p>
