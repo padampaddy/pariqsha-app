@@ -88,7 +88,6 @@ const Drawer = ({ onClose }: Props) => {
                   body: (
                     <Profile
                       onUpdate={() => {
-                        console.log("Updated");
                         getData({
                           variables: {
                             id: user?.id,

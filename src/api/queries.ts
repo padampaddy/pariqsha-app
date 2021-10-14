@@ -415,8 +415,15 @@ export const GET_EXAM_QUES = gql`
 `;
 
 export const GET_EXAM_ANS = gql`
-  subscription get_exam_ans($userId: uuid!, $ExamId: uuid!,) {
-    exams_exam_answer(where: {_and: {user_id: {_eq: $userId}, exam_question: {exam_id: {_eq: $ExamId}}}}) {
+  subscription get_exam_ans($userId: uuid!, $ExamId: uuid!) {
+    exams_exam_answer(
+      where: {
+        _and: {
+          user_id: { _eq: $userId }
+          exam_question: { exam_id: { _eq: $ExamId } }
+        }
+      }
+    ) {
       answer
       id
       status
@@ -429,20 +436,20 @@ export const GET_EXAM_ANS = gql`
 `;
 
 export const SEND_ANSWER = gql`
-  mutation send_answer($answer: String!, $quesId: uuid!, $userId: uuid!, $status: String!) {
-    insert_exams_exam_answer_one(
-      object: { user_id: $userId, answer: $answer, exam_question_id: $quesId , status: $status}
-    ) {
-      id
+  mutation send_answer($objects: [exams_exam_answer_insert_input!]!) {
+    insert_exams_exam_answer(objects: $objects) {
+      returning {
+        id
+      }
     }
   }
 `;
 
 export const UPDATE_ANSWER = gql`
-  mutation update_answer( $answer: String!,  $status: String!, $quesId: uuid!) {
+  mutation update_answer($answer: String!, $status: String!, $quesId: uuid!) {
     update_exams_exam_answer_by_pk(
       pk_columns: { id: $quesId }
-      _set: { answer: $answer, status: $status}
+      _set: { answer: $answer, status: $status }
     ) {
       id
     }

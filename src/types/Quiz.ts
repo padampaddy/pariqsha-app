@@ -123,9 +123,8 @@ export interface IExamAns {
 }
 
 export interface ISendAnswer {
-  id: string;
   answer: string;
-  user_id: string;
+  user_id?: string;
   exam_question_id: string;
   status: string;
 }

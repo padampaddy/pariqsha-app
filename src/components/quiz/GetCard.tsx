@@ -25,7 +25,6 @@ declare let Razorpay: any;
 
 const getLocalItems = () => {
   const likes = localStorage.getItem("like");
-  console.log(likes);
 
   if (likes) {
     return JSON.parse(likes);

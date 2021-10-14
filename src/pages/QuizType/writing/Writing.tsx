@@ -10,11 +10,13 @@ interface Props {
   setActive: React.Dispatch<
     SetStateAction<"menu" | "reading" | "writing" | "listening">
   >;
+  active: string;
 }
 
-const Writing = ({ questions = [], setActive }: Props) => {
+const Writing = ({ questions = [], setActive, active }: Props) => {
   const [currQues, setCurrQues] = useState(0);
   const [ans, setAns] = useState<string>("");
+  const [activeQues, setActiveQues] = useState(0);
 
   console.log(setAns);
 
@@ -26,8 +28,8 @@ const Writing = ({ questions = [], setActive }: Props) => {
         <div className="flex-grow-0 ">
           <QuizHeader title="Writing" setActive={setActive} />
         </div>
-        <div className="flex-grow bg-white px-6 py-4 flex flex-col overflow-y-auto h-full">
-        <TotalQues questions={questions} />
+        <div className="flex-grow bg-white md:px-6 md:py-4 px-3 py-1.5 flex flex-col overflow-y-auto h-full">
+        <TotalQues questions={questions} activeQues={activeQues} setActiveQues={setActiveQues}/>
           <Note detail="Write on an A4 sheet then scan and upload." />
           <div>
             <p className="mt-5 font-bold">Questions {currQues + 1}</p>
@@ -61,6 +63,7 @@ const Writing = ({ questions = [], setActive }: Props) => {
           <QuizFooter
             ans={ans}
             setAns={setAns}
+            active={active}
             setActive={setActive}
             currQues={currQues}
             setCurrQues={setCurrQues}

@@ -17,27 +17,18 @@ interface Props {
     SetStateAction<"menu" | "reading" | "writing" | "listening">
   >;
   loading: boolean;
+  active: string;
 }
 
-const getLocalAns = () => {
-  const answers = localStorage.getItem("answers");
-  console.log(answers);
 
-  if (answers) {
-    return JSON.parse(answers);
-  } else {
-    return [];
-  }
-};
 
-const Reading = ({ questions = [], setActive, loading }: Props) => {
-  const [currQues, setCurrQues] = useState(0);
-  const [ans, setAns] = useState<string>(getLocalAns());
+const Reading = ({ questions = [], setActive, active, loading }: Props) => {
+  const [ans, setAns] = useState<string>("");
+  const [activeQues, setActiveQues] = useState(0);
+  const [currQues, setCurrQues] = useState(activeQues);
 
   const type = questions[currQues]?.type_of_question.name;
   const tip = questions[currQues]?.type_of_question_description_override;
-
-  console.log(getLocalAns())
 
   return (
     <>
@@ -49,8 +40,12 @@ const Reading = ({ questions = [], setActive, loading }: Props) => {
             <QuizHeader title="Reading" setActive={setActive} />
           </div>
           <div className="flex-grow bg-white mx-0">
-            <div className="px-6 py-4 flex flex-col h-full">
-              <TotalQues questions={questions} />
+            <div className="md:px-6 md:py-4 px-3 py-1.5 flex flex-col h-full">
+              <TotalQues
+                questions={questions}
+                activeQues={activeQues}
+                setActiveQues={setActiveQues}
+              />
               <QuestionType title="Read Passage" />
               {tip && <Tip detail={tip} />}
               <div className="mt-1.5 flex flex-col h-full">
@@ -106,6 +101,7 @@ const Reading = ({ questions = [], setActive, loading }: Props) => {
             <QuizFooter
               ans={ans}
               setAns={setAns}
+              active={active}
               setActive={setActive}
               currQues={currQues}
               setCurrQues={setCurrQues}

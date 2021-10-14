@@ -20,6 +20,7 @@ const ExamStart = () => {
   // const history = useHistory();
   const { id } = useParams<{ id: string }>();
   const [active, setActive] = useState<"menu" | "reading" | "writing" | "listening">("menu");
+  // const [userAnswers, setUserAnswers] = useState<ISendAnswer[]>([]);
   // const user = useSelector((state: RootState) => state.user.entities?.user);
   const { data, loading } = useQuery<{ exams_exam_question: IExamQues[] }>(
     GET_EXAM_QUES,
@@ -31,7 +32,6 @@ const ExamStart = () => {
   );
 
   const groupedQue = useMemo(() => {
-    console.log("Data", data);
     if (data?.exams_exam_question) {
       const obj: {
         reading: (IQues & {exam_question_id: string})[];
@@ -122,12 +122,13 @@ const ExamStart = () => {
             </div>
      
         </div>
-      ) : active === "listening" ? (
-        <Listening questions={groupedQue.listening} setActive={setActive} />
+     
       ) : active === "reading" ? (
-        <Reading questions={groupedQue.reading} setActive={setActive}  loading={loading}/>
+        <Reading questions={groupedQue.reading} setActive={setActive}  loading={loading} active={active}/>
+      ) : active === "listening" ? (
+        <Listening questions={groupedQue.listening} setActive={setActive} active={active} />
       ) : (
-        <Writing questions={groupedQue.writing}  setActive={setActive}/>
+        <Writing questions={groupedQue.writing}  setActive={setActive} active={active}/>
       )}
     </GeneralLayout>
   );

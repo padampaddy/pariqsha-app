@@ -21,11 +21,13 @@ interface Props {
   setActive: React.Dispatch<
     SetStateAction<"menu" | "reading" | "writing" | "listening">
   >;
+  active: string;
 }
 
-const Listening = ({ questions = [], setActive }: Props) => {
+const Listening = ({ questions = [], setActive, active }: Props) => {
   const [currQues, setCurrQues] = useState(0);
   const [ans, setAns] = useState<string>("");
+  const [activeQues, setActiveQues] = useState(0);
   const audioRef = useRef() as MutableRefObject<HTMLAudioElement>;
 
   useEffect(() => {
@@ -51,8 +53,8 @@ const Listening = ({ questions = [], setActive }: Props) => {
         <div className="flex-grow-0 ">
           <QuizHeader title="Listening" setActive={setActive} />
         </div>
-        <div className="flex-grow px-6 py-4 flex flex-col overflow-y-auto h-full">
-          <TotalQues questions={questions} />
+        <div className="flex-grow md:px-6 md:py-4 px-3 py-1.5 flex flex-col overflow-y-auto h-full">
+          <TotalQues questions={questions} activeQues={activeQues} setActiveQues={setActiveQues}/>
           <Note detail="Recording will be played once only" />
           {tip && <Tip detail={tip} />}
           <audio ref={audioRef} autoPlay className="mt-6">
@@ -92,7 +94,8 @@ const Listening = ({ questions = [], setActive }: Props) => {
         <div className="flex-grow-0 quiz-footer common-btn">
           <QuizFooter
             ans={ans}
-            setAns={setAns}
+            setAns={setAns} 
+            active={active}
             setActive={setActive}
             currQues={currQues}
             setCurrQues={setCurrQues}

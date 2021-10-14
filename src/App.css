@@ -42,36 +42,6 @@
   text-align: center;
 }
 
-.language:hover{
-  background-color: #27A7AD;
-  border-radius: 10rem;
-  color: white;
-}
-.science:hover{
-background-color: #F9541F;
-border-radius: 10rem;
-color: white;
-}
-.drama:hover{
-background-color: #CDA4FF;
-border-radius: 10rem;
-color: white;
-}
-.art:hover{
-background-color: #91C874;
-border-radius: 10rem;
-color: white;
-}
-.maths:hover{
-background-color: #FDCC40;
-border-radius: 10rem;
-color: white;
-}
-.gk:hover{
-background-color: #79D9EF;
-border-radius: 10rem;
-color: white;
-}
 .list-style{
   box-shadow: 1px 1px 10px 1px #efdcdc;
 }
@@ -92,6 +62,7 @@ a.collection-list.common-btn, .quiz-button:hover, .market-btn:hover {
 /* width */
 ::-webkit-scrollbar {
   width: 5px;
+  height: 5px;
 }
 
 /* Track */
@@ -223,21 +194,24 @@ a.collection-list.common-btn, .quiz-button:hover, .market-btn:hover {
   overflow-y: auto!important;
 }
 
-
-/* .qstn-list {
-  margin-bottom: 18px;
-} */
+.qstn-list {
+  white-space: nowrap;
+  overflow: auto;
+  overflow-y: hidden;
+  padding-bottom: 8px;
+}
  
 .qstn-list li {
-  float: left;
-  margin: 0 5px 5px 0;
+  /* float: left; */
+  display: inline-block;
+  margin: 0 6px 5px 0;
   background: #1071b1;
   color: #fff;
   border-radius: 50%;
-  width: 20px;
+  width: 40px;
   text-align: center;
-  height: 20px;
-  font-size: 11px;
-  line-height: 20px;
+  height: 40px;
+  font-size: 15px;
+  line-height: 40px;
   font-weight: bold;
 }

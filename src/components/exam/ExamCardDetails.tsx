@@ -28,7 +28,6 @@ declare let Razorpay: any;
 
 const getLocalItems = () => {
   const likes = localStorage.getItem("like");
-  console.log(likes);
 
   if (likes) {
     return JSON.parse(likes);
@@ -38,7 +37,6 @@ const getLocalItems = () => {
 };
 
 export default function ExamCardDetails(): ReactElement {
-    console.log("Exam Details")
   const { id } = useParams<{ id: string }>();
   const user = useSelector((state: RootState) => state.user.entities?.user);
   const [registerQuiz] = useMutation(REGISTER_EXAM);

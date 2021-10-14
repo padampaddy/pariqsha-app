@@ -11,8 +11,8 @@ const QuizHeader = ({
   >;
 }) => {
   return (
-    <div className="px-0">
-      <div className="common-btn flex justify-between items-center p-6">
+    <>
+      <div className="common-btn flex justify-between items-center md:p-6 p-3.5">
         <button className="" onClick={() => setActive("menu")}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -30,7 +30,7 @@ const QuizHeader = ({
         <h3 className="text-xl font-medium ">{title}</h3>
         <TimeStamp hours={1} />
       </div>
-    </div>
+    </>
   );
 };
 

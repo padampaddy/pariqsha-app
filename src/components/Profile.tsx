@@ -24,7 +24,6 @@ function Profile({
   const [userProfile] = useMutation<IUserProfile>(UPDATE_USER_PROFILE);
 
   const uploadPicture = async (e: React.ChangeEvent<any>) => {
-    console.log(e);
     const formData = new FormData();
     formData.append("image", e.target.files[0]);
     const res = await fetch("https://functions.app.pariqsha.com/files/upload", {
