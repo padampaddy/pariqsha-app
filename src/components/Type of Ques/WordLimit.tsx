@@ -1,18 +1,16 @@
-import { ChangeEvent } from "react";
+import { useContext } from "react";
+import ExamContext from "../../contexts/examContext";
 
-interface Props {
-  ans: string;
-  onUpdate: (e: ChangeEvent<HTMLInputElement>) => void;
-}
-const WordLimit = ({ onUpdate, ans }: Props) => {
+const WordLimit = () => {
+  const { userAnswer, setUserAnswer } = useContext(ExamContext);
   return (
     <>
       <input
         type="text"
         className="resize-none text-sm flex w-full md:h-8 h-6 bg-transparent focus:outline-none border border-gray-400 break-words px-2 py-1 "
         placeholder="Type Your Answer"
-        value={ans}
-        onChange={onUpdate}
+        value={userAnswer}
+        onChange={(e)=>setUserAnswer(e.target.value)}
       />
     </>
   );

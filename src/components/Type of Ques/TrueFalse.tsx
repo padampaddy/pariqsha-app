@@ -1,13 +1,11 @@
-import { ChangeEvent } from "react";
+import {  useContext } from "react";
+import ExamContext from "../../contexts/examContext";
 
-interface Props {
-  ans: string;
-  onUpdate: (event: ChangeEvent<HTMLInputElement>) => void;
-}
 
 const items = [{ name: "True" }, { name: "False" }, { name: "Not given" }];
 
-const TrueFalse = ({ onUpdate, ans }: Props) => {
+const TrueFalse = () => {
+  const { userAnswer, setUserAnswer } = useContext(ExamContext);
   return (
     <>
       <form className="wrapper-mcq-form">
@@ -16,8 +14,8 @@ const TrueFalse = ({ onUpdate, ans }: Props) => {
             <input
               type="radio"
               value={item.name}
-              checked={item.name === ans}
-              onChange={onUpdate}
+              checked={item.name === userAnswer}
+              onChange={(e)=>setUserAnswer(e.target.value)}
               id={`rb_${index}`}
               name="radio-group"
             />

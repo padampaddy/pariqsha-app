@@ -1,76 +1,69 @@
-import { Dispatch, SetStateAction, useCallback } from "react";
+import { useCallback } from "react";
 import { useMutation } from "@apollo/client";
-import { IQues, ISendAnswer } from "../../../types/Quiz";
+import { ISendAnswer } from "../../../types/Quiz";
 import { SEND_ANSWER } from "../../../api/queries";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
+import { useContext } from "react";
+import ExamContext from "../../../contexts/examContext";
 
-interface Props {
-  questions: (IQues & { exam_question_id: string })[];
-  setActive: Dispatch<
-    SetStateAction<"menu" | "reading" | "writing" | "listening">
-  >;
-  currQues: number;
-  ans: string;
-  setAns: React.Dispatch<SetStateAction<string>>;
-  setCurrQues: Dispatch<SetStateAction<number>>;
-  active: string;
-}
-
-const QuizFooter = ({
-  active,
-  setActive,
-  currQues,
-  setCurrQues,
-  ans,
-  setAns,
-  questions = [],
-}: Props) => {
+const QuizFooter = () => {
   const user = useSelector((state: RootState) => state.user.entities?.user);
   const [sendAnswer] = useMutation<string[]>(SEND_ANSWER);
+  const {
+    active,
+    setActive,
+    setCurrentQuestionIndex,
+    currentQuestionIndex,
+    userAnswers,
+    setUserAnswers,
+    userAnswer,
+    setUserAnswer,
+    questions,
+  } = useContext(ExamContext);
 
   const setLocalAns = useCallback(
-    (ans) => {
-      const answersObj = {
-        quesId: questions[currQues].exam_question_id,
+    (userAnswer) => {
+      const answersObj: ISendAnswer = {
+        exam_question_id: questions[currentQuestionIndex].exam_question_id,
         status:
-          ans === ""
+        userAnswer === ""
             ? "unanswered"
-            : ans === questions[currQues]?.correct_answer
+            : userAnswer === questions[currentQuestionIndex]?.correct_answer
             ? "correct"
             : "wrong",
-        answer: ans,
+        answer: userAnswer,
       };
-      const arrStr = localStorage.getItem("answers");
-      let arr = [];
-      if (arrStr) {
-        arr = JSON.parse(arrStr);
-      }
-      const index = arr.findIndex(
-        (a: { quesId: string }) => a.quesId === answersObj.quesId
+      const index = userAnswers.findIndex(
+        (a) => a.exam_question_id === answersObj.exam_question_id
       );
       if (index === -1) {
-        arr.push(answersObj);
+        setUserAnswers([...userAnswers, answersObj]);
       } else {
-        arr[index] = answersObj;
+        setUserAnswers([
+          ...userAnswers.slice(0, index),
+          answersObj,
+          ...userAnswers.slice(index + 1),
+        ]);
+        userAnswers[index] = answersObj;
       }
-      localStorage.setItem("answers", JSON.stringify(arr));
+      localStorage.setItem("answers", JSON.stringify(userAnswers));
     },
-    [currQues]
+    [currentQuestionIndex]
   );
 
   const handleNext = () => {
-    setLocalAns(ans);
-    setAns("");
-    if (questions.length - 1 === currQues) {
+    setLocalAns(userAnswer);
+    if (questions.length - 1 === currentQuestionIndex) {
       setActive((a) =>
         a === "reading" ? "listening" : a === "listening" ? "writing" : "menu"
       );
-    } else setCurrQues(currQues + 1);
+    } else setCurrentQuestionIndex(currentQuestionIndex + 1);
+    setUserAnswer("");
   };
 
   const handlePrev = () => {
-    setCurrQues(currQues - 1);
+    setCurrentQuestionIndex(currentQuestionIndex - 1);
   };
 
   const handleSubmit = () => {
@@ -93,12 +86,12 @@ const QuizFooter = ({
 
     sendAnswer({
       variables: {
-        objects: dataToSend
+        objects: dataToSend,
       },
     })
       .then((info) => {
         console.log(info);
-        setAns("");
+        setUserAnswers([]);
         setActive("menu");
       })
       .catch((e) => console.error(e));
@@ -106,7 +99,7 @@ const QuizFooter = ({
 
   return (
     <div className="btn-grup">
-      {currQues !== 0 && (
+      {currentQuestionIndex !== 0 && (
         <button className="footer-button float-left" onClick={handlePrev}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -123,7 +116,7 @@ const QuizFooter = ({
           Previous
         </button>
       )}
-      {active === "writing" && currQues === questions.length - 1 ? (
+      {active === "writing" && currentQuestionIndex === questions.length - 1 ? (
         <button className="footer-button float-right" onClick={handleSubmit}>
           <svg
             xmlns="http://www.w3.org/2000/svg"

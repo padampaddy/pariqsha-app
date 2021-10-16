@@ -1,23 +1,29 @@
 import { createContext, SetStateAction, Dispatch } from "react";
-import { IExamQues, ISendAnswer } from "../types/Quiz";
+import { IQues, ISendAnswer } from "../types/Quiz";
 
 
 export interface IExamContext {
-    questions: IExamQues[];
+    questions: (IQues & {exam_question_id: string})[];
     active: "menu" | "reading" | "writing" | "listening";
-    setActive: Dispatch<
-    SetStateAction<"menu" | "reading" | "writing" | "listening">
-  >;
-  userAnswers: ISendAnswer[];
-  setUserAnswers: React.Dispatch<SetStateAction<string>>;
-
+    setActive: Dispatch<SetStateAction<"menu" | "reading" | "writing" | "listening">>;
+    userAnswers: ISendAnswer[];
+    currentQuestionIndex: number;
+    setCurrentQuestionIndex: React.Dispatch<SetStateAction<number>>;
+    setUserAnswers: React.Dispatch<SetStateAction<ISendAnswer[]>>;
+    setUserAnswer: React.Dispatch<SetStateAction<string>>;
+    userAnswer: string;
 }
 
-const ExamContext =  createContext({
+const ExamContext =  createContext<IExamContext>({
     questions: [],
     active: "menu",
     userAnswers: [],
-    setActive: "",
+    currentQuestionIndex: 0,
+    userAnswer: "",
+    setActive: ()=> console.log() ,
+    setUserAnswers: ()=> console.log(),
+    setCurrentQuestionIndex: ()=> console.log(),
+    setUserAnswer: ()=> console.log(),
 })
 
 export default ExamContext;

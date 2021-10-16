@@ -128,3 +128,9 @@ export interface ISendAnswer {
   exam_question_id: string;
   status: string;
 }
+
+export interface IGroupedQuestions {
+  reading: (IQues & { exam_question_id: string })[];
+  listening: (IQues & { exam_question_id: string })[];
+  writing: (IQues & { exam_question_id: string })[];
+}

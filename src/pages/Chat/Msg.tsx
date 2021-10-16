@@ -35,7 +35,8 @@ const Msg = () => {
   const uploadPicture = async (e: React.ChangeEvent<any>) => {
     console.log(e);
     const formData = new FormData();
-    formData.append("image", e.target.files[0]);
+    const file = e.target.files[0]
+    formData.append("image", file);
     const res = await fetch("https://functions.app.pariqsha.com/files/upload", {
       method: "POST",
       body: formData,

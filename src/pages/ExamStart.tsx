@@ -1,28 +1,30 @@
-import listening from "../assets/images/headphone.png";
-import read from "../assets/images/books.png";
-import exam2 from "../assets/images/exam2.png";
-import write from "../assets/images/write.png";
-// import speak from "../assets/images/chats.png";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 // import { RootState } from "../redux/store";
 // import { useSelector } from "react-redux";
 import { GET_EXAM_QUES } from "../api/queries";
-import { IExamQues, IQues } from "../types/Quiz";
-import { useMemo, useState } from "react";
-import Listening from "./QuizType/listening/Listening";
-import Reading from "./QuizType/reading/Reading";
-import Writing from "./QuizType/writing/Writing";
+import { IExamQues, IGroupedQuestions, ISendAnswer } from "../types/Quiz";
+import { useEffect, useMemo, useState } from "react";
+import Listening from "./QuizType/Listening";
+import Reading from "./QuizType/Reading";
+import Writing from "./QuizType/Writing";
 import GeneralLayout from "../layouts/General";
-
+import ExamContext from "../contexts/examContext";
+import QuizFooter from "./QuizType/components/QuizFooter";
+import Menu from "./QuizType/Menu";
+import TotalQues from "./QuizType/components/TotalQues";
+import QuizHeader from "./QuizType/components/QuizHeader";
 
 const ExamStart = () => {
-  // const history = useHistory();
   const { id } = useParams<{ id: string }>();
-  const [active, setActive] = useState<"menu" | "reading" | "writing" | "listening">("menu");
-  // const [userAnswers, setUserAnswers] = useState<ISendAnswer[]>([]);
+  const [active, setActive] = useState<
+    "menu" | "reading" | "writing" | "listening"
+  >("menu");
+  const [userAnswers, setUserAnswers] = useState<ISendAnswer[]>([]);
+  const [userAnswer, setUserAnswer] = useState<string>("");
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
   // const user = useSelector((state: RootState) => state.user.entities?.user);
-  const { data, loading } = useQuery<{ exams_exam_question: IExamQues[] }>(
+  const { data } = useQuery<{ exams_exam_question: IExamQues[] }>(
     GET_EXAM_QUES,
     {
       variables: {
@@ -30,14 +32,12 @@ const ExamStart = () => {
       },
     }
   );
-
+  useEffect(() => {
+    setCurrentQuestionIndex(0);
+  }, [active]);
   const groupedQue = useMemo(() => {
     if (data?.exams_exam_question) {
-      const obj: {
-        reading: (IQues & {exam_question_id: string})[];
-        listening: (IQues & {exam_question_id: string})[];
-        writing: (IQues & {exam_question_id: string})[];
-      } = {
+      const obj: IGroupedQuestions = {
         reading: [],
         listening: [],
         writing: [],
@@ -48,10 +48,9 @@ const ExamStart = () => {
             | "reading"
             | "writing"
             | "listening"
-        ].push({...cV.question,exam_question_id: cV.id});
+        ].push({ ...cV.question, exam_question_id: cV.id });
         return pV;
       }, obj);
-      console.log("Obj", obj);
       return obj;
     } else {
       return {
@@ -61,75 +60,58 @@ const ExamStart = () => {
       };
     }
   }, [data]);
-  
 
   return (
-    <GeneralLayout  hideFooter>
-      {active === "menu" ? (
-        <div className="flex flex-col h-full">
-          <div className="common-btn md:p-16 p-6 pb-16  flex-grow-0">
-            <p className="text-xl leading-normal md:w-1/2 md:mx-auto ">
-              Get lots of practical
-              <br />
-              tips for the Listening,
-              <br />
-              Reading and Writing sections to help you achieve your desired
-              score
-            </p>
-            
-          </div>
-          <div className="md:p-6 pb-0 p-4 rounded-3xl -mt-10 md:w-1/2 md:mx-auto bg-white flex-grow-0 ">
-            <ul>
-              <li
-                role="button"
-                onClick={() => setActive("reading")}
-                className="list-style animation"
-              >
-                Reading ({groupedQue.reading.length}) Qs
-                <span>
-                  <img src={read} className="h-8 w-8" alt="pariqsha reading" />
-                </span>
-              </li>
-
-              <li
-                role="button"
-                onClick={() => setActive("listening")}
-                className="list-style animation"
-              >
-                Listening ({groupedQue.listening.length}) Qs
-                <span>
-                  <img
-                    src={listening}
-                    className="h-8 w-8 "
-                    alt="pariqsha listening"
-                  />
-                </span>
-              </li>
-              <li
-                role="button"
-                onClick={() => setActive("writing")}
-                className="list-style animation"
-              >
-                Writing ({groupedQue.writing.length}) Qs
-                <span>
-                  <img src={write} className="h-8 w-8 " alt="pariqsha write" />
-                </span>
-              </li>
-            </ul>
-          </div>
-          <div className="flex-grow">
-            <img src={exam2} className="md:hidden w-3/4 m-auto" alt="pariqsha exam2" />
+    <GeneralLayout hideFooter>
+      <ExamContext.Provider
+        value={{
+          questions: active !== "menu" ? groupedQue[active] : [],
+          setActive,
+          active,
+          setUserAnswers,
+          userAnswers,
+          currentQuestionIndex,
+          setCurrentQuestionIndex,
+          userAnswer,
+          setUserAnswer,
+        }}
+      >
+        <div
+          className={`flex ${
+            active !== "menu" ? "md:w-1/2" : ""
+          } md:mx-auto flex-col bg-white md:shadow-md h-full`}
+        >
+          {active === "menu" ? null : (
+            <div className="flex-grow-0">
+              <QuizHeader
+                title={
+                  active === "reading"
+                    ? "Reading"
+                    : active === "listening"
+                    ? "Listening"
+                    : "Writing"
+                }
+                setActive={setActive}
+              />
+              <TotalQues />
             </div>
-     
+          )}
+          {active === "menu" ? (
+            <Menu groupedQuestions={groupedQue} />
+          ) : active === "reading" ? (
+            <Reading />
+          ) : active === "listening" ? (
+            <Listening />
+          ) : (
+            <Writing />
+          )}
+          {active === "menu" ? null : (
+            <div className="flex-grow-0 quiz-footer common-btn">
+              <QuizFooter />
+            </div>
+          )}
         </div>
-     
-      ) : active === "reading" ? (
-        <Reading questions={groupedQue.reading} setActive={setActive}  loading={loading} active={active}/>
-      ) : active === "listening" ? (
-        <Listening questions={groupedQue.listening} setActive={setActive} active={active} />
-      ) : (
-        <Writing questions={groupedQue.writing}  setActive={setActive} active={active}/>
-      )}
+      </ExamContext.Provider>
     </GeneralLayout>
   );
 };

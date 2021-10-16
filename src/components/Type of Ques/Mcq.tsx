@@ -1,20 +1,18 @@
-import { ChangeEvent } from "react";
+import { useContext } from "react";
+import ExamContext from "../../contexts/examContext";
 
-interface Props {
-  options: string[];
-  ans: string;
-  onUpdate: (e: ChangeEvent<HTMLInputElement>) => void;
-}
-const Mcq = ({ options, onUpdate, ans }: Props) => {
+const Mcq = () => {
+  const { userAnswer, setUserAnswer, questions, currentQuestionIndex } = useContext(ExamContext);
   return (
     <>
       <form className="wrapper-mcq-form">
-        {options.flatMap((item, index) => (
+        {questions[currentQuestionIndex].options.flatMap((item, index) => (
           <p className="text-sm" key={index}>
             <input
               type="radio"
-              value={ans}
-              onChange={onUpdate}
+              value={item}
+              checked={item === userAnswer}
+              onChange={(e)=>setUserAnswer(e.target.value)}
               id={`rb_${index}`}
               name="radio-group"
             />

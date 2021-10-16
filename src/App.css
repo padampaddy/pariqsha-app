@@ -190,13 +190,11 @@ a.collection-list.common-btn, .quiz-button:hover, .market-btn:hover {
   animation-iteration-count: 1;
   animation-timing-function: ease-in-out;
 }
-.quiz-list {
-  overflow-y: auto!important;
-}
+
 
 .qstn-list {
   white-space: nowrap;
-  overflow: auto;
+  overflow-x: auto;
   overflow-y: hidden;
   padding-bottom: 8px;
 }
