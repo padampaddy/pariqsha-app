@@ -9,7 +9,7 @@ import TrueFalse from "../../components/Type of Ques/TrueFalse";
 import Mcq from "../../components/Type of Ques/Mcq";
 import WordLimit from "../../components/Type of Ques/WordLimit";
 import Tip from "./components/Tip";
-import CheckBox from "../../components/Type of Ques/CheckBox";
+// import CheckBox from "../../components/Type of Ques/CheckBox";
 import ExamContext from "../../contexts/examContext";
 
 const Listening = () => {
@@ -56,8 +56,8 @@ const Listening = () => {
             <TrueFalse/>
           ) : type === "multiple_choice_question" ? (
             <Mcq />
-          ) : type === "checkbox" ? (
-            <CheckBox/>
+          // ) : type === "checkbox" ? (
+          //   <CheckBox/>
           ) : (
             <WordLimit />
           )}

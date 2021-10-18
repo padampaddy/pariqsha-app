@@ -12,7 +12,7 @@ import { useParams } from "react-router-dom";
 import DEFAULT_AVATAR from "../../assets/images/profileuser.png";
 import PicPreview from "../../components/PicPreview";
 import modalSlice from "../../redux/slices/modal-slice";
-import Loader from "../../components/Loader";
+import Loader from "../../components/Loader/Loader";
 
 const Msg = () => {
   const { id } = useParams<{ id: string }>();
@@ -27,7 +27,7 @@ const Msg = () => {
   );
   const temp1 = useRef() as MutableRefObject<HTMLDivElement>;
   const [input, setInput] = useState<string>("");
-  const [pictures, setPictures] = useState<string>("");
+  const [pictures, setPictures] = useState({ url: "", name: "", type: "" });
   const wrapperRef = useRef() as MutableRefObject<HTMLInputElement>;
   const [sendMessage] = useMutation<ISendMessage>(SEND_MESSAGE);
   const dispatch = useDispatch();
@@ -45,24 +45,25 @@ const Msg = () => {
       },
     });
     const { url } = await res.json();
-    setPictures(url);
+    setPictures({ url: url, name: file.name, type: file.type });
     e.target.value = "";
+    console.log("img", pictures.name)
   };
 
   const handleSend = async () => {
-    if (input.trim().length === 0 && pictures.length === 0) return;
+    if (input.trim().length === 0 && pictures.url.length === 0) return;
     sendMessage({
       variables: {
         message: input,
         threadId: id,
         sentBy: user?.id,
-        attachmentUrl: pictures,
+        attachmentUrl: pictures.url,
       },
     })
       .then((info) => {
         console.log(info);
         setInput("");
-        setPictures("");
+        setPictures({ url: "", name: "", type: "" });
         temp1.current?.scrollTo(0, temp1.current?.scrollHeight);
       })
       .catch((e) => console.error(e));
@@ -123,6 +124,7 @@ const Msg = () => {
                                             body: (
                                               <PicPreview
                                                 url={msg.attachment_url}
+                                                name={pictures.name}
                                               />
                                             ),
                                           })
@@ -199,13 +201,13 @@ const Msg = () => {
                 encType="multipart/form-data"
                 className="w-full"
               >
-                {pictures !== "" && (
+                {pictures.url !== "" && (
                   <div className="flex  mb-2">
                     <div className="w-20 h-20 flex">
-                      <img src={pictures} className="w-20 h-20" />
+                      <img src={pictures.url} className="w-20 h-20" />
                       <button
                         type="button"
-                        onClick={() => setPictures("")}
+                        onClick={() => setPictures({ url: "", name: "", type: "" })}
                         className="-ml-2 -mt-2 rounded-full h-5 w-5 bg-gray-700"
                       >
                         <svg

@@ -3,7 +3,7 @@ import TrueFalse from "../../components/Type of Ques/TrueFalse";
 import WordLimit from "../../components/Type of Ques/WordLimit";
 import Mcq from "../../components/Type of Ques/Mcq";
 import Tip from "./components/Tip";
-import CheckBox from "../../components/Type of Ques/CheckBox";
+// import CheckBox from "../../components/Type of Ques/CheckBox";
 import QuestionType from "../../components/QuestionType";
 import ExamContext from "../../contexts/examContext";
 
@@ -42,8 +42,8 @@ const Reading = () => {
                   <TrueFalse />
                 ) : type === "multiple_choice_question" ? (
                   <Mcq />
-                ) : type === "checkbox" ? (
-                  <CheckBox />
+                // ) : type === "checkbox" ? (
+                //   <CheckBox />
                 ) : (
                   <WordLimit/>
                 )}

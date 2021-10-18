@@ -28,7 +28,7 @@ const QuizHeader = ({
           </svg>
         </button>
         <h3 className="text-xl font-medium ">{title}</h3>
-        <TimeStamp hours={1} />
+        <TimeStamp hours={3} />
       </div>
     </>
   );

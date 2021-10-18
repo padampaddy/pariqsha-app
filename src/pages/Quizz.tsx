@@ -5,7 +5,7 @@ import { GET_TODAY_QUIZZES } from "../api/queries";
 import BaseLayout from "../layouts/Base";
 import { QuizResponse } from "../types/Quiz";
 import Collections from "../components/Collections";
-import Loader from "../components/Loader";
+import Loader from "../components/Loader/Loader";
 import GetCard from "../components/quiz/GetCard";
 import GetExamCards from "../components/exam/GetExamCard";
 
@@ -69,18 +69,18 @@ export default function Quizz() {
           <div className="collections w-full">
             <Collections />
           </div>
-          
+
           <Switch>
-           
             <Route exact path="/home">
-              <div className="flex flex-row flex-wrap gap-4 w-full mt-2">
-                <GetCard searchTerm={searchTerm} />
+            <div className="flex flex-row flex-wrap gap-4 w-full mt-2">
+              <GetExamCards searchTerm={searchTerm} />
               </div>
             </Route>
 
-            <Route exact path="/home/ielts">
-              {/* <div>My quiz</div> */}
-              <GetExamCards searchTerm={searchTerm} />
+            <Route exact path="/home/discover">
+              <div className="flex flex-row flex-wrap gap-4 w-full mt-2">
+                <GetCard searchTerm={searchTerm} />
+              </div>
             </Route>
 
             <Route exact path="/home/upcoming">
@@ -96,7 +96,6 @@ export default function Quizz() {
                 <div> No Liked Card</div>
               </div>
             </Route>
-            
           </Switch>
         </div>
       )}

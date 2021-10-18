@@ -15,16 +15,26 @@ import Menu from "./QuizType/Menu";
 import TotalQues from "./QuizType/components/TotalQues";
 import QuizHeader from "./QuizType/components/QuizHeader";
 
+const getLocalItems = () => {
+  const answers = localStorage.getItem("answers");
+
+  if (answers) {
+    return JSON.parse(answers);
+  } else {
+    return [];
+  }
+};
+
 const ExamStart = () => {
   const { id } = useParams<{ id: string }>();
   const [active, setActive] = useState<
     "menu" | "reading" | "writing" | "listening"
   >("menu");
   const [userAnswers, setUserAnswers] = useState<ISendAnswer[]>([]);
-  const [userAnswer, setUserAnswer] = useState<string>("");
+  const [userAnswer, setUserAnswer] = useState<string>(getLocalItems());
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
   // const user = useSelector((state: RootState) => state.user.entities?.user);
-  const { data } = useQuery<{ exams_exam_question: IExamQues[] }>(
+  const { data, loading } = useQuery<{ exams_exam_question: IExamQues[] }>(
     GET_EXAM_QUES,
     {
       variables: {
@@ -74,6 +84,7 @@ const ExamStart = () => {
           setCurrentQuestionIndex,
           userAnswer,
           setUserAnswer,
+          loading
         }}
       >
         <div

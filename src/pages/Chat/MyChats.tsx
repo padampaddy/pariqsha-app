@@ -8,7 +8,7 @@ import moment from "moment";
 import useAuthSubscription from "../../hooks/useAuthSubscription";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import Loader from "../../components/Loader";
+import Loader from "../../components/Loader/Loader";
 
 
 function Mychats() {

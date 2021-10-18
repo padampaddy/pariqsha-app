@@ -6,8 +6,10 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
 import { useContext } from "react";
 import ExamContext from "../../../contexts/examContext";
+import { useHistory } from "react-router-dom";
 
 const QuizFooter = () => {
+  const history = useHistory();
   const user = useSelector((state: RootState) => state.user.entities?.user);
   const [sendAnswer] = useMutation<string[]>(SEND_ANSWER);
   const {
@@ -92,7 +94,7 @@ const QuizFooter = () => {
       .then((info) => {
         console.log(info);
         setUserAnswers([]);
-        setActive("menu");
+        history.push("/submit")
       })
       .catch((e) => console.error(e));
   };

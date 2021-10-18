@@ -12,6 +12,7 @@ export interface IExamContext {
     setUserAnswers: React.Dispatch<SetStateAction<ISendAnswer[]>>;
     setUserAnswer: React.Dispatch<SetStateAction<string>>;
     userAnswer: string;
+    loading: boolean;
 }
 
 const ExamContext =  createContext<IExamContext>({
@@ -24,6 +25,7 @@ const ExamContext =  createContext<IExamContext>({
     setUserAnswers: ()=> console.log(),
     setCurrentQuestionIndex: ()=> console.log(),
     setUserAnswer: ()=> console.log(),
+    loading: true
 })
 
 export default ExamContext;

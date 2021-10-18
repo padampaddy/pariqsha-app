@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { CHECK_CHAT, SEARCH_CONTACT, START_NEW_CHAT } from "../../api/queries";
-import Loader from "../../components/Loader";
+import Loader from "../../components/Loader/Loader";
 import BaseLayout from "../../layouts/Base";
 import { RootState } from "../../redux/store";
 import { ISearchProfile } from "../../types/Chat";
