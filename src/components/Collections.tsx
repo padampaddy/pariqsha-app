@@ -34,8 +34,8 @@ const Collections = () => {
             backgroundColor: "#fff",
             primaryColor: "#3985db",
             textColor: "#000",
-            width: 900,
-            zIndex: 0,
+            width: "40vw",
+            zIndex: 9999,
           },
         }}
       />
@@ -69,7 +69,7 @@ const Collections = () => {
           <li role="button">
             <NavLink
               to="/home/discover"
-              className="collection-list discover"
+              className="collection-list discover hidden"
               activeClassName="common-btn"
             >
               <svg
@@ -93,7 +93,7 @@ const Collections = () => {
           <li role="button">
             <NavLink
               to="/home/upcoming"
-              className="collection-list upcoming"
+              className="collection-list upcoming hidden"
               activeClassName="common-btn"
             >
               <svg
@@ -117,7 +117,7 @@ const Collections = () => {
           <li role="button">
             <NavLink
               to="/home/live"
-              className="collection-list live"
+              className="collection-list live hidden"
               activeClassName="common-btn selected"
               aria-current="page"
             >
@@ -129,7 +129,7 @@ const Collections = () => {
           <li role="button">
             <NavLink
               to="/home/like"
-              className="collection-list liked"
+              className="collection-list liked hidden"
               activeClassName="common-btn"
             >
               <svg

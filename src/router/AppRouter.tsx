@@ -95,7 +95,7 @@ function MySwitch() {
         <ExamCardDetails />
       </PrivateRoute>
 
-      <PrivateRoute path="/examstart/:id">
+      <PrivateRoute path="/examstart/:id/:time">
         <ExamStart />
       </PrivateRoute>
 

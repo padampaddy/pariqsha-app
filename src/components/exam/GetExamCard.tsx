@@ -283,7 +283,7 @@ const GetExamCards = ({ searchTerm = "" }: { searchTerm: string }) => {
                   </button>
 
                   <button
-                    onClick={() => history.push(`/examstart/${item.id}`)}
+                    onClick={() => history.push(`/examstart/${item.id}/${item.duration_in_minutes}`)}
                     className="quiz-button"
                   >
                     <svg

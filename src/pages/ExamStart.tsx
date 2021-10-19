@@ -1,7 +1,5 @@
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
-// import { RootState } from "../redux/store";
-// import { useSelector } from "react-redux";
 import { GET_EXAM_QUES } from "../api/queries";
 import { IExamQues, IGroupedQuestions, ISendAnswer } from "../types/Quiz";
 import { useEffect, useMemo, useState } from "react";
@@ -15,25 +13,8 @@ import Menu from "./QuizType/Menu";
 import TotalQues from "./QuizType/components/TotalQues";
 import QuizHeader from "./QuizType/components/QuizHeader";
 
-const getLocalItems = () => {
-  const answers = localStorage.getItem("answers");
-
-  if (answers) {
-    return JSON.parse(answers);
-  } else {
-    return [];
-  }
-};
-
 const ExamStart = () => {
-  const { id } = useParams<{ id: string }>();
-  const [active, setActive] = useState<
-    "menu" | "reading" | "writing" | "listening"
-  >("menu");
-  const [userAnswers, setUserAnswers] = useState<ISendAnswer[]>([]);
-  const [userAnswer, setUserAnswer] = useState<string>(getLocalItems());
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
-  // const user = useSelector((state: RootState) => state.user.entities?.user);
+  const { id, time } = useParams<{ id: string; time: string }>();
   const { data, loading } = useQuery<{ exams_exam_question: IExamQues[] }>(
     GET_EXAM_QUES,
     {
@@ -42,9 +23,24 @@ const ExamStart = () => {
       },
     }
   );
+
+  const [active, setActive] = useState<
+    "menu" | "reading" | "writing" | "listening"
+  >("menu");
+  const [userAnswers, setUserAnswers] = useState<ISendAnswer[]>(
+    JSON.parse(localStorage.getItem("answers") ?? "[]")
+  );
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
+  const [userAnswer, setUserAnswer] = useState<string>("");
+
+  useEffect(() => {
+    localStorage.setItem("answers", JSON.stringify(userAnswers));
+  }, [userAnswers]);
+
   useEffect(() => {
     setCurrentQuestionIndex(0);
   }, [active]);
+
   const groupedQue = useMemo(() => {
     if (data?.exams_exam_question) {
       const obj: IGroupedQuestions = {
@@ -71,6 +67,19 @@ const ExamStart = () => {
     }
   }, [data]);
 
+  useEffect(() => {
+    if (active !== "menu") {
+      const index = userAnswers.findIndex(
+        (a) =>
+          a.exam_question_id ===
+          groupedQue?.[active]?.[currentQuestionIndex].exam_question_id
+      );
+      if (index !== -1) {
+        setUserAnswer(userAnswers[index].answer);
+      }
+    }
+  }, [active, currentQuestionIndex, groupedQue]);
+
   return (
     <GeneralLayout hideFooter>
       <ExamContext.Provider
@@ -84,7 +93,7 @@ const ExamStart = () => {
           setCurrentQuestionIndex,
           userAnswer,
           setUserAnswer,
-          loading
+          loading,
         }}
       >
         <div
@@ -94,16 +103,7 @@ const ExamStart = () => {
         >
           {active === "menu" ? null : (
             <div className="flex-grow-0">
-              <QuizHeader
-                title={
-                  active === "reading"
-                    ? "Reading"
-                    : active === "listening"
-                    ? "Listening"
-                    : "Writing"
-                }
-                setActive={setActive}
-              />
+              <QuizHeader time={time} />
               <TotalQues />
             </div>
           )}

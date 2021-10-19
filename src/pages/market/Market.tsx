@@ -48,7 +48,7 @@ const Market = () => {
               transition={{
                 type: "spring",
                 stiffness: 200,
-                damping: 50,
+                damping: 30,
               }}
             >
               <div className="bg-white shadow-lg rounded-md relative overflow-hidden">

@@ -29,7 +29,7 @@ const QuizFooter = () => {
       const answersObj: ISendAnswer = {
         exam_question_id: questions[currentQuestionIndex].exam_question_id,
         status:
-        userAnswer === ""
+          userAnswer === ""
             ? "unanswered"
             : userAnswer === questions[currentQuestionIndex]?.correct_answer
             ? "correct"
@@ -49,7 +49,6 @@ const QuizFooter = () => {
         ]);
         userAnswers[index] = answersObj;
       }
-      localStorage.setItem("answers", JSON.stringify(userAnswers));
     },
     [currentQuestionIndex]
   );
@@ -94,9 +93,10 @@ const QuizFooter = () => {
       .then((info) => {
         console.log(info);
         setUserAnswers([]);
-        history.push("/submit")
+        history.push("/submit");
       })
       .catch((e) => console.error(e));
+      history.push("/submit");
   };
 
   return (

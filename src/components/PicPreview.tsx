@@ -10,7 +10,7 @@ interface Props {
   type?: string;
 }
 
-function PicPreview({ url, name }: Props): ReactElement {
+function PicPreview({ url, name, type }: Props): ReactElement {
   const dispatch = useDispatch();
   // const [pageNumber] = useState(1);
   // const [numPages, setNumPages] = useState(1);
@@ -20,7 +20,7 @@ function PicPreview({ url, name }: Props): ReactElement {
     <>
       <div className="flex items-center justify-between px-4">
         <div className="flex items-center">
-        {/* {type && type === "application/pdf" ? (
+          {/* {type && type === "application/pdf" ? (
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-5 w-5"
@@ -33,7 +33,7 @@ function PicPreview({ url, name }: Props): ReactElement {
               clipRule="evenodd"
             />
           </svg>
-        ) : type?.includes("image/") ? ( */}
+        ) : type?.includes("image/") ? (
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-5 w-5"
@@ -46,8 +46,22 @@ function PicPreview({ url, name }: Props): ReactElement {
               clipRule="evenodd"
             />
           </svg>
-        {/* ) : null} */}
-        <p className="text-lg ml-1">{name}</p>
+        ) : null} */}
+          {type && (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fillRule="evenodd"
+                d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
+                clipRule="evenodd"
+              />
+            </svg>
+          )}
+          <p className="text-lg ml-1">{name}</p>
         </div>
         <button onClick={() => dispatch(modalSlice.actions.hideModal())}>
           <svg
@@ -72,7 +86,7 @@ function PicPreview({ url, name }: Props): ReactElement {
         ) : (
           <img className="mx-auto h-3/4 w-3/4" src={url} />
         )} */}
-         <img className="mx-auto h-3/4 w-3/4" src={url} />
+        <img className="mx-auto h-3/4 w-3/4" src={url} />
       </div>
     </>
   );

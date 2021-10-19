@@ -57,7 +57,7 @@ function BaseLayout({
           {showBack ? (
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="w-6 h-6 cursor-pointer  left-2 top-0 bottom-0 my-auto absolute"
+              className="w-6 h-6 cursor-pointer left-2 top-0 bottom-0 my-auto absolute"
               viewBox="0 0 20 20"
               fill="currentColor"
               onClick={() => history.goBack()}

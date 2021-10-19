@@ -24,7 +24,7 @@ export default function Menu({
           Reading and Writing sections to help you achieve your desired score
         </p>
       </div>
-      <div className="md:p-6 pb-0 p-4 rounded-3xl -mt-10 md:w-1/2 md:mx-auto bg-white flex-grow-0 ">
+      <div className="md:p-6 pb-0 p-4 rounded-3xl -mt-10 md:w-1/2 md:mx-auto bg-white md:border-4 border-0 flex-grow-0 " style={{borderColor:"#2799E5"}}>
         {loading ? (
           <Loader />
         ) : (
@@ -32,7 +32,7 @@ export default function Menu({
             <li
               role="button"
               onClick={() => setActive("reading")}
-              className="list-style animation"
+              className="list-style animation md:mt-4 mt-0" style={{borderColor:"#2799E5"}}
             >
               Reading ({groupedQuestions.reading.length}) Qs
               <span>
@@ -43,7 +43,7 @@ export default function Menu({
             <li
               role="button"
               onClick={() => setActive("listening")}
-              className="list-style animation"
+              className="list-style animation" style={{borderColor:"#2799E5"}}
             >
               Listening ({groupedQuestions.listening.length}) Qs
               <span>
@@ -57,7 +57,7 @@ export default function Menu({
             <li
               role="button"
               onClick={() => setActive("writing")}
-              className="list-style animation"
+              className="list-style animation" style={{borderColor:"#2799E5"}}
             >
               Writing ({groupedQuestions.writing.length}) Qs
               <span>

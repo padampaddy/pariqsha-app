@@ -1,5 +1,5 @@
 import Note from "./components/Note";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import ExamContext from "../../contexts/examContext";
@@ -11,15 +11,22 @@ const Writing = () => {
   const dispatch = useDispatch();
   const { entities } = useSelector((state: RootState) => state.user);
   const [files, setFiles] = useState({ url: "", name: "", type: "" });
+  const [invalidFile, setInvalidFile] = useState("")
   const [isLoading, setLoading] = useState(false);
-  const { questions, currentQuestionIndex, setUserAnswer } =
-    useContext(ExamContext);
+  const { questions, currentQuestionIndex, setUserAnswer } = useContext(ExamContext);
 
   const uploadFile = async (e: React.ChangeEvent<any>) => {
     setLoading(true);
     const formData = new FormData();
     const file = e.target.files[0];
     formData.append("image", file);
+    if (!file.name.match(/\.(jpg|jpeg|png)$/)) {
+      setInvalidFile("File does not support");
+     setLoading(false);
+     return false
+    }
+    else{
+    setInvalidFile("")
     const res = await fetch("https://functions.app.pariqsha.com/files/upload", {
       method: "POST",
       body: formData,
@@ -31,8 +38,14 @@ const Writing = () => {
     setFiles({ url: url, name: file.name, type: file.type });
     e.target.value = "";
     setLoading(false);
-    setUserAnswer(url);
+    setUserAnswer(url); 
+    return
+  }
   };
+
+  useEffect(()=>{
+    setFiles({ url: "", name: "", type: "" })
+  },[currentQuestionIndex])
 
   const handleRemove = () => {
     setFiles({ url: "", name: "", type: "" });
@@ -57,7 +70,9 @@ const Writing = () => {
           <p className="text-xs text-gray-500 mt-1">
             Accepted Formats: JPEG, PNG
           </p>
+          
           <div className="mt-3 mb-2">
+          {invalidFile && <div className="text-red-500 text-sm">{invalidFile}</div> }
             {isLoading ? (
               <LinearLoader />
             ) : (
@@ -76,7 +91,8 @@ const Writing = () => {
                       ),
                     })
                   );
-                }}>
+                }}
+              >
                 {/* {files &&
             Object.keys(files).length &&
             files?.type === "application/pdf" ? (
@@ -106,8 +122,8 @@ const Writing = () => {
                 />
               </svg>
               ) : null}  */}
-                {files && files?.type &&(
-                  <> 
+                {files && files?.type && (
+                  <>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="h-5 w-5"
@@ -147,7 +163,7 @@ const Writing = () => {
                 Remove
               </button>
             ) : (
-              <label className="flex justify-center p-2  text-sm items-center rounded-lg hover:bg-gray-200 capitalize cursor-pointer">
+              <label className="flex justify-center p-2 text-sm items-center rounded-lg hover:bg-gray-200 capitalize cursor-pointer">
                 <span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
