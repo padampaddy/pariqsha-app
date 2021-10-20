@@ -63,9 +63,9 @@ const Notification = () => {
           </ul>
         </div>
         <div className="text-center mt-6 mb-6">
-          <a href="#" className="underline text-gray-400 text-lg text-center ">
+          <button className="underline text-gray-400 text-lg text-center ">
             Clear All
-          </a>
+          </button>
         </div>
       </div>
     </BaseLayout>

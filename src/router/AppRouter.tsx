@@ -38,6 +38,9 @@ import ExamCardDetails from "../components/exam/ExamCardDetails";
 import Login from "../pages/Login/Login";
 import Notification from "../pages/Notifications";
 import SubmitPage from "../pages/QuizType/SubmitPage";
+// import LeaderBoard from "../pages/LeaderBoard";
+import LeaderB from "../pages/LeaderB";
+import Results from "../pages/Results";
 
 function MySwitch() {
   const location = useLocation();
@@ -49,6 +52,14 @@ function MySwitch() {
 
       <PrivateRoute path="/coins">
         <Coins />
+      </PrivateRoute>
+
+      <PrivateRoute path="/leaderboard">
+        <LeaderB />
+      </PrivateRoute>
+
+      <PrivateRoute path="/results">
+        <Results />
       </PrivateRoute>
 
       <PrivateRoute path="/setting">

@@ -192,6 +192,19 @@ const Drawer = ({ onClose }: Props) => {
               Earn Coins
             </NavLink>
           </li>
+
+          <li className="nav-item">
+            <NavLink
+              to="/results"
+              onClick={() => {
+                onClose();
+              }}
+              className="nav-link"
+              activeClassName="selected common-btn-nav"
+            >
+              Results
+            </NavLink>
+          </li>
         </ul>
 
         <div className="flex flex-row w-full absolute  bottom-0 bg-white z-10">

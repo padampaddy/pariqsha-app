@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 
 interface Props {
   hours?: number;
@@ -7,17 +7,17 @@ interface Props {
 }
 
 const TimeStamp = ({ hours = 0, minutes = 0, seconds = 0 }: Props) => {
-  const getLocalItems = useCallback(() => {
-    const time = localStorage.getItem("time");
-    if (time) {
-      return JSON.parse(time);
-    } else {
-      return [hours, minutes, seconds];
-    }
-  }, []);
+  // const getLocalItems = useCallback(() => {
+  //   const time = localStorage.getItem("time");
+  //   if (time) {
+  //     return JSON.parse(time);
+  //   } else {
+  //     return [hours, minutes, seconds];
+  //   }
+  // }, []);
 
   const [over, setOver] = useState(false);
-  const [[h, m, s], setTime] = useState(getLocalItems());
+  const [[h, m, s], setTime] = useState([hours, minutes, seconds]);
 
   const tick = () => {
     if (over) return;
@@ -33,7 +33,7 @@ const TimeStamp = ({ hours = 0, minutes = 0, seconds = 0 }: Props) => {
 
   useEffect(() => {
     const timerID = setInterval(() => tick(), 1000);
-    localStorage.setItem("time", JSON.stringify([h, m, s]));
+    // localStorage.setItem("time", JSON.stringify([h, m, s]));
     return () => clearInterval(timerID);
   }, [tick]);
 

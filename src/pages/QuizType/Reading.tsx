@@ -20,11 +20,11 @@ const Reading = () => {
           {tip && <Tip detail={tip} />}
           <div className="mt-1.5 flex flex-col h-full">
             {/* passage */}
-            <p className="text-sm font-bold">
+            <p className="text-sm font-bold mb-2">
               {questions[currentQuestionIndex].context.title}
             </p>
             <div className="flex-grow overflow-y-auto md:h-50 h-36">
-              <p className="text-sm mt-2 whitespace-pre-wrap">
+              <p className="text-sm whitespace-pre-wrap">
                 {questions[currentQuestionIndex].context.details}
               </p>
             </div>

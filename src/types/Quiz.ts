@@ -112,16 +112,6 @@ export interface IExamQues {
   question: IQues;
 }
 
-export interface IExamAns {
-  exams_exam_answer: {
-    id: string;
-    updated_at: Date;
-    exam_question_id: string;
-    answer: string;
-    status: string;
-  };
-}
-
 export interface ISendAnswer {
   answer: string;
   user_id?: string;

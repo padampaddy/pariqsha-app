@@ -88,13 +88,7 @@ export default function ExamCardDetails(): ReactElement {
           date={moment(data?.exams_exam_by_pk.start_at).format("Do MMM")}
           coverImgSrc={data?.exams_exam_by_pk.cover_image_url}
           time={moment(data?.exams_exam_by_pk.start_at).format("h:mm A")}
-          duration={moment
-            .duration(
-              moment(data?.exams_exam_by_pk.start_at).diff(
-                moment(data?.exams_exam_by_pk.end_at)
-              )
-            )
-            .humanize()}
+          duration={data?.exams_exam_by_pk.duration_in_minutes}
           // subTitle={data?.exams_exam_by_pk.short_description.split(",").join(", ")}
           likeBtn={
             <svg

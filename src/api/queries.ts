@@ -414,6 +414,16 @@ export const GET_EXAM_QUES = gql`
   }
 `;
 
+export const SEND_ANSWER = gql`
+  mutation send_answer($objects: [exams_exam_answer_insert_input!]!) {
+    insert_exams_exam_answer(objects: $objects) {
+      returning {
+        id
+      }
+    }
+  }
+`;
+
 export const GET_EXAM_ANS = gql`
   subscription get_exam_ans($userId: uuid!, $ExamId: uuid!) {
     exams_exam_answer(
@@ -429,16 +439,6 @@ export const GET_EXAM_ANS = gql`
       status
       updated_at
       exam_question {
-        id
-      }
-    }
-  }
-`;
-
-export const SEND_ANSWER = gql`
-  mutation send_answer($objects: [exams_exam_answer_insert_input!]!) {
-    insert_exams_exam_answer(objects: $objects) {
-      returning {
         id
       }
     }

@@ -1,32 +1,32 @@
 import { NavLink } from "react-router-dom";
-import Joyride from "react-joyride";
+// import Joyride from "react-joyride";
 
-const steps = [
-  {
-    target: ".ielts",
-    content: "This is  IELTS quiz!",
-  },
-  {
-    target: ".discover",
-    content: "This is Discover quiz!",
-  },
-  {
-    target: ".upcoming",
-    content: "This is Upcoming quiz!",
-  },
-  {
-    target: ".live",
-    content: "This is Live quiz!",
-  },
-  {
-    target: ".liked",
-    content: "This is Liked quiz!",
-  },
-];
+// const steps = [
+//   {
+//     target: ".ielts",
+//     content: "This is  IELTS quiz!",
+//   },
+//   {
+//     target: ".discover",
+//     content: "This is Discover quiz!",
+//   },
+//   {
+//     target: ".upcoming",
+//     content: "This is Upcoming quiz!",
+//   },
+//   {
+//     target: ".live",
+//     content: "This is Live quiz!",
+//   },
+//   {
+//     target: ".liked",
+//     content: "This is Liked quiz!",
+//   },
+// ];
 const Collections = () => {
   return (
     <>
-      <Joyride
+      {/* <Joyride
         steps={steps}
         styles={{
           options: {
@@ -38,7 +38,7 @@ const Collections = () => {
             zIndex: 9999,
           },
         }}
-      />
+      /> */}
       <div className="collections p-0">
         <ul className="w-full mb-2 float-left ">
           <li role="button" className="">

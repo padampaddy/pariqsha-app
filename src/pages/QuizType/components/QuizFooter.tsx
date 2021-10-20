@@ -68,6 +68,7 @@ const QuizFooter = () => {
   };
 
   const handleSubmit = () => {
+    setLocalAns(userAnswer);
     const arrStr = localStorage.getItem("answers");
     let arr = [];
     if (arrStr) {
@@ -75,16 +76,15 @@ const QuizFooter = () => {
     }
     const dataToSend: ISendAnswer[] = [];
     arr.forEach(
-      (answer: { answer: string; quesId: string; status: string }) => {
+      (answer: { answer: string; exam_question_id: string; status: string }) => {
         dataToSend.push({
           answer: answer.answer,
-          exam_question_id: answer.quesId,
+          exam_question_id: answer.exam_question_id,
           user_id: user!.id,
           status: answer.status,
         });
       }
     );
-
     sendAnswer({
       variables: {
         objects: dataToSend,
@@ -92,11 +92,11 @@ const QuizFooter = () => {
     })
       .then((info) => {
         console.log(info);
-        setUserAnswers([]);
         history.push("/submit");
+        setUserAnswers([]);
+        setLocalAns("");
       })
       .catch((e) => console.error(e));
-      history.push("/submit");
   };
 
   return (

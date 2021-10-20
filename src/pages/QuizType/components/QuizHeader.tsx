@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import TimeStamp from "../../../components/Time/TimeStamp";
+import TimeStamp from "../../../components/TimeStamp";
 import ExamContext from "../../../contexts/examContext";
 
 const QuizHeader = ({ time }: { time: string }) => {
