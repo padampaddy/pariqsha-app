@@ -49,6 +49,7 @@ const QuizFooter = () => {
         ]);
         userAnswers[index] = answersObj;
       }
+      return userAnswers;
     },
     [currentQuestionIndex]
   );
@@ -68,15 +69,14 @@ const QuizFooter = () => {
   };
 
   const handleSubmit = () => {
-    setLocalAns(userAnswer);
-    const arrStr = localStorage.getItem("answers");
-    let arr = [];
-    if (arrStr) {
-      arr = JSON.parse(arrStr);
-    }
+    const arr = setLocalAns(userAnswer);
     const dataToSend: ISendAnswer[] = [];
     arr.forEach(
-      (answer: { answer: string; exam_question_id: string; status: string }) => {
+      (answer: {
+        answer: string;
+        exam_question_id: string;
+        status: string;
+      }) => {
         dataToSend.push({
           answer: answer.answer,
           exam_question_id: answer.exam_question_id,
@@ -95,6 +95,7 @@ const QuizFooter = () => {
         history.push("/submit");
         setUserAnswers([]);
         setLocalAns("");
+        localStorage.removeItem("answers");
       })
       .catch((e) => console.error(e));
   };

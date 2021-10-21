@@ -72,10 +72,12 @@ const ExamStart = () => {
       const index = userAnswers.findIndex(
         (a) =>
           a.exam_question_id ===
-          groupedQue?.[active]?.[currentQuestionIndex].exam_question_id
+          groupedQue?.[active]?.[currentQuestionIndex]?.exam_question_id
       );
       if (index !== -1) {
         setUserAnswer(userAnswers[index].answer);
+      } else {
+        setUserAnswer("");
       }
     }
   }, [active, currentQuestionIndex, groupedQue]);

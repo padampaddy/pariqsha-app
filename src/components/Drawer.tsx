@@ -118,8 +118,8 @@ const Drawer = ({ onClose }: Props) => {
           <h4 className="text-gray-500 text-sm md:mt-2 flex justify-center items-center">
             <span>
               <img src={coin} className="h-7 w-7 mr-2" alt="coin" />
-            </span>{" "}
-            23456{" "}
+            </span>
+            75
           </h4>
         </div>
 

@@ -10,10 +10,10 @@ import modalSlice from "../../redux/slices/modal-slice";
 const Writing = () => {
   const dispatch = useDispatch();
   const { entities } = useSelector((state: RootState) => state.user);
-  const [files, setFiles] = useState({ url: "", name: "", type: "" });
+  // const [files, setFiles] = useState({ url: "", name: "", type: "" });
   const [invalidFile, setInvalidFile] = useState("")
   const [isLoading, setLoading] = useState(false);
-  const { questions, currentQuestionIndex, setUserAnswer } = useContext(ExamContext);
+  const { questions, currentQuestionIndex, setUserAnswer, userAnswer } = useContext(ExamContext);
 
   const uploadFile = async (e: React.ChangeEvent<any>) => {
     setLoading(true);
@@ -25,7 +25,7 @@ const Writing = () => {
      setLoading(false);
      return false
     }
-    else{
+    else {
     setInvalidFile("")
     const res = await fetch("https://functions.app.pariqsha.com/files/upload", {
       method: "POST",
@@ -35,20 +35,23 @@ const Writing = () => {
       },
     });
     const { url } = await res.json();
-    setFiles({ url: url, name: file.name, type: file.type });
+    setUserAnswer(url); 
+    // setFiles({ url: url, name: file.name, type: file.type });
     e.target.value = "";
     setLoading(false);
-    setUserAnswer(url); 
+   
     return
   }
   };
 
   useEffect(()=>{
-    setFiles({ url: "", name: "", type: "" })
+    // setFiles({ url: "", name: "", type: "" })
+    setUserAnswer(""); 
   },[currentQuestionIndex])
 
   const handleRemove = () => {
-    setFiles({ url: "", name: "", type: "" });
+    setUserAnswer(""); 
+    // setFiles({ url: "", name: "", type: "" });
   };
 
   const img = questions[currentQuestionIndex]?.image_link;
@@ -60,7 +63,7 @@ const Writing = () => {
         <div>
           <p className="mt-5 font-bold">Questions {currentQuestionIndex + 1}</p>
           <h5 className="text-sm mt-4">
-            {questions[currentQuestionIndex].question}
+            {questions[currentQuestionIndex]?.question}
           </h5>
           {img && <img className="mt-1 " src={img} />}
         </div>
@@ -84,9 +87,9 @@ const Writing = () => {
                     modalSlice.actions.showModal({
                       body: (
                         <PicPreview
-                          url={files.url}
-                          name={files.name}
-                          type={files.type}
+                          url={userAnswer}
+                          // name={files.name}
+                          // type={files.type}
                         />
                       ),
                     })
@@ -122,28 +125,13 @@ const Writing = () => {
                 />
               </svg>
               ) : null}  */}
-                {files && files?.type && (
-                  <>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                    <p className="ml-1">{files.name}</p>
-                  </>
-                )}
+                
+                {userAnswer && <img src={userAnswer} alt="img" className="h-12 w-12"/>}
               </div>
             )}
           </div>
           <div className="float-right">
-            {files.name.length ? (
+          {userAnswer ? (            
               <button
                 onClick={handleRemove}
                 className="flex justify-center p-2 text-red-500  text-sm items-center rounded-lg capitalize hover:bg-gray-200"

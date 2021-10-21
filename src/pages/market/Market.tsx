@@ -34,7 +34,7 @@ const Market = () => {
             <span className="text-sm">
               <img src={coin} className="h-8 w-8 mr-2" alt="coin" />
             </span>
-            23456
+            75
           </h4>
         </div>
 

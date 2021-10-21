@@ -24,46 +24,65 @@ export default function Menu({
           Reading and Writing sections to help you achieve your desired score
         </p>
       </div>
-      <div className="md:p-6 pb-0 p-4 rounded-3xl -mt-10 md:w-1/2 md:mx-auto bg-white md:border-4 border-0 flex-grow-0 " style={{borderColor:"#2799E5"}}>
+      <div
+        className="md:p-6 pb-0 p-4 rounded-3xl -mt-10 md:w-1/2 md:mx-auto bg-white md:border-4 border-0 flex-grow-0 "
+        style={{ borderColor: "#2799E5" }}
+      >
         {loading ? (
           <Loader />
         ) : (
           <ul>
-            <li
-              role="button"
-              onClick={() => setActive("reading")}
-              className="list-style animation md:mt-4 mt-0" style={{borderColor:"#2799E5"}}
-            >
-              Reading ({groupedQuestions.reading.length}) Qs
-              <span>
-                <img src={read} className="h-8 w-8" alt="pariqsha reading" />
-              </span>
-            </li>
+            {groupedQuestions.reading.length === 0 ? (
+              ""
+            ) : (
+              <li
+                role="button"
+                onClick={() => setActive("reading")}
+                className="list-style animation md:mt-4 mt-0"
+                style={{ borderColor: "#2799E5" }}
+              >
+                Reading ({groupedQuestions.reading.length}) Qs
+                <span>
+                  <img src={read} className="h-8 w-8" alt="pariqsha reading" />
+                </span>
+              </li>
+            )}
 
-            <li
-              role="button"
-              onClick={() => setActive("listening")}
-              className="list-style animation" style={{borderColor:"#2799E5"}}
-            >
-              Listening ({groupedQuestions.listening.length}) Qs
-              <span>
-                <img
-                  src={listening}
-                  className="h-8 w-8 "
-                  alt="pariqsha listening"
-                />
-              </span>
-            </li>
-            <li
-              role="button"
-              onClick={() => setActive("writing")}
-              className="list-style animation" style={{borderColor:"#2799E5"}}
-            >
-              Writing ({groupedQuestions.writing.length}) Qs
-              <span>
-                <img src={write} className="h-8 w-8 " alt="pariqsha write" />
-              </span>
-            </li>
+            {groupedQuestions.listening.length === 0 ? (
+              ""
+            ) : (
+              <li
+                role="button"
+                onClick={() => setActive("listening")}
+                className="list-style animation"
+                style={{ borderColor: "#2799E5" }}
+              >
+                Listening ({groupedQuestions.listening.length}) Qs
+                <span>
+                  <img
+                    src={listening}
+                    className="h-8 w-8 "
+                    alt="pariqsha listening"
+                  />
+                </span>
+              </li>
+            )}
+
+            {groupedQuestions.writing.length === 0 ? (
+              ""
+            ) : (
+              <li
+                role="button"
+                onClick={() => setActive("writing")}
+                className="list-style animation"
+                style={{ borderColor: "#2799E5" }}
+              >
+                Writing ({groupedQuestions.writing.length}) Qs
+                <span>
+                  <img src={write} className="h-8 w-8 " alt="pariqsha write" />
+                </span>
+              </li>
+            )}
           </ul>
         )}
       </div>

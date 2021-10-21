@@ -18,7 +18,7 @@ const Coins = () => {
       <div className="px-4 flex flex-col h-full">
         <div className="header pt-8 text-center">
           <p className="text-gray-500 font-medium text-xs">
-            You have 2.589 Coins
+            You have 75 Coins
           </p>
         </div>
 
@@ -50,7 +50,7 @@ const Coins = () => {
                       alt="Profile image"
                     />
                   </div>
-                  <div className=" text-center font-bold">+ {earn.coin}</div>
+                  <div className="font-bold">+ {earn.coin}</div>
                   <button className="common-btn md:p-2 p-1 md:px-8 px-2 mt-1 rounded text-sm md:text-base">
                   {espTransform(50).format()}
                   </button>

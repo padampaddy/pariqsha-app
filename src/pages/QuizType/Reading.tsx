@@ -1,4 +1,4 @@
-import { useContext} from "react";
+import { useContext } from "react";
 import TrueFalse from "../../components/Type of Ques/TrueFalse";
 import WordLimit from "../../components/Type of Ques/WordLimit";
 import Mcq from "../../components/Type of Ques/Mcq";
@@ -8,9 +8,10 @@ import QuestionType from "../../components/QuestionType";
 import ExamContext from "../../contexts/examContext";
 
 const Reading = () => {
-  const { questions, currentQuestionIndex,  } = useContext(ExamContext);
+  const { questions, currentQuestionIndex } = useContext(ExamContext);
   const type = questions[currentQuestionIndex]?.type_of_question.name;
-  const tip = questions[currentQuestionIndex]?.type_of_question_description_override;
+  const tip =
+    questions[currentQuestionIndex]?.type_of_question_description_override;
 
   return (
     <>
@@ -42,10 +43,10 @@ const Reading = () => {
                   <TrueFalse />
                 ) : type === "multiple_choice_question" ? (
                   <Mcq />
-                // ) : type === "checkbox" ? (
-                //   <CheckBox />
                 ) : (
-                  <WordLimit/>
+                  // ) : type === "checkbox" ? (
+                  //   <CheckBox />
+                  <WordLimit />
                 )}
               </div>
             </div>

@@ -3,14 +3,14 @@ import ExamContext from "../../../contexts/examContext";
 
 
 const TotalQues = () => {
-  const { questions, setCurrentQuestionIndex} = useContext(ExamContext);
+  const { questions, setCurrentQuestionIndex, } = useContext(ExamContext);
 
   return (
     <>
     <div className="qstn-list mb-1 m-auto py-3 px-2">
       <ul className="">
         {questions.map((_,idx)=>(
-          <li className="common-btn" key={idx} role="button" onClick={()=>setCurrentQuestionIndex(idx)}>{1+ idx}</li>
+          <li className={"common-btn"} key={idx} role="button" onClick={()=>setCurrentQuestionIndex(idx)}>{1+ idx}</li>
         ))}
       </ul>
     </div>
