@@ -455,3 +455,19 @@ export const UPDATE_ANSWER = gql`
     }
   }
 `;
+
+export const GET_MY_RESULT = gql`
+  query get_my_result($user: uuid!, $examId: uuid!) {
+    exams_exam_answer(where: {user_id: {_eq: $user}, exam_question: {exam_id: {_eq: $examId}}}) {
+      status
+      exam_question {
+        exam_id
+        question {
+          part {
+            name
+          }
+        }
+      }
+    }
+  }
+`;

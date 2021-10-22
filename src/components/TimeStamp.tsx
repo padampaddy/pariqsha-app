@@ -1,12 +1,25 @@
+import { useQuery } from "@apollo/client";
 import {  useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { GET_REGISTRATION_EXAM } from "../api/queries";
+import { RootState } from "../redux/store";
+import { MyExamResponse } from "../types/Quiz";
 
 interface Props {
   hours?: number;
   minutes?: number;
   seconds?: number;
+  examId?: string
 }
 
-const TimeStamp = ({ hours = 0, minutes = 0, seconds = 0 }: Props) => {
+const TimeStamp = ({ hours = 0, minutes = 0, seconds = 0, examId }: Props) => {
+  const user = useSelector((state: RootState) => state.user.entities?.user);
+  const { data } = useQuery<MyExamResponse>(GET_REGISTRATION_EXAM, {
+    variables: {
+      user: user?.id,
+      examId: examId,
+    },
+  });
   // const getLocalItems = useCallback(() => {
   //   const time = localStorage.getItem("time");
   //   if (time) {
@@ -15,6 +28,8 @@ const TimeStamp = ({ hours = 0, minutes = 0, seconds = 0 }: Props) => {
   //     return [hours, minutes, seconds];
   //   }
   // }, []);
+
+  console.log(data)
 
   const [over, setOver] = useState(false);
   const [[h, m, s], setTime] = useState([hours, minutes, seconds]);
@@ -37,9 +52,7 @@ const TimeStamp = ({ hours = 0, minutes = 0, seconds = 0 }: Props) => {
     return () => clearInterval(timerID);
   }, [tick]);
 
-  const time = `${h.toString().padStart(2, "0")}:${m
-    .toString()
-    .padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
+  const time = `${h.toString().padStart(2, "0")}:${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
 
   return (
     <div className="flex items-center">

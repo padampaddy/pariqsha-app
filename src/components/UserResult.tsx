@@ -1,12 +1,59 @@
-import { useDispatch } from "react-redux";
+import { useQuery } from "@apollo/client";
+import { useMemo } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { GET_MY_RESULT } from "../api/queries";
 import modalSlice from "../redux/slices/modal-slice";
+import { RootState } from "../redux/store";
+import { IExamResult, IGroupedResult } from "../types/Quiz";
 
-const items = [34, 45, 46];
+// const items = [34, 45, 46];
 
 const headings = ["Reading", "Listening", "Writing", "Total"];
 
-export default function UserResult() {
+export default function UserResult({ examId }: { examId: string }) {
+  const user = useSelector((state: RootState) => state.user.entities?.user);
   const dispatch = useDispatch();
+  const { data } = useQuery<IExamResult>(GET_MY_RESULT, {
+    variables: {
+      user: user?.id,
+      examId: examId,
+    },
+  });
+
+  const groupedResult = useMemo(() => {
+    if (data?.exams_exam_answer) {
+      const obj: IGroupedResult = {
+        reading: 0,
+        listening: 0,
+        writing: 0,
+      };
+      data?.exams_exam_answer.reduce((pV, cV) => {
+        pV[
+          cV.exam_question.question.part.name.toLowerCase() as
+            | "reading"
+            | "writing"
+            | "listening"
+        ] =
+          pV[
+            cV.exam_question.question.part.name.toLowerCase() as
+              | "reading"
+              | "writing"
+              | "listening"
+          ] + (cV.status === "correct" ? 1 : 0);
+        return pV;
+      }, obj);
+      return obj;
+    } else {
+      return {
+        reading: 0,
+        listening: 0,
+        writing: 0,
+      };
+    }
+  }, [data]);
+
+  console.log(groupedResult);
+
   return (
     <>
       <div className="flex items-center">
@@ -64,10 +111,22 @@ export default function UserResult() {
         </thead>
         <tbody>
           <tr className=" border-2 border-blue-500 mt-4 ">
-            {items.flatMap((item) => (
-              <td className=" border-r-2 border-blue-500 md:py-2 py-1 ">{item}</td>
-            ))}
-            <td className="md:py-2 py-1">{items.reduce((pV, item) => pV + item, 0)}</td>
+            <td className=" border-r-2 border-blue-500 md:py-2 py-1 ">
+              {groupedResult.reading}
+            </td>
+
+            <td className=" border-r-2 border-blue-500 md:py-2 py-1 ">
+              {groupedResult.listening}
+            </td>
+
+            <td className=" border-r-2 border-blue-500 md:py-2 py-1 ">
+              {groupedResult.writing}
+            </td>
+
+            <td className="md:py-2 py-1">
+            {groupedResult?.reading + groupedResult?.listening + groupedResult?.writing}
+              {/* {items.reduce((pV, item) => pV + item, 0)} */}
+            </td>
           </tr>
         </tbody>
       </table>

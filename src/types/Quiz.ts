@@ -124,3 +124,19 @@ export interface IGroupedQuestions {
   listening: (IQues & { exam_question_id: string })[];
   writing: (IQues & { exam_question_id: string })[];
 }
+
+export interface IExamResult {
+  exams_exam_answer: {
+    status: string;
+    exam_question: {
+      exam_id: string;
+      question: IQues;
+    };
+  }[];
+}
+
+export interface IGroupedResult {
+  reading: number;
+  listening: number;
+  writing: number;
+}

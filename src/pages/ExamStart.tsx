@@ -67,6 +67,8 @@ const ExamStart = () => {
     }
   }, [data]);
 
+  // console.log("quiz", groupedQue)
+
   useEffect(() => {
     if (active !== "menu") {
       const index = userAnswers.findIndex(
@@ -105,7 +107,7 @@ const ExamStart = () => {
         >
           {active === "menu" ? null : (
             <div className="flex-grow-0">
-              <QuizHeader time={time} />
+              <QuizHeader time={time} examId={id}/>
               <TotalQues />
             </div>
           )}
@@ -120,7 +122,7 @@ const ExamStart = () => {
           )}
           {active === "menu" ? null : (
             <div className="flex-grow-0 quiz-footer common-btn">
-              <QuizFooter />
+              <QuizFooter groupedQuestions={groupedQue} />
             </div>
           )}
         </div>

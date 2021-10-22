@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { useMutation } from "@apollo/client";
-import { ISendAnswer } from "../../../types/Quiz";
+import { IGroupedQuestions, ISendAnswer } from "../../../types/Quiz";
 import { SEND_ANSWER } from "../../../api/queries";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
@@ -8,7 +8,11 @@ import { useContext } from "react";
 import ExamContext from "../../../contexts/examContext";
 import { useHistory } from "react-router-dom";
 
-const QuizFooter = () => {
+const QuizFooter = ({
+  groupedQuestions,
+}: {
+  groupedQuestions: IGroupedQuestions;
+}) => {
   const history = useHistory();
   const user = useSelector((state: RootState) => state.user.entities?.user);
   const [sendAnswer] = useMutation<string[]>(SEND_ANSWER);
@@ -27,11 +31,11 @@ const QuizFooter = () => {
   const setLocalAns = useCallback(
     (userAnswer) => {
       const answersObj: ISendAnswer = {
-        exam_question_id: questions[currentQuestionIndex].exam_question_id,
+        exam_question_id: questions[currentQuestionIndex]?.exam_question_id,
         status:
           userAnswer === ""
             ? "unanswered"
-            : userAnswer === questions[currentQuestionIndex]?.correct_answer
+            : userAnswer?.trim() === questions[currentQuestionIndex]?.correct_answer?.trim()
             ? "correct"
             : "wrong",
         answer: userAnswer,
@@ -58,7 +62,11 @@ const QuizFooter = () => {
     setLocalAns(userAnswer);
     if (questions.length - 1 === currentQuestionIndex) {
       setActive((a) =>
-        a === "reading" ? "listening" : a === "listening" ? "writing" : "menu"
+        a === "reading" && groupedQuestions.listening.length !== 0
+          ? "listening"
+          : a === "listening" && groupedQuestions.writing.length !== 0
+          ? "writing"
+          : "menu"
       );
     } else setCurrentQuestionIndex(currentQuestionIndex + 1);
     setUserAnswer("");
@@ -119,7 +127,39 @@ const QuizFooter = () => {
           Previous
         </button>
       )}
-      {active === "writing" && currentQuestionIndex === questions.length - 1 ? (
+      {active === "reading" && groupedQuestions.listening.length === 0 && currentQuestionIndex === questions.length - 1 ? (
+        <button className="footer-button float-right" onClick={handleSubmit}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-5 w-5 mr-2"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fillRule="evenodd"
+              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+              clipRule="evenodd"
+            />
+          </svg>
+          Submit
+        </button>
+      ) : active === "listening" && groupedQuestions.writing.length === 0 && currentQuestionIndex === questions.length - 1 ? (
+        <button className="footer-button float-right" onClick={handleSubmit}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-5 w-5 mr-2"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fillRule="evenodd"
+              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+              clipRule="evenodd"
+            />
+          </svg>
+          Submit
+        </button>
+      ) : active === "writing" && currentQuestionIndex === questions.length - 1 ? (
         <button className="footer-button float-right" onClick={handleSubmit}>
           <svg
             xmlns="http://www.w3.org/2000/svg"

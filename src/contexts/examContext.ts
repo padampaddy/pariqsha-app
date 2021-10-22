@@ -25,7 +25,7 @@ const ExamContext =  createContext<IExamContext>({
     setUserAnswers: ()=> console.log(),
     setCurrentQuestionIndex: ()=> console.log(),
     setUserAnswer: ()=> console.log(),
-    loading: true
+    loading: true,
 })
 
 export default ExamContext;

@@ -2,7 +2,7 @@ import { useContext } from "react";
 import TimeStamp from "../../../components/TimeStamp";
 import ExamContext from "../../../contexts/examContext";
 
-const QuizHeader = ({ time }: { time: string }) => {
+const QuizHeader = ({ time , examId}: { time: string, examId:string }) => {
   const { setActive, active } = useContext(ExamContext);
 
   const title =
@@ -37,7 +37,7 @@ const QuizHeader = ({ time }: { time: string }) => {
         </button>
         <h3 className="text-xl flex-grow text-center font-medium ">{title}</h3>
         <div className="absolute top-1/2 transform -translate-y-1/2 right-4">
-          <TimeStamp hours={hours} minutes={minutes}/>
+          <TimeStamp hours={hours} minutes={minutes} examId={examId}/>
         </div>
       </div>
     </>
