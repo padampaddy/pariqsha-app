@@ -15,7 +15,7 @@ export default function Menu({
   const { setActive, loading } = useContext(ExamContext);
   return (
     <div className="flex flex-col h-full">
-      <div className="common-btn md:p-16 p-6 pb-16  flex-grow-0">
+      <div className="common-btn md:p-16 pt-4 px-6 pb-16  flex-grow-0">
         <p className="text-xl leading-normal md:w-1/2 md:mx-auto ">
           Get lots of practical
           <br />

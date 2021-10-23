@@ -18,6 +18,7 @@ import modalSlice from "../../redux/slices/modal-slice";
 import { RootState } from "../../redux/store";
 import { MyExamResponse, IExamResponse } from "../../types/Quiz";
 import UnregisterBody from "../UnregisterBody";
+import Instructions from "../Instructions";
 
 const today = new Date().toISOString();
 
@@ -283,7 +284,18 @@ const GetExamCards = ({ searchTerm = "" }: { searchTerm: string }) => {
                   </button>
 
                   <button
-                    onClick={() => history.push(`/examstart/${item.id}/${item.duration_in_minutes}`)}
+                    onClick={() => {
+                      dispatch(
+                        modalSlice.actions.showModal({
+                          body: (
+                            <Instructions
+                              examId={item.id}
+                              duration={item.duration_in_minutes}
+                            />
+                          ),
+                        })
+                      );
+                    }}
                     className="quiz-button"
                   >
                     <svg

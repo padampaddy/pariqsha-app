@@ -5,6 +5,7 @@ const modalSlice = createSlice({
   name: "modal",
   initialState: {
     visible: false,
+    dismissable: true,
   } as Modal,
   reducers: {
     showModal: (state, { payload }: PayloadAction<Omit<Modal, "visible">>) => {

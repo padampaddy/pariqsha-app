@@ -8,8 +8,8 @@ import userSlice from "./slices/user-slice";
 function getPersistedState() {
   const pStateString = localStorage.getItem("cartItems");
   if (pStateString) {
-    const state = JSON.parse(pStateString);
-    state.cart.items = state.cart.items.map(
+    const cartItems = JSON.parse(pStateString);
+    cartItems.items = cartItems.items.map(
       (item: {
         mId: string;
         mDescription: string;
@@ -25,8 +25,9 @@ function getPersistedState() {
           price_coins: item.mPriceCoins,
         })
     );
-    console.log(state);
-    return state;
+    return {
+      cart: cartItems
+    };
   } else {
     return {};
   }
@@ -43,7 +44,7 @@ const store = configureStore({
 });
 
 store.subscribe(() => {
-  localStorage.setItem("cartItems", JSON.stringify(store.getState()));
+  localStorage.setItem("cartItems", JSON.stringify(store.getState().cart));
 });
 
 export type RootState = ReturnType<typeof store.getState>;

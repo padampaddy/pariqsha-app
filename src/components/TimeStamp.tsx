@@ -1,25 +1,16 @@
-import { useQuery } from "@apollo/client";
-import {  useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { GET_REGISTRATION_EXAM } from "../api/queries";
-import { RootState } from "../redux/store";
-import { MyExamResponse } from "../types/Quiz";
+import { MutableRefObject, useEffect, useRef, useState } from "react";
+import { useDispatch } from "react-redux";
+import modalSlice from "../redux/slices/modal-slice";
+import TimeOverPage from "./TimeOverPage";
 
 interface Props {
   hours?: number;
   minutes?: number;
   seconds?: number;
-  examId?: string
 }
 
-const TimeStamp = ({ hours = 0, minutes = 0, seconds = 0, examId }: Props) => {
-  const user = useSelector((state: RootState) => state.user.entities?.user);
-  const { data } = useQuery<MyExamResponse>(GET_REGISTRATION_EXAM, {
-    variables: {
-      user: user?.id,
-      examId: examId,
-    },
-  });
+const TimeStamp = ({ hours = 0, minutes = 0, seconds = 0 }: Props) => {
+  const dispatch = useDispatch();
   // const getLocalItems = useCallback(() => {
   //   const time = localStorage.getItem("time");
   //   if (time) {
@@ -29,13 +20,20 @@ const TimeStamp = ({ hours = 0, minutes = 0, seconds = 0, examId }: Props) => {
   //   }
   // }, []);
 
-  console.log(data)
-
   const [over, setOver] = useState(false);
   const [[h, m, s], setTime] = useState([hours, minutes, seconds]);
-
+  const timerID = useRef() as MutableRefObject<ReturnType<typeof setTimeout>>;
   const tick = () => {
-    if (over) return;
+    if (over) {
+      dispatch(
+        modalSlice.actions.showModal({
+          body: <TimeOverPage  />,
+          dismissable: false
+        })
+      );
+      clearInterval(timerID.current);
+      return;
+    }
     if (h === 0 && m === 0 && s === 0) setOver(true);
     else if (m === 0 && s === 0) {
       setTime([h - 1, 59, 59]);
@@ -45,14 +43,18 @@ const TimeStamp = ({ hours = 0, minutes = 0, seconds = 0, examId }: Props) => {
       setTime([h, m, s - 1]);
     }
   };
-
   useEffect(() => {
-    const timerID = setInterval(() => tick(), 1000);
+    setTime([hours, minutes, seconds]);
+  }, [hours, minutes, seconds]);
+  useEffect(() => {
+    timerID.current = setInterval(() => tick(), 1000);
     // localStorage.setItem("time", JSON.stringify([h, m, s]));
-    return () => clearInterval(timerID);
+    return () => clearInterval(timerID.current);
   }, [tick]);
 
-  const time = `${h.toString().padStart(2, "0")}:${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
+  const time = `${h.toString().padStart(2, "0")}:${m
+    .toString()
+    .padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
 
   return (
     <div className="flex items-center">
@@ -70,10 +72,7 @@ const TimeStamp = ({ hours = 0, minutes = 0, seconds = 0, examId }: Props) => {
       </svg>
       {/* <p> Time : {new Date().toLocaleTimeString()}</p> */}
 
-      <div className="">
-        {/* {over ? "Time's up!" : {time}} */}
-        {time}
-      </div>
+      <div className="">{time}</div>
     </div>
   );
 };

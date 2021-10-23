@@ -154,9 +154,9 @@ export default function AppRouter() {
   return (
     <ApolloProvider client={client}>
       <Provider url={FUNCTIONS_URL_TEST} options={options}>
+        <Router>
         <Modal />
         <Alert />
-        <Router>
           <MySwitch />
         </Router>
       </Provider>

@@ -105,12 +105,10 @@ const ExamStart = () => {
             active !== "menu" ? "md:w-1/2" : ""
           } md:mx-auto flex-col bg-white md:shadow-md h-full`}
         >
-          {active === "menu" ? null : (
-            <div className="flex-grow-0">
-              <QuizHeader time={time} examId={id}/>
-              <TotalQues />
-            </div>
-          )}
+          <div className={`flex-grow-0 ${active!== "menu" ? "" : "p-3 bgTime text-white"}`}>
+            <QuizHeader time={time} examId={id} />
+            {active !== "menu" && <TotalQues />}
+          </div>
           {active === "menu" ? (
             <Menu groupedQuestions={groupedQue} />
           ) : active === "reading" ? (

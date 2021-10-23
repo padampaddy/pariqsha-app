@@ -48,7 +48,7 @@ const Drawer = ({ onClose }: Props) => {
 
   return (
     <div className="z-50 h-full flex flex-row">
-      <div className="flex flex-col bg-white w-screen overflow-hidden">
+      <div className="flex flex-col bg-white w-screen overflow-y-auto">
         <div className="flex items-center justify-start text-4xl py-2 px-4">
           <button
             onClick={() => {

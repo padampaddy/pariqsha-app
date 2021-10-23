@@ -140,3 +140,20 @@ export interface IGroupedResult {
   listening: number;
   writing: number;
 }
+
+export interface IUpdateExamRegistration {
+  update_exams_registration:{
+    started_at : Date;
+    status: string;
+    exam_id: string;
+    user_id: string;
+    exam_status:string;
+  }[]
+}
+
+export interface IExamTime {
+  exams_registration: {
+    started_at : Date;
+    exam: IExam
+  }[]
+}

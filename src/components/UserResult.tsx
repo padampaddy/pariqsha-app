@@ -57,7 +57,7 @@ export default function UserResult({ examId }: { examId: string }) {
   return (
     <>
       <div className="flex items-center">
-        <div className=" flex-shrink-0 flex items-center justify-center md:h-12 md:w-12 rounded-full common-btn h-10 w-10">
+        <div className=" flex-shrink-0 flex items-center justify-center rounded-full common-btn h-10 w-10">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-6 w-6 text-white"
