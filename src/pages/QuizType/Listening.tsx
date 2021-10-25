@@ -1,10 +1,5 @@
 import Note from "./components/Note";
-import {
-  MutableRefObject,
-  useContext,
-  useEffect,
-  useRef,
-} from "react";
+import { MutableRefObject, useContext, useEffect, useRef } from "react";
 import TrueFalse from "../../components/Type of Ques/TrueFalse";
 import Mcq from "../../components/Type of Ques/Mcq";
 import WordLimit from "../../components/Type of Ques/WordLimit";
@@ -17,10 +12,23 @@ const Listening = () => {
   const { questions, currentQuestionIndex } = useContext(ExamContext);
 
   useEffect(() => {
+    const prevId = localStorage.getItem("currentContext");
     localStorage.setItem(
-      questions[currentQuestionIndex].context.id,
-      audioRef.current.currentTime.toString()
+      "currentContext",
+      questions[currentQuestionIndex]?.context.id
     );
+    if(prevId){
+      localStorage.setItem(
+        prevId,
+        audioRef.current.currentTime.toString()
+      );
+    }else{
+      localStorage.setItem(
+        questions[currentQuestionIndex]?.context.id,
+        audioRef.current.currentTime.toString()
+      );
+    }
+
     audioRef.current.pause();
     audioRef.current.load();
     const timeLocal = localStorage.getItem(
@@ -43,7 +51,6 @@ const Listening = () => {
         <audio ref={audioRef} autoPlay className="mt-6">
           <source src={questions[currentQuestionIndex].context.details} />
         </audio>
-
         <div>
           {img && <img className="mt-4 " src={img} />}
           <p className="mt-5 font-bold">Questions {currentQuestionIndex + 1}</p>
@@ -53,12 +60,12 @@ const Listening = () => {
         </div>
         <div className="mt-4">
           {type === "true_false_not_given" ? (
-            <TrueFalse/>
+            <TrueFalse />
           ) : type === "multiple_choice_question" ? (
             <Mcq />
-          // ) : type === "checkbox" ? (
-          //   <CheckBox/>
           ) : (
+            // ) : type === "checkbox" ? (
+            //   <CheckBox/>
             <WordLimit />
           )}
         </div>

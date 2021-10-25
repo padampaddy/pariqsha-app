@@ -18,7 +18,7 @@ const Reading = () => {
       <div className="flex-grow bg-white mx-0">
         <div className="md:px-6 md:py-4 px-3 py-1.5 flex flex-col h-full">
           <QuestionType title="Read Passage" />
-          {tip && <Tip detail={tip} />}
+          
           <div className="mt-1.5 flex flex-col h-full">
             {/* passage */}
             <p className="text-sm font-bold mb-2">
@@ -31,6 +31,7 @@ const Reading = () => {
             </div>
             {/* questions */}
             <div className="flex-grow-0">
+            {tip && <Tip detail={tip} />}
               <p className="mt-3 font-bold">
                 Questions {currentQuestionIndex + 1}
               </p>

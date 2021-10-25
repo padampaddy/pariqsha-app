@@ -15,6 +15,7 @@ const beCareful = [
   "The test is for 2 hours and 40 minutes. Reading should take an hour followed by listening for 40 minutes and the next one hour for the writing section.",
   "There will be deduction of scores for spelling mistakes.",
   "You can click on the 'Previous' Button to correct your mistakes in the attempted questions.",
+  "Use capital letters where required."
 ];
 
 const reading = [
@@ -112,8 +113,8 @@ const Instructions = ({
           </button>
         </div>
       </div>
-      <hr className="mt-3 bg-gray-200 " />
-      <div className="overflow-y-auto h-96 text-xs md:text-sm pl-6 py-4">
+      <hr className="my-3 bg-gray-200 " />
+      <div className="overflow-y-auto h-96 text-xs md:text-sm pl-6 pr-2">
         <div className="font-bold md:text-base text-sm md:tracking-wide flex items-center ">
         <svg
             className="h-5 w-5 text-blue-500 mr-2"
@@ -136,6 +137,22 @@ const Instructions = ({
           {beCareful.flatMap((list) => (
             <li className="py-1">{list}</li>
           ))}
+          <li className="py-1 md:flex items-center justify-between">
+            <div className="flex items-center ">
+              <div className="rounded-full common-btn h-6 w-6 text-center md:pt-0.5 pt-1 mr-2">1</div>
+              <div>Current Question</div>
+            </div>
+
+            <div className="flex items-center  mt-2 md:mt-0">
+              <div className="rounded-full bg-green-500 text-white h-6 w-6 text-center md:pt-0.5 pt-1 mr-2">1</div>
+              <div>Answered</div>
+            </div>
+
+            <div className="flex items-center  mt-2 md:mt-0">
+              <div className="rounded-full text-blue-500 border-2 border-blue-500 h-6 w-6 text-center md:pt-0 pt-0.5  mr-2">1</div>
+              <div>Unanswered</div>
+            </div>
+          </li>
         </ol>
         <div className="font-bold md:text-base text-sm mt-4 md:tracking-wide flex items-center ">
           <img src={read} className="h-5 w-5 mr-2" />
@@ -165,12 +182,12 @@ const Instructions = ({
           ))}
         </ol>
       </div>
-      <hr className=" bg-gray-200" />
+      <hr className="mt-3 bg-gray-200" />
       <div className="flex md:justify-end justify-center pt-4">
         <button
           type="submit"
           onClick={handleStart}
-          className="common-btn w-24 py-1.5 rounded flex items-center justify-center"
+          className="common-btn px-2 py-1.5 rounded flex items-center justify-center"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -186,7 +203,7 @@ const Instructions = ({
               d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
             />
           </svg>
-          Start
+          Start Test
         </button>
       </div>
     </>

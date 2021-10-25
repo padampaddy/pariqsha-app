@@ -9,7 +9,7 @@ function getPersistedState() {
   const pStateString = localStorage.getItem("cartItems");
   if (pStateString) {
     const cartItems = JSON.parse(pStateString);
-    cartItems.items = cartItems.items.map(
+    cartItems.items = cartItems?.items?.map(
       (item: {
         mId: string;
         mDescription: string;
@@ -24,7 +24,7 @@ function getPersistedState() {
           name: item.mName,
           price_coins: item.mPriceCoins,
         })
-    );
+    ) ?? [];
     return {
       cart: cartItems
     };
