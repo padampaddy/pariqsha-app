@@ -9,80 +9,80 @@ import { RootState } from "../redux/store";
 import { ISendAnswer } from "../types/Quiz";
 
 const TimeOverPage = () => {
-    const history = useHistory();
-    const dispatch = useDispatch();
-    const user = useSelector((state: RootState) => state.user.entities?.user);
-    const [sendAnswer] = useMutation<string[]>(SEND_ANSWER);
-    const {
-        currentQuestionIndex,
-        userAnswers,
-        setUserAnswers,
-        userAnswer,
-        questions,
-      } = useContext(ExamContext);
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const user = useSelector((state: RootState) => state.user.entities?.user);
+  const [sendAnswer] = useMutation<string[]>(SEND_ANSWER);
+  const {
+    currentQuestionIndex,
+    userAnswers,
+    setUserAnswers,
+    userAnswer,
+    questions,
+  } = useContext(ExamContext);
 
-      const setLocalAns = useCallback(
-        (userAnswer) => {
-          const answersObj: ISendAnswer = {
-            exam_question_id: questions[currentQuestionIndex]?.exam_question_id,
-            status:
-              userAnswer === ""
-                ? "unanswered"
-                : userAnswer?.trim() === questions[currentQuestionIndex]?.correct_answer?.trim()
-                ? "correct"
-                : "wrong",
-            answer: userAnswer,
-          };
-          const index = userAnswers.findIndex(
-            (a) => a.exam_question_id === answersObj.exam_question_id
-          );
-          if (index === -1) {
-            setUserAnswers([...userAnswers, answersObj]);
-          } else {
-            setUserAnswers([
-              ...userAnswers.slice(0, index),
-              answersObj,
-              ...userAnswers.slice(index + 1),
-            ]);
-            userAnswers[index] = answersObj;
-          }
-          return userAnswers;
-        },
-        [currentQuestionIndex]
-      );
-
-    const handleSubmit = () => {
-        const arr = setLocalAns(userAnswer);
-        const dataToSend: ISendAnswer[] = [];
-        arr.forEach(
-          (answer: {
-            answer: string;
-            exam_question_id: string;
-            status: string;
-          }) => {
-            dataToSend.push({
-              answer: answer.answer,
-              exam_question_id: answer.exam_question_id,
-              user_id: user!.id,
-              status: answer.status,
-            });
-          }
-        );
-        sendAnswer({
-          variables: {
-            objects: dataToSend,
-          },
-        })
-          .then((info) => {
-            console.log(info);
-            history.push("/submit");
-            setUserAnswers([]);
-            setLocalAns("");
-            localStorage.removeItem("answers");
-            dispatch(modalSlice.actions.hideModal());
-          })
-          .catch((e) => console.error(e));
+  const setLocalAns = useCallback(
+    (userAnswer) => {
+      const answersObj: ISendAnswer = {
+        exam_question_id: questions[currentQuestionIndex]?.exam_question_id,
+        status:
+          userAnswer === ""
+            ? "unanswered"
+            : userAnswer?.trim() ===
+              questions[currentQuestionIndex]?.correct_answer?.trim()
+            ? "correct"
+            : "wrong",
+        answer: userAnswer,
       };
+      const index = userAnswers.findIndex(
+        (a) => a.exam_question_id === answersObj.exam_question_id
+      );
+      if (index === -1) {
+        setUserAnswers([...userAnswers, answersObj]);
+      } else {
+        setUserAnswers([
+          ...userAnswers.slice(0, index),
+          answersObj,
+          ...userAnswers.slice(index + 1),
+        ]);
+        userAnswers[index] = answersObj;
+      }
+      return userAnswers;
+    },
+    [currentQuestionIndex]
+  );
+
+  const handleSubmit = () => {
+    const arr = setLocalAns(userAnswer);
+    const dataToSend: ISendAnswer[] = [];
+    arr.forEach(
+      (answer: {
+        answer: string;
+        exam_question_id: string;
+        status: string;
+      }) => {
+        dataToSend.push({
+          answer: answer.answer,
+          exam_question_id: answer.exam_question_id,
+          user_id: user!.id,
+          status: answer.status,
+        });
+      }
+    );
+    sendAnswer({
+      variables: {
+        objects: dataToSend,
+      },
+    })
+      .then(() => {
+        history.push("/submit");
+        setUserAnswers([]);
+        setLocalAns("");
+        localStorage.removeItem("answers");
+        dispatch(modalSlice.actions.hideModal());
+      })
+      .catch((e) => console.error(e));
+  };
 
   return (
     <>
@@ -121,7 +121,7 @@ const TimeOverPage = () => {
           onClick={handleSubmit}
           className="common-btn py-1.5 px-3 m-auto rounded flex items-center justify-center"
         >
-         <svg
+          <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-5 w-5 mr-2"
             viewBox="0 0 20 20"

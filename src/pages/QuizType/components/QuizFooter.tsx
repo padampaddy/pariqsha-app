@@ -59,7 +59,7 @@ const QuizFooter = ({
   );
 
   const handleNext = () => {
-    setLocalAns(userAnswer);
+    setLocalAns(userAnswer?.trim().toUpperCase());
     if (questions.length - 1 === currentQuestionIndex) {
       setActive((a) =>
         a === "reading" && groupedQuestions.listening.length !== 0

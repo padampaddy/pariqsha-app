@@ -9,7 +9,6 @@ const CheckBox = () => {
   );
   const handleClick = (item: string) => {
     const index = selected.findIndex((a) => a === item);
-    console.log(index);
     if (index === -1) {
       setSelected([...selected, item]);
     } else {

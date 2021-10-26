@@ -67,8 +67,6 @@ const ExamStart = () => {
     }
   }, [data]);
 
-  // console.log("quiz", groupedQue)
-
   useEffect(() => {
     if (active !== "menu") {
       const index = userAnswers.findIndex(

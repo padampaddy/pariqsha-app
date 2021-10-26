@@ -14,7 +14,6 @@ const TotalQues = () => {
       const userAnswer = userAnswers.find(
         (uA) => uA.exam_question_id === questions?.[idx]?.exam_question_id
       );
-      console.log("Answer", userAnswer);
       return !!userAnswer && userAnswer.answer !== "";
     },
     [userAnswers, currentQuestionIndex]

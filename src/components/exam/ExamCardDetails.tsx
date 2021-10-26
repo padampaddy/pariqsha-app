@@ -18,10 +18,7 @@ import { RP_KEY_ID_TEST } from "../../Constants";
 import BaseLayout from "../../layouts/Base";
 import modalSlice from "../../redux/slices/modal-slice";
 import { RootState } from "../../redux/store";
-import {
-  ExamDetailsResponse,
-  ExamRegistrationResponse,
-} from "../../types/Quiz";
+import {ExamDetailsResponse, ExamRegistrationResponse,} from "../../types/Quiz";
 import UnregisterBody from "../UnregisterBody";
 
 declare let Razorpay: any;
@@ -39,8 +36,8 @@ const getLocalItems = () => {
 export default function ExamCardDetails(): ReactElement {
   const { id } = useParams<{ id: string }>();
   const user = useSelector((state: RootState) => state.user.entities?.user);
-  const [registerQuiz] = useMutation(REGISTER_EXAM);
-  const [unRegisterQuiz] = useMutation(UNREGISTER_EXAM);
+  const [registerExam] = useMutation(REGISTER_EXAM);
+  const [unRegisterExam] = useMutation(UNREGISTER_EXAM);
   const [addRPPayload] = useMutation(ADD_RP_PAYLOAD);
   const [makeRefundRequest] = useMutation(MAKE_REFUND_REQUEST);
   const dispatch = useDispatch();
@@ -54,7 +51,7 @@ export default function ExamCardDetails(): ReactElement {
   const { data: registration, refetch: refetchRegistration } =
     useQuery<ExamRegistrationResponse>(GET_REGISTRATION_EXAM, {
       variables: {
-        quizId: id,
+        examId: id,
         userId: user?.id,
       },
     });
@@ -64,7 +61,7 @@ export default function ExamCardDetails(): ReactElement {
   useEffect(() => {
     localStorage.setItem("like", JSON.stringify(like));
     refetchRegistration({
-      quizId: id,
+      examId: id,
       userId: user?.id,
     });
   }, [id, refetchRegistration, user?.id, like]);
@@ -117,10 +114,10 @@ export default function ExamCardDetails(): ReactElement {
                   onClick={async () => {
                     if (data?.exams_exam_by_pk.price === 0) {
                       Promise.all([
-                        registerQuiz({
+                        registerExam({
                           variables: {
                             userId: user?.id,
-                            quizId: data?.exams_exam_by_pk.id,
+                            examId: data?.exams_exam_by_pk.id,
                           },
                         }),
                       ])
@@ -135,7 +132,7 @@ export default function ExamCardDetails(): ReactElement {
                       return;
                     }
                     const res = await createOrder({
-                      quizId: data?.exams_exam_by_pk.id,
+                      examId: data?.exams_exam_by_pk.id,
                     });
                     const options = {
                       key: RP_KEY_ID_TEST, // Enter the Key ID generated from the Dashboard
@@ -158,10 +155,10 @@ export default function ExamCardDetails(): ReactElement {
                               payload: JSON.stringify(response),
                             },
                           }),
-                          registerQuiz({
+                          registerExam({
                             variables: {
                               userId: user?.id,
-                              quizId: data?.exams_exam_by_pk.id,
+                              examId: data?.exams_exam_by_pk.id,
                             },
                           }),
                         ])
@@ -170,7 +167,7 @@ export default function ExamCardDetails(): ReactElement {
                           })
                           .then(() => {
                             refetchRegistration({
-                              quizId: id,
+                              examId: id,
                               userId: user?.id,
                             });
                           });
@@ -180,6 +177,20 @@ export default function ExamCardDetails(): ReactElement {
                     rzp1.open();
                   }}
                 >
+                  <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5 mr-2"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                      />
+                    </svg>
                   Register
                 </button>
               </>
@@ -196,13 +207,13 @@ export default function ExamCardDetails(): ReactElement {
                             Promise.all([
                               makeRefundRequest({
                                 variables: {
-                                  quizId: data?.exams_exam_by_pk.id,
+                                  examId: data?.exams_exam_by_pk.id,
                                 },
                               }),
-                              unRegisterQuiz({
+                              unRegisterExam({
                                 variables: {
                                   userId: user?.id,
-                                  quizId: data?.exams_exam_by_pk.id,
+                                  examId: data?.exams_exam_by_pk.id,
                                 },
                               }),
                             ])
@@ -212,7 +223,7 @@ export default function ExamCardDetails(): ReactElement {
                               .then(() => {
                                 dispatch(modalSlice.actions.hideModal());
                                 refetchRegistration({
-                                  quizId: id,
+                                  examId: id,
                                   userId: user?.id,
                                 });
                               });
@@ -223,6 +234,20 @@ export default function ExamCardDetails(): ReactElement {
                   );
                 }}
               >
+                <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5 mr-2"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                      />
+                    </svg>
                 Unregister
               </button>
             )

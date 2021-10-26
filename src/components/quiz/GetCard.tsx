@@ -331,7 +331,7 @@ const GetCard = ({ searchTerm = "" }: { searchTerm: string }) => {
               )}
 
               <button
-                onClick={() => history.push(`details/${quiz.id}`)}
+                onClick={() => history.push(`/details/${quiz.id}`)}
                 className="quiz-button"
               >
                 <svg

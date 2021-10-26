@@ -8,17 +8,17 @@
   }
 
   .button {
-    @apply bg-blue-500 text-white py-2 px-8 rounded shadow-md transition duration-100 ease-in-out;
+    @apply bg-blue-500 flex items-center justify-center text-white py-2 px-4 rounded shadow-md transition duration-100 ease-in-out;
   }
   .button-link {
-    @apply py-2 px-8 border-2 border-blue-400 rounded transition duration-100 ease-in-out;
+    @apply py-1.5 px-4 border-2 flex items-center justify-center border-blue-400 rounded transition duration-100 ease-in-out;
   }
-  .button-link:hover {
+  /* .button-link:hover {
     @apply transform translate-y-0.5 shadow-none;
   }
   .button:hover {
     @apply transform translate-y-0.5 shadow-none;
-  }
+  } */
   .nav-item {
     @apply flex justify-center hover:text-white;
   }

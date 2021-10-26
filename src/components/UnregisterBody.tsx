@@ -62,12 +62,12 @@ export default function UnregisterBody({ onConfirm }: Props): ReactElement {
         automatically. Please contact us using the contact us form for details.
       </div>
       <div className="flex mt-4 items-center justify-center ">
-        <button className=" button-link mr-3" onClick={() => onConfirm()}>
+        <button className=" button-link w-20 mr-3" onClick={() => onConfirm()}>
           Yes
         </button>
         <button
           onClick={() => dispatch(modalSlice.actions.hideModal())}
-          className="button common-btn py-2.5 px-9"
+          className="button common-btn w-20  "
         >
           No
         </button>

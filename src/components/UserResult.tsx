@@ -29,13 +29,13 @@ export default function UserResult({ examId }: { examId: string }) {
       };
       data?.exams_exam_answer.reduce((pV, cV) => {
         pV[
-          cV.exam_question.question.part.name.toLowerCase() as
+          cV.exam_question.question?.part.name.toLowerCase() as
             | "reading"
             | "writing"
             | "listening"
         ] =
           pV[
-            cV.exam_question.question.part.name.toLowerCase() as
+            cV.exam_question.question?.part.name.toLowerCase() as
               | "reading"
               | "writing"
               | "listening"
@@ -51,8 +51,6 @@ export default function UserResult({ examId }: { examId: string }) {
       };
     }
   }, [data]);
-
-  console.log(groupedResult);
 
   return (
     <>
@@ -112,15 +110,15 @@ export default function UserResult({ examId }: { examId: string }) {
         <tbody>
           <tr className=" border-2 border-blue-500 mt-4 ">
             <td className=" border-r-2 border-blue-500 md:py-2 py-1 ">
-              {groupedResult.reading}
+              {groupedResult?.reading}
             </td>
 
             <td className=" border-r-2 border-blue-500 md:py-2 py-1 ">
-              {groupedResult.listening}
+              {groupedResult?.listening}
             </td>
 
             <td className=" border-r-2 border-blue-500 md:py-2 py-1 ">
-              {groupedResult.writing}
+              {groupedResult?.writing}
             </td>
 
             <td className="md:py-2 py-1">

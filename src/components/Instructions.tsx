@@ -49,7 +49,6 @@ const Instructions = ({
   const [updateRegistration] = useMutation<IUpdateExamRegistration>(
     UPDATE_EXAMS_REGISTRATION
   );
-  console.log(user, updateRegistration);
 
   const handleStart = async () => {
     updateRegistration({
@@ -60,8 +59,7 @@ const Instructions = ({
         examStatus: "started",
       },
     })
-      .then((info) => {
-        console.log(info);
+      .then(() => {
         history.push(`/examstart/${examId}/${duration}`);
         dispatch(modalSlice.actions.hideModal());
       })

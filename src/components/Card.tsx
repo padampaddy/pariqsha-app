@@ -138,7 +138,7 @@ export default function Card({
             )} */}
           </div>
         </div>
-        <div>{content}</div>
+        <p className="">{content}</p>
       </div>
       {footer && (
         <div className="border-t-2 flex flex-row px-6 py-3 justify-between items-center">
