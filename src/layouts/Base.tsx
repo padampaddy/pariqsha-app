@@ -97,7 +97,7 @@ function BaseLayout({
             <div
               role="button"
               onClick={() => history.push("/notification")}
-              className=" my-auto items-center flex relative"
+              className="hidden my-auto items-center flex relative"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

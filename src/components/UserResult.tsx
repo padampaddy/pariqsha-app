@@ -1,10 +1,10 @@
 import { useQuery } from "@apollo/client";
 import { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { GET_MY_RESULT } from "../api/queries";
+import { GET_MY_RESULT, GET_EXAM_DATA } from "../api/queries";
 import modalSlice from "../redux/slices/modal-slice";
 import { RootState } from "../redux/store";
-import { IExamResult, IGroupedResult } from "../types/Quiz";
+import { IExamData, IExamResult, IGroupedResult } from "../types/Quiz";
 
 // const items = [34, 45, 46];
 
@@ -19,25 +19,31 @@ export default function UserResult({ examId }: { examId: string }) {
       examId: examId,
     },
   });
-
+  const { data: marks } = useQuery<IExamData>(GET_EXAM_DATA, {
+    variables: {
+      user: user?.id,
+      examId: examId,
+    },
+  });
+  console.log("rslt", marks);
   const groupedResult = useMemo(() => {
     if (data?.exams_exam_answer) {
       const obj: IGroupedResult = {
         reading: 0,
         listening: 0,
-        writing: 0,
+        // writing: 0,
       };
       data?.exams_exam_answer.reduce((pV, cV) => {
         pV[
           cV.exam_question.question?.part.name.toLowerCase() as
             | "reading"
-            | "writing"
+            // | "writing"
             | "listening"
         ] =
           pV[
             cV.exam_question.question?.part.name.toLowerCase() as
               | "reading"
-              | "writing"
+              // | "writing"
               | "listening"
           ] + (cV.status === "correct" ? 1 : 0);
         return pV;
@@ -47,7 +53,7 @@ export default function UserResult({ examId }: { examId: string }) {
       return {
         reading: 0,
         listening: 0,
-        writing: 0,
+        // writing: 0,
       };
     }
   }, [data]);
@@ -117,14 +123,20 @@ export default function UserResult({ examId }: { examId: string }) {
               {groupedResult?.listening}
             </td>
 
-            <td className=" border-r-2 border-blue-500 md:py-2 py-1 ">
-              {groupedResult?.writing}
-            </td>
+            {marks?.exams_registration.flatMap((item) => (
+              <>
+                <td className=" border-r-2 border-blue-500 md:py-2 py-1 ">
+                  {item.result_writing}
+                </td>
 
-            <td className="md:py-2 py-1">
-            {groupedResult?.reading + groupedResult?.listening + groupedResult?.writing}
-              {/* {items.reduce((pV, item) => pV + item, 0)} */}
-            </td>
+                <td className="md:py-2 py-1">
+                  {groupedResult?.reading +
+                    groupedResult?.listening +
+                    item.result_writing}
+                  {/* {items.reduce((pV, item) => pV + item, 0)} */}
+                </td>
+              </>
+            ))}
           </tr>
         </tbody>
       </table>

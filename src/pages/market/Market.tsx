@@ -29,7 +29,7 @@ const Market = () => {
   return (
     <BaseLayout title="Market" actionButtons={[<CartButton key="cart" />]}>
       <div className="px-2">
-        <div className="mb-8 text-center flex  pt-3 flex-row">
+        <div className="md:mb-8 mb-2 text-center flex  pt-3 flex-row">
           <h4 className="text-gray-500 text-lg flex justify-center items-center flex-grow flex-1">
             <span className="text-sm">
               <img src={coin} className="h-8 w-8 mr-2" alt="coin" />
@@ -81,7 +81,7 @@ const Market = () => {
 
                 <div className="border-t-2 flex flex-row px-2 py-2 justify-between items-center">
                   <button
-                    className="border border-gray-400 p-1 md:px-4 md:py-2 flex rounded market-btn"
+                    className=" market-btn"
                     style={{ fontSize: "10px" }}
                     onClick={() => {
                       dispatch(
@@ -109,7 +109,7 @@ const Market = () => {
                   </button>
 
                   <button
-                    className="border border-gray-400 md:px-4 md:py-2 p-1 rounded flex market-btn"
+                    className="market-btn"
                     style={{ fontSize: "10px" }}
                     onClick={() => {
                       onAdd(new CartItem(market));

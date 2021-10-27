@@ -483,9 +483,10 @@ export const UPDATE_EXAMS_REGISTRATION = gql`
   }
 `;
 
-export const GET_EXAM_TIME = gql`
+export const GET_EXAM_DATA = gql`
 query get_exam_time($examId: uuid!, $user: uuid!,){
   exams_registration(where: {exam_id: {_eq: $examId}, user_id: {_eq: $user}}) {
+    result_writing
     started_at
     exam {
       duration_in_minutes

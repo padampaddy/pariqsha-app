@@ -2,16 +2,16 @@ import { useQuery } from "@apollo/client";
 import moment from "moment";
 import { useContext, useMemo } from "react";
 import { useSelector } from "react-redux";
-import { GET_EXAM_TIME } from "../../../api/queries";
+import { GET_EXAM_DATA } from "../../../api/queries";
 import TimeStamp from "../../../components/TimeStamp";
 import ExamContext from "../../../contexts/examContext";
 import { RootState } from "../../../redux/store";
-import { IExamTime } from "../../../types/Quiz";
+import { IExamData } from "../../../types/Quiz";
 
 const QuizHeader = ({ time, examId }: { time: string; examId: string }) => {
   const { setActive, active } = useContext(ExamContext);
   const user = useSelector((state: RootState) => state.user.entities?.user);
-  const { data } = useQuery<IExamTime>(GET_EXAM_TIME, {
+  const { data } = useQuery<IExamData>(GET_EXAM_DATA, {
     variables: {
       user: user?.id,
       examId: examId,

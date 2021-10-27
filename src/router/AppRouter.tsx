@@ -111,17 +111,17 @@ function MySwitch() {
       </PrivateRoute>
 
       <PrivateRoute path="/submit">
-        <SubmitPage/>
+        <SubmitPage />
       </PrivateRoute>
 
       {/* <PrivateRoute path="/notification">
         <LandingPage />
       </PrivateRoute> */}
-     
+
       <PrivateRoute path="/QuestionType">
         <QuestionType />
       </PrivateRoute>
-      
+
       <PublicRoute path="/signin">
         <Login />
       </PublicRoute>
@@ -155,8 +155,8 @@ export default function AppRouter() {
     <ApolloProvider client={client}>
       <Provider url={FUNCTIONS_URL_TEST} options={options}>
         <Router>
-        <Modal />
-        <Alert />
+          <Modal />
+          <Alert />
           <MySwitch />
         </Router>
       </Provider>

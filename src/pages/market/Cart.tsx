@@ -8,8 +8,10 @@ import { useMutation } from "@apollo/client";
 import { IMarketOrder } from "../../types/Market";
 import { SEND_MARKET_ORDER } from "../../api/queries";
 import alertSlice from "../../redux/slices/alert-slice";
+import { useHistory } from "react-router-dom";
 
 const Cart = () => {
+  const history = useHistory();
   const user = useSelector((state: RootState) => state.user.entities?.user);
   const items = useSelector((state: RootState) => state.cart.items);
   const dispatch = useDispatch();
@@ -59,7 +61,7 @@ const Cart = () => {
               </svg>
               Cart Is Empty
             </div>
-            <button className="common-btn rounded px-3 py-2 ">Click Here To Add Card</button>
+            <button className="common-btn rounded px-3 py-2 m-auto mt-4 flex items-center justify-center" onClick={()=>history.push("/market")}>Add Card</button>
             </>
           ) : (
             <>

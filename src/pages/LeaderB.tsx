@@ -16,8 +16,8 @@ const items = [
 const LeaderB = () => {
   return (
     <BaseLayout title="Leaderborad" showBack>
-      <div className="md:mx-20 mx-3 border-4 border-blue-500 rounded-lg md:my-20 my-16">
-        <div className="uppercase tracking-wide w-40 p-3 common-btn mx-auto text-white  text-center font-bold rounded-lg -mt-6">
+      <div className="md:mx-20 mx-3 border-4 border-green-500 rounded-lg md:my-20 my-16">
+        <div className="uppercase tracking-wide w-40 p-3 bg-green-500 mx-auto text-white  text-center font-bold rounded-lg -mt-6">
           leaderboard
         </div>
         <div className="md:m-6 my-3 mx-2 md:p-3">

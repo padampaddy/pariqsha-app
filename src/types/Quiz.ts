@@ -70,7 +70,10 @@ export interface MyExamResponse {
 }
 
 export interface ExamRegistrationResponse {
-  exams_registration: { id: string }[];
+  exams_registration: {
+    id: string;
+    
+  }[];
 }
 
 export interface IContextType {
@@ -138,22 +141,23 @@ export interface IExamResult {
 export interface IGroupedResult {
   reading: number;
   listening: number;
-  writing: number;
+  // writing: number;
 }
 
 export interface IUpdateExamRegistration {
-  update_exams_registration:{
-    started_at : Date;
+  update_exams_registration: {
+    started_at: Date;
     status: string;
     exam_id: string;
     user_id: string;
-    exam_status:string;
-  }[]
+    exam_status: string;
+  }[];
 }
 
-export interface IExamTime {
+export interface IExamData {
   exams_registration: {
-    started_at : Date;
-    exam: IExam
-  }[]
+    result_writing: number;
+    started_at: Date;
+    exam: IExam;
+  }[];
 }

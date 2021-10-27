@@ -22,7 +22,7 @@ const Drawer = ({ onClose }: Props) => {
   const user = useSelector((state: RootState) => state.user.entities?.user);
   const [getData, { data }] = useLazyQuery<IUsersProfile>(USERS_PROFILE, {
     onCompleted: (res) => {
-      if (!res) {
+      if (!res.users_profile_by_pk) {
         addProfile({
           variables: {
             id: user?.id,
@@ -164,13 +164,13 @@ const Drawer = ({ onClose }: Props) => {
             </NavLink>
           </li>
 
-          <li className="nav-item">
+          <li className="nav-item hidden">
             <NavLink
               to="/notification"
               onClick={() => {
                 onClose();
               }}
-              className="nav-link pl-4 flex justify-center items-center"
+              className="nav-link pl-4 flex justify-center items-center "
               activeClassName="selected common-btn-nav"
             >
               Notifications
