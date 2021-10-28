@@ -18,6 +18,7 @@ import modalSlice from "../../redux/slices/modal-slice";
 import { RootState } from "../../redux/store";
 import { MyExamResponse, IExamResponse } from "../../types/Quiz";
 import UnregisterBody from "../UnregisterBody";
+import Instructions from "../Instructions";
 
 const today = new Date().toISOString();
 
@@ -25,7 +26,6 @@ declare let Razorpay: any;
 
 const getLocalItems = () => {
   const likes = localStorage.getItem("like");
-  console.log(likes);
 
   if (likes) {
     return JSON.parse(likes);
@@ -114,27 +114,25 @@ const GetExamCards = ({ searchTerm = "" }: { searchTerm: string }) => {
           coverImgSrc={item.cover_image_url}
           time={moment(item.start_at).format("h:mm A")}
           duration={item.duration_in_minutes}
-          //   subTitle={item.short_description.split(",").join(", ")}
+          // subTitle={item.short_description.split(",").join(", ")}
           likeBtn={
-            <>
-              <svg
-                role="button"
-                onClick={() => handleLike()}
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-8 w-8 mr-1 text-red-600"
-                fill={like ? "currentColor" : "none"}
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <title>heart</title>
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="1.5"
-                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                />
-              </svg>
-            </>
+            <svg
+              role="button"
+              onClick={() => handleLike()}
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-8 w-8 mr-1 text-red-600"
+              fill={like ? "currentColor" : "none"}
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <title>heart</title>
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
+                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+              />
+            </svg>
           }
           footer={
             <>
@@ -143,7 +141,7 @@ const GetExamCards = ({ searchTerm = "" }: { searchTerm: string }) => {
               ) === -1 ? (
                 <>
                   <button
-                    className="quiz-button md:mb-0 mb-0.5 "
+                    className="quiz-button md:mb-0 mb-0.5 common-btn"
                     onClick={async () => {
                       if (item.price === 0) {
                         Promise.all([
@@ -211,7 +209,7 @@ const GetExamCards = ({ searchTerm = "" }: { searchTerm: string }) => {
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5 mr-1"
+                      className="h-5 w-5 mr-2"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -220,7 +218,7 @@ const GetExamCards = ({ searchTerm = "" }: { searchTerm: string }) => {
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         strokeWidth="2"
-                        d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"
+                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
                       />
                     </svg>
                     Register
@@ -229,7 +227,7 @@ const GetExamCards = ({ searchTerm = "" }: { searchTerm: string }) => {
               ) : (
                 <>
                   <button
-                    className="text-red-500 quiz-button  "
+                    className="text-red-500 quiz-button  common-btn"
                     onClick={() => {
                       dispatch(
                         modalSlice.actions.showModal({
@@ -268,28 +266,7 @@ const GetExamCards = ({ searchTerm = "" }: { searchTerm: string }) => {
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5 mr-1"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"
-                      />
-                    </svg>
-                    Unregister
-                  </button>
-
-                  <button
-                    onClick={() => history.push(`/examstart/${item.id}`)}
-                    className="quiz-button"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5 mr-1"
+                      className="h-5 w-5 mr-2"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -301,6 +278,44 @@ const GetExamCards = ({ searchTerm = "" }: { searchTerm: string }) => {
                         d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
                       />
                     </svg>
+                    Unregister
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      dispatch(
+                        modalSlice.actions.showModal({
+                          body: (
+                            <Instructions
+                              examId={item.id}
+                              duration={item.duration_in_minutes}
+                            />
+                          ),
+                        })
+                      );
+                    }}
+                    className="quiz-button common-btn"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5 mr-2"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
+                      />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
                     Start
                   </button>
                 </>
@@ -308,11 +323,11 @@ const GetExamCards = ({ searchTerm = "" }: { searchTerm: string }) => {
 
               <button
                 onClick={() => history.push(`/examdetails/${item.id}`)}
-                className="quiz-button"
+                className="quiz-button common-btn"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 mr-1"
+                  className="h-5 w-5 mr-2"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -321,7 +336,7 @@ const GetExamCards = ({ searchTerm = "" }: { searchTerm: string }) => {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth="2"
-                    d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"
+                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
                   />
                 </svg>
                 Details

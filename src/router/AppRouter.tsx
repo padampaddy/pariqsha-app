@@ -19,12 +19,10 @@ import { RootState } from "../redux/store";
 import { IncomingOptions, Provider } from "use-http";
 import { FUNCTIONS_URL_TEST } from "../Constants";
 import Details from "../components/quiz/Details";
-
 import SignupScreen from "../pages/Login/SignupScreen";
 import Mychats from "../pages/Chat/MyChats";
 import Coins from "../pages/Coins";
 import ExamStart from "../pages/ExamStart";
-import ListeningWordLimit from "../pages/QuizType/listening/ListeningWordLimit";
 import Setting from "../pages/setting/Setting";
 import Market from "../pages/market/Market";
 import NewChat from "../pages/Chat/NewChat";
@@ -35,22 +33,14 @@ import Cart from "../pages/market/Cart";
 import Alert from "../components/Modal/Alert";
 import MarketHistory from "../pages/setting/MarketHistory";
 import QuizHistory from "../pages/setting/QuizHistory";
-import QuizHeader from "../components/QuizHeader";
 import QuestionType from "../components/QuestionType";
-import Note from "../components/QuizHeader";
 import ExamCardDetails from "../components/exam/ExamCardDetails";
 import Login from "../pages/Login/Login";
 import Notification from "../pages/Notifications";
-import Reading from "../pages/QuizType/reading/Reading";
-import Writing from "../pages/QuizType/writing/Writing";
-// import Home from '../pages/Home'
-// import ListingQuiz from "../pages/QuizType/listening/ListingQuiz";
-//  import ListeningAudio from '../pages/QuizType/listening/ListeningAudio'
-//  import ListeningMcq from '../pages/QuizType/listening/ListeningMcq'
-// import ListeningTrueFalse from "../pages/QuizType/listening/ListeningTrueFalse";
-// import Writing from "../pages/writing/Writing";
-//  import QuizStart from "../pages/QuizStart";
-// import LandingPage from "../pages/LandingPage";
+import SubmitPage from "../pages/QuizType/SubmitPage";
+// import LeaderBoard from "../pages/LeaderBoard";
+import LeaderB from "../pages/LeaderB";
+import Results from "../pages/Results";
 
 function MySwitch() {
   const location = useLocation();
@@ -62,6 +52,14 @@ function MySwitch() {
 
       <PrivateRoute path="/coins">
         <Coins />
+      </PrivateRoute>
+
+      <PrivateRoute path="/leaderboard">
+        <LeaderB />
+      </PrivateRoute>
+
+      <PrivateRoute path="/results">
+        <Results />
       </PrivateRoute>
 
       <PrivateRoute path="/setting">
@@ -108,54 +106,22 @@ function MySwitch() {
         <ExamCardDetails />
       </PrivateRoute>
 
-      <PrivateRoute path="/examstart/:id">
+      <PrivateRoute path="/examstart/:id/:time">
         <ExamStart />
       </PrivateRoute>
 
-      <PrivateRoute path="/reading/:id">
-        <Reading /> 
-      </PrivateRoute>
-
-      <PrivateRoute path="/writing/:id">
-        <Writing />
+      <PrivateRoute path="/submit">
+        <SubmitPage />
       </PrivateRoute>
 
       {/* <PrivateRoute path="/notification">
         <LandingPage />
       </PrivateRoute> */}
-      {/* <PrivateRoute path="/notification">
-        <ListeningAudio/>
-      </PrivateRoute> */}
-      {/* <PrivateRoute path="/notification">
-        <ListeningMcq/>
-      </PrivateRoute> */}
-      {/* <PrivateRoute path="/notification">
-        <ListeningTrueFalse />
-      </PrivateRoute> */}
-      
-      {/* <PrivateRoute path="/notification">
-        <QuizStart />
-      </PrivateRoute> */}
-      {/* <PrivateRoute path="/notification">
-        <ListingQuiz />
-      </PrivateRoute> */}
-     
-
-      <PrivateRoute path="/quizHeader">
-        <QuizHeader />
-      </PrivateRoute>
 
       <PrivateRoute path="/QuestionType">
         <QuestionType />
       </PrivateRoute>
 
-      <PrivateRoute path="/note">
-        <Note />
-        <PrivateRoute path="/notification">
-          <ListeningWordLimit />
-        </PrivateRoute>
-      </PrivateRoute>
-      
       <PublicRoute path="/signin">
         <Login />
       </PublicRoute>
@@ -188,9 +154,9 @@ export default function AppRouter() {
   return (
     <ApolloProvider client={client}>
       <Provider url={FUNCTIONS_URL_TEST} options={options}>
-        <Modal />
-        <Alert />
         <Router>
+          <Modal />
+          <Alert />
           <MySwitch />
         </Router>
       </Provider>

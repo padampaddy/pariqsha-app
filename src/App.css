@@ -42,36 +42,6 @@
   text-align: center;
 }
 
-.language:hover{
-  background-color: #27A7AD;
-  border-radius: 10rem;
-  color: white;
-}
-.science:hover{
-background-color: #F9541F;
-border-radius: 10rem;
-color: white;
-}
-.drama:hover{
-background-color: #CDA4FF;
-border-radius: 10rem;
-color: white;
-}
-.art:hover{
-background-color: #91C874;
-border-radius: 10rem;
-color: white;
-}
-.maths:hover{
-background-color: #FDCC40;
-border-radius: 10rem;
-color: white;
-}
-.gk:hover{
-background-color: #79D9EF;
-border-radius: 10rem;
-color: white;
-}
 .list-style{
   box-shadow: 1px 1px 10px 1px #efdcdc;
 }
@@ -79,7 +49,7 @@ color: white;
   background: linear-gradient(185deg, rgba(31,160,238,1) 0%, rgba(31,160,238,1) 35%, rgba(57,133,219,1) 100%);
   color: #fff;
 }
-.nav-item:hover, .nav-link:hover{
+.nav-item:hover, .nav-link:hover, .common-btn-nav{
   color: #229ceb;
 }   
 
@@ -92,6 +62,7 @@ a.collection-list.common-btn, .quiz-button:hover, .market-btn:hover {
 /* width */
 ::-webkit-scrollbar {
   width: 5px;
+  height: 5px;
 }
 
 /* Track */
@@ -165,12 +136,17 @@ a.collection-list.common-btn, .quiz-button:hover, .market-btn:hover {
 }
 
 .wrapper-mcq-form [type="radio"]:checked,
-.wrapper-mcq-form [type="radio"]:not(:checked) {
+.wrapper-mcq-form [type="radio"]:not(:checked), 
+.wrapper-mcq-form [type="checkbox"]:checked,
+.wrapper-mcq-form [type="checkbox"]:not(:checked){
     position: absolute;
     left: -9999px;
 }
+
 .wrapper-mcq-form [type="radio"]:checked + label,
-.wrapper-mcq-form [type="radio"]:not(:checked) + label
+.wrapper-mcq-form [type="radio"]:not(:checked) + label,
+.wrapper-mcq-form [type="checkbox"]:checked + label,
+.wrapper-mcq-form [type="checkbox"]:not(:checked) + label
 {
   position: relative;
   padding-left: 28px;
@@ -180,14 +156,16 @@ a.collection-list.common-btn, .quiz-button:hover, .market-btn:hover {
   color: #000;
   border: 1px solid #ddd;
   width: 100%;
-  margin-bottom: 15px;
+  margin-bottom: 8px;
   padding: 10px;
   text-align: center;
   box-shadow: -1px 2px 9px 0px #ddd;
 }
 
 .wrapper-mcq-form [type="radio"]:checked + label:after,
-.wrapper-mcq-form [type="radio"]:not(:checked) + label:after {
+.wrapper-mcq-form [type="radio"]:not(:checked) + label:after,
+.wrapper-mcq-form [type="checkbox"]:checked + label:after,
+.wrapper-mcq-form [type="checkbox"]:not(:checked) + label:after {
   content: '';
   width: 100%;
   height: 100%;
@@ -200,7 +178,8 @@ a.collection-list.common-btn, .quiz-button:hover, .market-btn:hover {
   color: #2e90e3;
 
 }
-.wrapper-mcq-form [type="radio"]:not(:checked) + label:after {
+.wrapper-mcq-form [type="radio"]:not(:checked) + label:after,
+.wrapper-mcq-form [type="checkbox"]:not(:checked) + label:after {
     opacity: 0;
     -webkit-transform: scale(0);
     transform: scale(0);
@@ -211,7 +190,91 @@ a.collection-list.common-btn, .quiz-button:hover, .market-btn:hover {
   animation-iteration-count: 1;
   animation-timing-function: ease-in-out;
 }
-.quiz-list {
-  overflow-y: auto!important;
+
+
+.qstn-list {
+  white-space: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 8px;
+}
+ 
+.qstn-list li {
+  display: inline-flex;
+  margin: 0 6px 5px 0;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-weight: bold;
+  align-items: center;
+  justify-content: center;
 }
 
+.bgTime {
+  background-color: #1E9FEE;
+}
+
+/* .collections{
+  white-space: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 3px;
+}
+
+.collections li{
+  display: inline-block;
+} */
+
+/* Linear loader */
+
+.linear-activity {
+  overflow: hidden;
+  width: 50%;
+  height: 4px;
+  background-color: #B3E5FC;
+  /* margin: 20px auto; */
+}
+
+.indeterminate {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.indeterminate:before {
+  content: '';
+  position: absolute;
+  height: 100%;
+  background-color: #03A9F4;
+  animation: indeterminate_first 1.5s infinite ease-out;
+}
+
+.indeterminate:after {
+  content: '';
+  position: absolute;
+  height: 100%;
+  background-color: #4FC3F7;
+  animation: indeterminate_second 1.5s infinite ease-in;
+}
+
+@keyframes indeterminate_first {
+  0% {
+      left: -100%;
+      width: 100%;
+  }
+  100% {
+      left: 100%;
+      width: 10%;
+  }
+}
+
+@keyframes indeterminate_second {
+  0% {
+      left: -150%;
+      width: 100%;
+  }
+  100% {
+      left: 100%;
+      width: 10%;
+  }
+}

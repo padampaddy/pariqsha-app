@@ -17,3 +17,23 @@ export interface IMarketOrder {
     details: JSON;
   };
 }
+
+export interface ICoins {
+  users_coin_plans: {
+    coins: number;
+    id: string;
+    most_popular: boolean;
+    images: string;
+    price: number;
+  }[];
+}
+
+export interface ICoinsOrder {
+  coins_orders: {
+    id: string;
+    user_id: string;
+    cost_coins: number;
+    no_of_coins: number;
+    coins_plan_id: string
+  };
+}

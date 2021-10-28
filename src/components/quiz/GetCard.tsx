@@ -25,7 +25,6 @@ declare let Razorpay: any;
 
 const getLocalItems = () => {
   const likes = localStorage.getItem("like");
-  console.log(likes);
 
   if (likes) {
     return JSON.parse(likes);
@@ -148,7 +147,7 @@ const GetCard = ({ searchTerm = "" }: { searchTerm: string }) => {
               ) === -1 ? (
                 <>
                   <button
-                    className="quiz-button md:mb-0 mb-0.5 "
+                    className="quiz-button md:mb-0 mb-0.5 common-btn"
                     onClick={async () => {
                       if (quiz.price === 0) {
                         Promise.all([
@@ -214,9 +213,9 @@ const GetCard = ({ searchTerm = "" }: { searchTerm: string }) => {
                       rzp1.open();
                     }}
                   >
-                    <svg
+                      <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5 mr-1"
+                      className="h-5 w-5 mr-2"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -225,7 +224,7 @@ const GetCard = ({ searchTerm = "" }: { searchTerm: string }) => {
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         strokeWidth="2"
-                        d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"
+                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
                       />
                     </svg>
                     Register
@@ -234,7 +233,7 @@ const GetCard = ({ searchTerm = "" }: { searchTerm: string }) => {
               ) : (
                 <>
                   <button
-                    className="text-red-500 quiz-button  "
+                    className="text-red-500 quiz-button  common-btn"
                     onClick={() => {
                       dispatch(
                         modalSlice.actions.showModal({
@@ -271,7 +270,7 @@ const GetCard = ({ searchTerm = "" }: { searchTerm: string }) => {
                       );
                     }}
                   >
-                    <svg
+                    {/* <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="h-5 w-5 mr-1"
                       fill="none"
@@ -284,16 +283,10 @@ const GetCard = ({ searchTerm = "" }: { searchTerm: string }) => {
                         strokeWidth="2"
                         d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"
                       />
-                    </svg>
-                    Unregister
-                  </button>
-                  <button
-                    onClick={() => history.push(`examstart/${quiz.id}`)}
-                    className="quiz-button"
-                  >
-                    <svg
+                    </svg> */}
+                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5 mr-1"
+                      className="h-5 w-5 mr-2"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -305,18 +298,45 @@ const GetCard = ({ searchTerm = "" }: { searchTerm: string }) => {
                         d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
                       />
                     </svg>
+                    Unregister
+                  </button>
+                  <button
+                    onClick={() => history.push(`examstart/${quiz.id}`)}
+                    className="quiz-button common-btn"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5 mr-2"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
+                      />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                   
                     Start
                   </button>
                 </>
               )}
 
               <button
-                onClick={() => history.push(`details/${quiz.id}`)}
-                className="quiz-button"
+                onClick={() => history.push(`/details/${quiz.id}`)}
+                className="quiz-button common-btn"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 mr-1"
+                  className="h-5 w-5 mr-2"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -325,7 +345,7 @@ const GetCard = ({ searchTerm = "" }: { searchTerm: string }) => {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth="2"
-                    d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"
+                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
                   />
                 </svg>
                 Details

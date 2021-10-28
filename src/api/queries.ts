@@ -373,7 +373,7 @@ export const UNREGISTER_EXAM = gql`
 `;
 
 export const GET_EXAM_QUES = gql`
-  query get_exam_ques($examId: String!) {
+  query get_exam_ques($examId: uuid!) {
     exams_exam_question(
       where: { exam_id: { _eq: $examId } }
       order_by: { order: asc }
@@ -389,6 +389,7 @@ export const GET_EXAM_QUES = gql`
         created_at
         options
         image_link
+        type_of_question_description_override
         solution
         part {
           name
@@ -399,6 +400,8 @@ export const GET_EXAM_QUES = gql`
           name
         }
         context {
+          id
+          title
           details
           image_link
           link
@@ -407,6 +410,129 @@ export const GET_EXAM_QUES = gql`
           }
         }
       }
+    }
+  }
+`;
+
+export const SEND_ANSWER = gql`
+  mutation send_answer($objects: [exams_exam_answer_insert_input!]!) {
+    insert_exams_exam_answer(objects: $objects) {
+      returning {
+        id
+      }
+    }
+  }
+`;
+
+export const GET_EXAM_ANS = gql`
+  subscription get_exam_ans($userId: uuid!, $ExamId: uuid!) {
+    exams_exam_answer(
+      where: {
+        _and: {
+          user_id: { _eq: $userId }
+          exam_question: { exam_id: { _eq: $ExamId } }
+        }
+      }
+    ) {
+      answer
+      id
+      status
+      updated_at
+      exam_question {
+        id
+      }
+    }
+  }
+`;
+
+export const UPDATE_ANSWER = gql`
+  mutation update_answer($answer: String!, $status: String!, $quesId: uuid!) {
+    update_exams_exam_answer_by_pk(
+      pk_columns: { id: $quesId }
+      _set: { answer: $answer, status: $status }
+    ) {
+      id
+    }
+  }
+`;
+
+export const GET_MY_RESULT = gql`
+  query get_my_result($user: uuid!, $examId: uuid!) {
+    exams_exam_answer(
+      where: {
+        user_id: { _eq: $user }
+        exam_question: { exam_id: { _eq: $examId } }
+      }
+    ) {
+      status
+      exam_question {
+        exam_id
+        question {
+          part {
+            name
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const UPDATE_EXAMS_REGISTRATION = gql`
+  mutation update_exams_registration(
+    $examId: uuid!
+    $user: uuid!
+    $startedAt: timestamptz!
+    $examStatus: String!
+  ) {
+    update_exams_registration(
+      _set: { exam_status: $examStatus, started_at: $startedAt }
+      where: { exam_id: { _eq: $examId }, user_id: { _eq: $user } }
+    ) {
+      returning {
+        started_at
+      }
+    }
+  }
+`;
+
+export const GET_EXAM_DATA = gql`
+  query get_exam_time($examId: uuid!, $user: uuid!) {
+    exams_registration(
+      where: { exam_id: { _eq: $examId }, user_id: { _eq: $user } }
+    ) {
+      result_writing
+      started_at
+      exam {
+        duration_in_minutes
+      }
+    }
+  }
+`;
+
+export const GET_COINS = gql`
+  query get_coins($status: String!) {
+    users_coin_plans(where: { status: { _eq: $status } }) {
+      coins
+      id
+      images
+      most_popular
+      price
+    }
+  }
+`;
+
+
+export const SEND_COINS_ORDER = gql`
+  mutation send_coins_order(
+    $costCoin: Int!
+    $userId: uuid!
+    $coinPlanId: uuid!
+    $dNoOfCoins: Int!
+  ) {
+    insert_users_create_orders_one(
+      object: { cost_coins: $costCoin, user_id: $userId, no_of_coins: $dNoOfCoins, coins_plan_id: $coinPlanId }
+    ) {
+      id
     }
   }
 `;

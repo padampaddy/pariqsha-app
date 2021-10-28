@@ -48,9 +48,9 @@ export interface IExam {
 }
 
 export interface IExamType {
-  exams_exam_type:{
-    id: string,
-    name: string,
+  exams_exam_type: {
+    id: string;
+    name: string;
     description: string;
   }[];
 }
@@ -70,7 +70,10 @@ export interface MyExamResponse {
 }
 
 export interface ExamRegistrationResponse {
-  exams_registration: { id: string }[];
+  exams_registration: {
+    id: string;
+    
+  }[];
 }
 
 export interface IContextType {
@@ -78,10 +81,12 @@ export interface IContextType {
 }
 
 export interface IContext {
+  id: string;
   details: string;
+  title: string;
   image_link: string;
   link: string;
-  context_type: IContextType[];
+  context_type: IContextType;
 }
 
 export interface ITypeOfQues {
@@ -96,17 +101,63 @@ export interface IQues {
   created_at: Date;
   options: string[];
   image_link: string;
+  type_of_question_description_override: string;
   solution: string;
   context_id: string;
-  part: ITypeOfQues[];
-  type_of_question: ITypeOfQues[];
-  context: IContext[];
+  part: ITypeOfQues;
+  type_of_question: ITypeOfQues;
+  context: IContext;
 }
 
 export interface IExamQues {
-  exams_exam_question: {
-    id: string;
+  id: string;
+  exam_id: string;
+  question: IQues;
+}
+
+export interface ISendAnswer {
+  answer: string;
+  user_id?: string;
+  exam_question_id: string;
+  status: string;
+}
+
+export interface IGroupedQuestions {
+  reading: (IQues & { exam_question_id: string })[];
+  listening: (IQues & { exam_question_id: string })[];
+  writing: (IQues & { exam_question_id: string })[];
+}
+
+export interface IExamResult {
+  exams_exam_answer: {
+    status: string;
+    exam_question: {
+      exam_id: string;
+      question: IQues;
+    };
+  }[];
+}
+
+export interface IGroupedResult {
+  reading: number;
+  listening: number;
+  // writing: number;
+}
+
+export interface IUpdateExamRegistration {
+  update_exams_registration: {
+    started_at: Date;
+    status: string;
     exam_id: string;
-    question: IQues[];
-  };
+    user_id: string;
+    exam_status: string;
+  }[];
+}
+
+export interface IExamData {
+  exams_registration: {
+    result_writing: number;
+    started_at: Date;
+    exam: IExam;
+  }[];
 }

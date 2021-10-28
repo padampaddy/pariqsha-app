@@ -19,8 +19,7 @@ const Setting = () => {
             <div className=" text-gray-400 text-xs font-semibold uppercase ">
               Transactions History
             </div>
-
-            <div role="button" onClick={() => history.push(`quizhistory`)} className="flex justify-between rounded-lg border mt-2 items-center bg-white p-4 hover:bg-gray-100 animation">
+            <div role="button" onClick={() => history.push("/quizhistory")} className="flex justify-between rounded-lg border mt-2 items-center bg-white p-4 hover:bg-gray-100 animation">
               <div className="flex animation ">
                 <div className="rounded-full h-10 w-10  flex justify-center items-center bg-blue-900">
                   <svg
@@ -60,7 +59,7 @@ const Setting = () => {
               </div>
             </div>
 
-            <div role="button" onClick={() => history.push(`markethistory`)} className="flex justify-between rounded-lg border  mt-2 items-center bg-white p-4 hover:bg-gray-100 animation">
+            <div role="button" onClick={() => history.push("/markethistory")} className="flex justify-between rounded-lg border  mt-2 items-center bg-white p-4 hover:bg-gray-100 animation">
               <div className="flex ">
                 <div
                   className="rounded-full h-10 w-10  flex justify-center items-center"

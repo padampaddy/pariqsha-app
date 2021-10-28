@@ -25,7 +25,6 @@ declare let Razorpay: any;
 
 const getLocalItems =()=>{
   const likes = localStorage.getItem('like')
-  console.log(likes);
 
   if(likes){
     return JSON.parse(likes);
@@ -192,7 +191,7 @@ export default function Details(): ReactElement {
               </>
             ) : (
               <button
-                className="button-link text-red-500"
+                className="button text-red-500 common-btn"
                 
                 onClick={() => {
                   dispatch(

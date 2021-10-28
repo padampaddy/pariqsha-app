@@ -12,7 +12,7 @@ import { useParams } from "react-router-dom";
 import DEFAULT_AVATAR from "../../assets/images/profileuser.png";
 import PicPreview from "../../components/PicPreview";
 import modalSlice from "../../redux/slices/modal-slice";
-import Loader from "../../components/Loader";
+import Loader from "../../components/Loader/Loader";
 
 const Msg = () => {
   const { id } = useParams<{ id: string }>();
@@ -27,15 +27,15 @@ const Msg = () => {
   );
   const temp1 = useRef() as MutableRefObject<HTMLDivElement>;
   const [input, setInput] = useState<string>("");
-  const [pictures, setPictures] = useState<string>("");
-  const wrapperRef = useRef(null);
+  const [pictures, setPictures] = useState("");
+  const wrapperRef = useRef() as MutableRefObject<HTMLInputElement>;
   const [sendMessage] = useMutation<ISendMessage>(SEND_MESSAGE);
   const dispatch = useDispatch();
 
   const uploadPicture = async (e: React.ChangeEvent<any>) => {
-    console.log(e);
     const formData = new FormData();
-    formData.append("image", e.target.files[0]);
+    const file = e.target.files[0];
+    formData.append("image", file);
     const res = await fetch("https://functions.app.pariqsha.com/files/upload", {
       method: "POST",
       body: formData,
@@ -58,8 +58,7 @@ const Msg = () => {
         attachmentUrl: pictures,
       },
     })
-      .then((info) => {
-        console.log(info);
+      .then(() => {
         setInput("");
         setPictures("");
         temp1.current?.scrollTo(0, temp1.current?.scrollHeight);
@@ -76,51 +75,30 @@ const Msg = () => {
       <div className="flex h-full flex-col">
         <div>
           <div className=" bg-gradient-to-bl items-center text-center px-2 py-4 relative">
-         
-              {/* <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-6 cursor-pointer absolute top-1/2 -translate-y-1/2 transform "
-                viewBox="0 0 512 512"
-                onClick={() => history.goBack()}
-              >
-                <title>Arrow Back</title>
-                <path
-                  fill="currentColor"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="48"
-                  d="M244 400L100 256l144-144M120 256h292"
-                />
-              </svg> */}
-          
-      
-              <img
-                className="inline object-cover w-12 h-12 rounded-full"
-                src={
-                  data?.communication_threads_by_pk.profileByStartedWith
-                    .image_url
-                    ? data?.communication_threads_by_pk.profileByStartedWith
-                        .image_url
-                    : DEFAULT_AVATAR
-                }
-                onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) =>
-                  ((e.target as HTMLImageElement).src = DEFAULT_AVATAR)
-                }
-              ></img>
-        
-              <h4 className="text-black pt-1 text-sm font-bold">
-                {data?.communication_threads_by_pk.profileByStartedWith.name}
-              </h4>
-            </div>
-      
+            <img
+              className="inline object-cover w-12 h-12 rounded-full"
+              src={
+                data?.communication_threads_by_pk.profileByStartedWith.image_url
+                  ? data?.communication_threads_by_pk.profileByStartedWith
+                      .image_url
+                  : DEFAULT_AVATAR
+              }
+              onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) =>
+                ((e.target as HTMLImageElement).src = DEFAULT_AVATAR)
+              }
+            ></img>
+
+            <h4 className="text-black pt-1 text-sm font-bold">
+              {data?.communication_threads_by_pk.profileByStartedWith.name}
+            </h4>
+          </div>
         </div>
         <hr className="mx-2 mb-2 border-gray-300 border-b-1"></hr>
         <div ref={temp1} className="flex-1 px-2 overflow-y-auto">
           <div className="flex flex-col flex-auto rounded-2xl">
             <div className="grid">
               {loading ? (
-                <Loader/>
+                <Loader />
               ) : (
                 <ul>
                   {data?.communication_threads_by_pk.messages.flatMap(
@@ -260,7 +238,7 @@ const Msg = () => {
                         <button
                           type="button"
                           onClick={() => {
-                            (wrapperRef as any).current.click();
+                            wrapperRef.current.click();
                           }}
                         >
                           <svg

@@ -6,16 +6,16 @@ import modalSlice from "./slices/modal-slice";
 import userSlice from "./slices/user-slice";
 
 function getPersistedState() {
-  const pStateString = localStorage.getItem("reduxState");
+  const pStateString = localStorage.getItem("cartItems");
   if (pStateString) {
-    const state = JSON.parse(pStateString);
-    state.cart.items = state.cart.items.map(
+    const cartItems = JSON.parse(pStateString);
+    cartItems.items = cartItems?.items?.map(
       (item: {
-        mId: any;
-        mDescription: any;
-        mImages: any[];
-        mName: any;
-        mPriceCoins: any;
+        mId: string;
+        mDescription: string;
+        mImages: string[];
+        mName: string;
+        mPriceCoins: number;
       }) =>
         new CartItem({
           id: item.mId,
@@ -24,9 +24,10 @@ function getPersistedState() {
           name: item.mName,
           price_coins: item.mPriceCoins,
         })
-    );
-    console.log(state);
-    return state;
+    ) ?? [];
+    return {
+      cart: cartItems
+    };
   } else {
     return {};
   }
@@ -43,7 +44,7 @@ const store = configureStore({
 });
 
 store.subscribe(() => {
-  localStorage.setItem("reduxState", JSON.stringify(store.getState()));
+  localStorage.setItem("cartItems", JSON.stringify(store.getState().cart));
 });
 
 export type RootState = ReturnType<typeof store.getState>;

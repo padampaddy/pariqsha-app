@@ -22,7 +22,7 @@ const Drawer = ({ onClose }: Props) => {
   const user = useSelector((state: RootState) => state.user.entities?.user);
   const [getData, { data }] = useLazyQuery<IUsersProfile>(USERS_PROFILE, {
     onCompleted: (res) => {
-      if (!res) {
+      if (!res.users_profile_by_pk) {
         addProfile({
           variables: {
             id: user?.id,
@@ -48,7 +48,7 @@ const Drawer = ({ onClose }: Props) => {
 
   return (
     <div className="z-50 h-full flex flex-row">
-      <div className="flex flex-col bg-white w-screen overflow-hidden">
+      <div className="flex flex-col bg-white w-screen overflow-y-auto">
         <div className="flex items-center justify-start text-4xl py-2 px-4">
           <button
             onClick={() => {
@@ -88,7 +88,6 @@ const Drawer = ({ onClose }: Props) => {
                   body: (
                     <Profile
                       onUpdate={() => {
-                        console.log("Updated");
                         getData({
                           variables: {
                             id: user?.id,
@@ -119,8 +118,8 @@ const Drawer = ({ onClose }: Props) => {
           <h4 className="text-gray-500 text-sm md:mt-2 flex justify-center items-center">
             <span>
               <img src={coin} className="h-7 w-7 mr-2" alt="coin" />
-            </span>{" "}
-            23456{" "}
+            </span>
+            75
           </h4>
         </div>
 
@@ -133,7 +132,7 @@ const Drawer = ({ onClose }: Props) => {
                 dispatch(modalSlice.actions.hideModal());
               }}
               className="nav-link"
-              activeClassName="selected common-btn"
+              activeClassName="selected common-btn-nav"
             >
               Quizzes
             </NavLink>
@@ -146,7 +145,7 @@ const Drawer = ({ onClose }: Props) => {
                 onClose();
               }}
               className="nav-link"
-              activeClassName="selected common-btn"
+              activeClassName="selected common-btn-nav" 
             >
               My Chats
             </NavLink>
@@ -159,20 +158,20 @@ const Drawer = ({ onClose }: Props) => {
                 onClose();
               }}
               className="nav-link"
-              activeClassName="selected common-btn"
+              activeClassName="selected common-btn-nav"
             >
               Market
             </NavLink>
           </li>
 
-          <li className="nav-item">
+          <li className="nav-item hidden">
             <NavLink
               to="/notification"
               onClick={() => {
                 onClose();
               }}
-              className="nav-link pl-4 flex justify-center items-center"
-              activeClassName="selected common-btn"
+              className="nav-link pl-4 flex justify-center items-center "
+              activeClassName="selected common-btn-nav"
             >
               Notifications
               <span className="rounded-full h-5 w-5 md:h-6 md:w-6 flex items-center justify-center ml-2 mt-1 text-white font-medium common-btn text-xs">
@@ -188,9 +187,22 @@ const Drawer = ({ onClose }: Props) => {
                 onClose();
               }}
               className="nav-link"
-              activeClassName="selected common-btn"
+              activeClassName="selected common-btn-nav"
             >
               Earn Coins
+            </NavLink>
+          </li>
+
+          <li className="nav-item">
+            <NavLink
+              to="/results"
+              onClick={() => {
+                onClose();
+              }}
+              className="nav-link"
+              activeClassName="selected common-btn-nav"
+            >
+              Results
             </NavLink>
           </li>
         </ul>
