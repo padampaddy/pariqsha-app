@@ -8,15 +8,6 @@ import { GET_COINS, SEND_COINS_ORDER } from "../api/queries";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 
-// const earns = [
-//   { coin: "10", rs: "50", tag: "Popular" },
-//   { coin: "50", rs: "100",  },
-//   { coin: "100", rs: "150", },
-//   { coin: "200", rs: "200",  },
-//   { coin: "300", rs: "500", tag: "Most Popular" },
-//   { coin: "500", rs: "1,000",  },
-// ];
-
 const Coins = () => {
   const user = useSelector((state: RootState) => state.user.entities?.user);
   const { data } = useQuery<ICoins>(GET_COINS, {
