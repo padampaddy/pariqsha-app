@@ -199,7 +199,7 @@ export default function ExamCardDetails(): ReactElement {
               </>
             ) : (
               <button
-                className="button-link text-red-500"
+                className="button text-red-500 common-btn"
                 onClick={() => {
                   dispatch(
                     modalSlice.actions.showModal({

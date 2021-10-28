@@ -70,7 +70,7 @@ const Market = () => {
                   <div id="header-text" className="leading-5 w-full relative">
                     <h4
                       id="name"
-                      className="text-lg pb-3  font-semibold capitalize"
+                      className="text-lg pb-3 font-semibold capitalize"
                     >
                       {market.name}
                     </h4>
@@ -78,10 +78,10 @@ const Market = () => {
 
                   {/* <div className="text-xs capitalize">{market.description}</div> */}
                 </div>
-
-                <div className="border-t-2 flex flex-row px-2 py-2 justify-between items-center">
+                <hr className=" bg-gray-200 " />
+                <div className=" flex flex-row px-2 py-2 justify-between items-center">
                   <button
-                    className=" market-btn"
+                    className="common-btn market-btn"
                     style={{ fontSize: "10px" }}
                     onClick={() => {
                       dispatch(
@@ -109,7 +109,7 @@ const Market = () => {
                   </button>
 
                   <button
-                    className="market-btn"
+                    className="market-btn common-btn"
                     style={{ fontSize: "10px" }}
                     onClick={() => {
                       onAdd(new CartItem(market));

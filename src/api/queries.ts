@@ -458,7 +458,12 @@ export const UPDATE_ANSWER = gql`
 
 export const GET_MY_RESULT = gql`
   query get_my_result($user: uuid!, $examId: uuid!) {
-    exams_exam_answer(where: {user_id: {_eq: $user}, exam_question: {exam_id: {_eq: $examId}}}) {
+    exams_exam_answer(
+      where: {
+        user_id: { _eq: $user }
+        exam_question: { exam_id: { _eq: $examId } }
+      }
+    ) {
       status
       exam_question {
         exam_id
@@ -472,10 +477,17 @@ export const GET_MY_RESULT = gql`
   }
 `;
 
-
 export const UPDATE_EXAMS_REGISTRATION = gql`
-  mutation update_exams_registration($examId: uuid!, $user: uuid!, $startedAt: timestamptz!, $examStatus: String! ) {
-    update_exams_registration(_set: {exam_status: $examStatus, started_at: $startedAt}, where: {exam_id: {_eq: $examId}, user_id: {_eq: $user}}) {
+  mutation update_exams_registration(
+    $examId: uuid!
+    $user: uuid!
+    $startedAt: timestamptz!
+    $examStatus: String!
+  ) {
+    update_exams_registration(
+      _set: { exam_status: $examStatus, started_at: $startedAt }
+      where: { exam_id: { _eq: $examId }, user_id: { _eq: $user } }
+    ) {
       returning {
         started_at
       }
@@ -484,12 +496,43 @@ export const UPDATE_EXAMS_REGISTRATION = gql`
 `;
 
 export const GET_EXAM_DATA = gql`
-query get_exam_time($examId: uuid!, $user: uuid!,){
-  exams_registration(where: {exam_id: {_eq: $examId}, user_id: {_eq: $user}}) {
-    result_writing
-    started_at
-    exam {
-      duration_in_minutes
+  query get_exam_time($examId: uuid!, $user: uuid!) {
+    exams_registration(
+      where: { exam_id: { _eq: $examId }, user_id: { _eq: $user } }
+    ) {
+      result_writing
+      started_at
+      exam {
+        duration_in_minutes
+      }
     }
   }
-}`
+`;
+
+export const GET_COINS = gql`
+  query get_coins($status: String!) {
+    users_coin_plans(where: { status: { _eq: $status } }) {
+      coins
+      id
+      images
+      most_popular
+      price
+    }
+  }
+`;
+
+
+export const SEND_COINS_ORDER = gql`
+  mutation send_coins_order(
+    $costCoin: Int!
+    $userId: uuid!
+    $coinPlanId: uuid!
+    $dNoOfCoins: Int!
+  ) {
+    insert_users_create_orders_one(
+      object: { cost_coins: $costCoin, user_id: $userId, no_of_coins: $dNoOfCoins, coins_plan_id: $coinPlanId }
+    ) {
+      id
+    }
+  }
+`;

@@ -141,7 +141,7 @@ const GetExamCards = ({ searchTerm = "" }: { searchTerm: string }) => {
               ) === -1 ? (
                 <>
                   <button
-                    className="quiz-button md:mb-0 mb-0.5 "
+                    className="quiz-button md:mb-0 mb-0.5 common-btn"
                     onClick={async () => {
                       if (item.price === 0) {
                         Promise.all([
@@ -227,7 +227,7 @@ const GetExamCards = ({ searchTerm = "" }: { searchTerm: string }) => {
               ) : (
                 <>
                   <button
-                    className="text-red-500 quiz-button  "
+                    className="text-red-500 quiz-button  common-btn"
                     onClick={() => {
                       dispatch(
                         modalSlice.actions.showModal({
@@ -294,7 +294,7 @@ const GetExamCards = ({ searchTerm = "" }: { searchTerm: string }) => {
                         })
                       );
                     }}
-                    className="quiz-button"
+                    className="quiz-button common-btn"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -323,7 +323,7 @@ const GetExamCards = ({ searchTerm = "" }: { searchTerm: string }) => {
 
               <button
                 onClick={() => history.push(`/examdetails/${item.id}`)}
-                className="quiz-button"
+                className="quiz-button common-btn"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

@@ -147,7 +147,7 @@ const GetCard = ({ searchTerm = "" }: { searchTerm: string }) => {
               ) === -1 ? (
                 <>
                   <button
-                    className="quiz-button md:mb-0 mb-0.5 "
+                    className="quiz-button md:mb-0 mb-0.5 common-btn"
                     onClick={async () => {
                       if (quiz.price === 0) {
                         Promise.all([
@@ -233,7 +233,7 @@ const GetCard = ({ searchTerm = "" }: { searchTerm: string }) => {
               ) : (
                 <>
                   <button
-                    className="text-red-500 quiz-button  "
+                    className="text-red-500 quiz-button  common-btn"
                     onClick={() => {
                       dispatch(
                         modalSlice.actions.showModal({
@@ -302,7 +302,7 @@ const GetCard = ({ searchTerm = "" }: { searchTerm: string }) => {
                   </button>
                   <button
                     onClick={() => history.push(`examstart/${quiz.id}`)}
-                    className="quiz-button"
+                    className="quiz-button common-btn"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -332,7 +332,7 @@ const GetCard = ({ searchTerm = "" }: { searchTerm: string }) => {
 
               <button
                 onClick={() => history.push(`/details/${quiz.id}`)}
-                className="quiz-button"
+                className="quiz-button common-btn"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

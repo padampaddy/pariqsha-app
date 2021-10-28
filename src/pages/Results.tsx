@@ -36,8 +36,7 @@ const Results = () => {
       <div className=" px-4 my-4">
         <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
         <div className="mt-4">
-          <div className="mt-4 flex flex-wrap">
-           
+          <div className="mt-4 flex flex-wrap"> 
             {data?.exams_registration.flatMap((item) => (
               <div className="md:p-4 p-2 w-1/2 md:w-1/3 text-center ">
                 <div className="bg-white md:p-4 p-2 shadow-lg rounded md:flex items-center justify-between">
