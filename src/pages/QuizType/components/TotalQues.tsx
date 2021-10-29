@@ -1,4 +1,4 @@
-import { useCallback, useContext } from "react";
+import { useCallback, useContext, useEffect, useRef } from "react";
 import ExamContext from "../../../contexts/examContext";
 
 const TotalQues = () => {
@@ -8,6 +8,7 @@ const TotalQues = () => {
     currentQuestionIndex,
     userAnswers,
   } = useContext(ExamContext);
+  const scrollId = useRef() as React.MutableRefObject<HTMLLIElement>;
 
   const isAnswered = useCallback(
     (idx) => {
@@ -19,12 +20,17 @@ const TotalQues = () => {
     [userAnswers, currentQuestionIndex]
   );
 
+  useEffect(() => {
+    scrollId.current?.scrollTo(0, scrollId.current?.scrollHeight);
+  }, [currentQuestionIndex]);
+
   return (
     <>
       <div className="qstn-list mb-1 m-auto py-3 px-2">
         <ul className="">
           {questions.map((_, idx) => (
             <li
+              ref={scrollId}
               className={`
                ${
                  isAnswered(idx)

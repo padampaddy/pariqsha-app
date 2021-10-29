@@ -23,8 +23,18 @@ function SignupScreen() {
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     if (data.cpassword !== data.password) {
+      seterrData({
+        ...errData,
+        cpassword: "Please Enter The Same Password",
+      });
       return;
     }
+
+    if (data.email === "" || data.password === "" || data.cpassword === "") {
+      seterrData({ ...errData, emptyErr: "All fields are required" });
+      return;
+    }
+  
     dispatch(
       signupAction({
         registration: {
@@ -36,11 +46,6 @@ function SignupScreen() {
         },
       })
     );
-
-    if (data.email === "" || data.password === "" || data.cpassword === "") {
-      seterrData({ ...errData, emptyErr: "All fields are required" });
-      return;
-    }
   };
 
   const handleInputChange = (
@@ -67,7 +72,7 @@ function SignupScreen() {
         break;
       }
       case "cpassword": {
-        if (data.cpassword === data.password) {
+        if (data.cpassword !== data.password) {
           seterrData({ ...errData, cpassword: "" });
         } else {
           seterrData({
@@ -119,6 +124,7 @@ function SignupScreen() {
                 autoComplete="new-password"
                 placeholder="john@doe.com"
               />
+              
               <small style={{ color: "red" }}>{errData.email || ""}</small>
             </div>
 
@@ -136,10 +142,11 @@ function SignupScreen() {
                 autoComplete="new-password"
                 placeholder="*******"
               />
+              <div className="text-xs text-gray-400">(Use atleast one number and one special character)</div>
               <small style={{ color: "red" }}>{errData.password || ""}</small>
             </div>
 
-            <div className="mb-0 text-left">
+            <div className="mb-0 text-left mt-1">
               <label className="signup-screen-label" htmlFor="">
                 Confirm Password
               </label>

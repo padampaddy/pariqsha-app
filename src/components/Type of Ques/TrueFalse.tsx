@@ -2,7 +2,7 @@ import {  useContext } from "react";
 import ExamContext from "../../contexts/examContext";
 
 
-const items = [{ name: "True" }, { name: "False" }, { name: "Not given" }];
+const items = [{ name: "TRUE" }, { name: "FALSE" }, { name: "NOT GIVEN" }];
 
 const TrueFalse = () => {
   const { userAnswer, setUserAnswer } = useContext(ExamContext);

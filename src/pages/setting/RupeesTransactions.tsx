@@ -2,25 +2,24 @@ import BaseLayout from "../../layouts/Base";
 import dp from "../../assets/images/dp.jpeg";
 
 const items = [
-  { img: dp, name: "Jane Gilsob", score: "45", date: "27 Oct, 2021" },
-  { img: dp, name: "Jane Gilsob", score: "45", date: "27 Oct, 2021" },
-  { img: dp, name: "Jane Gilsob ", score: "45", date: "27 Oct, 2021" },
-  { img: dp, name: "Jane Gilsob", score: "45", date: "27 Oct, 2021" },
-  { img: dp, name: "Jane Gilsob", score: "45", date: "27 Oct, 2021" },
-  { img: dp, name: "Jane Gilsob", score: "45", date: "27 Oct, 2021" },
-  { img: dp, name: "Jane ", score: "4555", date: "27 Oct, 2021" },
-  { img: dp, name: "Jane Gilsob", score: "45", date: "27 Oct, 2021" },
-  { img: dp, name: "Jane ", score: "45", date: "27 Oct, 2021" },
+  { img: dp, name: "Pariqsha test1", score: "45", date: "27 Oct, 2021" },
+  { img: dp, name: "Pariqsha test2", score: "45", date: "27 Oct, 2021" },
+  { img: dp, name: "Pariqsha test3", score: "45", date: "27 Oct, 2021" },
+  { img: dp, name: "Pariqsha test4", score: "45", date: "27 Oct, 2021" },
+  { img: dp, name: "Pariqsha test5", score: "45", date: "27 Oct, 2021" },
+  { img: dp, name: "Pariqsha test6", score: "45", date: "27 Oct, 2021" },
+  { img: dp, name: "Pariqsha test7", score: "45", date: "27 Oct, 2021" },
+  { img: dp, name: "Pariqsha test8", score: "45", date: "27 Oct, 2021" },
 ];
 
-const MarketHistory = () => {
-  return (
-    <BaseLayout title="Market Transactions History" showBack>
-      <div className="px-4 py-8">
+const RupeesTransactions = () => {
+    return (
+        <BaseLayout title="My Transactions History" showBack>
+        <div className="px-4 py-8">
         <div className="px-2 py-4 bg-white shadow-lg rounded-md">
           <div className="flex uppercase md:font-bold mb-3 font-semibold text-sm md:text-base md:p-2 p-0.5">
             {/* <div className=" flex-grow-0 md:px-3 ml-1 px-2">Profile</div> */}
-            <div className=" w-1/2"> Name</div>
+            <div className=" w-1/2">Quiz Name</div>
             <div className=" w-1/4 text-right">Date</div>
             <div className="w-1/4 text-right">Coins</div>
           </div>
@@ -41,8 +40,8 @@ const MarketHistory = () => {
           </div>
         </div>
       </div>
-    </BaseLayout>
-  );
-};
+        </BaseLayout>
+    )
+}
 
-export default MarketHistory;
+export default RupeesTransactions

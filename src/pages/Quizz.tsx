@@ -55,7 +55,6 @@ export default function Quizz() {
             </Route>
           </Switch>
         </div>
-       
       )}
        </div>
     </BaseLayout>

@@ -526,11 +526,11 @@ export const SEND_COINS_ORDER = gql`
   mutation send_coins_order(
     $costCoin: Int!
     $userId: uuid!
-    $coinPlanId: uuid!
-    $dNoOfCoins: Int!
+    $coinPlanId: Int!
+    $NoOfCoins: Int!
   ) {
-    insert_users_create_orders_one(
-      object: { cost_coins: $costCoin, user_id: $userId, no_of_coins: $dNoOfCoins, coins_plan_id: $coinPlanId }
+    insert_users_coin_orders_one(
+      object: { cost_coins: $costCoin, user_id: $userId, no_of_coins: $NoOfCoins, coins_plan_id: $coinPlanId }
     ) {
       id
     }

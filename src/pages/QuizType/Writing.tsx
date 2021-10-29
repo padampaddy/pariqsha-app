@@ -39,7 +39,6 @@ const Writing = () => {
     // setFiles({ url: url, name: file.name, type: file.type });
     e.target.value = "";
     setLoading(false);
-   
     return
   }
   };

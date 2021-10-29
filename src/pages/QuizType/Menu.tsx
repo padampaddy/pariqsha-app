@@ -17,11 +17,11 @@ export default function Menu({
     <div className="flex flex-col h-full">
       <div className="common-btn md:p-16 pt-4 px-6 pb-16  flex-grow-0">
         <p className="text-xl leading-normal md:w-1/2 md:mx-auto ">
-          Get lots of practical
+          Get lots of practice
           <br />
-          tips for the Listening,
+          for Listening, Reading and 
           <br />
-          Reading and Writing sections to help you achieve your desired score
+          Writing sections to help you achieve your desired score
         </p>
       </div>
       <div
@@ -89,7 +89,7 @@ export default function Menu({
       <div className="flex-grow">
         <img
           src={exam2}
-          className="md:hidden w-3/4 m-auto"
+          className="hidden w-3/4 m-auto"
           alt="pariqsha exam2"
         />
       </div>

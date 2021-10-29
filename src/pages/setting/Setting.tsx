@@ -19,14 +19,18 @@ const Setting = () => {
             <div className=" text-gray-400 text-xs font-semibold uppercase ">
               Transactions History
             </div>
-            <div role="button" onClick={() => history.push("/quizhistory")} className="flex justify-between rounded-lg border mt-2 items-center bg-white p-4 hover:bg-gray-100 animation">
-              <div className="flex animation ">
-                <div className="rounded-full h-10 w-10  flex justify-center items-center bg-blue-900">
+            <div
+              role="button"
+              onClick={() => history.push("/rupeeshistory")}
+              className="flex justify-between rounded-lg border mt-2 items-center bg-white p-4 hover:bg-gray-100 animation"
+            >
+              <div className="flex animation">
+                <div className="rounded-full h-10 w-10  flex justify-center items-center bg-yellow-400">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6 text-white"
+                    className="h-7 w-7 text-green-600"
                     viewBox="0 0 20 20"
-                    fill="currentColor" 
+                    fill="currentColor"
                   >
                     <path
                       fillRule="evenodd"
@@ -36,9 +40,9 @@ const Setting = () => {
                   </svg>
                 </div>
                 <div className="flex flex-col ml-3 text-sm font-semibold animation ">
-                  Quiz
+                  My Transactions
                   <span className="text-xs text-gray-400 ">
-                    Quizzes Transactions History
+                    Rupees Transactions History
                   </span>
                 </div>
               </div>
@@ -59,12 +63,56 @@ const Setting = () => {
               </div>
             </div>
 
-            <div role="button" onClick={() => history.push("/markethistory")} className="flex justify-between rounded-lg border  mt-2 items-center bg-white p-4 hover:bg-gray-100 animation">
+            <div
+              role="button"
+              onClick={() => history.push("/coinshistory")}
+              className="flex justify-between rounded-lg border mt-2 items-center bg-white p-4 hover:bg-gray-100 animation"
+            >
+              <div className="flex animation">
+                <div className="rounded-full h-10 w-10  flex justify-center items-center bg-blue-900">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6 text-yellow-400"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path d="M3 12v3c0 1.657 3.134 3 7 3s7-1.343 7-3v-3c0 1.657-3.134 3-7 3s-7-1.343-7-3z" />
+                    <path d="M3 7v3c0 1.657 3.134 3 7 3s7-1.343 7-3V7c0 1.657-3.134 3-7 3S3 8.657 3 7z" />
+                    <path d="M17 5c0 1.657-3.134 3-7 3S3 6.657 3 5s3.134-3 7-3 7 1.343 7 3z" />
+                  </svg>
+                </div>
+                <div className="flex flex-col ml-3 text-sm font-semibold animation ">
+                  My Coins Transactions
+                  <span className="text-xs text-gray-400 ">
+                    Coins Transactions History
+                  </span>
+                </div>
+              </div>
+              <div className="flex flex-col items-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  style={{ color: "#9CA3AF" }}
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </div>
+            </div>
+
+            <div
+              role="button"
+              onClick={() => history.push("/markethistory")}
+              className="flex justify-between rounded-lg border  mt-2 items-center bg-white p-4 hover:bg-gray-100 animation"
+            >
               <div className="flex ">
                 <div
-                  className="rounded-full h-10 w-10  flex justify-center items-center"
-                  style={{ background: "#A2E57D" }}
-                >
+                  className="rounded-full h-10 w-10 bg-purple-400 flex justify-center items-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-6 w-6 text-white"
@@ -124,7 +172,7 @@ const Setting = () => {
             className="animation flex justify-between rounded-lg border  mt-2  items-center bg-white p-4 hover:bg-gray-100"
           >
             <div className="flex animation">
-              <div className="rounded-full h-10 w-10 bg-purple-400 flex justify-center items-center">
+              <div className="rounded-full h-10 w-10 bg-green-500  flex justify-center items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className=" h-6 w-6 "
@@ -170,7 +218,7 @@ const Setting = () => {
             className="flex animation justify-between rounded-lg border  mt-2 items-center bg-white p-4 hover:bg-gray-100"
           >
             <div className="flex ">
-              <div className="rounded-full h-10 w-10 bg-yellow-400  flex justify-center items-center">
+              <div className="rounded-full h-10 w-10 bg-blue-500  flex justify-center items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-6 w-6"

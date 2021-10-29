@@ -189,7 +189,7 @@ const Drawer = ({ onClose }: Props) => {
               className="nav-link"
               activeClassName="selected common-btn-nav"
             >
-              Earn Coins
+              Buy Coins
             </NavLink>
           </li>
 
