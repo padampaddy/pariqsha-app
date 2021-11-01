@@ -1,5 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { motion } from "framer-motion";
+import { useParams } from "react-router-dom";
 import useFetch from "use-http";
 import { GET_COINS } from "../api/queries";
 import money from "../assets/images/money.png";
@@ -11,6 +12,7 @@ import { espTransform } from "../Utils/utils";
 declare let Razorpay: any;
 
 const Coins = () => {
+  const { coins } = useParams<{ coins: string }>();
   const { data } = useQuery<ICoins>(GET_COINS, {
     variables: {
       status: "published",
@@ -37,9 +39,8 @@ const Coins = () => {
         razorpay_order_id: string;
         razorpay_signature: string;
       }) {
-        console.log(response)
-        Promise.all([
-        ])
+        console.log(response);
+        Promise.all([]);
       },
     };
     const rzp1 = new Razorpay(options);
@@ -50,7 +51,14 @@ const Coins = () => {
     <BaseLayout title="Buy Coins">
       <div className="px-4 flex flex-col h-full">
         <div className="header pt-8 text-center">
-          <p className="text-gray-500 font-medium text-xs">You have 75 Coins</p>
+          <p className="text-gray-500 font-medium text-xs">
+            You have{" "}
+            {espTransform(coins, {
+              showSymbol: false,
+              precision: 0,
+            }).format()}{" "}
+            Coins
+          </p>
         </div>
 
         <div className="mt-6 h-full">

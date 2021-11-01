@@ -62,10 +62,10 @@ const GetExamCards = ({ searchTerm = "" }: { searchTerm: string }) => {
   const [like, setLike] = useState<boolean>(getLocalItems());
 
   const handleLike = () => {
-    if (!like) {
-      setLike(true);
-    } else {
+    if (like) {
       setLike(false);
+    } else {
+      setLike(true);
     }
   };
 

@@ -8,7 +8,7 @@ const TotalQues = () => {
     currentQuestionIndex,
     userAnswers,
   } = useContext(ExamContext);
-  const scrollId = useRef() as React.MutableRefObject<HTMLLIElement>;
+  const scrollId = useRef() as React.MutableRefObject<HTMLDivElement>;
 
   const isAnswered = useCallback(
     (idx) => {
@@ -21,31 +21,29 @@ const TotalQues = () => {
   );
 
   useEffect(() => {
-    scrollId.current?.scrollTo(0, scrollId.current?.scrollHeight);
+    scrollId.current?.scrollTo(0, scrollId.current?.offsetTop);
   }, [currentQuestionIndex]);
 
   return (
     <>
       <div className="qstn-list mb-1 m-auto py-3 px-2">
-        <ul className="">
-          {questions.map((_, idx) => (
-            <li
-              ref={scrollId}
-              className={`
+        {questions.map((_, idx) => (
+          <div
+            ref={scrollId}
+            className={`qstn-lists
                ${
                  isAnswered(idx)
                    ? "bg-green-500 text-white"
                    : "text-blue-500 border-2 border-blue-500"
                }
                ${currentQuestionIndex === idx ? "common-btn" : ""} `}
-              key={idx}
-              role="button"
-              onClick={() => setCurrentQuestionIndex(idx)}
-            >
-              {1 + idx}
-            </li>
-          ))}
-        </ul>
+            key={idx}
+            role="button"
+            onClick={() => {setCurrentQuestionIndex(idx)}}
+          >
+            {1 + idx}
+          </div>
+        ))}
       </div>
     </>
   );

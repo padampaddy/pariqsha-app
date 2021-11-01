@@ -12,8 +12,11 @@ import { useCallback } from "react";
 import { CartItem } from "../../types/Cart";
 import alertSlice from "../../redux/slices/alert-slice";
 import CoupenDetails from "./Component/CoupenDetails";
+import { useParams } from "react-router-dom";
+import { espTransform } from "../../Utils/utils";
 
 const Market = () => {
+  const { coins} = useParams<{ coins: string }>();
   const { data } = useQuery<IMarketProduct>(GET_MARKET_PRODUCT, {
     variables: {
       status: "published",
@@ -34,7 +37,9 @@ const Market = () => {
             <span className="text-sm">
               <img src={coin} className="h-8 w-8 mr-2" alt="coin" />
             </span>
-            75
+            {espTransform(coins, {
+              showSymbol: false, precision: 0
+            }).format()}
           </h4>
         </div>
 

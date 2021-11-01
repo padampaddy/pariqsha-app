@@ -9,6 +9,7 @@ import { IMarketOrder } from "../../types/Market";
 import { SEND_MARKET_ORDER } from "../../api/queries";
 import alertSlice from "../../redux/slices/alert-slice";
 import { useHistory } from "react-router-dom";
+import { espTransform } from "../../Utils/utils";
 
 const Cart = () => {
   const history = useHistory();
@@ -44,24 +45,29 @@ const Cart = () => {
         <div className=" py-4 md:px-5 px-3.5">
           {items.length === 0 ? (
             <>
-            <div className="text-lg font-medium capitalize flex items-center justify-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 mr-2"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
+              <div className="text-lg font-medium capitalize flex items-center justify-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6 mr-2"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+                  />
+                </svg>
+                Cart Is Empty
+              </div>
+              <button
+                className="common-btn rounded px-3 py-2 m-auto mt-4 flex items-center justify-center"
+                onClick={() => history.push("/market")}
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                />
-              </svg>
-              Cart Is Empty
-            </div>
-            <button className="common-btn rounded px-3 py-2 m-auto mt-4 flex items-center justify-center" onClick={()=>history.push("/market")}>Add Card</button>
+                Add Card
+              </button>
             </>
           ) : (
             <>
@@ -114,7 +120,10 @@ const Cart = () => {
                     </div>
                     <div className="flex-grow-0 flex  md:text-base text-sm font-semibold">
                       <img src={coin} alt="price" className="h-5 w-5 mr-1" />
-                      {item.getPrice()}
+                      {espTransform(item.getPrice(), {
+                        showSymbol: false,
+                        precision: 0,
+                      }).format()}
                     </div>
                   </div>
                   <hr className="mt-4" />
@@ -146,7 +155,13 @@ const Cart = () => {
                 <div className="flex items-center md:text-xl text-lg md:font-semibold font-medium">
                   <span className="mr-4">Subtotal:</span>
                   <img src={coin} alt="price" className="h-5 w-5 mr-1" />
-                  {items.reduce((pV, item) => pV + item.getPrice(), 0)}
+                  {espTransform(
+                    items.reduce((pV, item) => pV + item.getPrice(), 0),
+                    {
+                      showSymbol: false,
+                      precision: 0,
+                    }
+                  ).format()}
                 </div>
               </div>
             </>

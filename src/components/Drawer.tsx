@@ -12,6 +12,7 @@ import { IUsersProfile } from "../types/Chat";
 import DEFAULT_AVATAR from "../assets/images/profileuser.png";
 import { useLazyQuery, useMutation } from "@apollo/client";
 import { useCallback, useEffect } from "react";
+import { espTransform } from "../Utils/utils";
 
 interface Props {
   onClose: () => void;
@@ -115,11 +116,11 @@ const Drawer = ({ onClose }: Props) => {
               {data?.users_profile_by_pk?.name}
             </h1>
           </button>
-          <h4 className="text-gray-500 text-sm md:mt-2 flex justify-center items-center">
-            <span>
-              <img src={coin} className="h-7 w-7 mr-2" alt="coin" />
-            </span>
-            75
+          <h4 className="text-gray-500  md:mt-2 flex justify-center items-center">
+            <img src={coin} className="h-6 w-6 mr-2" alt="coin" />
+            {espTransform(data?.users_profile_by_pk.coins_balance, {
+              showSymbol: false, precision: 0
+            }).format()}
           </h4>
         </div>
 
@@ -145,7 +146,7 @@ const Drawer = ({ onClose }: Props) => {
                 onClose();
               }}
               className="nav-link"
-              activeClassName="selected common-btn-nav" 
+              activeClassName="selected common-btn-nav"
             >
               My Chats
             </NavLink>
@@ -153,7 +154,7 @@ const Drawer = ({ onClose }: Props) => {
 
           <li className="nav-item">
             <NavLink
-              to="/market"
+              to={`/market/${data?.users_profile_by_pk.coins_balance}`}
               onClick={() => {
                 onClose();
               }}
@@ -182,7 +183,7 @@ const Drawer = ({ onClose }: Props) => {
 
           <li className="nav-item">
             <NavLink
-              to="/coins"
+              to={`/coins/${data?.users_profile_by_pk.coins_balance}`}
               onClick={() => {
                 onClose();
               }}

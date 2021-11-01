@@ -18,6 +18,16 @@ export interface IMarketOrder {
   };
 }
 
+export interface IMarketTransactions {
+  market_transactions: {
+    id: string;
+    user_id: string;
+    order_id: string;
+    end_amount: number;
+    start_amount:number;
+  };
+}
+
 export interface ICoin {
   coins: number;
   id: string;

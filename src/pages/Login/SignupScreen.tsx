@@ -34,7 +34,11 @@ function SignupScreen() {
       seterrData({ ...errData, emptyErr: "All fields are required" });
       return;
     }
-  
+
+    if(!errData){
+      return;
+    }
+    
     dispatch(
       signupAction({
         registration: {

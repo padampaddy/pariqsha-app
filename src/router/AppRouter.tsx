@@ -52,7 +52,7 @@ function MySwitch() {
         <Quizz />
       </PrivateRoute>
 
-      <PrivateRoute path="/coins">
+      <PrivateRoute path="/coins/:coins">
         <Coins />
       </PrivateRoute>
 
@@ -88,7 +88,7 @@ function MySwitch() {
         <Cart />
       </PrivateRoute>
 
-      <PrivateRoute path="/market">
+      <PrivateRoute path="/market/:coins">
         <Market />
       </PrivateRoute>
 

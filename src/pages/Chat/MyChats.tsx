@@ -10,6 +10,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import Loader from "../../components/Loader/Loader";
 import SearchBar from "../../components/SearchBar";
+import DEFAULT_AVATAR from "../../assets/images/profileuser.png";
 
 function Mychats() {
   const user = useSelector((state: RootState) => state.user.entities?.user);
@@ -26,7 +27,7 @@ function Mychats() {
           {loading ? (
             <Loader />
           ) : data?.communication_threads.length === 0 ? (
-            <p className="text-center pt-4">No Contact</p>
+            <p className="text-center pt-4">No Chat</p>
           ) : (
             <div>
               <ul>
@@ -60,8 +61,8 @@ function Mychats() {
                             <img
                               src={
                                 chat.profileByStartedWith.id === user?.id
-                                  ? chat.profileByStartedBy.image_url
-                                  : chat.profileByStartedWith.image_url
+                                  ? (chat.profileByStartedBy.image_url? chat.profileByStartedBy.image_url : DEFAULT_AVATAR) 
+                                  : (chat.profileByStartedWith.image_url? chat.profileByStartedWith.image_url : DEFAULT_AVATAR)
                               }
                               width="50"
                               height="50"
@@ -69,7 +70,7 @@ function Mychats() {
                             />
                           </div>
                           <div className="flex flex-col ml-4">
-                            <span className="text-black font-bold text-sm">
+                            <span className="text-black font-bold text-sm capitalize">
                               {chat.profileByStartedWith.id === user?.id
                                 ? chat.profileByStartedBy.name
                                 : chat.profileByStartedWith.name}

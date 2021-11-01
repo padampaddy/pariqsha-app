@@ -216,6 +216,7 @@ export const USERS_PROFILE = gql`
       id
       image_url
       name
+      coins_balance
     }
   }
 `;
@@ -261,6 +262,21 @@ export const SEND_MARKET_ORDER = gql`
   ) {
     insert_market_orders_one(
       object: { cost_coins: $costCoin, user_id: $userId, details: $details }
+    ) {
+      id
+    }
+  }
+`;
+
+export const MARKET_TRANSACTIONS = gql`
+  mutation market_transactions(
+    $costCoin: Int!
+    $userId: uuid!
+    $orderId: uuid!
+    $endAmount: Int!
+  ) {
+    insert_market_transactions_one(
+      object: { start_amount: $startAmount, user_id: $userId, order_id: $orderId, end_amount: $endAmount }
     ) {
       id
     }

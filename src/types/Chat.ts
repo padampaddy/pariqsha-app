@@ -13,6 +13,7 @@ interface IProfile {
   id: string;
   name: string;
   image_url: string;
+  coins_balance?: number;
 }
 
 export interface IChatResponse {

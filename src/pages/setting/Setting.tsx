@@ -16,7 +16,7 @@ const Setting = () => {
       <div className=" flex h-full flex-col">
         <div className="h-full px-4 pt-3">
           <div className=" mt-6">
-            <div className=" text-gray-400 text-xs font-semibold uppercase ">
+            <div className=" text-gray-500 text-xs font-semibold uppercase ">
               Transactions History
             </div>
             <div
@@ -150,7 +150,7 @@ const Setting = () => {
               </div>
             </div>
           </div>
-          <div className="mt-6 text-gray-400 text-xs font-semibold pt-2">
+          <div className="mt-6 text-gray-500 text-xs font-semibold pt-2">
             ACCOUNT
           </div>
           <div
