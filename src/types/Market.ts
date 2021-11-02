@@ -9,13 +9,15 @@ export interface IMarketProduct {
   }[];
 }
 
+export interface IMarket {
+  id: string;
+  user_id: string;
+  cost_coins: number;
+  details: JSON;
+}
+
 export interface IMarketOrder {
-  market_orders: {
-    id: string;
-    user_id: string;
-    cost_coins: number;
-    details: JSON;
-  };
+  market_orders: IMarket
 }
 
 export interface IMarketTransactions {
@@ -25,6 +27,7 @@ export interface IMarketTransactions {
     order_id: string;
     end_amount: number;
     start_amount:number;
+    order: IMarket;
   };
 }
 

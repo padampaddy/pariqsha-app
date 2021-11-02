@@ -274,11 +274,19 @@ export const MARKET_TRANSACTIONS = gql`
     $userId: uuid!
     $orderId: uuid!
     $endAmount: Int!
+    $startAmount: Int!
   ) {
-    insert_market_transactions_one(
-      object: { start_amount: $startAmount, user_id: $userId, order_id: $orderId, end_amount: $endAmount }
+    insert_market_transactions(
+      objects: {
+        order: { data: { cost_coins: $costCoin, id: $orderId } }
+        end_amount: $endAmount
+        start_amount: $startAmount
+        user_id: $userId
+      }
     ) {
-      id
+      returning {
+        id
+      }
     }
   }
 `;
@@ -537,7 +545,6 @@ export const GET_COINS = gql`
   }
 `;
 
-
 export const SEND_COINS_ORDER = gql`
   mutation send_coins_order(
     $costCoin: Int!
@@ -546,7 +553,12 @@ export const SEND_COINS_ORDER = gql`
     $NoOfCoins: Int!
   ) {
     insert_users_coin_orders_one(
-      object: { cost_coins: $costCoin, user_id: $userId, no_of_coins: $NoOfCoins, coins_plan_id: $coinPlanId }
+      object: {
+        cost_coins: $costCoin
+        user_id: $userId
+        no_of_coins: $NoOfCoins
+        coins_plan_id: $coinPlanId
+      }
     ) {
       id
     }

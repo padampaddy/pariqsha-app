@@ -88,6 +88,10 @@ function MySwitch() {
         <Cart />
       </PrivateRoute>
 
+      <PrivateRoute path="/market">
+        <Market />
+      </PrivateRoute>
+
       <PrivateRoute path="/market/:coins">
         <Market />
       </PrivateRoute>

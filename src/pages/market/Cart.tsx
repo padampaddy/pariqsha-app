@@ -5,19 +5,22 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import cartSlice from "../../redux/slices/cart-slice";
 import { useMutation } from "@apollo/client";
-import { IMarketOrder } from "../../types/Market";
-import { SEND_MARKET_ORDER } from "../../api/queries";
+import { IMarketOrder, IMarketTransactions, } from "../../types/Market";
+import {  MARKET_TRANSACTIONS, SEND_MARKET_ORDER } from "../../api/queries";
 import alertSlice from "../../redux/slices/alert-slice";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { espTransform } from "../../Utils/utils";
 
 const Cart = () => {
+  const { coins } = useParams<{ coins: string }>();
   const history = useHistory();
   const user = useSelector((state: RootState) => state.user.entities?.user);
   const items = useSelector((state: RootState) => state.cart.items);
   const dispatch = useDispatch();
 
   const [sendOrder] = useMutation<IMarketOrder>(SEND_MARKET_ORDER);
+  const [sendTransaction] = useMutation<IMarketTransactions>(MARKET_TRANSACTIONS);
+  console.log("coin",coins)
 
   const handleSend = () => {
     sendOrder({
@@ -27,7 +30,17 @@ const Cart = () => {
         costCoin: items.reduce((pV, item) => pV + item.getPrice(), 0),
       },
     })
-      .then(() => {
+      .then((res) => {
+        console.log("res",res)      
+        sendTransaction({
+          variables:{
+            userId: user?.id,
+            orderId: res.data?.market_orders.id,
+            startAmount: coins,
+            endAmount: Math.abs(parseInt(coins)-parseInt(res.data!.market_orders.cost_coins.toString()))
+            // endAmount: parseInt(coins).diff(res.data?.market_orders.cost_coins, "coins");
+          }
+        })
         dispatch(cartSlice.actions.clearItem());
       })
       .catch((e) => console.error(e));
@@ -63,7 +76,7 @@ const Cart = () => {
                 Cart Is Empty
               </div>
               <button
-                className="common-btn rounded px-3 py-2 m-auto mt-4 flex items-center justify-center"
+                className="common-btn rounded px-3.5 py-1.5 m-auto mt-4 flex items-center justify-center"
                 onClick={() => history.push("/market")}
               >
                 Add Card
