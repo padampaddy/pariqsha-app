@@ -2,11 +2,11 @@ import { createContext} from "react";
 
 
 export interface IUserContext {
-  coins: number;
+  coinsBalance: number;
 }
 
 const UserContext =  createContext<IUserContext>({
-  coins: 0,
+  coinsBalance: 0,
 })
 
 export default UserContext;

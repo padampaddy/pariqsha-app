@@ -12,7 +12,7 @@ import DEFAULT_AVATAR from "../assets/images/profileuser.png";
 import { useLazyQuery, useMutation } from "@apollo/client";
 import { useCallback, useEffect } from "react";
 import { espTransform } from "../Utils/utils";
-// import UserContext from "../contexts/userContext";
+import UserContext from "../contexts/userContext";
 
 interface Props {
   onClose: () => void;
@@ -123,8 +123,8 @@ const Drawer = ({ onClose }: Props) => {
             }).format()}
           </h4>
         </div>
-       {/* <UserContext.Provider value={data?.users_profile_by_pk.coins_balance}> */}
-        <ul className="flex flex-col  justify-center text-center mx-4 md:mx-0">
+       <UserContext.Provider value={{coinsBalance: data?.users_profile_by_pk.coins_balance ?? 0}}>
+        <ul className="flex flex-col justify-center text-center mx-4 md:mx-0">
           <li className="nav-item">
             <NavLink
               to="/home"
@@ -154,7 +154,7 @@ const Drawer = ({ onClose }: Props) => {
 
           <li className="nav-item">
             <NavLink
-              to={`/market/${data?.users_profile_by_pk.coins_balance}`}
+              to={"/market"}
               onClick={() => {
                 onClose();
               }}
@@ -183,7 +183,7 @@ const Drawer = ({ onClose }: Props) => {
 
           <li className="nav-item">
             <NavLink
-              to={`/coins/${data?.users_profile_by_pk.coins_balance}`}
+              to={"/coins"}
               onClick={() => {
                 onClose();
               }}
@@ -207,7 +207,7 @@ const Drawer = ({ onClose }: Props) => {
             </NavLink>
           </li>
         </ul>
-        {/* </UserContext.Provider> */}
+        
         <div className="flex flex-row w-full absolute  bottom-0 bg-white z-10">
           <Link
             to="/setting"
@@ -259,6 +259,7 @@ const Drawer = ({ onClose }: Props) => {
             Logout
           </Link>
         </div>
+        </UserContext.Provider>
       </div>
     </div>
   );

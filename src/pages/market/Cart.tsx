@@ -5,22 +5,24 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import cartSlice from "../../redux/slices/cart-slice";
 import { useMutation } from "@apollo/client";
-import { IMarketOrder, IMarketTransactions, } from "../../types/Market";
-import {  MARKET_TRANSACTIONS, SEND_MARKET_ORDER } from "../../api/queries";
+import { IMarketOrder, IMarketTransactions } from "../../types/Market";
+import { MARKET_TRANSACTIONS, SEND_MARKET_ORDER } from "../../api/queries";
 import alertSlice from "../../redux/slices/alert-slice";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { espTransform } from "../../Utils/utils";
+import { useContext } from "react";
+import UserContext from "../../contexts/userContext";
 
 const Cart = () => {
-  const { coins } = useParams<{ coins: string }>();
   const history = useHistory();
   const user = useSelector((state: RootState) => state.user.entities?.user);
   const items = useSelector((state: RootState) => state.cart.items);
   const dispatch = useDispatch();
+  const { coinsBalance } = useContext(UserContext);
 
   const [sendOrder] = useMutation<IMarketOrder>(SEND_MARKET_ORDER);
-  const [sendTransaction] = useMutation<IMarketTransactions>(MARKET_TRANSACTIONS);
-  console.log("coin",coins)
+  const [sendTransaction] =
+    useMutation<IMarketTransactions>(MARKET_TRANSACTIONS);
 
   const handleSend = () => {
     sendOrder({
@@ -31,25 +33,29 @@ const Cart = () => {
       },
     })
       .then((res) => {
-        console.log("res",res)      
-        sendTransaction({
-          variables:{
-            userId: user?.id,
-            orderId: res.data?.market_orders.id,
-            startAmount: coins,
-            endAmount: Math.abs(parseInt(coins)-parseInt(res.data!.market_orders.cost_coins.toString()))
-            // endAmount: parseInt(coins).diff(res.data?.market_orders.cost_coins, "coins");
-          }
-        })
+          sendTransaction({
+            variables: {
+              userId: user?.id,
+              orderId: res.data?.insert_market_orders_one.id,
+              startAmount: coinsBalance,
+              endAmount: Math.abs(
+                coinsBalance - res.data!.insert_market_orders_one.cost_coins
+              ),
+              // endAmount: Math.abs(parseInt(coinsBalance)-parseInt(res.data!.market_orders.cost_coins.toString()))
+            },
+          })
+            .then((info) => {
+              console.log(info);
+            })
+            .catch((e) => console.error(e));
         dispatch(cartSlice.actions.clearItem());
+        dispatch(
+          alertSlice.actions.showAlert({
+            body: "Order Placed",
+          })
+        );
       })
       .catch((e) => console.error(e));
-
-    dispatch(
-      alertSlice.actions.showAlert({
-        body: "Order Placed",
-      })
-    );
   };
 
   return (

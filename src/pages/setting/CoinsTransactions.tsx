@@ -15,6 +15,7 @@ const items = [
 ];
 
 const CoinsTransactions = () => {
+  
   return (
     <BaseLayout title="Coins Transactions History" showBack>
       <div className="bg-white shadow-lg md:m-7 mx-5 my-6">
@@ -24,7 +25,7 @@ const CoinsTransactions = () => {
           </p>
           <hr className="mt-1" />
           {items.flatMap((item, index) => (
-            <>
+            <div key={index}>
               <div key={index} className="flex mt-4 items-center">
                 {/* <div className="flex-grow-0 flex justify-center items-center md:w-28 w-16 ">
                       <img
@@ -50,9 +51,9 @@ const CoinsTransactions = () => {
                 </div>
               </div>
               <hr className="mt-4" />
-            </>
+            </div>
           ))}
-          <div className="flex items-center mt-3  md:text-xl text-lg md:font-semibold font-medium justify-end">
+          {/* <div className="flex items-center mt-3  md:text-xl text-lg md:font-semibold font-medium justify-end">
             <span className="mr-4">Subtotal:</span>
             <img src={coin} alt="price" className="h-5 w-5 mr-1" />
             {espTransform(
@@ -62,7 +63,7 @@ const CoinsTransactions = () => {
                 precision: 0,
               }
             ).format()}
-          </div>
+          </div> */}
         </div>
       </div>
     </BaseLayout>

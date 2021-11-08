@@ -17,7 +17,7 @@ export interface IMarket {
 }
 
 export interface IMarketOrder {
-  market_orders: IMarket
+  insert_market_orders_one: IMarket
 }
 
 export interface IMarketTransactions {
@@ -27,8 +27,9 @@ export interface IMarketTransactions {
     order_id: string;
     end_amount: number;
     start_amount:number;
+    created_at: Date;
     order: IMarket;
-  };
+  }[];
 }
 
 export interface ICoin {
@@ -50,11 +51,12 @@ export interface ICoins {
 }
 
 export interface ICoinsOrder {
-  coins_orders: {
+  users_coin_orders: {
     id: string;
     user_id: string;
     cost_coins: number;
     no_of_coins: number;
     coins_plan_id: string;
-  };
+    created_at: Date;
+  }[];
 }

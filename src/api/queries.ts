@@ -264,6 +264,7 @@ export const SEND_MARKET_ORDER = gql`
       object: { cost_coins: $costCoin, user_id: $userId, details: $details }
     ) {
       id
+      cost_coins
     }
   }
 `;
@@ -276,17 +277,8 @@ export const MARKET_TRANSACTIONS = gql`
     $endAmount: Int!
     $startAmount: Int!
   ) {
-    insert_market_transactions(
-      objects: {
-        order: { data: { cost_coins: $costCoin, id: $orderId } }
-        end_amount: $endAmount
-        start_amount: $startAmount
-        user_id: $userId
-      }
-    ) {
-      returning {
-        id
-      }
+    insert_market_transactions_one(object: {order_id: $orderId, user_id: $userId, start_amount: $startAmount, end_amount: $endAmount}) {
+      id
     }
   }
 `;
@@ -564,3 +556,24 @@ export const SEND_COINS_ORDER = gql`
     }
   }
 `;
+
+export const GET_MARKET_TRANSACTIONS = gql`
+query get_market_transactions( $id: uuid!) {
+  market_transactions(where: {user_id: {_eq: $id}}) {
+    created_at
+    order {
+      cost_coins
+      details
+    }
+  }
+}`
+
+
+export const GET_COINS_TRANSACTIONS = gql`
+query get_coins_transactions( $id: uuid!) {
+  users_coin_orders(where: {user_id: {_eq: $id}}) {
+    cost_coins
+    created_at
+    no_of_coins
+  }
+}`

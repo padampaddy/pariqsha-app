@@ -42,6 +42,9 @@ import SubmitPage from "../pages/QuizType/SubmitPage";
 import LeaderB from "../pages/LeaderB";
 import Results from "../pages/Results";
 import CoinsTransactions from "../pages/setting/CoinsTransactions";
+// import UserContext from "../contexts/userContext";
+// import { IUsersProfile } from "../types/Chat";
+// import { USERS_PROFILE } from "../api/queries";
 
 
 function MySwitch() {
@@ -52,7 +55,7 @@ function MySwitch() {
         <Quizz />
       </PrivateRoute>
 
-      <PrivateRoute path="/coins/:coins">
+      <PrivateRoute path="/coins">
         <Coins />
       </PrivateRoute>
 
@@ -89,10 +92,6 @@ function MySwitch() {
       </PrivateRoute>
 
       <PrivateRoute path="/market">
-        <Market />
-      </PrivateRoute>
-
-      <PrivateRoute path="/market/:coins">
         <Market />
       </PrivateRoute>
 
@@ -151,6 +150,11 @@ export default function AppRouter() {
   const { entities } = useSelector((state: RootState) => state.user);
   const [client, setClient] = useState<ApolloClient<NormalizedCacheObject>>();
   const [options, setOptions] = useState<IncomingOptions | undefined>();
+  // const { data } = useQuery<IUsersProfile>(USERS_PROFILE, {
+  //   variables: {
+  //     id: entities?.user?.id,
+  //   },
+  // });
   useEffect(() => {
     setClient(createApolloClient());
     setOptions({
@@ -164,11 +168,13 @@ export default function AppRouter() {
   return (
     <ApolloProvider client={client}>
       <Provider url={FUNCTIONS_URL_TEST} options={options}>
+      {/* <UserContext.Provider value={{coinsBalance: data?.users_profile_by_pk.coins_balance ?? 0}}> */}
         <Router>
           <Modal />
           <Alert />
           <MySwitch />
         </Router>
+        {/* </UserContext.Provider> */}
       </Provider>
     </ApolloProvider>
   );

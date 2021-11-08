@@ -8,15 +8,15 @@ import { useDispatch } from "react-redux";
 import modalSlice from "../../redux/slices/modal-slice";
 import cartSlice from "../../redux/slices/cart-slice";
 import CartButton from "./Component/CartButton";
-import { useCallback } from "react";
+import { useCallback, useContext } from "react";
 import { CartItem } from "../../types/Cart";
 import alertSlice from "../../redux/slices/alert-slice";
 import CoupenDetails from "./Component/CoupenDetails";
-import { useParams } from "react-router-dom";
 import { espTransform } from "../../Utils/utils";
+import UserContext from "../../contexts/userContext";
 
 const Market = () => {
-  const { coins} = useParams<{ coins: string }>();
+  const {coinsBalance} = useContext(UserContext);
   const { data } = useQuery<IMarketProduct>(GET_MARKET_PRODUCT, {
     variables: {
       status: "published",
@@ -37,7 +37,7 @@ const Market = () => {
             <span className="text-sm">
               <img src={coin} className="h-8 w-8 mr-2" alt="coin" />
             </span>
-            {espTransform(coins, {
+            {espTransform(coinsBalance, {
               showSymbol: false, precision: 0
             }).format()}
           </h4>
