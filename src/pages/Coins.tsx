@@ -1,46 +1,72 @@
-import BaseLayout from "../layouts/Base";
-import money from "../assets/images/money.png";
+import { useQuery } from "@apollo/client";
 import { motion } from "framer-motion";
+import { useContext } from "react";
+import useFetch from "use-http";
+import { GET_COINS } from "../api/queries";
+import money from "../assets/images/money.png";
+import { RP_KEY_ID_TEST } from "../Constants";
+import UserContext from "../contexts/userContext";
+import BaseLayout from "../layouts/Base";
+import { ICoin, ICoins } from "../types/Market";
 import { espTransform } from "../Utils/utils";
-import { useMutation, useQuery } from "@apollo/client";
-import { ICoins, ICoinsOrder } from "../types/Market";
-import { GET_COINS, SEND_COINS_ORDER } from "../api/queries";
-import { useSelector } from "react-redux";
-import { RootState } from "../redux/store";
+
+declare let Razorpay: any;
 
 const Coins = () => {
-  const user = useSelector((state: RootState) => state.user.entities?.user);
+  const {coinsBalance} = useContext(UserContext);
   const { data } = useQuery<ICoins>(GET_COINS, {
     variables: {
       status: "published",
     },
   });
-  const [createOrder] = useMutation<ICoinsOrder>(SEND_COINS_ORDER);
-  const handleSend = () => {
-    createOrder({
-      variables: {
-        userId: user?.id,
-        costCoin: 0
+
+  const { post: createCoinOrder } = useFetch(`coins_orders`, {
+    cache: "no-cache",
+  });
+  const handleSend = async (earn: ICoin) => {
+    const data = await createCoinOrder({
+      planId: earn.id,
+    });
+    const options = {
+      key: RP_KEY_ID_TEST,
+      amount: data.amount * 100,
+      currency: "INR",
+      name: "Pariqsha",
+      description: "Test Transaction",
+      image: "https://pariqsha.com/static/media/pariqsha.8035258e.png",
+      order_id: data.id,
+      handler: function (response: {
+        razorpay_payment_id: string;
+        razorpay_order_id: string;
+        razorpay_signature: string;
+      }) {
+        console.log(response);
+        Promise.all([]);
       },
-    })
-      .then((info) => {
-        console.error(info)
-      })
-      .catch((e) => console.error(e));
+    };
+    const rzp1 = new Razorpay(options);
+    rzp1.open();
   };
-  
+
   return (
-    <BaseLayout title="Earn Coins">
+    <BaseLayout title="Buy Coins">
       <div className="px-4 flex flex-col h-full">
         <div className="header pt-8 text-center">
-          <p className="text-gray-500 font-medium text-xs">You have 75 Coins</p>
+          <p className="text-gray-500 font-medium text-xs">
+            You have{" "}
+            {espTransform(coinsBalance, {
+              showSymbol: false,
+              precision: 0,
+            }).format()}{" "}
+            Coins
+          </p>
         </div>
 
         <div className="mt-6 h-full">
           <div className="flex flex-wrap">
-            {data?.users_coin_plans.flatMap((earn, index) => (
+            {data?.users_coin_plans.flatMap((earn) => (
               <div
-                key={index}
+                key={earn.id}
                 className="md:p-4 p-2 w-1/2 md:w-1/3 text-center "
               >
                 <motion.div
@@ -62,11 +88,14 @@ const Coins = () => {
                     <img
                       className="inline object-cover md:w-20 md:h-20 w-14 h-14 mb-2"
                       src={earn.images ? earn.images : money}
-                      alt="Profile image"
+                      alt="image"
                     />
                   </div>
                   <div className="font-bold">+ {earn.coins}</div>
-                  <button onClick={handleSend} className="common-btn md:p-2 p-1 md:px-8 px-2 mt-1 rounded text-sm md:text-base">
+                  <button
+                    onClick={() => handleSend(earn)}
+                    className="common-btn md:p-2 p-1 md:px-8 px-2 mt-1 rounded text-sm md:text-base"
+                  >
                     {espTransform(earn.price).format()}
                   </button>
                 </motion.div>

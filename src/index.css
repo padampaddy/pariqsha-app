@@ -23,7 +23,7 @@
     @apply flex justify-center hover:text-white;
   }
   .nav-link {
-    @apply font-medium md:text-lg w-full py-4  hover:text-white;
+    @apply font-medium md:text-lg w-full py-4 capitalize hover:text-white;
   }
   .option{
     @apply flex justify-center border w-full border-gray-200 shadow-md py-2 text-sm; 

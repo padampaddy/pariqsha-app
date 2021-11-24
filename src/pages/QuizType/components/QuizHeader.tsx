@@ -47,10 +47,9 @@ const QuizHeader = ({ time, examId }: { time: string; examId: string }) => {
         }flex justify-between items-center md:p-6 p-3.5 relative`}
       >
         {active === "menu" ? (
-          <div />
+          <div/>
         ) : (
           <>
-            {" "}
             <button
               className="left-4 top-0 bottom-0 my-auto absolute"
               onClick={() => setActive("menu")}

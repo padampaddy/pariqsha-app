@@ -31,8 +31,8 @@ import Modal from "../components/Modal/Modal";
 import Msg from "../pages/Chat/Msg";
 import Cart from "../pages/market/Cart";
 import Alert from "../components/Modal/Alert";
-import MarketHistory from "../pages/setting/MarketHistory";
-import QuizHistory from "../pages/setting/QuizHistory";
+import MarketTransactions from "../pages/setting/MarketTransactions";
+import RupeesTransactions from "../pages/setting/RupeesTransactions";
 import QuestionType from "../components/QuestionType";
 import ExamCardDetails from "../components/exam/ExamCardDetails";
 import Login from "../pages/Login/Login";
@@ -41,6 +41,11 @@ import SubmitPage from "../pages/QuizType/SubmitPage";
 // import LeaderBoard from "../pages/LeaderBoard";
 import LeaderB from "../pages/LeaderB";
 import Results from "../pages/Results";
+import CoinsTransactions from "../pages/setting/CoinsTransactions";
+// import UserContext from "../contexts/userContext";
+// import { IUsersProfile } from "../types/Chat";
+// import { USERS_PROFILE } from "../api/queries";
+
 
 function MySwitch() {
   const location = useLocation();
@@ -91,11 +96,15 @@ function MySwitch() {
       </PrivateRoute>
 
       <PrivateRoute path="/markethistory">
-        <MarketHistory />
+        <MarketTransactions />
       </PrivateRoute>
 
-      <PrivateRoute path="/quizhistory">
-        <QuizHistory />
+      <PrivateRoute path="/rupeeshistory">
+        <RupeesTransactions />
+      </PrivateRoute>
+
+      <PrivateRoute path="/coinshistory">
+        <CoinsTransactions />
       </PrivateRoute>
 
       <PrivateRoute path="/details/:id">
@@ -141,6 +150,11 @@ export default function AppRouter() {
   const { entities } = useSelector((state: RootState) => state.user);
   const [client, setClient] = useState<ApolloClient<NormalizedCacheObject>>();
   const [options, setOptions] = useState<IncomingOptions | undefined>();
+  // const { data } = useQuery<IUsersProfile>(USERS_PROFILE, {
+  //   variables: {
+  //     id: entities?.user?.id,
+  //   },
+  // });
   useEffect(() => {
     setClient(createApolloClient());
     setOptions({
@@ -154,11 +168,13 @@ export default function AppRouter() {
   return (
     <ApolloProvider client={client}>
       <Provider url={FUNCTIONS_URL_TEST} options={options}>
+      {/* <UserContext.Provider value={{coinsBalance: data?.users_profile_by_pk.coins_balance ?? 0}}> */}
         <Router>
           <Modal />
           <Alert />
           <MySwitch />
         </Router>
+        {/* </UserContext.Provider> */}
       </Provider>
     </ApolloProvider>
   );

@@ -161,3 +161,8 @@ export interface IExamData {
     exam: IExam;
   }[];
 }
+
+export interface ILike {
+  id: string;
+  like: boolean;
+}

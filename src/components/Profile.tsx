@@ -6,6 +6,7 @@ import { useMutation } from "@apollo/client";
 import { IUserProfile } from "../types/User";
 import { UPDATE_USER_PROFILE } from "../api/queries";
 import DEFAULT_AVATAR from "../assets/images/profileuser.png";
+import Loader from "./Loader/Loader";
 
 function Profile({
   oUrl = "",
@@ -21,9 +22,11 @@ function Profile({
   const wrapperRef = useRef() as MutableRefObject<HTMLInputElement>;
   const [pictures, setPictures] = useState<string>(oUrl);
   const [name, setName] = useState<string>(oName);
+  const [isLoading, setLoading] = useState(false);
   const [userProfile] = useMutation<IUserProfile>(UPDATE_USER_PROFILE);
 
   const uploadPicture = async (e: React.ChangeEvent<any>) => {
+    setLoading(true);
     const formData = new FormData();
     formData.append("image", e.target.files[0]);
     const res = await fetch("https://functions.app.pariqsha.com/files/upload", {
@@ -36,6 +39,7 @@ function Profile({
     const { url } = await res.json();
     setPictures(url);
     e.target.value = "";
+    setLoading(false);
   };
 
   const handleSend = async () => {
@@ -69,11 +73,17 @@ function Profile({
           }}
           className=""
         >
+           {isLoading ? (
+             <div className="border-2 border-gray-300 w-16 h-16 rounded-full">
+              <Loader />
+              </div>
+            ) : (
           <img
             className="inline object-cover w-16 h-16 rounded-full"
             src={pictures ? pictures : DEFAULT_AVATAR}
             alt=""
           />
+            )}
           <div className="rounded-full h-7 w-7 p-1 text-white common-btn -mt-6 ml-9 absolute">
             <svg
               xmlns="http://www.w3.org/2000/svg"

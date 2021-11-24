@@ -113,7 +113,7 @@ const Login = () => {
               </label>
               <div className="flex items-center signup-screen-input">
                 <input
-                  className=" flex-grow"
+                  className="outline-none flex-grow"
                   // onChange={(e) => setPassword(e.target.value)}
                   onChange={(e) => handleInputChange(e)}
                   value={data.password || ""}
@@ -123,7 +123,7 @@ const Login = () => {
                   id="password"
                   name="password"
                 />
-                <button className="flex-grow-0" onClick={() => setPasswordShown(!passwordShown)}>
+                <div role="button" className="flex-grow-0" onClick={() => setPasswordShown(!passwordShown)}>
                   {passwordShown ? (
                     <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -154,7 +154,7 @@ const Login = () => {
                     </svg>
                     
                   )}
-                </button>
+                </div>
               </div>
               <small style={{ color: "red" }}>{errData.password}</small>
             </div>

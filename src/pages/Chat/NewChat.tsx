@@ -8,6 +8,7 @@ import SearchBar from "../../components/SearchBar";
 import BaseLayout from "../../layouts/Base";
 import { RootState } from "../../redux/store";
 import { ISearchProfile } from "../../types/Chat";
+import DEFAULT_AVATAR from "../../assets/images/profileuser.png";
 
 function NewChat() {
   const user = useSelector((state: RootState) => state.user.entities?.user);
@@ -77,14 +78,14 @@ function NewChat() {
                       <div className="flex ml-2 items-center">
                         <div className="h-50 w-50">
                           <img
-                            src={profile.image_url}
+                            src={profile.image_url? profile.image_url: DEFAULT_AVATAR}
                             width="50"
                             height="50"
                             className="rounded-full"
                           />
                         </div>
                         <div className="flex flex-col ml-4">
-                          <span className="text-black font-bold text-sm">
+                          <span className="text-black font-bold text-sm capitalize">
                             {profile.name}
                           </span>
                           <span className="text-sm text-gray-400 truncate w-32"></span>

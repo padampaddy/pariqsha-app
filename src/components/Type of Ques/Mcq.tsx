@@ -11,7 +11,7 @@ const Mcq = () => {
             <input
               type="radio"
               value={item}
-              checked={item === userAnswer}
+              checked={item === userAnswer.toLowerCase()}
               onChange={(e)=>setUserAnswer(e.target.value)}
               id={`rb_${index}`}
               name="radio-group"

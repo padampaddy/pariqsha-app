@@ -9,13 +9,35 @@ export interface IMarketProduct {
   }[];
 }
 
+export interface IMarket {
+  id: string;
+  user_id: string;
+  cost_coins: number;
+  details: JSON;
+}
+
 export interface IMarketOrder {
-  market_orders: {
+  insert_market_orders_one: IMarket
+}
+
+export interface IMarketTransactions {
+  market_transactions: {
     id: string;
     user_id: string;
-    cost_coins: number;
-    details: JSON;
-  };
+    order_id: string;
+    end_amount: number;
+    start_amount:number;
+    created_at: Date;
+    order: IMarket;
+  }[];
+}
+
+export interface ICoin {
+  coins: number;
+  id: string;
+  most_popular: boolean;
+  images: string;
+  price: number;
 }
 
 export interface ICoins {
@@ -29,11 +51,12 @@ export interface ICoins {
 }
 
 export interface ICoinsOrder {
-  coins_orders: {
+  users_coin_orders: {
     id: string;
     user_id: string;
     cost_coins: number;
     no_of_coins: number;
-    coins_plan_id: string
-  };
+    coins_plan_id: string;
+    created_at: Date;
+  }[];
 }

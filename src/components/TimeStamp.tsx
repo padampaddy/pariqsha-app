@@ -27,7 +27,7 @@ const TimeStamp = ({ hours = 0, minutes = 0, seconds = 0 }: Props) => {
     if (over) {
       dispatch(
         modalSlice.actions.showModal({
-          body: <TimeOverPage  />,
+          body: <TimeOverPage/>,
           dismissable: false
         })
       );
@@ -70,9 +70,7 @@ const TimeStamp = ({ hours = 0, minutes = 0, seconds = 0 }: Props) => {
           clipRule="evenodd"
         />
       </svg>
-      {/* <p> Time : {new Date().toLocaleTimeString()}</p> */}
-
-      <div className="">{time}</div>
+      <div>{time}</div>
     </div>
   );
 };

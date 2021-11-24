@@ -132,8 +132,8 @@ const Instructions = ({
           Be Careful!
         </div>
         <ol className="list-decimal  mt-2">
-          {beCareful.flatMap((list) => (
-            <li className="py-1">{list}</li>
+          {beCareful.flatMap((list,idx) => (
+            <li key={idx} className="py-1">{list}</li>
           ))}
           <li className="py-1 md:flex items-center justify-between">
             <div className="flex items-center ">
@@ -157,8 +157,8 @@ const Instructions = ({
           Reading Test Instructions
         </div>
         <ol className="list-decimal mt-2">
-          {reading.flatMap((list) => (
-            <li className="py-1">{list}</li>
+          {reading.flatMap((list,idx) => (
+            <li key={idx} className="py-1">{list}</li>
           ))}
         </ol>
         <div className="font-bold md:text-base text-sm mt-4 md:tracking-wide flex items-center ">
@@ -166,8 +166,8 @@ const Instructions = ({
           Listening Test Instructions
         </div>
         <ol className="list-decimal mt-2">
-          {listening.flatMap((list) => (
-            <li className="py-1">{list}</li>
+          {listening.flatMap((list,idx) => (
+            <li key={idx} className="py-1">{list}</li>
           ))}
         </ol>
         <div className="font-bold md:text-base text-sm mt-4 md:tracking-wide flex items-center ">
@@ -175,8 +175,8 @@ const Instructions = ({
           Writing Test Instructions
         </div>
         <ol className="list-decimal mt-2">
-          {writing.flatMap((list) => (
-            <li className="py-1">{list}</li>
+          {writing.flatMap((list,idx) => (
+            <li key={idx} className="py-1">{list}</li>
           ))}
         </ol>
       </div>

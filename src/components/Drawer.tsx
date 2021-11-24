@@ -6,12 +6,13 @@ import userSlice from "../redux/slices/user-slice";
 import modalSlice from "../redux/slices/modal-slice";
 import Profile from "./Profile";
 import { RootState } from "../redux/store";
-// import useAuthSubscription from "../hooks/useAuthSubscription";
 import { USERS_PROFILE, USER_PROFILE_ADD } from "../api/queries";
 import { IUsersProfile } from "../types/Chat";
 import DEFAULT_AVATAR from "../assets/images/profileuser.png";
 import { useLazyQuery, useMutation } from "@apollo/client";
 import { useCallback, useEffect } from "react";
+import { espTransform } from "../Utils/utils";
+import UserContext from "../contexts/userContext";
 
 interface Props {
   onClose: () => void;
@@ -115,15 +116,15 @@ const Drawer = ({ onClose }: Props) => {
               {data?.users_profile_by_pk?.name}
             </h1>
           </button>
-          <h4 className="text-gray-500 text-sm md:mt-2 flex justify-center items-center">
-            <span>
-              <img src={coin} className="h-7 w-7 mr-2" alt="coin" />
-            </span>
-            75
+          <h4 className="text-gray-500  md:mt-2 flex justify-center items-center">
+            <img src={coin} className="h-6 w-6 mr-2" alt="coin" />
+            {espTransform(data?.users_profile_by_pk.coins_balance, {
+              showSymbol: false, precision: 0
+            }).format()}
           </h4>
         </div>
-
-        <ul className="flex flex-col  justify-center text-center mx-4 md:mx-0">
+       <UserContext.Provider value={{coinsBalance: data?.users_profile_by_pk.coins_balance ?? 0}}>
+        <ul className="flex flex-col justify-center text-center mx-4 md:mx-0">
           <li className="nav-item">
             <NavLink
               to="/home"
@@ -145,7 +146,7 @@ const Drawer = ({ onClose }: Props) => {
                 onClose();
               }}
               className="nav-link"
-              activeClassName="selected common-btn-nav" 
+              activeClassName="selected common-btn-nav"
             >
               My Chats
             </NavLink>
@@ -153,7 +154,7 @@ const Drawer = ({ onClose }: Props) => {
 
           <li className="nav-item">
             <NavLink
-              to="/market"
+              to={"/market"}
               onClick={() => {
                 onClose();
               }}
@@ -182,14 +183,14 @@ const Drawer = ({ onClose }: Props) => {
 
           <li className="nav-item">
             <NavLink
-              to="/coins"
+              to={"/coins"}
               onClick={() => {
                 onClose();
               }}
               className="nav-link"
               activeClassName="selected common-btn-nav"
             >
-              Earn Coins
+              Buy Coins
             </NavLink>
           </li>
 
@@ -206,7 +207,7 @@ const Drawer = ({ onClose }: Props) => {
             </NavLink>
           </li>
         </ul>
-
+        
         <div className="flex flex-row w-full absolute  bottom-0 bg-white z-10">
           <Link
             to="/setting"
@@ -258,6 +259,7 @@ const Drawer = ({ onClose }: Props) => {
             Logout
           </Link>
         </div>
+        </UserContext.Provider>
       </div>
     </div>
   );

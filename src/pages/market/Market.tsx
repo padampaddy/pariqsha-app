@@ -8,12 +8,15 @@ import { useDispatch } from "react-redux";
 import modalSlice from "../../redux/slices/modal-slice";
 import cartSlice from "../../redux/slices/cart-slice";
 import CartButton from "./Component/CartButton";
-import { useCallback } from "react";
+import { useCallback, useContext } from "react";
 import { CartItem } from "../../types/Cart";
 import alertSlice from "../../redux/slices/alert-slice";
 import CoupenDetails from "./Component/CoupenDetails";
+import { espTransform } from "../../Utils/utils";
+import UserContext from "../../contexts/userContext";
 
 const Market = () => {
+  const {coinsBalance} = useContext(UserContext);
   const { data } = useQuery<IMarketProduct>(GET_MARKET_PRODUCT, {
     variables: {
       status: "published",
@@ -34,7 +37,9 @@ const Market = () => {
             <span className="text-sm">
               <img src={coin} className="h-8 w-8 mr-2" alt="coin" />
             </span>
-            75
+            {espTransform(coinsBalance, {
+              showSymbol: false, precision: 0
+            }).format()}
           </h4>
         </div>
 
@@ -136,30 +141,6 @@ const Market = () => {
                     </svg>
                     Add to Cart
                   </button>
-
-                  {/* <button
-                      className="border border-gray-400 md:px-4 md:py-2 p-1 rounded flex market-btn"
-                      style={{ fontSize: "10px" }}
-                      onClick={() =>
-                        dispatch(cartSlice.actions.removeItem(index))
-                      }
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-4 w-4 mr-1"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                        />
-                      </svg>
-                      Remove
-                    </button> */}
                 </div>
               </div>
             </motion.div>
