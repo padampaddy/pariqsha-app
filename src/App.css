@@ -214,6 +214,24 @@ a.collection-list.common-btn, .quiz-button:hover, .market-btn:hover {
   background-color: #1E9FEE;
 }
 
+.scroll-to-bottom {
+  position: fixed;
+  display: inline-flex;
+  justify-content: center;
+  bottom: 8%;
+  left: 1%;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.icon-btn{
+  margin-top: 10px;
+  animation: scrollBottom 0.5s alternate ease infinite;
+}
+
+
 /* .collections{
   white-space: nowrap;
   overflow-x: auto;
@@ -276,5 +294,14 @@ a.collection-list.common-btn, .quiz-button:hover, .market-btn:hover {
   100% {
       left: 100%;
       width: 10%;
+  }
+}
+
+@keyframes scrollBottom {
+  from {
+      transform: translateY(2px);
+  }
+  to {
+    transform: translateY(-1px);
   }
 }

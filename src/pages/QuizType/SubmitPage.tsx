@@ -1,12 +1,14 @@
 import { useHistory } from "react-router-dom";
-import { motion } from "framer-motion";
+import submit from "../../assets/lottie/test-submit.json"
+import Lottie from "react-lottie-player";
+// import { motion } from "framer-motion";
 
 const SubmitPage = () => {
   const history = useHistory();
   return (
     <div className="bg-gradient-to-tl from-red-100 to-blue-100 h-screen">
       <div className="text-center pt-48 ">
-        <motion.div
+        {/* <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{
@@ -28,8 +30,15 @@ const SubmitPage = () => {
               clipRule="evenodd"
             />
           </svg>
-        </motion.div>
-        <p className="text-green-500 font-bold md:text-7xl text-5xl  mt-6">
+        </motion.div> */}
+          <Lottie
+          speed={1.1}
+          className="md:h-1/5 md:w-1/5 h-1/3 w-1/3 text-center m-auto"
+          loop
+          animationData={submit}
+          play
+        />
+        <p className=" font-bold md:text-7xl text-5xl  mt-6" style={{color:"#00C233"}}>
           Thank You !
         </p>
         <p className="mt-4 md:text-xl font-semibold">

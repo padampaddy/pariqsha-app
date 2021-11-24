@@ -33,23 +33,23 @@ const Cart = () => {
       },
     })
       .then((res) => {
-          sendTransaction({
-            variables: {
-              userId: user?.id,
-              orderId: res.data?.insert_market_orders_one.id,
-              startAmount: coinsBalance,
-              endAmount: Math.abs(
-                coinsBalance - res.data!.insert_market_orders_one.cost_coins
-              ),
-              // endAmount: Math.abs(parseInt(coinsBalance)-parseInt(res.data!.market_orders.cost_coins.toString()))
-            },
+        sendTransaction({
+          variables: {
+            userId: user?.id,
+            orderId: res.data?.insert_market_orders_one.id,
+            startAmount: coinsBalance,
+            endAmount: Math.abs(
+              coinsBalance - res.data!.insert_market_orders_one.cost_coins
+            ),
+            // endAmount: Math.abs(parseInt(coinsBalance)-parseInt(res.data!.market_orders.cost_coins.toString()))
+          },
+        })
+          .then((info) => {
+            console.log(info);
           })
-            .then((info) => {
-              console.log(info);
-            })
-            .catch((e) => console.error(e));
-        dispatch(cartSlice.actions.clearItem());
-        dispatch(
+          .catch((e) => console.error(e));
+          dispatch(cartSlice.actions.clearItem());
+          dispatch(
           alertSlice.actions.showAlert({
             body: "Order Placed",
           })

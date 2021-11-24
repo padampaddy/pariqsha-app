@@ -70,14 +70,6 @@ export default function ExamCardDetails(): ReactElement {
     });
   }, [id, refetchRegistration, user?.id, like]);
 
-  const handleLike = () => {
-    if (!like) {
-      setLike(true);
-    } else {
-      setLike(false);
-    }
-  };
-
   return (
     <BaseLayout title="Details" showBack>
       <div className="flex justify-center mx-4 mt-4">
@@ -97,7 +89,7 @@ export default function ExamCardDetails(): ReactElement {
             likeBtn={
               <svg
                 role="button"
-                onClick={() => handleLike()}
+                onClick={() => setLike(a=>!a)}
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-8 w-8 mr-1 text-red-600"
                 fill={like ? "currentColor" : "none"}

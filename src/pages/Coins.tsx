@@ -23,6 +23,7 @@ const Coins = () => {
   const { post: createCoinOrder } = useFetch(`coins_orders`, {
     cache: "no-cache",
   });
+  
   const handleSend = async (earn: ICoin) => {
     const data = await createCoinOrder({
       planId: earn.id,

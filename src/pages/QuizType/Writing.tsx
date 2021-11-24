@@ -11,9 +11,10 @@ const Writing = () => {
   const dispatch = useDispatch();
   const { entities } = useSelector((state: RootState) => state.user);
   // const [files, setFiles] = useState({ url: "", name: "", type: "" });
-  const [invalidFile, setInvalidFile] = useState("")
+  const [invalidFile, setInvalidFile] = useState("");
   const [isLoading, setLoading] = useState(false);
-  const { questions, currentQuestionIndex, setUserAnswer, userAnswer } = useContext(ExamContext);
+  const { questions, currentQuestionIndex, setUserAnswer, userAnswer } =
+    useContext(ExamContext);
 
   const uploadFile = async (e: React.ChangeEvent<any>) => {
     setLoading(true);
@@ -22,34 +23,36 @@ const Writing = () => {
     formData.append("image", file);
     if (!file.name.match(/\.(jpg|jpeg|png)$/)) {
       setInvalidFile("File does not support");
-     setLoading(false);
-     return false
+      setLoading(false);
+      return false;
+    } else {
+      setInvalidFile("");
+      const res = await fetch(
+        "https://functions.app.pariqsha.com/files/upload",
+        {
+          method: "POST",
+          body: formData,
+          headers: {
+            Authorization: `Bearer ${entities?.token}`,
+          },
+        }
+      );
+      const { url } = await res.json();
+      setUserAnswer(url);
+      // setFiles({ url: url, name: file.name, type: file.type });
+      e.target.value = "";
+      setLoading(false);
+      return;
     }
-    else {
-    setInvalidFile("")
-    const res = await fetch("https://functions.app.pariqsha.com/files/upload", {
-      method: "POST",
-      body: formData,
-      headers: {
-        Authorization: `Bearer ${entities?.token}`,
-      },
-    });
-    const { url } = await res.json();
-    setUserAnswer(url); 
-    // setFiles({ url: url, name: file.name, type: file.type });
-    e.target.value = "";
-    setLoading(false);
-    return
-  }
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     // setFiles({ url: "", name: "", type: "" })
-    setUserAnswer(""); 
-  },[currentQuestionIndex])
+    setUserAnswer("");
+  }, [currentQuestionIndex]);
 
   const handleRemove = () => {
-    setUserAnswer(""); 
+    setUserAnswer("");
     // setFiles({ url: "", name: "", type: "" });
   };
 
@@ -72,9 +75,11 @@ const Writing = () => {
           <p className="text-xs text-gray-500 mt-1">
             Accepted Formats: JPEG, PNG
           </p>
-          
+
           <div className="mt-3 mb-2">
-          {invalidFile && <div className="text-red-500 text-sm">{invalidFile}</div> }
+            {invalidFile && (
+              <div className="text-red-500 text-sm">{invalidFile}</div>
+            )}
             {isLoading ? (
               <LinearLoader />
             ) : (
@@ -124,13 +129,15 @@ const Writing = () => {
                 />
               </svg>
               ) : null}  */}
-                
-                {userAnswer && <img src={userAnswer} alt="img" className="h-12 w-12"/>}
+
+                {userAnswer && (
+                  <img src={userAnswer} alt="img" className="h-12 w-12" />
+                )}
               </div>
             )}
           </div>
           <div className="float-right">
-          {userAnswer ? (            
+            {userAnswer ? (
               <button
                 onClick={handleRemove}
                 className="flex justify-center p-2 text-red-500  text-sm items-center rounded-lg capitalize hover:bg-gray-200"

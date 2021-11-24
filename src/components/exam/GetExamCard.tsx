@@ -61,14 +61,6 @@ const GetExamCards = ({ searchTerm = "" }: { searchTerm: string }) => {
 
   const [like, setLike] = useState<boolean>(getLocalItems());
 
-  const handleLike = () => {
-    if (like) {
-      setLike(false);
-    } else {
-      setLike(true);
-    }
-  };
-
   useEffect(() => {
     localStorage.setItem("like", JSON.stringify(like));
     refetch({
@@ -118,7 +110,7 @@ const GetExamCards = ({ searchTerm = "" }: { searchTerm: string }) => {
           likeBtn={
             <svg
               role="button"
-              onClick={() => handleLike()}
+              onClick={() => setLike(a=>!a)}
               xmlns="http://www.w3.org/2000/svg"
               className="h-8 w-8 mr-1 text-red-600"
               fill={like ? "currentColor" : "none"}

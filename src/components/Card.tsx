@@ -33,7 +33,7 @@ export default function Card({
   price,
   time,
   duration,
-  likeBtn,
+  // likeBtn,
 }: Props): ReactElement {
   // const history = useHistory();
   
@@ -122,11 +122,12 @@ export default function Card({
               >
                 {title}
               </div>
+             
+              </div>
               <div className="text-sm ml-3 text-gray-600 mt-1">({duration} mins)</div>
-              </div>
-              <div>
+              {/* <div>
                 {likeBtn}
-              </div>
+              </div> */}
             </div>
             <h5 id="job" className="font-semibold text-gray-600">
               {subTitle}

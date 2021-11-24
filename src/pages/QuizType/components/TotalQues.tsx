@@ -21,7 +21,7 @@ const TotalQues = () => {
   );
 
   useEffect(() => {
-    scrollId.current?.scrollTo(0, scrollId.current?.offsetTop);
+    window.scrollTo({ top: scrollId.current?.offsetTop, behavior: "smooth" });
   }, [currentQuestionIndex]);
 
   return (
@@ -39,7 +39,13 @@ const TotalQues = () => {
                ${currentQuestionIndex === idx ? "common-btn" : ""} `}
             key={idx}
             role="button"
-            onClick={() => {setCurrentQuestionIndex(idx)}}
+            onClick={() => {
+              setCurrentQuestionIndex(idx);
+              window.scrollTo({
+                top: scrollId.current?.offsetTop,
+                behavior: "smooth",
+              });
+            }}
           >
             {1 + idx}
           </div>

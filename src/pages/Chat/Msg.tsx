@@ -13,6 +13,7 @@ import DEFAULT_AVATAR from "../../assets/images/profileuser.png";
 import PicPreview from "../../components/PicPreview";
 import modalSlice from "../../redux/slices/modal-slice";
 import Loader from "../../components/Loader/Loader";
+import ScrollToBottom from "../../components/ScrollToBottom";
 
 const Msg = () => {
   const { id } = useParams<{ id: string }>();
@@ -31,6 +32,7 @@ const Msg = () => {
   const wrapperRef = useRef() as MutableRefObject<HTMLInputElement>;
   const [sendMessage] = useMutation<ISendMessage>(SEND_MESSAGE);
   const dispatch = useDispatch();
+  
 
   const uploadPicture = async (e: React.ChangeEvent<any>) => {
     const formData = new FormData();
@@ -72,6 +74,8 @@ const Msg = () => {
 
   return (
     <BaseLayout title="Messages" showBack>
+      <ScrollToBottom temp1={temp1}/>
+
       <div className="flex h-full flex-col">
         <div>
           <div className=" bg-gradient-to-bl items-center text-center px-2 py-4 relative">
