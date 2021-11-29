@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { useMutation } from "@apollo/client";
-import { IGroupedQuestions, ISendAnswer } from "../../../types/Quiz";
-import { SEND_ANSWER } from "../../../api/queries";
+import { IGroupedQuestions, ISendAnswer, ISubmitExamRegistration } from "../../../types/Quiz";
+import { SEND_ANSWER, SUBMIT_EXAMS_REGISTRATION } from "../../../api/queries";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
 import { useContext } from "react";
@@ -9,13 +9,16 @@ import ExamContext from "../../../contexts/examContext";
 import { useHistory } from "react-router-dom";
 
 const QuizFooter = ({
-  groupedQuestions,
+  groupedQuestions, examId
 }: {
-  groupedQuestions: IGroupedQuestions;
+  groupedQuestions: IGroupedQuestions; examId: string
 }) => {
   const history = useHistory();
   const user = useSelector((state: RootState) => state.user.entities?.user);
   const [sendAnswer] = useMutation<string[]>(SEND_ANSWER);
+  const [updateRegistration] = useMutation<ISubmitExamRegistration>(
+    SUBMIT_EXAMS_REGISTRATION
+  );
   const {
     active,
     setActive,
@@ -73,7 +76,17 @@ const QuizFooter = ({
   };
 
   const handlePrev = () => {
-    setCurrentQuestionIndex(currentQuestionIndex - 1);
+    setLocalAns(userAnswer?.trim().toUpperCase());
+    if (questions.length - 1 === currentQuestionIndex) {
+      setActive((a) =>
+        a === "reading" && groupedQuestions.listening.length !== 0
+          ? "listening"
+          : a === "listening" && groupedQuestions.writing.length !== 0
+          ? "writing"
+          : "menu"
+      );
+    } else setCurrentQuestionIndex(currentQuestionIndex - 1);
+    setUserAnswer("");
   };
 
   const handleSubmit = () => {
@@ -98,14 +111,26 @@ const QuizFooter = ({
         objects: dataToSend,
       },
     })
-      .then((info) => {
-        console.log(info);
-        history.push("/submit");
-        setUserAnswers([]);
-        setLocalAns("");
-        localStorage.removeItem("answers");
+    .then((info) => {
+      console.log(info);
+      updateRegistration({
+        variables: {
+          examId: examId,
+          user: user?.id,
+          examStatus: "submitted",
+        },
       })
-      .catch((e) => console.error(e));
+        .then((info) => {
+          console.log(info);
+          history.push("/submit");
+          setUserAnswers([]);
+          setLocalAns("");
+          localStorage.removeItem("answers");
+        })
+        .catch((e) => console.error(e));
+    })
+    .catch((e) => console.error(e));
+    
   };
 
   return (

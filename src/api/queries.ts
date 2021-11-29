@@ -335,6 +335,7 @@ export const GET_EXAM_DETAILS = gql`
 export const GET_MY_EXAMS = gql`
   query get_my_exams($user: uuid!) {
     exams_registration(where: { user_id: { _eq: $user } }) {
+      exam_status
       exam {
         cover_image_url
         created_at
@@ -511,12 +512,30 @@ export const UPDATE_EXAMS_REGISTRATION = gql`
   }
 `;
 
+export const SUBMIT_EXAMS_REGISTRATION = gql`
+  mutation submit_exams_registration(
+    $examId: uuid!
+    $user: uuid!
+    $examStatus: String!
+  ) {
+    update_exams_registration(
+      _set: { exam_status: $examStatus }
+      where: { exam_id: { _eq: $examId }, user_id: { _eq: $user } }
+    ) {
+      returning {
+        exam_status
+      }
+    }
+  }
+`;
+
 export const GET_EXAM_DATA = gql`
   query get_exam_time($examId: uuid!, $user: uuid!) {
     exams_registration(
       where: { exam_id: { _eq: $examId }, user_id: { _eq: $user } }
     ) {
       result_writing
+      exam_status
       started_at
       exam {
         duration_in_minutes

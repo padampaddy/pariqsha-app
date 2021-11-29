@@ -21,7 +21,7 @@ const TotalQues = () => {
   );
 
   useEffect(() => {
-    window.scrollTo({ top: scrollId.current?.offsetTop, behavior: "smooth" });
+    window.scrollTo({ left: scrollId.current?.offsetLeft, behavior: "smooth" });
   }, [currentQuestionIndex]);
 
   return (
@@ -42,7 +42,7 @@ const TotalQues = () => {
             onClick={() => {
               setCurrentQuestionIndex(idx);
               window.scrollTo({
-                top: scrollId.current?.offsetTop,
+                left: scrollId.current?.offsetLeft,
                 behavior: "smooth",
               });
             }}

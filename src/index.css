@@ -56,6 +56,10 @@
     @apply float-left flex items-center capitalize justify-center rounded text-center md:mr-1  py-1.5 px-2 text-base;
   }
 
+  .disabled-button {
+    @apply float-left flex items-center bg-gray-300 text-gray-600 cursor-not-allowed capitalize justify-center rounded text-center md:mr-1  py-1.5 px-2 text-base;
+  }
+
   .quiz-button:hover, .market-btn:hover, {
     @apply transform translate-y-0.5 shadow-none ;
   }

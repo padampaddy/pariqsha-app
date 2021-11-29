@@ -65,6 +65,7 @@ export interface ExamDetailsResponse {
 
 export interface MyExamResponse {
   exams_registration: {
+    exam_status: string;
     exam: IExam;
   }[];
 }
@@ -154,11 +155,21 @@ export interface IUpdateExamRegistration {
   }[];
 }
 
+export interface ISubmitExamRegistration {
+  submit_exams_registration: {
+    status: string;
+    exam_id: string;
+    user_id: string;
+    exam_status: string;
+  }[];
+}
+
 export interface IExamData {
   exams_registration: {
     result_writing: number;
     started_at: Date;
     exam: IExam;
+    exam_status: string;
   }[];
 }
 

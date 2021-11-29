@@ -25,7 +25,6 @@ export default function UserResult({ examId }: { examId: string }) {
       examId: examId,
     },
   });
-  console.log("rslt", marks);
   const groupedResult = useMemo(() => {
     if (data?.exams_exam_answer) {
       const obj: IGroupedResult = {

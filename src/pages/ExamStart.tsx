@@ -118,7 +118,7 @@ const ExamStart = () => {
           )}
           {active === "menu" ? null : (
             <div className="flex-grow-0 quiz-footer common-btn">
-              <QuizFooter groupedQuestions={groupedQue} />
+              <QuizFooter groupedQuestions={groupedQue} examId={id}/>
             </div>
           )}
         </div>
